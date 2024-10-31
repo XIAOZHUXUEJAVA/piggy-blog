@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import type { Authors } from 'contentlayer/generated';
-import { Mail, Linkedin, Github, Twitter } from 'lucide-react';
-
+import { Icon } from '@iconify/react';
 import { CareerTimeline } from '@/components/about';
 import { Link, Image, Button, Twemoji } from '@/components/ui';
 
@@ -13,7 +12,6 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function AuthorLayout({ children, content }: Props) {
   const { name, avatar, occupation, company, email, twitter, linkedin, github } = content;
-
   return (
     <>
       <div className="about divide-y divide-gray-200 dark:divide-gray-700">
@@ -36,16 +34,16 @@ export default function AuthorLayout({ children, content }: Props) {
 
             <div className="mt-2 flex gap-3">
               <Link href={`mailto:${email}`}>
-                <Mail size={24} strokeWidth={1} />
+                <Icon icon="fluent-color:mail-24" width="24px" height="24px" />
               </Link>
               <Link href={github || ''} target="_blank">
-                <Github size={24} strokeWidth={1} />
-              </Link>
-              <Link href={linkedin || ''} target="_blank">
-                <Linkedin size={24} strokeWidth={1} />
+                <Icon icon="jam:github" width="24px" height="24px" />
               </Link>
               <Link href={twitter || ''} target="_blank">
-                <Twitter size={24} strokeWidth={1} />
+                <Icon icon="ri:twitter-x-fill" width="24px" height="24px" />
+              </Link>
+              <Link href={linkedin || ''} target="_blank">
+                <Icon icon="mingcute:linkedin-line" width="24px" height="24px" style={{ color: '#648ae3' }} />
               </Link>
             </div>
           </div>

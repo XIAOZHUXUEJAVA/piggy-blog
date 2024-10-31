@@ -23,17 +23,7 @@ const TypedBios = () => {
     <div>
       <ul id="bios" className="hidden">
         <li>
-          I live in <b className="font-medium">Ho Chi Minh, Viet Nam</b>.
-        </li>
-        <li>
-          I was born in the beautiful <b className="font-medium">Quang Ngai</b> city.
-        </li>
-        <li>
-          My first programming language I learned was <b className="font-medium">C++</b>.
-        </li>
-        <li>I love web development.</li>
-        <li>
-          I'm focusing on building <b className="font-medium">Social Analytics Software</b>.
+          I live in <b className="font-medium">Ji nan, China</b>.
         </li>
         <li>
           I work mostly with <b className="font-medium">Java/Javascript/Typescript</b> technologies.
@@ -50,10 +40,11 @@ const TypedBios = () => {
         </li>
         <li>
           I enjoy listening to pop music
-          <Twemoji emoji="musical-note" />.
+          <Twemoji emoji="musical-note" />
+          G.E.M.!!!!!!
         </li>
         <li>
-          I love playing video game <Twemoji emoji="video-game" />, LoL is my favorite one.
+          I love playing Soulslike game <Twemoji emoji="video-game" />: Sekiro, DarkSouls, WoLong, Nioh...
         </li>
       </ul>
       <span ref={el} className="text-neutral-900 dark:text-neutral-200" />
