@@ -4,17 +4,25 @@ import { getSpotifyNowPlaying } from '@/servers/spotify.server';
 export async function GET() {
   const response = await getSpotifyNowPlaying();
 
-  if (response.status === 204 || response.status > 400) {
+  // 检查 response 是否有效
+  if (!response || response.status === 204 || response.status > 400) {
     return Response.json({ isPlaying: false });
   }
 
-  const data = await response.json();
+  let data;
+  try {
+    data = await response.json();
+  } catch (error) {
+    // 处理 JSON 解析错误
+    return Response.json({ isPlaying: false, error: 'Failed to parse response.' });
+  }
 
-  if (data?.currently_playing_type === 'episode') {
+  // 检查 data 是否有效
+  if (!data || data.currently_playing_type === 'episode') {
     return Response.json({
       isPlaying: true,
-      title: data.item.name,
-      songUrl: data.item.external_urls.spotify,
+      title: data?.item?.name || 'Unknown',
+      songUrl: data?.item?.external_urls?.spotify || '',
     });
   }
 
