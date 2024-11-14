@@ -5,7 +5,11 @@ interface UmamiAnalyticsProps {
   src?: string;
 }
 
-export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
+// export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
+export function UmamiAnalytics({
+  websiteId,
+  src = 'https://umami-88h8yr28f-xiaozhuxuejavas-projects.vercel.app/script.js',
+}: UmamiAnalyticsProps) {
   if (websiteId) {
     return <Script defer data-website-id={websiteId} src={src} />;
   }

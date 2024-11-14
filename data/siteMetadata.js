@@ -10,7 +10,8 @@ const siteMetadata = {
   theme: 'system',
   siteUrl: 'https://karhdo.dev',
   // analyticsURL: 'https://analytics.karhdo.dev/share/5atUzHulqItdW3PK/karhdo.dev',
-  analyticsURL: 'https://cloud.umami.is/share/kIRoD42fHBwn1WGm/piggy-blog.netlify.app',
+  analyticsURL:
+    'https://umami-88h8yr28f-xiaozhuxuejavas-projects.vercel.app/share/2yArURTfGzlVZNrQ/piggy-blog.netlify.app',
   // siteRepo: 'https://github.com/Karhdo/karhdo.dev',
   siteRepo: 'https://github.com/XIAOZHUXUEJAVA/piggy-blog',
   siteLogo: '/static/images/avatar.jpg',
