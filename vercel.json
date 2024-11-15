@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/stats/:match*",
-      "destination": "https://analytics.karhdo.dev/:match*"
+      "destination": "https://umami-88h8yr28f-xiaozhuxuejavas-projects.vercel.app/:match*"
     }
   ]
 }

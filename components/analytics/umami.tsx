@@ -1,17 +1,16 @@
-import Script from 'next/script';
+import Script from 'next/script.js';
 
 interface UmamiAnalyticsProps {
   websiteId?: string;
   src?: string;
 }
 
-export function UmamiAnalytics({
-  websiteId,
-  src = '/script.js', // 指向 public/script.js
-}: UmamiAnalyticsProps) {
-  if (websiteId) {
-    return <Script defer data-website-id={websiteId} src={src} strategy="afterInteractive" />;
-  }
+export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
+  {
+    if (websiteId) {
+      return <Script defer data-website-id={websiteId} src={src} strategy="afterInteractive" />;
+    }
 
-  return null;
+    return null;
+  }
 }
