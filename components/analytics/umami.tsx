@@ -11,7 +11,7 @@ export function UmamiAnalytics({
   src = 'https://umami-88h8yr28f-xiaozhuxuejavas-projects.vercel.app/script.js',
 }: UmamiAnalyticsProps) {
   if (websiteId) {
-    return <Script defer data-website-id={websiteId} src={src} />;
+    return <Script defer data-website-id={websiteId} src={src} strategy="afterInteractive" />;
   }
 
   return null;
