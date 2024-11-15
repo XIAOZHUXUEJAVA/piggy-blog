@@ -5,8 +5,8 @@ interface UmamiAnalyticsProps {
   src?: string;
 }
 
-// export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
-export function UmamiAnalytics({ websiteId, src = './script.js' }: UmamiAnalyticsProps) {
+export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
+  // export function UmamiAnalytics({ websiteId, src = './script.js' }: UmamiAnalyticsProps) {
   if (websiteId) {
     return <Script defer data-website-id={websiteId} src={src} strategy="afterInteractive" />;
   }
