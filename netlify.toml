@@ -3,3 +3,4 @@
   to = "https://umami-88h8yr28f-xiaozhuxuejavas-projects.vercel.app/:match*"
   status = 200
   force = true
+  headers = { Authorization = "Bearer $API_TOKEN" }
