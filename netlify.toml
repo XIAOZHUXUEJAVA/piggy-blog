@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/stats/*"
+  to = "https://umami-three-lime.vercel.app/:splat"
+  status = 200
