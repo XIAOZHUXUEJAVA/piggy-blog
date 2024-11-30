@@ -1,10 +1,10 @@
 const ShortDescription = () => {
   return (
     <div className="mb-4 mt-4">
-      <p>I started learning to code in 2019 when I started college.</p>
-      <p>I landed my first job as a Back-end Developer in 2021.</p>
-      <p>I have a passion for JavaScript/Typescript and website development.</p>
-      <p>I started this blog to practice my skill and share my knowledge.</p>
+      <p>I usually focus on back-end development.</p>
+      <p>I currently trying to learn knowledge about web front-end development.</p>
+      <p>I personally find front-end development very interesting.</p>
+      {/* <p>I personally find front-end development very interesting, even though I mainly study back-end development.</p> */}
     </div>
   );
 };

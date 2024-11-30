@@ -44,7 +44,7 @@ export default function Home({ posts }) {
             <BlogLinks />
             <SpotifyNowPlaying />
             <p className="flex">
-              <span className="mr-2">Happy reading</span>
+              <span className="mr-2">May you find joy in your reading!!!!</span>
               <Twemoji emoji="clinking-beer-mugs" />
             </p>
           </div>
@@ -59,10 +59,18 @@ export default function Home({ posts }) {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             Recent Posts
           </h1>
-          <p className="!mt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">{siteMetadata.description}</p>
+          <p className="!mt-2 flex text-lg leading-7 text-gray-500 dark:text-gray-400">
+            {siteMetadata.description}
+            <Link href="/blog" className="ml-auto hover:underline">
+              <Twemoji emoji="backhand-index-pointing-right" />
+              <span data-umami-event="home-link-blog" className="ml-1.5">
+                See more blogs
+              </span>
+            </Link>
+          </p>
         </div>
 
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+        {/* <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post;
@@ -85,6 +93,60 @@ export default function Home({ posts }) {
                             </Link>
                           </h2>
                           <div className="flex flex-wrap">
+                            {tags.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
+                      </div>
+                      <div className="text-base font-medium leading-6">
+                        <Link
+                          href={`/blog/${slug}`}
+                          className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
+                          aria-label={`Read "${title}"`}
+                        >
+                          Read more &rarr;
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul> */}
+        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+          {!posts.length && 'No posts found.'}
+          {posts.slice(0, MAX_DISPLAY).map((post) => {
+            const { slug, date, title, summary, tags } = post;
+            return (
+              <li
+                key={slug}
+                className="transform rounded-lg py-6 transition-all duration-300 ease-in-out hover:rotate-1 hover:scale-105 hover:bg-gray-50 hover:shadow-xl hover:shadow-gray-400 dark:hover:bg-gray-800"
+              >
+                <article>
+                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                    <dl>
+                      <dt className="sr-only">Published on</dt>
+                      <dd className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium leading-6 text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                        <time dateTime={date} className="text-gray-700 dark:text-gray-300">
+                          {formatDate(date, siteMetadata.locale)}
+                        </time>
+                      </dd>
+                    </dl>
+                    <div className="space-y-5 xl:col-span-3">
+                      <div className="space-y-4">
+                        <div>
+                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                            <Link
+                              href={`/blog/${slug}`}
+                              className="hover:text-primary text-gray-900 dark:text-gray-100 dark:hover:text-sky-400"
+                            >
+                              {title}
+                            </Link>
+                          </h2>
+                          <div className="flex flex-wrap space-x-2">
                             {tags.map((tag) => (
                               <Tag key={tag} text={tag} />
                             ))}

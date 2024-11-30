@@ -5,7 +5,7 @@ const siteMetadata = {
   author: 'Piggy',
   fullName: 'Piggy DP',
   headerTitle: "Piggy's Blog",
-  description: 'My desire to practice my skills and share my acquired knowledge fuels my endeavors.',
+  description: 'I would be grateful for any feedback or insights you have on my writing.',
   language: 'en-us',
   theme: 'system',
   siteUrl: 'https://karhdo.dev',

@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import type { Authors } from 'contentlayer/generated';
 import { Icon } from '@iconify/react';
-import { CareerTimeline } from '@/components/about';
-import { Link, Image, Button, Twemoji } from '@/components/ui';
+// import { CareerTimeline } from '@/components/about';
+import { Link, Image, Twemoji } from '@/components/ui';
 
 interface Props {
   children: ReactNode;
@@ -52,41 +52,18 @@ export default function AuthorLayout({ children, content }: Props) {
 
           <div className="prose max-w-none pb-8 dark:prose-dark xl:col-span-2">
             <h2>
-              Hello, folks! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Trong Khanh (aka Karhdo)
+              Hello, friends! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Piggy DP
             </h2>
-            <p>
-              I have a passion for <strong>JavaScript/TypeScript</strong> and website development. I'm currently a
-              fullstack developer at <strong>YouNet Media</strong>, deeply engaged in the <strong>EcomHeat</strong>{' '}
-              project, which entails market share management, competitor research, and fostering e-commerce growth. I
-              work mainly with <strong>JavaScript</strong>, <strong>TypeScript</strong>, <strong>React</strong>,{' '}
-              <strong>NodeJS</strong>, <strong>NestJS</strong>, and <strong>NextJS</strong>.
-            </p>
-            <h2>Why have this blog?</h2>
-            <blockquote>
-              <p>My desire to practice my skills and share my acquired knowledge fuels my endeavors.</p>
-            </blockquote>
-            <p>
-              I founded this blog as a means to document and share the knowledge and practical wisdom I've acquired
-              during my journey as a software engineer.
-            </p>
-            <p>
-              Writing and taking notes helps me solidify my understanding of new concepts and technologies. I hope my
-              blog can be a useful resource for fellow web developers.
-            </p>
-            <p>
-              I would greatly appreciate your thoughts and comments on what I have written{' '}
-              <Twemoji emoji="clinking-beer-mugs" />.
-            </p>
             <div className="flex items-center justify-between">
-              <h2>My Career</h2>
+              {/* <h2>My Career</h2> */}
 
-              <Button as="a" href="/static/resume.pdf" target="_blank">
+              {/* <Button as="a" href="/static/resume.pdf" target="_blank">
                 <span>Resume</span>
                 <Twemoji emoji="page-facing-up" />
-              </Button>
+              </Button> */}
             </div>
-            <CareerTimeline />
-            <h2>Tech stack</h2>
+            {/* <CareerTimeline /> */}
+            {/* <h2>Tech stack</h2>
             <p>
               This blog is built with{' '}
               <a target="_blank" href="https://nextjs.org/">
@@ -109,51 +86,24 @@ export default function AuthorLayout({ children, content }: Props) {
                 Timothy Lin
               </a>{' '}
               for their contribution to this minimal, lightweight, and highly customizable blog starter.
-            </p>
-
-            <p>A few major over-engineering-changes from the original repo:</p>
-
+            </p> */}
             <ul>
               <li>
-                <Twemoji className="!mr-2" emoji="atom-symbol" /> Upgrading to <strong>React 18</strong>,{' '}
-                <strong>Next 14</strong>.
+                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
+                personal growth.{' '}
               </li>
               <li>
-                <Twemoji className="!mr-2" emoji="party-popper" /> Adopting <strong>Typescript</strong>, committing with{' '}
-                <a target="_blank" href="https://www.conventionalcommits.org">
-                  Conventional Commits
-                </a>
+                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
+                personal growth.{' '}
               </li>
               <li>
-                <Twemoji className="!mr-2" emoji="bar-chart" /> Monitoring site with{' '}
-                <a target="_blank" href="https://umami.is/">
-                  Umami
-                </a>{' '}
-                website analytics
-              </li>
-              <li>
-                <Twemoji className="!mr-2" emoji="eyes" /> Theming in dark mode with{' '}
-                <a target="_blank" href="https://github.com/folke/tokyonight.nvim">
-                  Tokyonight Neovim Theme
-                </a>{' '}
-                colors for better contrast.
-              </li>
-              <li>
-                <Twemoji className="!mr-2" emoji="man-technologist" /> My website refers to the design and code from the{' '}
-                <a target="_blank" href="https://github.com/hta218/leohuynh.dev">
-                  lehuynh.dev
-                </a>{' '}
-                repository and incorporates the tailwind-nextjs-starter-blog template, version 2.0.
-              </li>
-              <li>
-                <Twemoji className="!mr-2" emoji="inbox-tray" /> Bumping up <code>mdx-bundler</code>,{' '}
-                <code>rehype</code>/<code>remark</code> plugins and dependencies to the latest version
+                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
+                personal growth.{' '}
               </li>
             </ul>
-
             <p>
               See my{' '}
-              <a target="_blank" href="https://github.com/Karhdo/karhdo.dev">
+              <a target="_blank" href="https://github.com/XIAOZHUXUEJAVA/piggy-blog">
                 repository
               </a>{' '}
               for this blog.

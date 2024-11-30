@@ -33,14 +33,14 @@ const Header = () => {
             <Logo className="fill-dark dark:fill-white" />
           </div>
           <div className="group ml-2 text-xl font-bold transition duration-300">
-            Karhdo.dev
+            PiggyBlog
             <span className="block h-0.5 max-w-0 bg-black transition-all duration-500 group-hover:max-w-[85%] dark:bg-white"></span>
           </div>
         </Link>
         <div className="flex items-center gap-3 text-base leading-5">
           <div className="hidden sm:block">
-            {headerNavLinks
-              .filter((link) => link.href !== '/')
+            {/* {headerNavLinks
+              // .filter((link) => link.href !== '/')
               .map((link) => (
                 <Link
                   key={link.title}
@@ -55,7 +55,22 @@ const Header = () => {
                 >
                   {link.title}
                 </Link>
-              ))}
+              ))} */}
+            {headerNavLinks.map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                data-umami-event={`nav-${link.href.replace('/', '')}`}
+                className={clsx(
+                  'mx-1 rounded px-2 py-1 font-medium text-gray-900 dark:text-gray-100 sm:px-3 sm:py-2',
+                  pathname === link.href
+                    ? 'bg-gray-200 dark:bg-primary-600'
+                    : 'hover:bg-gray-200 dark:hover:bg-primary-600'
+                )}
+              >
+                {link.title}
+              </Link>
+            ))}
           </div>
           <div
             role="separator"

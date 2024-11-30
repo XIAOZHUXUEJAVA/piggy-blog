@@ -32,7 +32,7 @@ export default async function Page() {
                   className="-ml-2 text-sm font-semibold uppercase text-gray-600 dark:text-gray-300"
                   aria-label={`View posts tagged ${t}`}
                 >
-                  {` (${tagCounts[t]})`}
+                  <span className="ml-2">{` (${tagCounts[t]})`}</span>
                 </Link>
               </div>
             );
