@@ -11,7 +11,7 @@ interface Props {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content;
+  const { name, avatar, occupation, email, twitter, github } = content;
   return (
     <>
       <div className="about divide-y divide-gray-200 dark:divide-gray-700">
@@ -20,7 +20,7 @@ export default function AuthorLayout({ children, content }: Props) {
             About
           </h1>
           <p className="text-base text-gray-500 dark:text-gray-400 md:text-lg md:leading-7">
-            Further insights into who I am and the purpose of this blog.
+            Here's a brief introduction about me.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function AuthorLayout({ children, content }: Props) {
 
             <h3 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
-            <div className="text-gray-500 dark:text-gray-400">{company}</div>
+            {/* <div className="text-gray-500 dark:text-gray-400">{company}</div> */}
 
             <div className="mt-2 flex gap-3">
               <Link href={`mailto:${email}`}>
@@ -42,9 +42,9 @@ export default function AuthorLayout({ children, content }: Props) {
               <Link href={twitter || ''} target="_blank">
                 <Icon icon="ri:twitter-x-fill" width="24px" height="24px" />
               </Link>
-              <Link href={linkedin || ''} target="_blank">
+              {/* <Link href={linkedin || ''} target="_blank">
                 <Icon icon="mingcute:linkedin-line" width="24px" height="24px" style={{ color: '#648ae3' }} />
-              </Link>
+              </Link> */}
             </div>
           </div>
 
@@ -52,7 +52,7 @@ export default function AuthorLayout({ children, content }: Props) {
 
           <div className="prose max-w-none pb-8 dark:prose-dark xl:col-span-2">
             <h2>
-              Hello, friends! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Piggy DP
+              Hello, friends! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Piggy DP.
             </h2>
             <div className="flex items-center justify-between">
               {/* <h2>My Career</h2> */}
@@ -89,20 +89,25 @@ export default function AuthorLayout({ children, content }: Props) {
             </p> */}
             <ul>
               <li>
-                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
-                personal growth.{' '}
+                <Twemoji className="!mr-2" emoji="desktop-computer" /> I am an ordinary programmer for{' '}
+                <strong>web development</strong>.
               </li>
               <li>
-                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
-                personal growth.{' '}
+                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to{' '}
+                <strong>enhance my capabilities and foster personal growth.</strong>
               </li>
               <li>
-                <Twemoji className="!mr-2" emoji="party-popper" /> I publish blogs to enhance my capabilities and foster
-                personal growth.{' '}
+                <Twemoji className="!mr-2" emoji="musical-note" /> <strong>Favorite Song:</strong> 《Yesterday》
+              </li>
+              <li>
+                <Twemoji className="!mr-2" emoji="video-game" /> <strong>Favorite Games:</strong> Sekiro / DarkSouls III
+                / WoLong / Elden Ring / Nioh 2 / Bloodborne / DarkSouls I / Rise of the Ronin
               </li>
             </ul>
+
             <p>
-              See my{' '}
+              <Twemoji emoji="backhand-index-pointing-right" />
+              <span className="ml-2">See my </span>
               <a target="_blank" href="https://github.com/XIAOZHUXUEJAVA/piggy-blog">
                 repository
               </a>{' '}

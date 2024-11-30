@@ -60,12 +60,29 @@ const computedFields: ComputedFields = {
 /**
  * Count the occurrences of all tags across blog posts and write to json file
  */
+// function createTagCount(allBlogs) {
+//   const tagCount: Record<string, number> = {};
+//   allBlogs.forEach((file) => {
+//     if (file.tags && (!isProduction || file.draft !== true)) {
+//       file.tags.forEach((tag) => {
+//         const formattedTag = slug(tag);
+//         if (formattedTag in tagCount) {
+//           tagCount[formattedTag] += 1;
+//         } else {
+//           tagCount[formattedTag] = 1;
+//         }
+//       });
+//     }
+//   });
+//   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount));
+// }
 function createTagCount(allBlogs) {
   const tagCount: Record<string, number> = {};
   allBlogs.forEach((file) => {
-    if (file.tags && (!isProduction || file.draft !== true)) {
+    // 确保文件包含标签并且标签数组非空
+    if (file.tags && file.tags.length > 0 && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag) => {
-        const formattedTag = slug(tag);
+        const formattedTag = slug(tag); // 格式化标签（slug化）
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1;
         } else {
@@ -74,6 +91,7 @@ function createTagCount(allBlogs) {
       });
     }
   });
+  // 将标签统计结果写入 json 文件
   writeFileSync('./app/tag-data.json', JSON.stringify(tagCount));
 }
 

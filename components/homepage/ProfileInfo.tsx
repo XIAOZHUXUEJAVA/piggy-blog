@@ -12,10 +12,10 @@ const ProfileCardInfo = () => {
         <div className="flex items-center">
           <Briefcase size={20} strokeWidth={1} />
           <p className="px-2">
-            Fullstack Engineer @{' '}
-            <a className="hover:underline" target="_blank" href="https://younetmedia.com/" rel="noreferrer">
+            Just an ordinary programmer @{' '}
+            {/* <a className="hover:underline" target="_blank" href="https://younetmedia.com/" rel="noreferrer">
               YouNet Media
-            </a>
+            </a> */}
           </p>
         </div>
         <div className="flex items-center">

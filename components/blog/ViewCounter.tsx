@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 import type { ViewCounterProps } from '@/types/components';
 import type { ViewApiResponse } from '@/types/server';
-import { fetcher } from '@/utils/fetcher';
+import { fetcher } from 'utils/fetcher';
 
 const ViewCounter = ({ slug, className }: ViewCounterProps) => {
   const { data } = useSWR<ViewApiResponse>(`/api/views/${slug}`, fetcher);

@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import { fetcher } from '@/utils/index';
+import { fetcher } from 'utils/index';
 
 import type { SpotifyNowPlayingData } from '@/types/index';
 
