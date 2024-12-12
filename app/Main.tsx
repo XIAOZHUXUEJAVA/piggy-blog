@@ -17,21 +17,29 @@ import {
   SpotifyNowPlaying,
 } from '@/components/homepage';
 
+import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
+import { useEffect } from 'react';
+
 const MAX_DISPLAY = 5;
 
 export default function Home({ posts }) {
+  useEffect(() => {
+    // renderCanvas(); // This will initialize the canvas animation
+    newCanvas('canvas');
+  }, []);
   return (
     <div className="relative">
+      <canvas id="canvas" className="fixed inset-0 z-[2] h-screen w-screen"></canvas>
+
       <Snowfall
         snowflakeCount={60}
         style={{
-          zIndex: -1,
+          zIndex: -2,
           width: '100vw',
           height: '100vh',
           position: 'fixed',
         }}
       />
-
       {/* Introduce myself */}
       <div className="mt-8 dark:divide-gray-700 md:mt-8">
         <Greeting />
@@ -69,53 +77,6 @@ export default function Home({ posts }) {
             </Link>
           </p>
         </div>
-
-        {/* <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post;
-            return (
-              <li key={slug} className="py-6">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-4">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
-                          aria-label={`Read "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ul> */}
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
@@ -179,12 +140,6 @@ export default function Home({ posts }) {
           </Link>
         </div>
       )}
-
-      {/* {siteMetadata.newsletter.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )} */}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import { renderCanvas } from '../../utils/renderCanvas'; // Ensure correct import path
+// import { renderCanvas } from '../../utils/renderCanvas'; // Ensure correct import path
+// import { newCanvas } from '../../utils/newCanvas'; // Ensure correct import path
 
 const Greeting = () => {
   const className = clsx(
@@ -11,7 +12,8 @@ const Greeting = () => {
 
   // Call renderCanvas when the component mounts
   useEffect(() => {
-    renderCanvas(); // This will initialize the canvas animation
+    // renderCanvas(); // This will initialize the canvas animation
+    //  newCanvas('canvas')
   }, []);
 
   return (
