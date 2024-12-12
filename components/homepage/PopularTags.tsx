@@ -15,9 +15,9 @@ const PopularTags = () => {
         </h1>
         <p className="!mt-2 flex text-lg leading-7 text-gray-500 dark:text-gray-400">
           Popular tags feature the most widely favored topics.
-          <Link href="/tags" className="ml-auto hover:underline">
+          <Link href="/tags" className="z-[1] ml-auto hover:underline">
             <Twemoji emoji="backhand-index-pointing-right" />
-            <span data-umami-event="home-link-blog" className="ml-1.5">
+            <span data-umami-event="home-link-blog" className=" ml-1.5">
               See more tags
             </span>
           </Link>

@@ -18,10 +18,10 @@ const Greeting = () => {
 
   return (
     <div className={className}>
-      <div className="absolute left-1/2 top-1/2 z-[-1] -translate-x-1/2 -translate-y-1/2 transform">
-        {/* The canvas element for rendering the animation */}
-        <canvas id="canvas"></canvas>
-      </div>
+      {/* <div className="absolute left-1/2 top-1/2 z-[-1] -translate-x-1/2 -translate-y-1/2 transform"> */}
+      {/* The canvas element for rendering the animation */}
+      {/* <canvas id="canvas"></canvas> */}
+      {/* </div> */}
       Hello, everyone! <span className="font-bold">I am here to share my learning journey and insights.</span>
     </div>
   );

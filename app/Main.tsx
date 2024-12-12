@@ -29,7 +29,7 @@ export default function Home({ posts }) {
   }, []);
   return (
     <div className="relative">
-      <canvas id="canvas" className="fixed inset-0 z-[2] h-screen w-screen"></canvas>
+      <canvas id="canvas" className="fixed inset-0 z-[0] h-screen w-screen"></canvas>
 
       <Snowfall
         snowflakeCount={60}
@@ -71,7 +71,7 @@ export default function Home({ posts }) {
             {siteMetadata.description}
             <Link href="/blog" className="ml-auto hover:underline">
               <Twemoji emoji="backhand-index-pointing-right" />
-              <span data-umami-event="home-link-blog" className="ml-1.5">
+              <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
                 See more blogs
               </span>
             </Link>
