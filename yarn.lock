@@ -7284,6 +7284,7 @@ __metadata:
     react: 18.3.1
     react-dom: 18.3.1
     react-medium-image-zoom: ^5.2.10
+    react-rough-notation: ^1.0.5
     react-snowfall: ^2.1.1
     reading-time: 1.5.0
     rehype-autolink-headings: ^7.1.0
@@ -9595,6 +9596,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-rough-notation@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "react-rough-notation@npm:1.0.5"
+  dependencies:
+    rough-notation: ^0.5.1
+  peerDependencies:
+    react: ^18.2.0
+    react-dom: ^18.2.0
+  checksum: 8d05cb577dc69db8faf1304e4b4bd9ac31ea3cdcfea645677134c57e0d35995e2bfae80f89a2700588e20dae57de93f4318475043c1b03f60a420b8ea1aa522a
+  languageName: node
+  linkType: hard
+
 "react-snowfall@npm:^2.1.1":
   version: 2.1.1
   resolution: "react-snowfall@npm:2.1.1"
@@ -10479,6 +10492,13 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
+  languageName: node
+  linkType: hard
+
+"rough-notation@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "rough-notation@npm:0.5.1"
+  checksum: e7aacbd0b9751b4c5a377198dfd81eab8ad4c339bccc547e7439ce86c379113cea857fa56ef0f4beac41e316efc1888d127a8e7248b1431f41cd45092893166e
   languageName: node
   linkType: hard
 

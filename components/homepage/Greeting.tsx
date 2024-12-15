@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
 import clsx from 'clsx';
-// import { renderCanvas } from '../../utils/renderCanvas'; // Ensure correct import path
-// import { newCanvas } from '../../utils/newCanvas'; // Ensure correct import path
+import { RoughNotation, RoughNotationGroup } from 'react-rough-notation';
 
 const Greeting = () => {
   const className = clsx(
@@ -10,19 +8,14 @@ const Greeting = () => {
     'mb-8 bg-clip-text text-4xl font-extrabold leading-[60px] tracking-tight text-transparent md:text-7xl md:leading-[86px]'
   );
 
-  // Call renderCanvas when the component mounts
-  useEffect(() => {
-    // renderCanvas(); // This will initialize the canvas animation
-    //  newCanvas('canvas')
-  }, []);
-
   return (
     <div className={className}>
-      {/* <div className="absolute left-1/2 top-1/2 z-[-1] -translate-x-1/2 -translate-y-1/2 transform"> */}
-      {/* The canvas element for rendering the animation */}
-      {/* <canvas id="canvas"></canvas> */}
-      {/* </div> */}
-      Hello, everyone! <span className="font-bold">I am here to share my learning journey and insights.</span>
+      <RoughNotationGroup show={true}>
+        <RoughNotation type="underline" color="#4FD1C5" animationDuration={1000}>
+          <span>Hello, everyone! </span>
+        </RoughNotation>
+        <span className="font-bold">I am here to share my learning journey and insights.</span>
+      </RoughNotationGroup>
     </div>
   );
 };

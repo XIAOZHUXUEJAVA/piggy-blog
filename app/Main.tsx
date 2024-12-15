@@ -19,6 +19,7 @@ import {
 
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
 import { useEffect } from 'react';
+import { RoughNotation } from 'react-rough-notation';
 
 const MAX_DISPLAY = 5;
 
@@ -64,16 +65,54 @@ export default function Home({ posts }) {
       {/* List all post */}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 py-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+          {/* <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             Recent Posts
+          </h1> */}
+          {/* <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+            <RoughNotation
+              type="highlight"
+              show={true}
+              color="#fbbf24" // Choose an appropriate color
+              animationDelay={1000}
+              animationDuration={1000}
+              strokeWidth={5} // Increase border width
+            >
+              <span className="inline-block" style={{ padding: '0.2em' }}>
+                Recent Posts
+              </span>
+            </RoughNotation>
+          </h1> */}
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-800 dark:text-gray-200 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+            <RoughNotation
+              type="bracket"
+              brackets={['left', 'right']}
+              show={true}
+              color="#f6ad55"
+              animationDelay={1000}
+              animationDuration={1000}
+              strokeWidth={5}
+            >
+              <span className="inline-block text-gray-600" style={{ padding: '0.2em', display: 'inline-block' }}>
+                Recent Posts
+              </span>
+            </RoughNotation>
           </h1>
+
           <p className="!mt-2 flex text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
-            <Link href="/blog" className="ml-auto hover:underline">
+            <Link href="/blog" className="z-[1] ml-auto">
               <Twemoji emoji="backhand-index-pointing-right" />
-              <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
-                See more blogs
-              </span>
+              <RoughNotation
+                type="underline"
+                show={true}
+                color="#FFb900"
+                animationDelay={1400}
+                animationDuration={1200}
+              >
+                <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
+                  See more blogs
+                </span>
+              </RoughNotation>
             </Link>
           </p>
         </div>
