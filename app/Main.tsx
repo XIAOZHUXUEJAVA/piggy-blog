@@ -15,15 +15,32 @@ import {
   SpotifyNowPlaying,
 } from '@/components/homepage';
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RoughNotation } from 'react-rough-notation';
 
 const MAX_DISPLAY = 5;
 
 export default function Home({ posts }) {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
   useEffect(() => {
-    // renderCanvas(); // This will initialize the canvas animation
+    // Initialize canvas animation
     newCanvas('canvas');
+
+    // Handle scroll events to show or hide the button
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowScrollButton(true); // Show the button when scrolled down
+      } else {
+        setShowScrollButton(false); // Hide the button when at the top
+      }
+    };
+
+    // Attach the scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener when the component is unmounted
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Scroll to top function
@@ -167,13 +184,15 @@ export default function Home({ posts }) {
       )}
 
       {/* Back to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-4 right-4 transform rounded-full bg-yellow-400 p-4 text-white shadow-lg transition-transform hover:rotate-12 hover:scale-110"
-        aria-label="Back to Top"
-      >
-        ↑
-      </button>
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 transform rounded-full bg-yellow-400 p-4 text-white shadow-lg transition-transform hover:rotate-12 hover:scale-110"
+          aria-label="Back to Top"
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 }
