@@ -2,8 +2,6 @@
 
 import Snowfall from 'react-snowfall';
 import { formatDate } from 'pliny/utils/formatDate';
-// import NewsletterForm from 'pliny/ui/NewsletterForm';
-
 import siteMetadata from '@/data/siteMetadata';
 import { Tag, Link, Twemoji } from '@/components/ui';
 import {
@@ -16,7 +14,6 @@ import {
   ShortDescription,
   SpotifyNowPlaying,
 } from '@/components/homepage';
-
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
 import { useEffect } from 'react';
 import { RoughNotation } from 'react-rough-notation';
@@ -28,6 +25,12 @@ export default function Home({ posts }) {
     // renderCanvas(); // This will initialize the canvas animation
     newCanvas('canvas');
   }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="relative">
       <canvas id="canvas" className="fixed inset-0 z-[0] h-screen w-screen"></canvas>
@@ -65,23 +68,6 @@ export default function Home({ posts }) {
       {/* List all post */}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 py-6 md:space-y-5">
-          {/* <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            Recent Posts
-          </h1> */}
-          {/* <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            <RoughNotation
-              type="highlight"
-              show={true}
-              color="#fbbf24" // Choose an appropriate color
-              animationDelay={1000}
-              animationDuration={1000}
-              strokeWidth={5} // Increase border width
-            >
-              <span className="inline-block" style={{ padding: '0.2em' }}>
-                Recent Posts
-              </span>
-            </RoughNotation>
-          </h1> */}
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-800 dark:text-gray-200 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
             <RoughNotation
               type="bracket"
@@ -179,6 +165,15 @@ export default function Home({ posts }) {
           </Link>
         </div>
       )}
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className="fixed bottom-4 right-4 transform rounded-full bg-yellow-400 p-4 text-white shadow-lg transition-transform hover:rotate-12 hover:scale-110"
+        aria-label="Back to Top"
+      >
+        ↑
+      </button>
     </div>
   );
 }
