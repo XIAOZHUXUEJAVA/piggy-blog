@@ -1,0 +1,42 @@
+---
+title: Resolve the Conflict Between VS Code `code` Command and Cursor `cursor` Command In Windows 11
+date: '2024-12-17'
+tags: ['windows', 'vscode', 'cursor']
+draft: false
+summary: Cursor VSCode Conflict
+---
+
+Cursor is a recently popular AI editor. Before this, I was using the VS Code editor. However, after I downloaded Cursor, I encountered a conflict between the `code` command in VS Code and Cursor as the following:
+
+When I use `code .` command in PowerShell, the editor that opens is Cursor instead of VS Code.
+
+![image-20241217231522259](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20241217231522259.png)
+
+**How to fix it:**
+
+- Find `code` and `cursor` command files
+
+PowerShell (replace Username with your Username ):
+
+```bash
+ Get-Command code
+```
+
+- Backup `code.cmd` and `code`
+
+```bash
+ Copy-Item "C:\Users\Username\AppData\Local\Programs\cursor\resources\app\bin\code.cmd" "C:\Users\<Username>\AppData\Local\Programs\cursor\resources\app\bin\code.cmd.bak"
+
+  Copy-Item "C:\Users\Username\AppData\Local\Programs\cursor\resources\app\bin\code" "C:\Users\<Username>\AppData\Local\Programs\cursor\resources\app\bin\code.bak"
+```
+
+- Delete `code.cmd` and `code`
+
+```bash
+Remove-Item "C:\Users\Username\AppData\Local\Programs\cursor\resources\app\bin\code.cmd"
+Remove-Item "C:\Users\Username\AppData\Local\Programs\cursor\resources\app\bin\code"
+```
+
+![image-20241217233028918](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20241217233028918.png)
+
+- And then we can use `code` to open VS Code

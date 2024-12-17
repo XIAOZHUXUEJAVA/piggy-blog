@@ -1,0 +1,37 @@
+---
+title: WSL2 cannot use the `code .` environment variable to open VS Code.
+date: '2024-12-17'
+tags: ['linux', 'vscode']
+draft: false
+summary: WSL2 VSCode error
+---
+
+If you're using WSL2 (Windows Subsystem for Linux 2) and encountering issues when trying to open VS Code with `code .` command, you may see errors like this: a
+
+![image-20241117194640815](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20241117194640815.png)
+
+```bash
+Updating VS Code Server to version f1a4fb101478ce6ec82fe9627c43efbf9e98c813
+Removing previous installation...
+Installing VS Code Server for Linux x64 (f1a4fb101478ce6ec82fe9627c43efbf9e98c813)
+Downloading: 100%
+Failed
+--2024-11-17 17:36:58--  https://update.code.visualstudio.com/commit:f1a4fb101478ce6ec82fe9627c43efbf9e98c813/server-linux-x64/stable
+Connecting to 127.0.0.1:7890... connected.
+ERROR: cannot verify update.code.visualstudio.com's certificate, issued by ‘CN=Microsoft Azure RSA TLS Issuing CA 08,O=Microsoft Corporation,C=US’:
+  Self-signed certificate encountered.
+To connect to update.code.visualstudio.com insecurely, use `--no-check-certificate'.
+ERROR: Failed to download https://update.code.visualstudio.com/commit:f1a4fb101478ce6ec82fe9627c43efbf9e98c813/server-linux-x64/stable to /root/.vscode-server/bin/f1a4fb101478ce6ec82fe9627c43efbf9e98c813-1731836218.tar.gz
+Please install missing certificates.
+Debian/Ubuntu:  sudo apt-get install ca-certificates
+```
+
+**Use the following command:**
+
+```bash
+sudo apt-get install ca-certificates
+```
+
+```bash
+echo "check_certificate = off" >> ~/.wgetrc
+```
