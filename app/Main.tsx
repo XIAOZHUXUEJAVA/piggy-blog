@@ -177,8 +177,17 @@ export default function Home({ posts }) {
 
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
-          <Link href="/blog" className="text-primary hover:text-sky-600 dark:hover:text-sky-400" aria-label="All posts">
-            All Posts &rarr;
+          <Link
+            href="/blog"
+            className="text-primary z-[1] hover:text-sky-600 dark:hover:text-sky-400"
+            aria-label="All posts"
+          >
+            <Twemoji emoji="backhand-index-pointing-right" />
+            <RoughNotation type="underline" show={true} color="#FFb900" animationDelay={1400} animationDuration={1200}>
+              <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
+                All Posts
+              </span>
+            </RoughNotation>
           </Link>
         </div>
       )}

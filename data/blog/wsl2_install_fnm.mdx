@@ -1,0 +1,58 @@
+---
+title: WSL2 Install FNM(Fast Node Manager)
+date: '2024-12-18'
+tags: ['wls2', 'linux', 'node']
+draft: false
+summary: wsl2 install fnm
+---
+
+To install `fnm` (Fast Node Manager) on WSL2, follow these steps:
+
+1. **Open WSL2**: Start your WSL2 terminal
+
+2. **Install fnm**: You can install `fnm` using a script provided by the maintainers. Run the following command:
+
+   ```bash
+   curl -sSfL https://fnm.vercel.app/install | bash
+   ```
+
+3. **Add fnm to Your Shell**: After the installation, you need to add `fnm` to your shell profile. If you're using `bash`, add the following lines to your `~/.bashrc` file:
+
+   ```bash
+   export PATH="$HOME/.fnm/node-versions/node/v$(fnm current)/bin:$PATH"
+   eval "$(fnm env)"
+   ```
+
+   If you're using `zsh`, add it to your `~/.zshrc` instead.
+
+4. **Reload Your Shell**: To apply the changes, reload your shell configuration:
+
+   ```bash
+   source ~/.bashrc
+   ```
+
+   Or for `zsh`:
+
+   ```bash
+   source ~/.zshrc
+   ```
+
+5. **Verify the Installation**: Check if `fnm` is installed correctly by running:
+
+   ```bash
+   fnm --version
+   ```
+
+6. **Install Node.js**: Now you can install Node.js versions using `fnm`. For example, to install the latest LTS version:
+
+   ```bash
+   fnm install --lts
+   ```
+
+7. **Use a Specific Version**: To set a specific version of Node.js, you can use:
+
+   ```bash
+   fnm use <version>
+   ```
+
+You should now have `fnm` installed and ready to manage your Node.js versions on WSL2.
