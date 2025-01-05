@@ -1,0 +1,159 @@
+---
+title: AstroNvim Install and Config (Based on Ubuntu)
+date: '2025-1-5'
+tags: ['linux', 'vim']
+draft: false
+summary: AstroNvim as Your Editor
+---
+
+## zsh (if necessary)
+
+```bash
+sudo apt-get install zsh -y
+chsh -s /bin/zsh
+reboot
+```
+
+reboot or open a new terminal
+
+## oh my zsh (if necessary)
+
+```bash
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+```
+
+## 1. Install Neovim
+
+```bash
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update -y
+sudo apt-get install neovim -y
+```
+
+## 2. Install Xclip
+
+```bash
+sudo apt-get install xclip
+```
+
+## 3. Back up nvim
+
+```bash
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+mv ~/.local/state/nvim ~/.local/state/nvim.bak
+mv ~/.cache/nvim ~/.cache/nvim.bak
+```
+
+## 4. Clone AstroNvim Repository and Start
+
+```bash
+git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+nvim
+```
+
+## 5. Key Mappings Config
+
+```bash
+nvim ~/.config/nvim/lua/plugins/mappings.lua
+```
+
+Append the below code to `mappings.lua`
+
+```lua
+return {
+  {
+    "AstroNvim/astrocore",
+    ---@type AstroCoreOpts
+    opts = {
+      mappings = {
+        -- first key is the mode
+        n = {
+          -- second key is the lefthand side of the map
+          -- mappings seen under group name "Buffer"
+          ["<Leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
+          ["<Leader>bD"] = {
+            function()
+              require("astroui.status").heirline.buffer_picker(function(bufnr)
+                require("astrocore.buffer").close(bufnr)
+              end)
+            end,
+            desc = "Pick to close",
+          },
+          -- tables with just a `desc` key will be registered with which-key if it's installed
+          -- this is useful for naming menus
+          ["<Leader>b"] = { desc = "Buffers" },
+          -- quick save
+          -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+        },
+        t = {
+          -- setting a mapping to false will disable it
+          -- ["<esc>"] = false,
+        },
+      },
+    },
+  },
+  {
+    "AstroNvim/astrolsp",
+    ---@type AstroLSPOpts
+    opts = {
+      mappings = {
+        n = {
+          -- this mapping will only be set in buffers with an LSP attached
+          K = {
+            function()
+              vim.lsp.buf.hover()
+            end,
+            desc = "Hover symbol details",
+          },
+          -- condition for only server with declaration capabilities
+          gD = {
+            function()
+              vim.lsp.buf.declaration()
+            end,
+            desc = "Declaration of current symbol",
+            cond = "textDocument/declaration",
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+**Your personal vim key mappings may conflict with some mappings in astronvim**
+
+You can view the following files:
+
+```bash
+nvim ~/.local/share/nvim/lazy/AstroNvim/lua/astronvim/plugins/_astrocore_mappings.lua
+```
+
+## 6. Theme
+
+modify the `community.lua` file:
+
+```bash
+nvim ~/.config/nvim/lua/community.lua
+```
+
+append the following code:
+
+```
+ { import = "astrocommunity.colorscheme.catppuccin" }
+```
+
+![](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250105163415156.png)
+
+For more details, please visit https://github.com/AstroNvim/astrocommunity
+
+modify the `astroui.lua`
+
+modify the `astroui.lua`, set your theme
+
+```bash
+nvim ~/.config/nvim/lua/plugins/astroui.lua
+```
+
+![image-20250105170817917](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250105170817917.png)
