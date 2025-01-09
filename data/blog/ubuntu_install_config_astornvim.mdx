@@ -6,7 +6,9 @@ draft: false
 summary: AstroNvim as Your Editor
 ---
 
-## zsh (if necessary)
+# AstroNvim Install and Config (Based on Ubuntu)
+
+## zsh (optional)
 
 ```bash
 sudo apt-get install zsh -y
@@ -16,7 +18,7 @@ reboot
 
 reboot or open a new terminal
 
-## oh my zsh (if necessary)
+## oh my zsh (optional)
 
 ```bash
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
@@ -144,11 +146,11 @@ append the following code:
  { import = "astrocommunity.colorscheme.catppuccin" }
 ```
 
+local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
 ![](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250105163415156.png)
 
 For more details, please visit https://github.com/AstroNvim/astrocommunity
-
-modify the `astroui.lua`
 
 modify the `astroui.lua`, set your theme
 
@@ -157,3 +159,40 @@ nvim ~/.config/nvim/lua/plugins/astroui.lua
 ```
 
 ![image-20250105170817917](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250105170817917.png)
+
+## 7.Remote Server Clipboard
+
+When we use SSH to login to a remote server(like ubuntu), our AstroNvim clipboard may not sync with the clipboard of our local machine. In this case, we can use `OSC 52`. Then , we can use `y` to copy content from our AstroNvim on the remote server to the local machine, and use `Ctrl + V` to paste content into AstroNvim from the local machine to remote server.
+
+The solution is:
+
+```bash
+vim ~/.config/nvim/init.lua
+```
+
+append the following code to `init.lua`
+
+```lua
+vim.o.clipboard = "unnamedplus"
+
+local function paste()
+  return {
+    vim.fn.split(vim.fn.getreg(""), "\n"),
+    vim.fn.getregtype(""),
+  }
+end
+
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = paste,
+    ["*"] = paste,
+  },
+}
+```
+
+For more details, please visit: https://neovim.io/doc/user/provider.html#clipboard-tool
