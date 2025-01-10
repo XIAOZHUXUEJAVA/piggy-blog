@@ -1,0 +1,87 @@
+---
+title: Start a Java project with Maven manually (Based on Ubuntu)
+date: '2025-01-10'
+tags: ['java', 'maven', 'linux']
+draft: false
+summary: Deep understanding the structure of maven project
+---
+
+## Install Maven
+
+Update System Packages and install Maven, you can also use `apt-get`
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install maven
+mvn -v
+```
+
+## Create a project manually
+
+1. **create a empty folder**
+
+```bash
+mkdir hello-maven
+cd hello-maven
+```
+
+2. **create a `pom.xml`**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>hello-maven</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
+
+```
+
+3. **create project structure**
+
+```bash
+mkdir -p src/main/java/com/example
+cd src/main/java/com/example
+```
+
+4. **just write a simple application**
+
+```java
+vim App.java
+```
+
+```java
+package com.example;
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+```
+
+5. **Navigate to the project root directory and execute the Maven command to compile and build the project.**
+
+```bash
+mvn clean install
+mvn exec:java -Dexec.mainClass="com.example.App"
+```
