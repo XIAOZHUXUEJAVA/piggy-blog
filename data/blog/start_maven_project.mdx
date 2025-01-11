@@ -6,6 +6,22 @@ draft: false
 summary: Deep understanding the structure of maven project
 ---
 
+```java
+public class Test {
+  public static void main(String[] arg) {
+    System.out.println("Hello, Java");
+  }
+}
+```
+
+When I use Neovim with the JDTLS (Java Development Tools Language Server) for writing Java code, Neovim provides reminders like the following:
+
+**Test.java is a non-project file, only syntax errors are reported.**
+
+![image-20250111135420624](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250111135420624.png)
+
+So I start a Java project with maven.
+
 ## Install Maven
 
 Update System Packages and install Maven, you can also use `apt-get`
