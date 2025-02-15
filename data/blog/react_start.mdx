@@ -1,0 +1,178 @@
+---
+title: Setting Up a React Development Environment with Vite, TypeScript, TailwindCSS, ESLint, and Prettier
+date: '2025-02-15'
+tags: ['js', 'vscode', 'react']
+draft: false
+summary: Build a react project
+---
+
+## 1. Create Vite Project
+
+```bash
+npm create vite @latest
+```
+
+```bash
+✔ Project name: … note-project
+✔ Select a framework: › React
+✔ Select a variant: › TypeScript
+```
+
+```
+cd note-project
+npm install
+npm run dev
+```
+
+## 2. Install and config prettier
+
+```bash
+npm i -D -E prettier
+```
+
+**.prettierrc**
+
+```
+{
+  "printWidth": 120,
+  "tabWidth": 2,
+  "useTabs": false,
+  "singleQuote": true,
+  "semi": false,
+  "trailingComma": "none",
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "eslintIntegration": true
+}
+```
+
+## 3. Install eslint-config-prettier
+
+```bash
+npm i -D eslint-config-prettier
+```
+
+**.eslintrc.cjs**
+
+```bash
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'prettier', // add this line
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+  },
+}
+```
+
+## 4. Config VSCode setting
+
+![image-20240911222016854](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20240911222016854.png)
+
+![image-20240911222037569](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20240911222037569.png)
+
+![image-20240911222105147](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20240911222105147.png)
+**setting.json**
+
+```json
+"editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+"editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "eslint.autoFixOnSave": "explicit"
+  },
+```
+
+## 5. Install and config tailwindcss
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+**tailwind.config.js**
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+**index.css**
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## 6. Install and config Shadcn UI
+
+https://ui.shadcn.com/docs/installation/vite
+
+**tsconfig.json**
+
+```json
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+**tsconfig.app.json**
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    // ...
+  }
+}
+```
+
+```bash
+npm i -D @types/node
+```
