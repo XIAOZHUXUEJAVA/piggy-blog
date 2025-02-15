@@ -14,10 +14,10 @@ summary: Some common settings and config about WSL2
 wsl --list --verbose
 ```
 
-**2. Replace <distro-name> with the name of your WSL distribution(e.g., `Ubuntu`)**
+**2. Replace distro-name with the name of your WSL distribution(e.g., `Ubuntu`)**
 
 ```bash
-<distro-name> config --default-user root
+distro-name config --default-user root
 ```
 
 For instance:
@@ -31,11 +31,11 @@ Ubuntu config --default-user root
 **1. Export the WSL Distribution**
 
 ```bash
-wsl --export <Distribution-Name> <Export-Path>.tar
+wsl --export Distribution-Name Export-Path.tar
 ```
 
-- `<Distribution-Name>`: The name of the WSL distribution to export (e.g., `Ubuntu`, `docker-desktop`, `docker-desktop-data`, etc)
-- <Export-Path>: The path where the `.tar` file will be saved (e.g., `D:\Data\WSL_Export\<Distribution-Name>.tar`)
+- `Distribution-Name`: The name of the WSL distribution to export (e.g., `Ubuntu`, `docker-desktop`, `docker-desktop-data`, etc)
+- Export-Path: The path where the `.tar` file will be saved (e.g., `D:\Data\WSL_Export\<Distribution-Name>.tar`)
 
 For instance:
 
@@ -46,7 +46,7 @@ wsl --export Ubuntu D:\Data\WSL_Export\Ubuntu.tar
 **2. Unregister the current WSL distribution**
 
 ```bash
-wsl --unregister <Distribution-Name>
+wsl --unregister Distribution-Name
 ```
 
 For instance:
@@ -58,7 +58,7 @@ wsl --unregister Ubuntu
 **3. Import the WSL Distribution**
 
 ```bash
-wsl --import <Distribution-Name> <New-Data-Path> <Export-Path>.tar --version 2
+wsl --import Distribution-Name New-Data-Path Export-Path.tar --version 2
 ```
 
 For instance:
