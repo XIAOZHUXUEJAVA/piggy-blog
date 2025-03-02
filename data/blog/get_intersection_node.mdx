@@ -1,0 +1,304 @@
+---
+title: LeetCode-160.相交链表
+date: '2025-3-1'
+tags: ['java', 'algorithm']
+draft: false
+summary: LeetCode练级
+---
+
+**声明：该文通过我个人写Prompt喂给AI产出**
+
+## 问题描述
+
+给定两个单链表 `list1` 和 `list2`，判断它们是否相交。如果相交，返回相交的节点；如果不相交，返回 `null`。
+
+原题链接：https://leetcode.cn/problems/intersection-of-two-linked-lists/
+
+---
+
+## 双指针法
+
+让两个指针分别遍历两个链表，最终在相交节点相遇（如果存在相交节点）。具体步骤如下：
+
+1. 初始化两个指针 `p1` 和 `p2`，分别指向 `list1` 和 `list2` 的头节点。
+2. 同时移动 `p1` 和 `p2`：
+   - 如果 `p1` 到达链表末尾，将其指向 `list2` 的头节点。
+   - 如果 `p2` 到达链表末尾，将其指向 `list1` 的头节点。
+3. 当 `p1` 和 `p2` 相遇时，即为相交节点；如果两个指针同时到达链表末尾（`null`），则说明链表不相交。
+
+---
+
+### 具体思路
+
+双指针法的关键在于**两个指针遍历的总路径长度相同**。具体分析如下：
+
+1. **链表相交的情况**
+
+假设：
+
+- `list1` 的长度为 `m`，`list2` 的长度为 `n`。
+- 两个链表相交，相交节点之后的长度为 `k`。
+
+那么：
+
+- `list1` 的独立部分长度为 `m - k`。
+- `list2` 的独立部分长度为 `n - k`。
+
+两个指针的遍历路径如下：
+
+- 指针 `p1` 的路径：`list1` 的独立部分 (`m - k`) + `list2` 的独立部分 (`n - k`) + 相交部分 (`k`)。
+- 指针 `p2` 的路径：`list2` 的独立部分 (`n - k`) + `list1` 的独立部分 (`m - k`) + 相交部分 (`k`)。
+
+因此，两个指针的路径长度都是 `m + n - k`，最终会在相交节点相遇。
+
+**2.链表不相交的情况**
+
+如果两个链表不相交，两个指针会分别遍历完两个链表，最终同时到达链表末尾（`null`），此时返回 `null`
+
+### 代码实现
+
+以下是双指针法的代码实现：
+
+```java
+public ListNode getIntersectionNode(ListNode list1, ListNode list2) {
+    ListNode p1 = list1;
+    ListNode p2 = list2;
+
+    while (p1 != p2) {
+        p1 = (p1 == null) ? list2 : p1.next;
+        p2 = (p2 == null) ? list1 : p2.next;
+    }
+
+    return p1;
+}
+```
+
+---
+
+### 示例
+
+```java
+list1: 1 -> 2 -> 3
+                \
+                 6 -> 7 -> 8
+                /
+list2:     4 -> 5
+```
+
+- `list1` 的长度 `m = 6`。
+- `list2` 的长度 `n = 5`。
+- 相交部分长度 `k = 3`。
+
+两个指针的遍历路径：
+
+- `p1`：`1 -> 2 -> 3 -> 6 -> 7 -> 8 -> 4 -> 5 -> 6`。
+- `p2`：`4 -> 5 -> 6 -> 7 -> 8 -> 1 -> 2 -> 3 -> 6`。
+
+最终，两个指针在节点 `6` 相遇。
+
+---
+
+### 复杂度分析
+
+- **时间复杂度**：`O(m + n)`，其中 `m` 和 `n` 分别是两个链表的长度。
+- **空间复杂度**：`O(1)`，只使用了常数级别的额外空间。
+
+---
+
+## 长度差法
+
+通过计算两个链表的长度差，将较长的链表的指针移动到与较短链表对齐的位置，然后同时遍历两个链表，找到相交节点。
+
+### 具体思路
+
+长度差法的关键在于**对齐两个链表的起点**，使得两个指针从相同长度的位置开始遍历。具体分析如下：
+
+1. **计算链表长度**：
+   - 遍历 `list1` 和 `list2`，分别计算它们的长度 `lenA` 和 `lenB`。
+2. **对齐链表起点**：
+   - 如果 `lenA > lenB`，将 `p1` 向前移动 `lenA - lenB` 步。
+   - 如果 `lenB > lenA`，将 `p2` 向前移动 `lenB - lenA` 步。
+   - 这样，两个指针后面的链表长度相同。
+3. **同时遍历链表**：
+   - 从对齐后的位置开始，同时遍历两个链表。
+   - 如果两个链表相交，`p1` 和 `p2` 会在相交节点相遇。
+   - 如果两个链表不相交，`p1` 和 `p2` 会同时到达链表末尾（`null`）。
+
+### 代码实现
+
+```java
+public ListNode getIntersectionNode(ListNode list1, ListNode list2) {
+    ListNode p1 = list1;
+    ListNode p2 = list2;
+
+    // 计算两个链表的长度
+    int lenA = 0;
+    int lenB = 0;
+    while (p1 != null) {
+        p1 = p1.next;
+        lenA++;
+    }
+    while (p2 != null) {
+        p2 = p2.next;
+        lenB++;
+    }
+
+    // 重置指针
+    p1 = list1;
+    p2 = list2;
+
+    // 将较长的链表的指针移动到与较短链表对齐的位置
+    if (lenA > lenB) {
+        for (int i = 0; i < lenA - lenB; i++) {
+            p1 = p1.next;
+        }
+    } else {
+        for (int i = 0; i < lenB - lenA; i++) {
+            p2 = p2.next;
+        }
+    }
+
+    // 同时遍历两个链表，找到相交节点
+    while (p1 != p2) {
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+
+    return p1;
+}
+```
+
+---
+
+### 示例
+
+**链表结构**
+
+```java
+list1: 1 -> 2 -> 3
+                \
+                 6 -> 7 -> 8
+                /
+list2:     4 -> 5
+```
+
+- `list1` 的长度 `m = 6`（`1 -> 2 -> 3 -> 6 -> 7 -> 8`）。
+- `list2` 的长度 `n = 5`（`4 -> 5 -> 6 -> 7 -> 8`）。
+- 相交部分长度 `k = 3`（`6 -> 7 -> 8`）。
+
+**长度差法的执行过程**
+
+**步骤 1：计算链表长度**
+
+- 遍历 `list1`，计算长度 `lenA = 6`。
+- 遍历 `list2`，计算长度 `lenB = 5`。
+
+**步骤 2：对齐链表起点**
+
+- `lenA > lenB`，所以 `p1` 需要向前移动 `lenA - lenB = 1` 步。
+- 移动后：
+  - `p1` 指向 `2`（`list1` 的第 2 个节点）。
+  - `p2` 指向 `4`（`list2` 的第 1 个节点）。
+
+**步骤 3：同时遍历链表**
+
+- `p1` 和 `p2` 同时向后移动：
+  - 第 1 步：
+    - `p1` 从 `2` 移动到 `3`。
+    - `p2` 从 `4` 移动到 `5`。
+  - 第 2 步：
+    - `p1` 从 `3` 移动到 `6`。
+    - `p2` 从 `5` 移动到 `6`。
+- 此时，`p1` 和 `p2` 都指向 `6`，找到相交节点。
+
+### 复杂度分析
+
+- **时间复杂度**：`O(m + n)`，其中 `m` 和 `n` 分别是两个链表的长度。
+  - 计算链表长度需要遍历两个链表，时间复杂度为 `O(m + n)`。
+  - 对齐链表起点需要移动指针，时间复杂度为 `O(|m - n|)`。
+  - 同时遍历链表的时间复杂度为 `O(min(m, n))`。
+- **空间复杂度**：`O(1)`，只使用了常数级别的额外空间。
+
+## 测试
+
+```java
+public class ProblemGetIntersectionNodeTest {
+    @Test
+    void testIntersectionNodeExists() {
+        // 创建相交的链表
+        ListNode commonNode = new ListNode(8, new ListNode(4, new ListNode(5)));
+        ListNode list1 = new ListNode(4, new ListNode(1, commonNode));
+        ListNode list2 = new ListNode(5, new ListNode(6, new ListNode(1, commonNode)));
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNotNull(result);
+        assertEquals(8, result.val);
+    }
+
+    @Test
+    void testNoIntersectionNode() {
+        // 创建不相交的链表
+        ListNode list1 = new ListNode(2, new ListNode(6, new ListNode(4)));
+        ListNode list2 = new ListNode(1, new ListNode(5));
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNull(result);
+    }
+
+    @Test
+    void testOneListIsEmpty() {
+        // 其中一个链表为空
+        ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(3)));
+        ListNode list2 = null;
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNull(result);
+    }
+
+    @Test
+    void testBothListsAreEmpty() {
+        // 两个链表都为空
+        ListNode list1 = null;
+        ListNode list2 = null;
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNull(result);
+    }
+
+    @Test
+    void testIntersectionAtFirstNode() {
+        // 两个链表在第一个节点相交
+        ListNode commonNode = new ListNode(1, new ListNode(2, new ListNode(3)));
+        ListNode list1 = commonNode;
+        ListNode list2 = commonNode;
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNotNull(result);
+        assertEquals(1, result.val);
+    }
+
+    @Test
+    void testIntersectionAtLastNode() {
+        // 两个链表在最后一个节点相交
+        ListNode commonNode = new ListNode(3);
+        ListNode list1 = new ListNode(1, new ListNode(2, commonNode));
+        ListNode list2 = new ListNode(4, new ListNode(5, commonNode));
+
+        ProblemGetIntersectionNodeSolution1 solution = new ProblemGetIntersectionNodeSolution1();
+        ListNode result = solution.getIntersectionNode(list1, list2);
+
+        assertNotNull(result);
+        assertEquals(3, result.val);
+    }
+}
+```
