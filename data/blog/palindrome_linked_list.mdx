@@ -1,0 +1,114 @@
+---
+title: 回文链表
+date: '2025-03-11'
+tags: ['java', 'algorithm']
+draft: false
+summary: LeetCode练级
+---
+
+**声明：该文通过我个人写Prompt喂给AI产出**
+
+## 问题描述
+
+给定一个单链表 `head`，判断它是否是回文链表。如果是回文链表，返回 `true`；否则返回 `false`。
+
+原题链接：https://leetcode.cn/problems/palindrome-linked-list/
+
+---
+
+## 快慢指针法
+
+通过快慢指针找到链表的中点，然后将链表的后半部分反转，最后比较前半部分和反转后的后半部分是否相同
+
+---
+
+### 具体思路
+
+快慢指针法的关键在于**找到链表的中点并反转后半部分**。具体分析如下：
+
+1. **找到链表的中点**：
+   - 使用快慢指针，快指针每次移动两步，慢指针每次移动一步。
+   - 当快指针到达链表末尾时，慢指针指向链表的中点。
+   - 当链表长度为奇数时，`slow` 指针会指向链表的中间节点。
+   - 当链表长度为偶数时，`slow` 指针会指向链表后半部分的第一个节点。
+2. **反转链表的后半部分**：
+   - 从中点开始，反转链表的后半部分。
+3. **比较前半部分和反转后的后半部分**：
+   - 使用两个指针分别从链表头部和反转后的后半部分头部开始遍历，逐个比较节点的值。
+   - 如果所有节点的值都相同，则链表是回文链表；否则，不是回文链表。
+4. **恢复链表的后半部分（可选）**：
+   - 如果需要保持链表的原始结构，可以再次反转链表的后半部分，恢复原始链表。
+
+### 代码实现
+
+以下是快慢指针法的代码实现：
+
+```java
+public boolean isPalindrome(ListNode head) {
+    if (head == null || head.next == null) {
+        return true;
+    }
+    // 找到链表的中点
+    ListNode middleNode = getMiddleNode(head);
+    // 反转链表的后半部分
+    ListNode high = reverseList(middleNode);
+    ListNode low = head;
+    // 比较前半部分和反转后的后半部分，这里其实就忽略的奇数偶数带来的影响，这样的话，直到后半部分没有了我们比对结束，
+    while (high != null) {
+        if (low.val != high.val) {
+            return false;
+        }
+        low = low.next;
+        high = high.next;
+    }
+    return true;
+}
+
+// 找到链表的中点
+public ListNode getMiddleNode(ListNode head) {
+    ListNode slow = head;
+    ListNode fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+
+// 反转链表
+public ListNode reverseList(ListNode head) {
+    ListNode current = head;
+    ListNode previous = null;
+    ListNode next = null;
+
+    while (current != null) {
+        next = current.next;
+        current.next = previous;
+        previous = current;
+        current = next;
+    }
+    return previous;
+}
+```
+
+---
+
+### 示例
+
+```java
+链表: 1 -> 2 -> 3 -> 2 -> 1
+```
+
+- 快慢指针找到中点 `3`。(其实代码里已经考虑到了奇数偶数，详情请看我上面的代码注释)
+- 反转后半部分链表，得到 `1 -> 2 -> 3`。
+- 比较前半部分 `1 -> 2 -> 3` 和反转后的后半部分 `1 -> 2 -> 3 `，发现相同，因此链表是回文链表。
+
+---
+
+### 复杂度分析
+
+- **时间复杂度**：`O(n)`，其中 `n` 是链表的长度。
+  - 找到中点需要 `O(n/2)` 的时间。
+  - 反转后半部分链表需要 `O(n/2)` 的时间。
+  - 比较前后两部分链表需要 `O(n/2)` 的时间。
+- **空间复杂度**：`O(1)`，只使用了常数级别的额外空间。

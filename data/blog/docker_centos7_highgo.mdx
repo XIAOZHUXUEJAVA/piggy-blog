@@ -1,0 +1,259 @@
+---
+title: Docker CentOS7 容器中安装Highgo数据库
+date: '2025-03-10'
+tags: ['linux', 'docker', 'database']
+draft: false
+summary: 适用于国产化改造
+---
+
+**背景 & 思路**：由于某些原因，**从dockerhub中拉去镜像的难度升高，修改docker镜像加速需要重启docker**，为了确保服务器伤害的其他的容器中的服务应用正常运行，我们只能放弃使用服务器上的docker，使用本地环境或者其他服务器上的docker来完成一些基本的操作，比如：在本地环境中拉取 CentOS 7 镜像并启动一个容器，然后在该容器内安装瀚高数据库。完成安装后，将该容器提交为新的镜像，并导出为 `.tar` 文件。最后，将该 `.tar` 文件上传到服务器中，并使用 `docker load` 命令导入镜像。
+
+## 1. 安装 Docker 环境
+
+Windows下可以去Docker 官网下载Docker Desktop for Windows： https://docs.docker.com/desktop/setup/install/windows-install/
+
+在Windows下安装之后，点击Docker Desktop的图标就可以启动Docker了，然后在CMD中就可以使用Docker相关的命令
+
+Ubuntu环境可以参考另一篇文章：Ubuntu install Docker
+
+当然也可以Arch、Centos、Debian等环境，这里不在赘述
+
+## 2. 运行一个CentOS 7容器
+
+- **拉取一个CentOS7镜像**
+
+```bash
+docker pull centos:7
+docker images
+```
+
+- **运行容器并进入容器内部**
+
+其中 `highgo` 是容器名称，`centos:7` 是我们之前拉取的镜像名称
+
+```bash
+docker run --name highgo --privileged=true -it centos:7 /bin/bash
+```
+
+- **修改 CentOS 的yum源**
+
+```bash
+sudo cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+vi /etc/yum.repos.d/CentOS-Base.repo
+```
+
+将下面的内容添加到CentOS-Base.repo中
+
+```
+[base]
+name=CentOS-$releasever - Base - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+```
+
+- **安装中文语言包**
+
+```bash
+yum install -y glibc-langpack-zh
+locale
+```
+
+## 3.在Centos容器中安装Highgo数据库
+
+- **下载安装包**
+
+下载地址：https://www.highgo.com/down_enterprise.html
+
+![image-20250213143120779](C:\Users\1\AppData\Roaming\Typora\typora-user-images\image-20250213143120779.png)
+
+将下载好的rpm文件传入到CentOS7 容器中
+
+`<local_file_path>` 是本地文件的完整路径。
+
+`<container_id>` 是目标容器的 ID 或名称。
+
+`<container_file_path>` 是容器内的目标路径。
+
+```bash
+docker container ls
+docker cp <local_file_path> <container_id>:<container_file_path>
+```
+
+举个例子：
+
+```bash
+docker cp libqb-1.0.1-9.el7.x86_64.rpm 312312321:/root
+```
+
+- **安装**
+
+```bash
+rpm -ivh hgdb-enterprise-6.0.4.rpm
+```
+
+**设置highgo用户密码**
+
+第一个`highgo`是用户名
+
+第二个`highgo`是密码
+
+```bash
+echo highgo|passwd --stdin highgo
+id highgo
+```
+
+- **设置highgo用户环境变量**
+
+```bash
+su - highgo
+cat /opt/HighGo6.0.4-cluster/etc/highgodb.env >> ~/.bash_profile
+source ~/.bash_profile
+```
+
+- **检查是否生效**
+
+```bash
+echo $PGDATA
+```
+
+- **初始化数据库**
+
+```bash
+su - highgo
+initdb -D ${PGDATA} > ./initdb.log
+```
+
+- **查看数据库是否启动**
+
+```bash
+pg_ctl status
+```
+
+pg_ctl: no server running
+
+- **启动Highgo**
+
+```bash
+pg_ctl start
+```
+
+- **查看数据库相关进程**
+
+```bash
+ps -axf |grep postgres
+```
+
+- **设置允许远程访问**
+
+```bash
+su - highgo
+vi ${PGDATA}/pg_hba.conf
+```
+
+![image-20250309144519382](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250309144519382.png)
+
+- **修改监听地址并启动mysql适配**
+
+```bash
+vi ${PGDATA}/postgresql.conf
+```
+
+```conf
+listen_addresses = '*'
+compatible_db = 'mysql'
+```
+
+- **重启数据库**
+
+```bash
+pg_ctl restart
+```
+
+## 4. 将容器提交为镜像并导出
+
+在完成Highgo数据库的安装和配置后，我们可以将当前容器提交为一个新的Docker镜像，并将其导出为 `.tar` 文件，以便在其他服务器上使用。
+
+### 4.1 提交容器为镜像
+
+首先，确保你已经退出了容器的交互式终端（可以使用 `exit` 命令退出）。然后，使用以下命令将容器提交为新的镜像：
+
+```bash
+docker commit <container_id> highgo-centos7:latest
+```
+
+其中：
+
+- `<container_id>` 是你正在运行的CentOS 7容器的ID或名称。
+- `highgo-centos7:latest` 是你为新镜像指定的名称和标签。
+
+你可以使用 `docker images` 命令查看新创建的镜像。
+
+### 4.2 将镜像导出为 `.tar` 文件
+
+接下来，将新创建的镜像导出为 `.tar` 文件：
+
+```bash
+docker save -o highgo-centos7.tar highgo-centos7:latest
+```
+
+这将在当前目录下生成一个名为 `highgo-centos7.tar` 的文件。
+
+## 5. 将 `.tar` 文件上传到服务器并导入镜像
+
+### 5.1 上传 `.tar` 文件到服务器
+
+使用文件传输工具将 `highgo-centos7.tar` 文件上传到目标服务器。
+
+### 5.2 在服务器上导入镜像
+
+在服务器上，使用 `docker load` 命令导入镜像：
+
+```bash
+docker load -i ./highgo-centos7.tar
+```
+
+导入完成后，使用 `docker images` 命令确认镜像已成功导入。
+
+### 5.3 运行容器
+
+最后，使用导入的镜像启动一个新的容器：
+
+```bash
+docker run --name highgo-server --privileged=true -it -p 5866:5866 highgo-centos7:latest /bin/bash
+```
+
+这将启动一个新的容器，并且你已经可以在其中运行Highgo数据库了。
+
+## 6. 验证数据库运行
+
+在容器中，你可以使用以下命令验证Highgo数据库是否正常运行：
+
+```bash
+su - highgo
+pg_ctl status
+```
