@@ -1,0 +1,350 @@
+---
+title: VMware 安装 CentOS 7 详细图文教程
+date: '2025-03-30'
+tags: ['linux', 'centos']
+draft: false
+summary: CentOS Install
+---
+
+## 前言
+
+本教程将详细介绍如何在 VMware 虚拟机上安装 CentOS 7 操作系统，包含 DVD 版本和 Minimal 版本两种安装方式。无论您是 Linux 初学者还是有一定经验的用户，都能通过本教程顺利完成安装。
+
+---
+
+## 准备工作
+
+### 1. 下载 CentOS 7 ISO 镜像文件
+
+CentOS 7 提供多个版本，我们主要介绍两种：
+
+- **DVD 版本**：包含图形界面，适合桌面使用
+- **Minimal 版本**：更轻量，适合服务器环境
+
+推荐从阿里云镜像站下载：
+https://mirrors.aliyun.com/centos/7/isos/x86_64/
+
+![CentOS 7 DVD版本下载页面](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321201958888.png)
+
+下载完成后，您将获得一个 `.iso` 格式的光盘映像文件：
+
+![ISO文件示例](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221209465.png)
+
+---
+
+## 第一部分：安装 CentOS 7 DVD 版本
+
+### 1. 创建新虚拟机
+
+1. 启动 VMware，点击"创建新的虚拟机"
+
+   ![新建虚拟机入口](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221323673.png)
+
+2. 选择"典型"配置，点击下一步
+
+   ![选择典型配置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221444569.png)
+
+3. 选择"安装程序光盘映像文件(iso)"，浏览并选择下载的 CentOS 7 ISO 文件
+
+   ![选择ISO文件](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221637811.png)
+
+### 2. 配置虚拟机
+
+1. 设置用户名和密码（建议设置简单易记的密码用于练习）
+
+   ![设置用户信息](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221952523.png)
+
+2. 命名虚拟机并选择存储位置
+
+   ![命名虚拟机](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320222156977.png)
+
+3. 设置磁盘大小（建议至少 20GB）
+
+   ![磁盘大小设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320222335757.png)
+
+### 3. 自定义硬件配置
+
+1. 点击"自定义硬件"进行详细配置
+
+   ![自定义硬件入口](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320222440668.png)
+
+2. 推荐配置：
+
+   - 处理器：2-4核（根据主机配置）
+   - 内存：4-8GB
+   - 网络适配器：NAT模式（便于上网）
+
+   ![CPU和内存设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321195206530.png)
+   ![网络设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323165857614.png)
+
+### 4. 开始安装
+
+完成配置后，VMware 会自动启动虚拟机并开始安装过程：
+
+![CentOS安装启动界面](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321195752686.png)
+
+安装过程会自动进行，等待完成即可。
+
+---
+
+## 第二部分：安装 CentOS 7 Minimal 版本
+
+Minimal 版本安装过程与 DVD 版本类似，但有几个关键区别点：
+
+### 1. 启动安装
+
+选择"Install CentOS 7"开始安装：
+
+![Minimal启动界面](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321203412099.png)
+
+### 2. 语言选择
+
+虽然是最小化安装，但仍可选择中文界面：
+
+![语言选择](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321203537966.png)
+
+### 3. 安装位置
+
+确认磁盘分区方案：
+
+![安装位置设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321203613288.png)
+
+建议选择自动分区：
+
+![分区方案](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321203646415.png)
+
+### 4. 网络配置
+
+启用网络连接：
+
+![网络配置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321203730322.png)
+
+### 5. 软件选择
+
+Minimal 版本默认只安装基本系统，可根据需要添加软件包：
+
+我们这里可以不进行第4步箭头中的操作，后续我们会在安装好的CentOS里面重新设置一下
+
+![image-20250324211707802](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324211707802.png)
+
+### 6. 完成安装
+
+等待安装完成后重启系统：
+
+![安装完成](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321204358357.png)
+
+---
+
+## 第三部分：测试环境
+
+### 1. 测试是否联网
+
+```bash
+ping www.baidu.com
+```
+
+**报错：Name or service not known**
+
+我们需要确保宿主机VM服务开启，然后设置虚拟机网络适配器为NAT模式，这里我们之前都已经设置过了一部分
+
+**虚拟机网络适配器开启NAT模式**
+
+![网络设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323165857614.png)
+
+**VMware 虚拟网络编辑器**
+
+![image-20250324212901042](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324212901042.png)
+
+![image-20250324212731244](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324212731244.png)
+
+**同时点击NAT设置，查看子网IP 子网掩码 网关 IP**
+
+![image-20250324213054467](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324213054467.png)
+
+**在本机中配置VMnet8的IPV4协议，确保该网络的IP地址和和我们刚才在虚拟机中的NAT设置里面的子网IP地址在同一网段**
+
+win + r 打开 cmd 输入control 打开控制面板，选择 网络和 Internet
+
+![image-20250323230400531](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230400531.png)
+
+**查看网络状态和任务**
+
+![image-20250323230501379](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230501379.png)
+
+**更改适配器设置**
+
+![image-20250323230516827](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230516827.png)
+
+**选择VMnet8**
+
+![image-20250323230534168](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230534168.png)
+
+![image-20250323231247376](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323231247376.png)
+
+![image-20250323231311339](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323231311339.png)
+
+确保IP地址和之前在虚拟机网络设置中的IP地址在一个网段，同时设置一下DNS服务器 、子网掩码、默认网关
+
+![image-20250323233921529](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323233921529.png)
+
+进入虚拟机内CentOS系统，执行以下命令
+
+```bash
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+```
+
+1. **IP 地址范围(IPADDR)**：必须属于您设置的网络范围（示例中使用的是 192.168.88.0/24 网段，我在Windows设置VMnet8的IP 地址是192.168.88.131，在虚拟机的CentOS7 是IPADDR=192.168.88.132
+2. **子网掩码(NETMASK)**：必须与虚拟机网络设置一致
+3. **网关(GATEWAY)**：必须与虚拟机网络设置一致
+4. **DNS**：DNS设置为8.8.8.8
+
+在ifcfg-ens33修改以下内容：
+
+```
+BOOTPROTO=static
+
+ONBOOT=yes
+
+IPADDR=192.168.88.132
+
+NETMASK=255.255.255.0
+
+GATEWAY=192.168.88.2
+
+DNS=8.8.8.8
+```
+
+:wq 保存之后，执行以下命令，增加DNS服务器配置
+
+```bash
+ vi /etc/resolv.conf
+```
+
+添加如下配置，如果没有这个文件，可以先创建
+
+```bash
+nameserver 8.8.8.8
+```
+
+重启网络 先执行
+
+```bash
+service network restart
+```
+
+使用以下命令查看上面设置的IP是否已经配置成功
+
+```bash
+ip addr
+```
+
+## 第四部分：基本配置
+
+### 1. 启用 SSH 远程登录
+
+1. 登录系统后，编辑 SSH 配置文件：
+
+   ```bash
+   vim /etc/ssh/sshd_config
+   ```
+
+2. 找到并修改以下参数：
+
+   ```bash
+   PermitRootLogin yes
+   ```
+
+3. 重启 SSH 服务：
+
+   ```bash
+   systemctl restart sshd
+   service sshd restart
+   ```
+
+### 2.配置yum源
+
+```bash
+vi /etc/yum.repos.d/CentOS-Base.repo
+```
+
+用下面的内容替换掉原文件中的
+
+```repo
+[base]
+name=CentOS-$releasever - Base - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/updates/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.aliyun.com
+baseurl=http://mirrors.aliyun.com/centos/$releasever/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
+```
+
+**测试**
+
+```bash
+ping 192.168.88.131   # 测试与主机的连通性
+ping 192.168.88.2     # 测试网关是否可达
+ping 8.8.8.8          # 测试外网连通性
+ping www.baidu.com    # 测试DNS解析
+```
+
+**常见问题解答**
+
+**Q1：主机VMnet8的IP（192.168.88.131）和虚拟机IP（192.168.88.132）这样配置可以吗？**
+
+完全可以，这是标准的NAT模式配置：
+
+```
+
+主机VMnet8 IP：192.168.88.131
+
+CentOS IP：192.168.88.132
+
+网关：192.168.88.2
+
+```
+
+所有地址都在192.168.88.0/24网段内
+
+这种配置确保了：
+
+主机和虚拟机可以互相通信
+
+虚拟机可以通过NAT访问外网
+
+网络隔离，不影响物理网络
+
+**Q2：VMnet8的IP是真实主机IP吗？**
+
+不是。VMnet8的IP（192.168.88.131）是VMware创建的虚拟网络接口IP，不是物理主机的真实IP。要查看真实IP，在Windows中执行：
+
+```cmd
+ipconfig
+```
+
+输出中"以太网适配器 以太网"显示的是真实IP，而"VMware Network Adapter VMnet8"显示的是虚拟IP。
+
+**Q3：依旧联不上网**
+
+考虑防火墙的原因
