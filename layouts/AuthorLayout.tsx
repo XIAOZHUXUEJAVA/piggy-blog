@@ -101,7 +101,7 @@ export default function AuthorLayout({ children, content }: Props) {
               </li>
               <li>
                 <Twemoji className="!mr-2" emoji="video-game" /> <strong>Favorite Games:</strong> Sekiro / DarkSouls III
-                / WoLong / Elden Ring / Nioh 2 / Bloodborne / DarkSouls I / Rise of the Ronin
+                / WoLong / Elden Ring / Nioh 2 / Bloodborne / DarkSouls I / Rise of the Ronin / The Last of Us / God War
               </li>
             </ul>
 

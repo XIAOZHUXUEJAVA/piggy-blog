@@ -59,6 +59,13 @@ input:-webkit-autofill:focus {
   vertical-align: middle;
 }
 
+body {
+  cursor: url('/cursors/icons8-cursor-48.png'), auto;
+}
+a,
+button {
+  cursor: url('/cursors/icons8-cursor-48.png'), pointer;
+}
 /* START: CSS popular tags */
 .popular-tags .javascript {
   @apply bg-amber-400;
