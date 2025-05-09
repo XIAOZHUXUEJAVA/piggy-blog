@@ -6,10 +6,59 @@ draft: false
 summary: LeetCode练级
 ---
 
-原题链接：https://leetcode.cn/problems/merge-sorted-array/description/
+## ✨ 题目介绍
+
+给你两个 **升序排列** 的整数数组 `nums1` 和 `nums2`，请你将 `nums2` 合并到 `nums1` 中，使得 `nums1` 成为一个升序数组。
+
+- 初始时，`nums1` 的长度为 `m + n`，其中前 `m` 个元素为有效元素，后 `n` 个元素为 0（占位）。
+- `nums2` 的长度为 `n`。
+
+你需要 **就地修改** `nums1`，不能返回新数组。
+
+LeetCode 中的经典题目：[88. Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array/)
+
+---
+
+## 💡 题目思路
+
+我们可以使用**双指针归并排序思想**，维护两个指针分别指向 `nums1` 和 `nums2` 的当前比较元素。
+
+- 指针 `i` 初始指向 `nums1` 的第一个有效元素
+- 指针 `j` 初始指向 `nums2` 的第一个元素
+- 比较两者的大小，较小的元素放入新的位置数组 `mergedArray`
+- 最后将 `mergedArray` 复制回 `nums1`
+
+注意：
+
+- 原地合并（不借助额外数组）的方法会更优，本文在“优化方案”部分介绍。
+
+---
+
+## 🧮 思路演示
+
+举个例子：
 
 ```java
+nums1 = [1,3,5,0,0,0], m = 3
+nums2 = [2,4,6], n = 3
+```
 
+合并步骤如下：
+
+1. 比较 1 和 2，取 1
+2. 比较 3 和 2，取 2
+3. 比较 3 和 4，取 3
+4. 比较 5 和 4，取 4
+5. 比较 5 和 6，取 5
+6. nums2 还剩 6，放入
+
+最终：`nums1 = [1,2,3,4,5,6]`
+
+---
+
+## 💻 题目代码实现（含测试）
+
+```java
 import java.util.Arrays;
 
 public class ProblemMergeSortedArray {
@@ -27,9 +76,8 @@ public class ProblemMergeSortedArray {
         if (m > nums1.length || n > nums2.length) {
             throw new IllegalArgumentException("Length parameter exceed actual array length!");
         }
-        int nums1Index = 0;
-        int nums2Index = 0;
-        int mergedIndex = 0;
+
+        int nums1Index = 0, nums2Index = 0, mergedIndex = 0;
         int[] mergedArray = new int[m + n];
 
         while (nums1Index < m && nums2Index < n) {
@@ -39,12 +87,15 @@ public class ProblemMergeSortedArray {
                 mergedArray[mergedIndex++] = nums2[nums2Index++];
             }
         }
+
         while (nums1Index < m) {
             mergedArray[mergedIndex++] = nums1[nums1Index++];
         }
+
         while (nums2Index < n) {
             mergedArray[mergedIndex++] = nums2[nums2Index++];
         }
+
         System.arraycopy(mergedArray, 0, nums1, 0, m + n);
     }
 
@@ -52,18 +103,15 @@ public class ProblemMergeSortedArray {
         System.out.println("=== Test Case: " + testName + " ===");
         try {
             int[] originalNums1 = nums1 != null ? Arrays.copyOf(nums1, nums1.length) : null;
+
             if (expected == null) {
-                // 异常抛出测试
                 try {
                     merge(nums1, m, nums2, n);
-                    // 预期抛出的异常，并没有抛出
                     System.out.println("FAIL - Expected exception but none thrown");
                 } catch (Exception e) {
                     System.out.println("PASS - Caught expected exception: " + e.getClass().getSimpleName() + " - " + e.getMessage());
                 }
-
             } else {
-                // 正常测试
                 merge(nums1, m, nums2, n);
                 if (Arrays.equals(nums1, expected)) {
                     System.out.println("PASS");
@@ -80,9 +128,8 @@ public class ProblemMergeSortedArray {
         }
     }
 
-
     public static void main(String[] args) {
-        // 正常情况测试
+        // ✅ 正常情况测试
         testMerge("Both arrays with elements",
                 new int[]{1, 3, 5, 0, 0, 0}, 3,
                 new int[]{2, 4, 6}, 3,
@@ -108,7 +155,7 @@ public class ProblemMergeSortedArray {
                 new int[]{2, 5, 6}, 3,
                 new int[]{1, 2, 2, 3, 5, 6});
 
-        // 异常情况测试
+        // ❌ 异常情况测试
         testMerge("nums1 is null", null, 0, new int[]{1, 2}, 2, null);
         testMerge("nums2 is null", new int[]{1, 2, 0}, 2, null, 1, null);
         testMerge("m is negative", new int[]{1, 2, 0}, -1, new int[]{3}, 1, null);
@@ -119,3 +166,43 @@ public class ProblemMergeSortedArray {
     }
 }
 ```
+
+---
+
+## ⏱️ 时间和空间复杂度分析
+
+- **时间复杂度**：O(m + n)
+  每个元素都只遍历了一次。
+- **空间复杂度**：O(m + n)
+  使用了一个额外数组 `mergedArray` 存储合并结果。
+
+---
+
+## 🚀 算法优化方案（更好的写法）
+
+题目要求在 `nums1` 原地修改。我们可以 **从后往前遍历**，这样就能直接在 `nums1` 中放置最大元素，无需额外数组：
+
+```java
+public void merge(int[] nums1, int m, int[] nums2, int n) {
+    int i = m - 1, j = n - 1, k = m + n - 1;
+
+    while (i >= 0 && j >= 0) {
+        nums1[k--] = nums1[i] > nums2[j] ? nums1[i--] : nums2[j--];
+    }
+
+    while (j >= 0) {
+        nums1[k--] = nums2[j--];
+    }
+}
+```
+
+- 时间复杂度仍为 O(m + n)
+- 空间复杂度为 O(1)，**无需额外数组**
+
+---
+
+## ✅ 总结
+
+- 本题本质是归并排序的合并过程。
+- 初始写法逻辑清晰但使用了额外数组，可以作为理解算法的第一步。
+- 最终推荐使用从后向前原地合并的方法，提升空间效率。
