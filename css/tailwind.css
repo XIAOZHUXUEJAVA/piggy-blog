@@ -162,6 +162,29 @@ button {
   }
 }
 
+.transform-style-3d {
+  transform-style: preserve-3d;
+  perspective: 2000px;
+}
+
+/* 添加这些新的样式 */
+.transform-style-3d > div {
+  backface-visibility: visible;
+  transform-style: preserve-3d;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+  perspective: 2000px;
+}
+
+.transform-style-3d > div {
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+}
+
+.transform-style-3d > div > div {
+  backface-visibility: visible;
+}
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
 }

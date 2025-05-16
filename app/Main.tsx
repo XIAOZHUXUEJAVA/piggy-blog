@@ -17,6 +17,7 @@ import {
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
 import { useEffect, useState } from 'react';
 import { RoughNotation } from 'react-rough-notation';
+import CubeSplitter from '@/components/ui/CubeSplitter';
 
 const MAX_DISPLAY = 5;
 
@@ -246,6 +247,8 @@ export default function Home({ posts }) {
           </svg>
         </button>
       )}
+
+      <CubeSplitter />
     </div>
   );
 }
