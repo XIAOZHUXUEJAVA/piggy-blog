@@ -59,13 +59,13 @@ input:-webkit-autofill:focus {
   vertical-align: middle;
 }
 
-body {
+/* body {
   cursor: url('/cursors/icons8-cursor-48.png'), auto;
 }
 a,
 button {
   cursor: url('/cursors/icons8-cursor-48.png'), pointer;
-}
+} */
 /* START: CSS popular tags */
 .popular-tags .javascript {
   @apply bg-amber-400;
@@ -119,3 +119,99 @@ button {
   background: #5c6370;
 }
 /* END: CSS Prose */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) rotate(15deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(15deg);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* 背景网格效果 */
+.bg-grid {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .bg-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* 玻璃态效果 */
+.glass-effect {
+  @apply bg-white/20 backdrop-blur-sm dark:bg-gray-800/20;
+}
+
+.glass-effect-strong {
+  @apply bg-white/40 backdrop-blur-md dark:bg-gray-800/40;
+}
+
+/* 渐变边框效果 */
+.gradient-border {
+  position: relative;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to right, #fbbf24, #f59e0b);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+/* END: Custom Animations */

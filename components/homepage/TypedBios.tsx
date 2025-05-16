@@ -44,7 +44,7 @@ const TypedBios = () => {
           G.E.M.!!!!!!
         </li>
         <li>
-          I love playing Soulslike game <Twemoji emoji="video-game" />: Sekiro, DarkSouls, WoLong, Nioh...
+          I love playing Soulslike game <Twemoji emoji="video-game" />: Sekiro, DarkSouls...
         </li>
       </ul>
       <span ref={el} className="text-neutral-900 dark:text-neutral-200" />

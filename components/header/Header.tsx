@@ -39,36 +39,37 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-3 text-base leading-5">
           <div className="hidden sm:block">
-            {/* {headerNavLinks
-              // .filter((link) => link.href !== '/')
-              .map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  data-umami-event={`nav-${link.href.replace('/', '')}`}
-                  className={clsx(
-                    'mx-1 rounded px-2 py-1 font-medium text-gray-900 dark:text-gray-100 sm:px-3 sm:py-2',
-                    pathname.startsWith(link.href)
-                      ? 'bg-gray-200 dark:bg-primary-600'
-                      : 'hover:bg-gray-200 dark:hover:bg-primary-600'
-                  )}
-                >
-                  {link.title}
-                </Link>
-              ))} */}
             {headerNavLinks.map((link) => (
               <Link
                 key={link.title}
                 href={link.href}
                 data-umami-event={`nav-${link.href.replace('/', '')}`}
                 className={clsx(
-                  'mx-1 rounded px-2 py-1 font-medium text-gray-900 dark:text-gray-100 sm:px-3 sm:py-2',
-                  pathname === link.href
-                    ? 'bg-gray-200 dark:bg-primary-600'
-                    : 'hover:bg-gray-200 dark:hover:bg-primary-600'
+                  'group relative mx-2 rounded-lg px-3 py-2 font-medium transition-all duration-200',
+                  'hover:text-yellow-600 dark:hover:text-yellow-400',
+                  pathname === link.href ? 'text-yellow-600 dark:text-yellow-400' : 'text-gray-900 dark:text-gray-100'
                 )}
               >
-                {link.title}
+                <span className="relative z-10">{link.title}</span>
+                {/* 背景动画效果 */}
+                <span
+                  className={clsx(
+                    'absolute inset-0 -z-10 rounded-lg transition-all duration-200',
+                    'bg-gradient-to-r from-yellow-100/0 via-yellow-100/25 to-yellow-100/0',
+                    'dark:from-yellow-900/0 dark:via-yellow-900/25 dark:to-yellow-900/0',
+                    'opacity-0 group-hover:opacity-100'
+                  )}
+                />
+                {/* 底部下划线动画 */}
+                <span
+                  className={clsx(
+                    'absolute bottom-0 left-0 h-0.5 w-full scale-x-0 transform',
+                    'bg-gradient-to-r from-yellow-400 to-yellow-600',
+                    'transition-transform duration-300 ease-out',
+                    'group-hover:scale-x-100',
+                    pathname === link.href ? 'scale-x-100' : ''
+                  )}
+                />
               </Link>
             ))}
           </div>

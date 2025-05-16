@@ -4,6 +4,7 @@ import type { Blog, Authors } from 'contentlayer/generated';
 
 import siteMetadata from '@/data/siteMetadata';
 import { Comments, Link, PageTitle, SectionContainer, Image, Tag, ScrollTopAndComment } from '@/components/ui';
+import ReadingProgress from '@/components/ReadingProgress';
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`;
 // const discussUrl = (path) =>
@@ -30,6 +31,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
 
   return (
     <SectionContainer>
+      <ReadingProgress />
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">

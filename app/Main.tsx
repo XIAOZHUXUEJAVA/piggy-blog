@@ -126,13 +126,26 @@ export default function Home({ posts }) {
             return (
               <li
                 key={slug}
-                className="transform rounded-lg py-6 transition-all duration-300 ease-in-out hover:rotate-1 hover:scale-105 hover:bg-gray-50 hover:shadow-xl hover:shadow-gray-400 dark:hover:bg-gray-800"
+                className="group relative transform overflow-hidden rounded-xl py-6 transition-all duration-300 ease-out
+                           hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-2xl 
+                           dark:hover:from-gray-800/50 dark:hover:to-gray-900/50"
               >
-                <article>
+                {/* 背景动画效果 */}
+                <div
+                  className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-100/0 via-yellow-100/5 to-yellow-100/0 
+                              opacity-0 transition-opacity duration-500 group-hover:opacity-100
+                              dark:from-yellow-400/0 dark:via-yellow-400/5 dark:to-yellow-400/0"
+                />
+
+                <article className="px-4 transition-transform duration-300 ease-out group-hover:scale-[0.99]">
                   <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
-                      <dd className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm font-medium leading-6 text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                      <dd
+                        className="inline-block rounded-lg bg-gradient-to-r from-gray-100 to-gray-50 
+                                   px-3 py-1.5 text-sm font-medium leading-6 shadow-sm
+                                   dark:from-gray-800 dark:to-gray-700"
+                      >
                         <time dateTime={date} className="text-gray-700 dark:text-gray-300">
                           {formatDate(date, siteMetadata.locale)}
                         </time>
@@ -144,26 +157,40 @@ export default function Home({ posts }) {
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
                               href={`/blog/${slug}`}
-                              className="hover:text-primary text-gray-900 dark:text-gray-100 dark:hover:text-sky-400"
+                              className="group/title relative text-gray-900 transition-colors duration-300
+                                       dark:text-gray-100"
                             >
                               {title}
+                              <span
+                                className="absolute -bottom-0.5 left-0 h-0.5 w-full origin-left scale-x-0 
+                                             rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 
+                                             transition-transform duration-300 group-hover/title:scale-x-100"
+                              />
                             </Link>
                           </h2>
-                          <div className="flex flex-wrap space-x-2">
+                          <div className="mt-2 flex flex-wrap gap-2">
                             {tags.map((tag) => (
                               <Tag key={tag} text={tag} />
                             ))}
                           </div>
                         </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
+                        <div
+                          className="prose line-clamp-2 max-w-none text-gray-500 
+                                      dark:text-gray-400"
+                        >
+                          {summary}
+                        </div>
                       </div>
                       <div className="text-base font-medium leading-6">
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
+                          className="group/read inline-flex items-center gap-1.5 text-yellow-600 
+                                   transition-colors duration-200 hover:text-yellow-700
+                                   dark:text-yellow-400 dark:hover:text-yellow-300"
                           aria-label={`Read "${title}"`}
                         >
-                          Read more &rarr;
+                          Read more
+                          <span className="transition-transform duration-200 group-hover/read:translate-x-0.5">→</span>
                         </Link>
                       </div>
                     </div>
