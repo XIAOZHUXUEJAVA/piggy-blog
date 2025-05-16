@@ -18,42 +18,40 @@ const CubeSplitter = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 统一立方体的尺寸和初始位置
-  const CUBE_SIZE = 80; // 单个立方体的大小
-  const SPACING = 100; // 初始间距
+  const CUBE_SIZE = 80;
+  const SPACING = 100;
 
+  // 调整边框颜色透明度
   const cubes = [
     {
       initialPosition: { x: -SPACING, y: -SPACING, z: -SPACING },
-      color: 'yellow',
+      borderColor: 'border-yellow-400/40', // 添加 /40 使颜色更透明
       rotation: 0,
     },
     {
       initialPosition: { x: SPACING, y: -SPACING, z: -SPACING },
-      color: 'rose',
+      borderColor: 'border-rose-400/40',
       rotation: 90,
     },
     {
       initialPosition: { x: -SPACING, y: -SPACING, z: SPACING },
-      color: 'blue',
+      borderColor: 'border-blue-400/40',
       rotation: 270,
     },
     {
       initialPosition: { x: SPACING, y: -SPACING, z: SPACING },
-      color: 'purple',
+      borderColor: 'border-purple-400/40',
       rotation: 180,
     },
   ];
 
   return (
     <div className="fixed right-[10%] top-[30%] z-[-1] hidden xl:block">
-      {' '}
-      {/* 调整垂直位置 */}
       <div
         ref={cubeRef}
         className="transform-style-3d relative h-[400px] w-[400px] transition-transform duration-300"
         style={{
-          transform: `rotateX(${60}deg) rotateZ(${45}deg)`, // 调整整体旋转角度
+          transform: `rotateX(${60}deg) rotateZ(${45}deg)`,
         }}
       >
         {cubes.map((cube, index) => (
@@ -76,32 +74,32 @@ const CubeSplitter = () => {
           >
             {/* 前面 */}
             <div
-              className={`absolute h-full w-full transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-full w-full transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateZ(${CUBE_SIZE / 2}px)` }}
             />
             {/* 后面 */}
             <div
-              className={`absolute h-full w-full transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-full w-full transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateZ(-${CUBE_SIZE / 2}px)` }}
             />
             {/* 左面 */}
             <div
-              className={`absolute h-full w-[${CUBE_SIZE}px] transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-full w-[${CUBE_SIZE}px] transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateX(-${CUBE_SIZE / 2}px) rotateY(90deg)` }}
             />
             {/* 右面 */}
             <div
-              className={`absolute h-full w-[${CUBE_SIZE}px] transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-full w-[${CUBE_SIZE}px] transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateX(${CUBE_SIZE / 2}px) rotateY(90deg)` }}
             />
             {/* 上面 */}
             <div
-              className={`absolute h-[${CUBE_SIZE}px] w-full transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-[${CUBE_SIZE}px] w-full transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateY(-${CUBE_SIZE / 2}px) rotateX(90deg)` }}
             />
             {/* 下面 */}
             <div
-              className={`absolute h-[${CUBE_SIZE}px] w-full transform border border-${cube.color}-400/30 bg-gradient-to-br from-${cube.color}-400/20 to-transparent backdrop-blur-sm`}
+              className={`absolute h-[${CUBE_SIZE}px] w-full transform border ${cube.borderColor} backdrop-blur-[1px]`}
               style={{ transform: `translateY(${CUBE_SIZE / 2}px) rotateX(90deg)` }}
             />
           </div>
