@@ -1,0 +1,166 @@
+---
+title: FastDFS 文件服务器问题解决指南
+date: '2025-07-16'
+tags: ['tip']
+draft: false
+summary:
+---
+
+FastDFS 文件存储系统出现问题时，可以按照以下步骤进行排查和修复。
+
+---
+
+## 🔍 **1. 检查容器运行状态**
+
+首先查看 `storage` 和 `tracker` 容器是否正常运行：
+
+```bash
+docker container ls
+```
+
+📌 **如果容器没有运行**，按顺序启动它们（**先启动 `tracker`**）：
+
+```bash
+docker start tracker
+docker start storage
+```
+
+---
+
+## ⚙️ **2. 检查 FastDFS 和 Nginx 服务**
+
+如果容器已运行，但文件访问仍然异常，可能是服务未启动。
+
+### **进入 `tracker` 容器检查服务**
+
+```bash
+docker exec -it tracker bash
+ps -ef | grep fdfs  # 查看 FastDFS 进程
+/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf start  # 重启 tracker 服务
+```
+
+### **进入 `storage` 容器检查服务**
+
+```bash
+docker exec -it storage bash
+ps -ef | grep fdfs  # 查看 FastDFS 进程
+/usr/bin/fdfs_storaged /etc/fdfs/storage.conf start  # 重启 storage 服务
+
+# 检查 Nginx 是否运行
+ps -ef | grep nginx
+kill -9 <原Nginx进程ID>  # 强制停止旧进程（如果有问题）
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf  # 启动 Nginx
+```
+
+如果文件访问还是有问题，请检查文件挂载情况
+
+## 📂 **3. 检查挂载情况**
+
+FastDFS 依赖宿主机和容器的文件挂载，确保数据同步。
+
+### **查看 `storage` 容器的挂载信息**
+
+```bash
+docker inspect storage | grep -A 50 Mounts
+```
+
+示例输出：
+
+```bash
+            {
+                "Type": "bind",
+                "Source": "/var/fdfs/storage",
+                "Destination": "/var/fdfs",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/fdfs2/storage",
+                "Destination": "/var/fdfs2",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/fdfs2/storage",
+                "Destination": "/var/fdfs3",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+```
+
+- **`Source`**: 宿主机路径（如 `/var/fdfs/storage`）
+- **`Destination`**: 容器内路径（如 `/var/fdfs`）
+
+📌 **如果 `Source` 路径没有数据**，可能是挂载或软链接问题。
+
+---
+
+## 🔗 **4. 检查软链接和磁盘挂载**
+
+FastDFS 可能使用**软链接**指向实际存储路径，例如：
+
+```bash
+ls -l /var
+```
+
+输出示例：
+
+```bash
+lrwxrwxrwx 1 root root 14 Jun  6 10:48 fdfs -> /data/fdfs/fdfs/
+```
+
+这意味着 `/var/fdfs` 实际指向 `/data/fdfs/fdfs/`。
+
+而`/data/fdfs`目录有可能挂载到了某个扩容磁盘
+
+### **检查磁盘挂载**
+
+```bash
+lsblk
+```
+
+📌 **如果挂载丢失**，手动挂载：
+
+```bash
+mount /dev/vdc1 /data/fdfs
+mount /dev/vdc2 /data/fdfs1
+mount /dev/vdd1 /data/fdfs2
+```
+
+### **修复软链接（如果缺失）**
+
+```
+ln -s /data/fdfs/fdfs/ /var/fdfs
+ln -s /data/fdfs1/ /var/fdfs2
+ln -s /data/fdfs2/ /fdfs2
+```
+
+---
+
+## 🔄 **5. 重启 Docker 容器**
+
+修复挂载后，重启容器：
+
+```bash
+docker restart tracker
+docker restart storage
+```
+
+---
+
+## ✅ 6. **测试**
+
+看看docker容器中是否可以看到对应的数据，如果有数据，说明问题解决
+
+比如：
+
+```bash
+docker exec -it storage ls /var/fdfs/data/02/05/
+```
+
+希望这篇指南能帮你解决问题！🚀 🎉
