@@ -1,0 +1,80 @@
+---
+title: 在 Claude Code 中使用 Kimi K2 
+date: '2025-07-26'
+tags: ['wsl2', 'linux', 'ai']
+draft: false
+summary: wsl2 using claude code with kimi k2
+---
+## 前言
+
+Claude Code 最近火的一塌糊涂，只不过 Claude 的大模型在国内使用非常折磨，我之前注册的账号全部被封掉了，所以我们可以使用由**moonshot**(月之暗面)最新发布的 **Kimi K2** 大模型。当然，生成的效果肯定是不如 Claude 4 的，Claude 4 的效果依然是目前世界的数一数二的存在，前些天阿里发布的 Qwen3‑Coder 据说可以碰瓷一下，但我表示怀疑态度。
+
+## 环境准备
+
+### 1. 安装 Node.js
+
+- 访问 [Node.js 官网](https://nodejs.org/) 下载安装包
+
+- 确保安装版本为 18 或更高
+
+- 安装完成后，可通过命令行验证：
+
+  bash
+
+  ```
+  node -v
+  npm -v
+  ```
+
+### 2. 安装 Claude Code
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+## 获取 Kimi API Key
+
+1. 访问 [Kimi API 平台](https://platform.moonshot.cn/)
+2. 注册并登录账号
+3. 在控制台中获取您的专属 API Key
+
+![image-20250726174622847](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250726174622847.png)
+
+## 配置 Kimi K2 环境
+
+### Windows 系统
+
+```cmd
+setx ANTHROPIC_API_KEY "your_api_key_here"
+setx ANTHROPIC_BASE_URL "https://api.moonshot.cn/anthropic/"
+```
+
+### macOS/Linux 系统
+
+1. 根据您使用的终端编辑配置文件：
+   - Bash: `~/.bashrc`
+   - Zsh: `~/.zshrc`
+2. 添加以下内容：
+
+bash
+
+```
+export ANTHROPIC_AUTH_TOKEN=your_api_key_here
+export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic/
+```
+
+1. 使配置生效：
+
+```bash
+source ~/.zshrc  # 或 ~/.bashrc
+```
+
+## 使用 Claude Code
+
+完成配置后，只需在终端输入：
+
+```bash
+claude
+```
+
+![image-20250726174629219](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250726174629219.png)
