@@ -1,24 +1,23 @@
 import siteMetadata from '@/data/siteMetadata';
-
-import Twemoji from '@/components/ui/Twemoji';
-import { RoughNotation } from 'react-rough-notation';
+import { RoughNotation, RoughNotationGroup } from 'react-rough-notation';
 
 const Heading = () => {
   return (
-    <h1 className="font-medium text-neutral-900 dark:text-neutral-200">
-      I'm{' '}
-      <RoughNotation type="underline" show={true} color="#FFb900" animationDelay={1400} animationDuration={1200}>
-        {siteMetadata.fullName}
-      </RoughNotation>{' '}
-      - a programmer dedicated to becoming a{' '}
-      <RoughNotation type="circle" show={true} color="#f43f5e" animationDelay={1700} animationDuration={1200}>
-        FullStack Engineer{' '}
-      </RoughNotation>
-      {/* <span className="hidden">Ho Chi Minh, VN</span> */}
-      <span className="absolute ml-1.5 inline-flex pt-[3px]">
-        <Twemoji emoji="viet-nam-vietnam-flag" />
-      </span>
-    </h1>
+    <RoughNotationGroup show={true}>
+      <h1 className="flex flex-wrap items-center gap-2 font-medium text-neutral-900 dark:text-neutral-200">
+        <span className="flex items-center gap-1">
+          I'm
+          <RoughNotation type="underline" color="#FFB900" animationDelay={500} animationDuration={1200}>
+            {siteMetadata.fullName}
+          </RoughNotation>
+        </span>
+        <span>a programmer dedicated to becoming </span>
+
+        <RoughNotation type="highlight" color="#f43f5e33" animationDelay={1500} animationDuration={1200}>
+          FullStack Engineer
+        </RoughNotation>
+      </h1>
+    </RoughNotationGroup>
   );
 };
 

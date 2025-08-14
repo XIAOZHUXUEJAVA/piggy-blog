@@ -3,7 +3,7 @@
 const siteMetadata = {
   title: "Piggy's Blog - Unleash My Creative Potential",
   author: 'Piggy',
-  fullName: 'Piggy DP',
+  fullName: 'ZDP',
   headerTitle: "Piggy's Blog",
   description: 'I would be grateful for any feedback or insights you have on my writing.',
   language: 'en-us',

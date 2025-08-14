@@ -17,7 +17,7 @@ const PopularTags = () => {
           </h1>
         </RoughNotation> */}
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-          <RoughNotation
+          {/* <RoughNotation
             type="bracket"
             show={true}
             color="#1db954" // 使用柔和的蓝色
@@ -25,6 +25,17 @@ const PopularTags = () => {
             animationDelay={1000}
             animationDuration={1000}
             strokeWidth={5}
+          >
+            <span className="inline-block text-gray-600" style={{ padding: '0.2em' }}>
+              Popular Tags
+            </span>
+          </RoughNotation> */}
+          <RoughNotation
+            type="highlight"
+            show={true}
+            color="#1bf065ff" // 绿色高亮
+            animationDelay={1000}
+            animationDuration={1000}
           >
             <span className="inline-block text-gray-600" style={{ padding: '0.2em' }}>
               Popular Tags

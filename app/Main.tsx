@@ -74,7 +74,7 @@ export default function Home({ posts }) {
         <Greeting />
         <div className="flex flex-col justify-between md:my-4 md:pb-8 xl:flex-row">
           <Avatar />
-          <div className="my-auto flex flex-col text-lg leading-8 text-gray-600 dark:text-gray-400">
+          <div className="my-auto ml-4 flex flex-col text-lg leading-8 text-gray-600 dark:text-gray-400">
             <Heading />
             <TypedBios />
             <ShortDescription />
@@ -96,7 +96,7 @@ export default function Home({ posts }) {
         <div className="divide-y divide-gray-200 dark:divide-gray-700">
           <div className="space-y-2 py-6 md:space-y-5">
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-800 dark:text-gray-200 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-              <RoughNotation
+              {/* <RoughNotation
                 type="bracket"
                 brackets={['left', 'right']}
                 show={true}
@@ -106,6 +106,17 @@ export default function Home({ posts }) {
                 strokeWidth={5}
               >
                 <span className="inline-block text-gray-600" style={{ padding: '0.2em', display: 'inline-block' }}>
+                  Recent Posts
+                </span>
+              </RoughNotation> */}
+              <RoughNotation
+                type="highlight"
+                show={true}
+                color="#f6ad55" // 你也可以用 #f6ad5533 来加透明度
+                animationDelay={1000}
+                animationDuration={1000}
+              >
+                <span className="inline-block text-gray-600" style={{ padding: '0.2em' }}>
                   Recent Posts
                 </span>
               </RoughNotation>
