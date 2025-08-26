@@ -1,0 +1,115 @@
+---
+title: How to Use Claude Code with Claude Code Router and VolcEngine DeepSeekV3.1
+date: '2025-08-26'
+tags: ['wsl2', 'linux', 'ai']
+draft: false
+summary: wsl2 using claude code router with deepseekv3.1
+---
+
+## Introduction
+
+Claude Code Router is a powerful tool that allows you to route Claude Code requests to different AI providers, including VolcEngine's DeepSeekV3.1 model. This guide shows you how to set up and configure this integration.
+
+## Prerequisites
+
+- Claude Code installed
+
+  Install [Node.js 18+](https://nodejs.org/en/download) , recommend v22.18.0(Latest LTS)
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+- Claude Code Router installed
+
+```bash
+npm install -g @musistudio/claude-code-router
+```
+
+- VolcEngine account with API access
+
+deepseek-v3.1 doc: https://www.volcengine.com/docs/82379/1801298
+
+How to get api key: https://www.volcengine.com/docs/82379/1541594
+
+## Configuration Setup
+
+### Basic Configuration
+
+Create or edit your `config.json` file in `~/.claude-code-router/` with the following structure:
+
+```json
+{
+  "LOG": false,
+  "LOG_LEVEL": "debug",
+  "CLAUDE_PATH": "",
+  "HOST": "127.0.0.1",
+  "PORT": 3456,
+  "APIKEY": "",
+  "API_TIMEOUT_MS": "600000",
+  "PROXY_URL": "",
+  "transformers": [],
+  "Providers": [
+    {
+      "name": "volcengine",
+      "api_base_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "your-api-key-here",
+      "models": ["deepseek-v3-1-250821"],
+      "transformer": {
+        "use": ["deepseek", "deepseek", "deepseek"]
+      }
+    }
+  ],
+  "StatusLine": {
+    "enabled": false,
+    "currentStyle": "default",
+    "default": {
+      "modules": []
+    },
+    "powerline": {
+      "modules": []
+    }
+  },
+  "Router": {
+    "default": "volcengine,deepseek-v3-1-250821",
+    "background": "volcengine,deepseek-v3-1-250821",
+    "think": "volcengine,deepseek-v3-1-250821",
+    "longContext": "volcengine,deepseek-v3-1-250821",
+    "longContextThreshold": 60000,
+    "webSearch": "volcengine,deepseek-v3-1-250821"
+  }
+}
+```
+
+### Key Configuration Elements
+
+1. **Provider Configuration**:
+
+   - `name`: "volcengine" - Identifies the provider
+   - `api_base_url`: VolcEngine's API endpoint
+   - `api_key`: Your VolcEngine API key
+   - `models`: Array containing the DeepSeekV3.1 model
+
+2. **Router Configuration**:
+
+   - Routes all request types to VolcEngine DeepSeekV3.1
+   - Includes default, background, think, long context, and web search routes
+
+3. **Transformer Configuration**:
+   - Uses DeepSeek-specific transformers for proper request formatting
+
+## Getting Your VolcEngine API Key
+
+1. Sign up for a VolcEngine account
+2. Navigate to the AI platform section
+3. Create a new application or access your existing one
+4. Generate an API key with appropriate permissions
+5. Replace `"your-api-key-here"` with your actual API key
+
+## Starting Claude Code Router
+
+# Start the router
+
+```bash
+ccr code
+```
