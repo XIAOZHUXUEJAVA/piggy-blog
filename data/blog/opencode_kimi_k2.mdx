@@ -1,0 +1,110 @@
+---
+title: How to Use OpenCode with Kimi K2
+date: '2025-08-27'
+tags: ['wsl2', 'linux', 'ai']
+draft: false
+summary: wsl2 using opencode with kimi k2
+---
+
+This guide walks you through setting up and using OpenCode with Kimi K2 (kimi-k2-0711-preview) from Moonshot AI.
+
+## Prerequisites
+
+- OpenCode CLI installed
+
+```bash
+npm install -g opencode-ai
+```
+
+- A Moonshot AI API key, Getting Your Moonshot API Key
+
+1. Visit [Moonshot AI Platform](https://platform.moonshot.cn)
+2. Sign up for an account or log in
+3. Navigate to the [API Keys section](https://platform.moonshot.cn/console/api-keys)
+4. Click "Create API Key" and give it a descriptive name
+5. Copy the generated API key (starts with `sk-`)
+6. Keep your API key secure and never share it publicly
+
+## Configuration
+
+You can use the following command to auth:
+
+```bash
+opencode auth login
+```
+
+OR config with the following steps:
+
+### Step 1: Set Up Authentication
+
+Create or edit your authentication file at `~/.local/share/opencode/auth.json`:
+
+```json
+{
+  "moonshotai-cn": {
+    "type": "api",
+    "key": "your-moonshot-api-key-here"
+  }
+}
+```
+
+### Step 2: Configure OpenCode
+
+Create or edit your OpenCode configuration at `~/.config/opencode/opencode.json`:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "provider": {
+    "moonshot": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://api.moonshot.cn/v1",
+        "apiKey": "your-moonshot-api-key-here"
+      },
+      "models": {
+        "kimi-k2-0711-preview": {}
+      }
+    }
+  },
+  "autoshare": false,
+  "autoupdate": true
+}
+```
+
+## Usage
+
+### Starting OpenCode with Kimi K2
+
+Once configured, you can start using OpenCode with Kimi K2 immediately. The model will be available as `kimi-k2-0711-preview` through the Moonshot provider.
+
+### Example Commands
+
+```bash
+# Start OpenCode (will use Kimi K2 as configured)
+opencode
+```
+
+## Tips for Best Results
+
+1. **Clear Prompts**: Be specific in your requests to get better responses
+2. **Context Matters**: Provide relevant file paths or code snippets when asking questions
+3. **Iterative Refinement**: Use follow-up questions to refine the AI's responses
+4. **Security**: Never commit API keys or sensitive information to version control
+
+## Troubleshooting
+
+### Common Issues
+
+- **API Key Invalid**: Ensure your API key is correctly placed in both configuration files
+- **Model Not Found**: Verify the model name is exactly `kimi-k2-0711-preview`
+- **Connection Issues**: Check your internet connection and Moonshot AI service status
+
+### Getting Help
+
+If you encounter issues:
+
+1. Check the [OpenCode documentation](https://opencode.ai/docs)
+2. Verify your configuration files are properly formatted JSON
+3. Ensure your API key has sufficient credits/quota
