@@ -15,9 +15,9 @@ export default async function Projects() {
     })
   );
 
-  const description = 'My open-source side projects and stuff that I built with my colleagues at work';
+  const description = 'My personal side projects';
 
-  const workProjects = projectsData.filter(({ type }) => type === 'work');
+  // const workProjects = projectsData.filter(({ type }) => type === 'work');
   const sideProjects = projectsData.filter(({ type }) => type === 'self');
 
   return (
@@ -30,7 +30,7 @@ export default async function Projects() {
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
         </div>
 
-        <div className="container py-12">
+        {/* <div className="container py-12">
           <h3 className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
             Work
           </h3>
@@ -39,7 +39,7 @@ export default async function Projects() {
               <ProjectCard key={project.title} project={project} />
             ))}
           </div>
-        </div>
+        </div> */}
 
         <div className="container py-12">
           <h3 className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
