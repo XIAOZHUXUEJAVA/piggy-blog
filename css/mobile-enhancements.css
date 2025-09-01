@@ -1,0 +1,40 @@
+/* 移动端优化样式 */
+@media (max-width: 768px) {
+  /* 触摸友好的按钮尺寸 */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 移动端卡片间距优化 */
+  .mobile-card-spacing {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  /* 移动端文字大小调整 */
+  .mobile-text-adjust h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .mobile-text-adjust h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  /* 移动端导航优化 */
+  .mobile-nav-item {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+}
+
+/* 平板端优化 */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
