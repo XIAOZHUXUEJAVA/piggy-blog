@@ -4,26 +4,24 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { Authors } from 'contentlayer/generated';
 
 interface AboutProfileProps {
-  author: {
-    name: string;
-    avatar: string;
-    occupation: string;
-    company: string;
-    email: string;
-    twitter: string;
-    linkedin: string;
-    github: string;
-  };
+  author: CoreContent<Authors>;
 }
 
 export default function AboutProfile({ author }: AboutProfileProps) {
   const socialLinks = [
-    { name: 'GitHub', url: `https://github.com/${author.github}`, icon: '🐙' },
-    { name: 'Twitter', url: `https://twitter.com/${author.twitter}`, icon: '🐦' },
-    { name: 'LinkedIn', url: `https://linkedin.com/in/${author.linkedin}`, icon: '💼' },
-  ];
+    { name: 'GitHub', url: `https://github.com/${author.github || ''}`, icon: '🐙' },
+    { name: 'Twitter', url: `https://twitter.com/${author.twitter || ''}`, icon: '🐦' },
+    { name: 'LinkedIn', url: `https://linkedin.com/in/${author.linkedin || ''}`, icon: '💼' },
+  ].filter(
+    (link) =>
+      link.url !== 'https://github.com/' &&
+      link.url !== 'https://twitter.com/' &&
+      link.url !== 'https://linkedin.com/in/'
+  );
 
   return (
     <motion.div
@@ -39,8 +37,8 @@ export default function AboutProfile({ author }: AboutProfileProps) {
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 p-1">
             <div className="h-full w-full rounded-full bg-white p-1 dark:bg-gray-800">
               <Image
-                src={author.avatar}
-                alt={author.name}
+                src={author.avatar || '/static/images/avatar.png'}
+                alt={author.name || 'Author'}
                 width={120}
                 height={120}
                 className="h-full w-full rounded-full object-cover"
@@ -54,9 +52,11 @@ export default function AboutProfile({ author }: AboutProfileProps) {
 
         {/* Basic Info */}
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{author.name}</h2>
-          <p className="mt-2 text-lg font-medium text-blue-600 dark:text-blue-400">{author.occupation}</p>
-          {/* <p className="text-gray-600 dark:text-gray-300">@ {author.company}</p> */}
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{author.name || 'Anonymous'}</h2>
+          <p className="mt-2 text-lg font-medium text-blue-600 dark:text-blue-400">
+            {author.occupation || 'Developer'}
+          </p>
+          {author.company && <p className="text-gray-600 dark:text-gray-300">@ {author.company}</p>}
         </div>
 
         {/* Contact Info */}
