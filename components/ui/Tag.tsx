@@ -27,7 +27,7 @@ const Tag = ({ text }: Props) => {
   return (
     <Link
       href={`/tags/${slug(text)}`}
-      className="inline-block rounded-full bg-gray-200 px-3 py-1 text-xs font-medium uppercase text-gray-700 transition-colors duration-300 hover:bg-primary-500 hover:text-white dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-sky-400 dark:hover:text-white"
+      className="inline-block rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 px-4 py-2 text-sm font-semibold text-gray-800 transition-all duration-300 hover:scale-105 hover:from-blue-100 hover:to-purple-100 hover:text-blue-800 hover:shadow-md dark:from-gray-700 dark:to-gray-600 dark:text-gray-200 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 dark:hover:text-blue-200"
     >
       {text.split(' ').join('-')}
     </Link>
