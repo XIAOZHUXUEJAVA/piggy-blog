@@ -7,7 +7,7 @@ const timelineData = [
   {
     year: '2023',
     title: '高级前端工程师',
-    company: 'Tech Company',
+    company: 'Secret',
     description:
       '负责大型Web应用的架构设计和开发，使用React、TypeScript等技术栈。主导团队技术选型，优化应用性能，提升用户体验。',
     technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'GraphQL'],
@@ -18,7 +18,7 @@ const timelineData = [
   {
     year: '2022',
     title: '前端工程师',
-    company: 'Startup Inc.',
+    company: 'Secret',
     description: '参与多个创新项目的前端开发，积累了丰富的用户体验设计经验。从零到一构建多个产品原型。',
     technologies: ['Vue.js', 'JavaScript', 'SCSS', 'Webpack', 'Element UI'],
     type: 'work' as const,
@@ -28,11 +28,11 @@ const timelineData = [
   {
     year: '2021',
     title: '计算机科学学士',
-    company: '某知名大学',
+    company: '某不知名大学',
     description: '主修计算机科学与技术，专注于软件工程和算法设计。参与多个开源项目，获得优秀毕业生称号。',
     technologies: ['Java', 'Python', 'C++', 'MySQL', 'Linux'],
     type: 'education' as const,
-    achievements: ['GPA 3.8/4.0', '优秀毕业生', 'ACM竞赛省二等奖'],
+    achievements: ['GPA xxx/4.0', '优秀毕业生', '某竞赛省二等奖'],
     icon: 'mdi:school',
   },
   {

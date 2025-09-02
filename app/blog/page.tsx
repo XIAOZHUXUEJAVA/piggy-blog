@@ -1,9 +1,9 @@
-import ListLayout from '@/layouts/ListLayout';
+import ModernListLayout from '@/layouts/ModernListLayout';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 import { allBlogs } from 'contentlayer/generated';
 import { genPageMetadata } from 'app/seo';
 
-const POSTS_PER_PAGE = 5;
+const POSTS_PER_PAGE = 6;
 
 export const metadata = genPageMetadata({ title: 'Blog' });
 
@@ -17,6 +17,6 @@ export default function BlogPage() {
   };
 
   return (
-    <ListLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} title="All Posts" />
+    <ModernListLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} title="Blog" />
   );
 }
