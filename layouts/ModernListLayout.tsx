@@ -24,7 +24,7 @@ interface ModernListLayoutProps {
 
 // Interactive Card Component with mouse follow effect
 const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: number }) => {
-  const { path, date, title, summary, tags } = post;
+  const { slug, date, title, summary, tags } = post;
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -71,9 +71,6 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
         <div className="absolute -bottom-2 -left-2 h-12 w-12 rounded-full bg-purple-500/20"></div>
       </div>
 
-      {/* Background Link for entire card */}
-      <Link href={`/${path}`} className="absolute inset-0 z-0" aria-label={`Read article: ${title}`} />
-
       {/* Mouse follow shine effect */}
       <div
         className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -82,7 +79,10 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
         }}
       />
 
-      <div className="relative z-10 p-6">
+      {/* Background Link for entire card */}
+      <Link href={`/blog/${slug}`} className="absolute inset-0 z-10" aria-label={`Read article: ${title}`} />
+
+      <div className="pointer-events-none relative z-20 p-6">
         {/* Date Badge */}
         <div className="mb-4">
           <time
@@ -94,8 +94,8 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
         </div>
 
         {/* Title */}
-        <h2 className="mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
-          <span className="relative z-10">{title}</span>
+        <h2 className="relative z-10 mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
+          {title}
         </h2>
 
         {/* Summary */}
@@ -103,7 +103,7 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
 
         {/* Tags */}
         {tags && tags.length > 0 && (
-          <div className="relative z-20 flex flex-wrap gap-2">
+          <div className="pointer-events-auto relative z-30 flex flex-wrap gap-2">
             {tags.slice(0, 3).map((tag) => (
               <SimpleTag key={tag} text={tag} />
             ))}
@@ -114,7 +114,7 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
         )}
 
         {/* Read More Arrow */}
-        <div className="pointer-events-none absolute bottom-4 right-4 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+        <div className="pointer-events-none absolute bottom-4 right-4 z-30 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
           <svg className="h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
@@ -277,7 +277,7 @@ export default function ModernListLayout({
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {displayPosts.map((post, index) => (
-                <InteractiveCard key={post.path} post={post} index={index} />
+                <InteractiveCard key={post.slug} post={post} index={index} />
               ))}
             </div>
           )}
