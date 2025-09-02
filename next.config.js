@@ -71,18 +71,9 @@ module.exports = () => {
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
     },
-    // 性能优化配置
-    experimental: {
-      optimizeCss: true,
-      scrollRestoration: true,
-    },
     // 编译优化
     compiler: {
       removeConsole: process.env.NODE_ENV === 'production',
-    },
-    // 预加载优化
-    async rewrites() {
-      return [];
     },
     images: {
       remotePatterns: [

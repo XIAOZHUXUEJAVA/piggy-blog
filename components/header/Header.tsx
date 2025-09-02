@@ -24,7 +24,9 @@ const Header = memo(() => {
   // 预加载页面函数
   const handleMouseEnter = useCallback(
     (href: string) => {
-      router.prefetch(href);
+      if (typeof window !== 'undefined') {
+        router.prefetch(href);
+      }
     },
     [router]
   );

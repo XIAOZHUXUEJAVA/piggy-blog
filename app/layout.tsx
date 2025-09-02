@@ -12,7 +12,11 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import siteMetadata from '@/data/siteMetadata';
 import { SectionContainer } from '@/components/ui';
-import LoadingBar from '@/components/ui/LoadingBar';
+import dynamic from 'next/dynamic';
+
+const LoadingBar = dynamic(() => import('@/components/ui/LoadingBar'), {
+  ssr: false,
+});
 
 import { ThemeProviders } from './theme-providers';
 import { UmamiAnalytics } from '@/components/analytics/umami';
