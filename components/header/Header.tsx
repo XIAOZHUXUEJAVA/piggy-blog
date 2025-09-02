@@ -7,6 +7,8 @@ import siteMetadata from '@/data/siteMetadata';
 import headerNavLinks from '@/data/headerNavLinks';
 
 import Link from '@/components/ui/Link';
+import { useRouter } from 'next/navigation';
+import { memo, useCallback } from 'react';
 
 import Logo from 'public/static/images/logo.svg';
 
@@ -15,8 +17,17 @@ import ThemeSwitch from './ThemeSwitch';
 // import SearchButton from './SearchButton';
 import AnalyticsLink from './AnalyticsLink';
 
-const Header = () => {
+const Header = memo(() => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  // 预加载页面函数
+  const handleMouseEnter = useCallback(
+    (href: string) => {
+      router.prefetch(href);
+    },
+    [router]
+  );
 
   let headerClass =
     'supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-white/75 py-4 backdrop-blur dark:bg-dark/75';
@@ -44,6 +55,7 @@ const Header = () => {
                 key={link.title}
                 href={link.href}
                 data-umami-event={`nav-${link.href.replace('/', '')}`}
+                onMouseEnter={() => handleMouseEnter(link.href)}
                 className={clsx(
                   'group relative mx-2 rounded-lg px-3 py-2 font-medium transition-all duration-200',
                   'hover:text-yellow-600 dark:hover:text-yellow-400',
@@ -88,6 +100,8 @@ const Header = () => {
       </div>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;

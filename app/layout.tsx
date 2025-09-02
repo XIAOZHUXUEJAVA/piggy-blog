@@ -12,6 +12,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import siteMetadata from '@/data/siteMetadata';
 import { SectionContainer } from '@/components/ui';
+import LoadingBar from '@/components/ui/LoadingBar';
 
 import { ThemeProviders } from './theme-providers';
 import { UmamiAnalytics } from '@/components/analytics/umami';
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-dark dark:text-white">
         <ThemeProviders>
+          <LoadingBar />
           {/* <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} /> */}
           <UmamiAnalytics websiteId={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId} />
           <SectionContainer>

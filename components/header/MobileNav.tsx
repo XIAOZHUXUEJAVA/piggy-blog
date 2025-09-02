@@ -2,15 +2,17 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-import { Fragment, useState, useEffect, useRef } from 'react';
+import { Fragment, useState, useEffect, useRef, memo, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from '../ui/Link';
 import headerNavLinks from '@/data/headerNavLinks';
 
-const MobileNav = () => {
+const MobileNav = memo(() => {
   const [navShow, setNavShow] = useState(false);
   const navRef = useRef(null);
+  const router = useRouter();
 
-  const onToggleNav = () => {
+  const onToggleNav = useCallback(() => {
     setNavShow((status) => {
       if (status) {
         enableBodyScroll(navRef.current);
@@ -20,7 +22,15 @@ const MobileNav = () => {
       }
       return !status;
     });
-  };
+  }, []);
+
+  // 预加载页面函数
+  const handleMouseEnter = useCallback(
+    (href: string) => {
+      router.prefetch(href);
+    },
+    [router]
+  );
 
   useEffect(() => {
     return clearAllBodyScrollLocks;
@@ -78,6 +88,7 @@ const MobileNav = () => {
                     href={link.href}
                     className="mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-400"
                     onClick={onToggleNav}
+                    onMouseEnter={() => handleMouseEnter(link.href)}
                   >
                     {link.title}
                   </Link>
@@ -103,6 +114,8 @@ const MobileNav = () => {
       </Transition>
     </>
   );
-};
+});
+
+MobileNav.displayName = 'MobileNav';
 
 export default MobileNav;
