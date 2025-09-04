@@ -1,6 +1,4 @@
 {
-  "tsx": "react",
-  "jsx": "react",
   "compilerOptions": {
     "incremental": true,
     "target": "ES6",
