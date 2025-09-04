@@ -58,16 +58,16 @@ const PopularTags = () => {
           </Link>
         </p>
       </div>
-      <div className="popular-tags grid grid-cols-3 gap-4 py-6 xl:grid-cols-6">
+      <div className="popular-tags grid grid-cols-1 gap-3 py-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
         {map(popularTags, (popularTag) => {
           const { slug, iconType, href, title } = popularTag;
 
-          const className = `${slug} flex w-[128px] justify-center space-x-2 rounded-lg p-3 transform transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-1 hover:shadow-lg hover:shadow-gray-400`;
+          const className = `${slug} flex w-full min-w-0 justify-center space-x-2 rounded-lg p-3 sm:p-4 transform transition-all duration-300 ease-in-out hover:scale-105 hover:rotate-1 hover:shadow-lg hover:shadow-gray-400`;
 
           return (
             <Link key={slug} href={href} className={className}>
-              <BrandIcon type={iconType} className="h-6 w-6" />
-              <div className="my-auto text-white">{title}</div>
+              <BrandIcon type={iconType} className="h-5 w-5 flex-shrink-0 sm:h-6 sm:w-6" />
+              <div className="my-auto truncate text-sm text-white sm:text-base">{title}</div>
             </Link>
           );
         })}

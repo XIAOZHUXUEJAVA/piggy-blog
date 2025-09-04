@@ -93,7 +93,7 @@ const Header = memo(() => {
             className="hidden h-4 w-px shrink-0 bg-gray-200 dark:bg-gray-600 md:block"
           />
           <div className="flex items-center">
-            <AnalyticsLink />
+            {/* <AnalyticsLink /> */}
             <ThemeSwitch />
             {/* <SearchButton /> */}
             <MobileNav />

@@ -133,62 +133,125 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
 
+  // Generate visible page numbers for mobile
+  const getVisiblePages = () => {
+    const delta = 1;
+    const result: (number | string)[] = [];
+
+    // Always show first page
+    result.push(1);
+
+    // Add dots if needed
+    if (currentPage - delta > 2) {
+      result.push('...');
+    }
+
+    // Add pages around current page
+    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+      if (i !== 1 && i !== totalPages) {
+        result.push(i);
+      }
+    }
+
+    // Add dots if needed
+    if (currentPage + delta < totalPages - 1) {
+      result.push('...');
+    }
+
+    // Always show last page if more than 1 page
+    if (totalPages > 1) {
+      result.push(totalPages);
+    }
+
+    // Remove duplicates
+    return result.filter((item, index) => result.indexOf(item) === index);
+  };
+
   return (
-    <div className="flex items-center justify-center space-x-4 py-12">
-      <div className="flex items-center space-x-2">
+    <div className="flex items-center justify-center px-4 py-8">
+      <div className="flex items-center space-x-1 sm:space-x-2">
         {prevPage ? (
           <Link
             href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
-            className="group flex items-center space-x-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="group flex items-center space-x-1 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-2 text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:px-4 sm:py-2 sm:text-base"
           >
             <svg
-              className="h-4 w-4 transition-transform group-hover:-translate-x-1"
+              className="h-3 w-3 transition-transform group-hover:-translate-x-1 sm:h-4 sm:w-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span>Previous</span>
+            <span className="hidden sm:inline">Previous</span>
+            <span className="sm:hidden">Prev</span>
           </Link>
         ) : (
           <button
             disabled
-            className="flex items-center space-x-2 rounded-xl bg-gray-200 px-6 py-3 text-gray-400 dark:bg-gray-700 dark:text-gray-500"
+            className="flex items-center space-x-1 rounded-lg bg-gray-200 px-3 py-2 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-500 sm:px-4 sm:py-2 sm:text-base"
           >
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span>Previous</span>
+            <span className="hidden sm:inline">Previous</span>
+            <span className="sm:hidden">Prev</span>
           </button>
         )}
 
-        <div className="flex items-center space-x-2">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <Link
-              key={page}
-              href={page === 1 ? `/${basePath}/` : `/${basePath}/page/${page}`}
-              className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200 ${
-                page === currentPage
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-              }`}
-            >
-              {page}
-            </Link>
-          ))}
+        <div className="flex items-center space-x-1">
+          {/* Desktop: Show all pages */}
+          <div className="hidden sm:flex sm:items-center sm:space-x-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Link
+                key={page}
+                href={page === 1 ? `/${basePath}/` : `/${basePath}/page/${page}`}
+                className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 sm:h-10 sm:w-10 ${
+                  page === currentPage
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                }`}
+              >
+                {page}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile: Show limited pages with dots */}
+          <div className="flex items-center space-x-1 sm:hidden">
+            {getVisiblePages().map((page, index) =>
+              page === '...' ? (
+                <span key={index} className="px-2 text-gray-400">
+                  ...
+                </span>
+              ) : (
+                <Link
+                  key={page}
+                  href={page === 1 ? `/${basePath}/` : `/${basePath}/page/${page}`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 ${
+                    page === currentPage
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  {page}
+                </Link>
+              )
+            )}
+          </div>
         </div>
 
         {nextPage ? (
           <Link
             href={`/${basePath}/page/${currentPage + 1}`}
             rel="next"
-            className="group flex items-center space-x-2 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            className="group flex items-center space-x-1 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 px-3 py-2 text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:px-4 sm:py-2 sm:text-base"
           >
-            <span>Next</span>
+            <span className="hidden sm:inline">Next</span>
+            <span className="sm:hidden">Next</span>
             <svg
-              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              className="h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -199,10 +262,11 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
         ) : (
           <button
             disabled
-            className="flex items-center space-x-2 rounded-xl bg-gray-200 px-6 py-3 text-gray-400 dark:bg-gray-700 dark:text-gray-500"
+            className="flex items-center space-x-1 rounded-lg bg-gray-200 px-3 py-2 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-500 sm:px-4 sm:py-2 sm:text-base"
           >
-            <span>Next</span>
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="hidden sm:inline">Next</span>
+            <span className="sm:hidden">Next</span>
+            <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>

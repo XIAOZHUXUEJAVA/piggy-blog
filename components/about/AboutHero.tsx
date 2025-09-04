@@ -65,7 +65,7 @@ export default function AboutHero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-gray-500 dark:text-gray-400">向下滚动了解更多(目前下面的内容大多为虚构)</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">向下滚动了解更多(虚构)</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
