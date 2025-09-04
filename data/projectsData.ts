@@ -40,6 +40,13 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/cover-image-maker',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
   },
+  {
+    type: 'self',
+    title: 'Magic Code Share',
+    imgSrc: '/static/images/projects/magic-code-share.png',
+    repo: 'XIAOZHUXUEJAVA/magic-code-share',
+    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
+  },
 ];
 
 export default projectsData;
