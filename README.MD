@@ -2,6 +2,8 @@
 
 一个基于 Next.js 14 构建的现代化博客系统，支持 MDX 文章、深色模式、搜索功能和评论系统。
 
+体验地址： https://piggyblog.xyz/
+
 ## 技术栈
 
 - **框架**: Next.js 14 (App Router)
