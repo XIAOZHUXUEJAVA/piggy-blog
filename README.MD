@@ -141,3 +141,7 @@ yarn lint         # 代码检查
 ### Spotify
 
 确保自己的 Spotify 环境变量配置正确，否则无法播放音乐。
+
+## 感谢
+
+借鉴于开源项目： https://github.com/timlrx/tailwind-nextjs-starter-blog
