@@ -36,7 +36,7 @@ export default function AboutHero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mx-auto mt-8 max-w-2xl text-lg text-gray-600 dark:text-gray-300 sm:text-xl"
           >
-            热爱技术，专注于创造有意义的数字体验。在这里分享我的技术之旅、思考与创作。
+            热爱技术，在这里分享我的技术之旅、思考与创作。
           </motion.p>
 
           <motion.div

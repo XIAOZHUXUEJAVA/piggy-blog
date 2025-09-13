@@ -78,7 +78,7 @@ export default function AboutProfile({ author }: AboutProfileProps) {
           )}
           <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
             <Icon icon="mdi:calendar" className="h-4 w-4 text-gray-400" />
-            <span>加入于 2023</span>
+            <span>开始工作于 2023</span>
           </div>
         </div>
 
