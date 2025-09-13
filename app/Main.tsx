@@ -13,6 +13,7 @@ import {
   PopularTags,
   ShortDescription,
   SpotifyNowPlaying,
+  SmartMusicWidget,
 } from '@/components/homepage';
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
 import { useEffect, useState } from 'react';
@@ -79,7 +80,7 @@ export default function Home({ posts }) {
             <TypedBios />
             <ShortDescription />
             <BlogLinks />
-            <SpotifyNowPlaying />
+            <SmartMusicWidget />
           </div>
         </div>
       </div>

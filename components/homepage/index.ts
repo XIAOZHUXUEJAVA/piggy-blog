@@ -9,6 +9,7 @@ import ProfileCard from './ProfileCard';
 import ProfileInfo from './ProfileInfo';
 import ShortDescription from './ShortDescription';
 import SpotifyNowPlaying from './SpotifyNowPlaying';
+import SmartMusicWidget from './SmartMusicWidget';
 
 export {
   Avatar,
@@ -22,4 +23,5 @@ export {
   ProfileInfo,
   ShortDescription,
   SpotifyNowPlaying,
+  SmartMusicWidget,
 };
