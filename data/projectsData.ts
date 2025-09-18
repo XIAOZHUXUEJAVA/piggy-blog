@@ -28,6 +28,20 @@ const projectsData: Project[] = [
   },
   {
     type: 'self',
+    title: 'Go React Web Monitor',
+    imgSrc: '/static/images/projects/go-react-monitor-compose.png',
+    repo: 'XIAOZHUXUEJAVA/go-react-monitor-compose',
+    builtWith: ['Go', 'React', 'Typescript'],
+  },
+  {
+    type: 'self',
+    title: 'Magic Code Share',
+    imgSrc: '/static/images/projects/magic-code-share.png',
+    repo: 'XIAOZHUXUEJAVA/magic-code-share',
+    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
+  },
+  {
+    type: 'self',
     title: 'Top Game Rank',
     imgSrc: '/static/images/projects/top-game-rank.png',
     repo: 'XIAOZHUXUEJAVA/game-ranking',
@@ -40,13 +54,7 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/cover-image-maker',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
   },
-  {
-    type: 'self',
-    title: 'Magic Code Share',
-    imgSrc: '/static/images/projects/magic-code-share.png',
-    repo: 'XIAOZHUXUEJAVA/magic-code-share',
-    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
-  },
+
   {
     type: 'self',
     title: 'Magic Game Ranking',
