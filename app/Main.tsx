@@ -198,156 +198,177 @@ export default function Home({ posts }) {
 
       {/* 博客列表部分 */}
       <div className="relative">
-        <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-blue-100/10 via-rose-100/10 to-yellow-100/10 blur-2xl dark:from-blue-900/10 dark:via-rose-900/10 dark:to-yellow-900/10" />
-        <div className="divide-y divide-gray-200 dark:divide-gray-700">
-          <div className="space-y-2 py-6 md:space-y-5">
-            <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-800 dark:text-gray-200 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-              {/* <RoughNotation
-                type="bracket"
-                brackets={['left', 'right']}
-                show={true}
-                color="#f6ad55"
-                animationDelay={1000}
-                animationDuration={1000}
-                strokeWidth={5}
-              >
-                <span className="inline-block text-gray-600" style={{ padding: '0.2em', display: 'inline-block' }}>
-                  Recent Posts
-                </span>
-              </RoughNotation> */}
-              <RoughNotation
-                type="highlight"
-                show={true}
-                color="#f6ad55" // 你也可以用 #f6ad5533 来加透明度
-                animationDelay={1000}
-                animationDuration={1000}
-              >
-                <span className="inline-block text-gray-600" style={{ padding: '0.2em' }}>
-                  Recent Posts
-                </span>
-              </RoughNotation>
-            </h1>
+        {/* 背景装饰 */}
+        <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-orange-50/30 via-yellow-50/20 to-red-50/30 blur-xl dark:from-orange-900/10 dark:via-yellow-900/10 dark:to-red-900/10" />
 
-            <p className="!mt-2 flex text-lg leading-7 text-gray-500 dark:text-gray-400">
-              {siteMetadata.description}
-              <Link href="/blog" className="z-[1] ml-auto">
-                <Twemoji emoji="backhand-index-pointing-right" />
+        <div className="relative z-10">
+          {/* 标题区域 - 左右布局 */}
+          <div className="flex flex-col items-start justify-between gap-6 py-8 md:flex-row md:items-center">
+            {/* 左侧标题内容 */}
+            <div className="flex-1">
+              {/* <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-2 shadow-lg backdrop-blur-sm dark:bg-gray-800/60">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-orange-400" />
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Latest Articles</span>
+              </div> */}
+
+              <h1 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-5xl">
                 <RoughNotation
-                  type="underline"
+                  type="highlight"
                   show={true}
-                  color="#FFb900"
-                  animationDelay={1400}
+                  color="#f59e0b"
+                  animationDelay={800}
                   animationDuration={1200}
+                  padding={[8, 16]}
                 >
-                  <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
-                    See more blogs
-                  </span>
+                  <span className="text-gray-800 dark:text-gray-200">Recent Posts</span>
                 </RoughNotation>
-              </Link>
-            </p>
-          </div>
-          <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-            {!posts.length && 'No posts found.'}
-            {posts.slice(0, MAX_DISPLAY).map((post) => {
-              const { slug, date, title, summary, tags } = post;
-              return (
-                <li
-                  key={slug}
-                  className="group relative transform overflow-hidden rounded-xl py-6 transition-all duration-300 ease-out
-                             hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-2xl 
-                             dark:hover:from-gray-800/50 dark:hover:to-gray-900/50"
-                >
-                  {/* 背景动画效果 */}
-                  <div
-                    className="absolute inset-0 -z-10 bg-gradient-to-r from-yellow-100/0 via-yellow-100/5 to-yellow-100/0 
-                                opacity-0 transition-opacity duration-500 group-hover:opacity-100
-                                dark:from-yellow-400/0 dark:via-yellow-400/5 dark:to-yellow-400/0"
-                  />
+              </h1>
 
-                  <article className="px-4 transition-transform duration-300 ease-out group-hover:scale-[0.99]">
-                    <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd
-                          className="inline-block rounded-lg bg-gradient-to-r from-gray-100 to-gray-50 
-                                     px-3 py-1.5 text-sm font-medium leading-6 shadow-sm
-                                     dark:from-gray-800 dark:to-gray-700"
-                        >
-                          <time dateTime={date} className="text-gray-700 dark:text-gray-300">
-                            {formatDate(date, siteMetadata.locale)}
-                          </time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-5 xl:col-span-3">
-                        <div className="space-y-4">
-                          <div>
-                            <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                              <Link
-                                href={`/blog/${slug}`}
-                                className="group/title relative text-gray-900 transition-colors duration-300
-                                         dark:text-gray-100"
-                              >
-                                {title}
-                                <span
-                                  className="absolute -bottom-0.5 left-0 h-0.5 w-full origin-left scale-x-0 
-                                               rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 
-                                               transition-transform duration-300 group-hover/title:scale-x-100"
-                                />
-                              </Link>
-                            </h2>
-                            <div className="mt-2 flex flex-wrap gap-2">
-                              {tags.map((tag) => (
-                                <Tag key={tag} text={tag} />
-                              ))}
-                            </div>
-                          </div>
-                          <div
-                            className="prose line-clamp-2 max-w-none text-gray-500 
-                                        dark:text-gray-400"
-                          >
-                            {summary}
-                          </div>
-                        </div>
-                        <div className="text-base font-medium leading-6">
-                          <Link
-                            href={`/blog/${slug}`}
-                            className="group/read inline-flex items-center gap-1.5 text-yellow-600 
-                                     transition-colors duration-200 hover:text-yellow-700
-                                     dark:text-yellow-400 dark:hover:text-yellow-300"
-                            aria-label={`Read "${title}"`}
-                          >
-                            Read more
-                            <span className="transition-transform duration-200 group-hover/read:translate-x-0.5">
-                              →
-                            </span>
-                          </Link>
-                        </div>
+              <p className="max-w-xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+                {siteMetadata.description}
+              </p>
+            </div>
+
+            {/* 右侧查看更多按钮和装饰 */}
+            <div className="flex flex-col items-start gap-4 md:items-end">
+              <Link
+                href="/blog"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-orange-900/30 dark:to-yellow-900/30 dark:text-gray-300"
+              >
+                <Twemoji emoji="backhand-index-pointing-right" />
+                <span>View All Posts</span>
+                <div className="transition-transform duration-200 group-hover:translate-x-1">→</div>
+              </Link>
+
+              {/* 装饰性统计信息 */}
+              <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center gap-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                  <span>{posts.length} Articles</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
+                  <span>Fresh Content</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 博客列表容器 - 网格布局 */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            {!posts.length && (
+              <div className="col-span-full py-12 text-center">
+                <p className="text-gray-500 dark:text-gray-400">No posts found.</p>
+              </div>
+            )}
+            {posts.slice(0, MAX_DISPLAY).map((post, index) => {
+              const { slug, date, title, summary, tags } = post;
+              const isFirstPost = index === 0;
+
+              return (
+                <article
+                  key={slug}
+                  className={`group relative overflow-hidden rounded-2xl bg-white/70 p-6 shadow-lg backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl dark:bg-gray-800/70 ${
+                    isFirstPost ? 'md:col-span-2 lg:col-span-1 xl:col-span-2' : ''
+                  }`}
+                >
+                  {/* 背景装饰 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-yellow-50/30 to-red-50/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-orange-900/20 dark:via-yellow-900/20 dark:to-red-900/20" />
+
+                  <div className="relative z-10">
+                    {/* 日期标签 */}
+                    <div className="mb-4 flex items-center justify-between">
+                      <time
+                        dateTime={date}
+                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-3 py-1 text-xs font-medium text-gray-700 dark:from-orange-900/50 dark:to-yellow-900/50 dark:text-gray-300"
+                      >
+                        <div className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                        {formatDate(date, siteMetadata.locale)}
+                      </time>
+
+                      {isFirstPost && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-2 py-1 text-xs font-medium text-blue-700 dark:from-blue-900/50 dark:to-purple-900/50 dark:text-blue-300">
+                          <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                          Latest
+                        </span>
+                      )}
+                    </div>
+
+                    {/* 标题 */}
+                    <h2
+                      className={`mb-3 font-bold leading-tight tracking-tight ${isFirstPost ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'}`}
+                    >
+                      <Link
+                        href={`/blog/${slug}`}
+                        className="group/title relative text-gray-900 transition-colors duration-300 dark:text-gray-100"
+                      >
+                        {title}
+                        <span className="absolute -bottom-0.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 transition-transform duration-300 group-hover/title:scale-x-100" />
+                      </Link>
+                    </h2>
+
+                    {/* 标签 */}
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {tags.slice(0, isFirstPost ? 4 : 3).map((tag) => (
+                        <Tag key={tag} text={tag} />
+                      ))}
+                      {tags.length > (isFirstPost ? 4 : 3) && (
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          +{tags.length - (isFirstPost ? 4 : 3)} more
+                        </span>
+                      )}
+                    </div>
+
+                    {/* 摘要 */}
+                    <p
+                      className={`mb-4 text-gray-600 dark:text-gray-400 ${isFirstPost ? 'line-clamp-3' : 'line-clamp-2'}`}
+                    >
+                      {summary}
+                    </p>
+
+                    {/* 阅读更多 */}
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={`/blog/${slug}`}
+                        className="group/read inline-flex items-center gap-2 text-sm font-medium text-orange-600 transition-colors duration-200 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                        aria-label={`Read "${title}"`}
+                      >
+                        Read more
+                        <span className="transition-transform duration-200 group-hover/read:translate-x-1">→</span>
+                      </Link>
+
+                      {/* 装饰性元素 */}
+                      <div className="flex items-center gap-1">
+                        <div className="h-1 w-1 rounded-full bg-orange-300 opacity-60" />
+                        <div className="h-1 w-1 rounded-full bg-yellow-300 opacity-60" />
+                        <div className="h-1 w-1 rounded-full bg-red-300 opacity-60" />
                       </div>
                     </div>
-                  </article>
-                </li>
+                  </div>
+
+                  {/* 装饰性光效 */}
+                  <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-orange-200/30 to-yellow-200/30 opacity-0 blur-xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-orange-800/30 dark:to-yellow-800/30" />
+                  <div className="absolute -bottom-2 -left-2 h-6 w-6 rounded-full bg-gradient-to-br from-red-200/30 to-pink-200/30 opacity-0 blur-lg transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-red-800/30 dark:to-pink-800/30" />
+                </article>
               );
             })}
-          </ul>
+          </div>
         </div>
       </div>
 
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
+      {/* {posts.length > MAX_DISPLAY && (
+        <div className="mt-4 flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"
-            className="text-primary z-[1] hover:text-sky-600 dark:hover:text-sky-400"
+            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-orange-900/30 dark:to-yellow-900/30 dark:text-gray-300"
             aria-label="All posts"
           >
             <Twemoji emoji="backhand-index-pointing-right" />
-            <RoughNotation type="underline" show={true} color="#FFb900" animationDelay={1400} animationDuration={1200}>
-              <span data-umami-event="home-link-blog" className="z-[1] ml-1.5">
-                All Posts
-              </span>
-            </RoughNotation>
+            <span data-umami-event="home-link-blog">All Posts</span>
+            <div className="transition-transform duration-200 group-hover:translate-x-1">→</div>
           </Link>
         </div>
-      )}
+      )} */}
 
       {/* 优化后的回到顶部按钮 */}
       {showScrollButton && (

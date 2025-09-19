@@ -89,7 +89,6 @@ const Greeting = () => {
                 >
                   <span className="text-gray-800 dark:text-gray-200">learning journey</span>
                 </RoughNotation>
-                <br className="hidden sm:block" />
                 <span> and </span>
                 <RoughNotation
                   type="circle"
@@ -106,11 +105,11 @@ const Greeting = () => {
         </div>
 
         {/* 装饰性分割线 */}
-        <div
+        {/* <div
           className={`mx-auto mt-8 transform transition-all delay-700 duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
         >
           <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400" />
-        </div>
+        </div> */}
 
         {/* 欢迎描述 */}
         <div
@@ -128,7 +127,7 @@ const Greeting = () => {
         >
           <div className="flex flex-wrap justify-center gap-4">
             {/* 技能标签 */}
-            {['JavaScript', 'TypeScript', 'React', 'Node.js'].map((skill, index) => (
+            {['Java', 'Go', 'TypeScript', 'Linux'].map((skill, index) => (
               <div
                 key={skill}
                 className="group relative overflow-hidden rounded-full bg-white/60 px-4 py-2 text-sm font-medium text-gray-700 shadow-md backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg dark:bg-gray-800/60 dark:text-gray-300"
