@@ -77,9 +77,18 @@ export default function Home({ posts }) {
 
         {/* 主要内容容器 */}
         <div className="relative">
-          {/* 问候语部分 */}
-          <div className="mb-12">
-            <Greeting />
+          {/* 问候语部分 - 全新现代化设计 */}
+          <div className="relative mb-16 md:mb-20">
+            {/* 背景装饰容器 */}
+            <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-pink-50/30 blur-2xl dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10" />
+
+            {/* Greeting 组件容器 */}
+            <div className="relative z-10 overflow-hidden rounded-3xl bg-white/40 backdrop-blur-sm dark:bg-gray-900/40">
+              <Greeting />
+            </div>
+
+            {/* 底部装饰光效 */}
+            <div className="absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-300/20 via-purple-300/20 to-pink-300/20 blur-xl dark:from-blue-800/20 dark:via-purple-800/20 dark:to-pink-800/20" />
           </div>
 
           {/* 主要内容区域 - 响应式网格布局 */}
