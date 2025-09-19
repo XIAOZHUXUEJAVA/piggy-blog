@@ -91,97 +91,99 @@ export default function Home({ posts }) {
             <div className="absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-300/20 via-purple-300/20 to-pink-300/20 blur-xl dark:from-blue-800/20 dark:via-purple-800/20 dark:to-pink-800/20" />
           </div>
 
-          {/* 主要内容区域 - 响应式网格布局 */}
-          <div className="grid gap-6 md:gap-8 lg:grid-cols-12 lg:gap-12">
-            {/* 头像区域 */}
-            <div className="lg:col-span-4">
-              <div className="sticky top-8">
-                {/* 头像卡片 */}
-                <div className="group relative overflow-hidden rounded-2xl bg-white/70 p-4 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl dark:bg-gray-800/70 md:p-6">
-                  {/* 卡片装饰背景 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-purple-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-900/20 dark:to-purple-900/20" />
+          {/* 主要内容区域 - 优化移动端响应式网格布局 */}
+          <div className="mx-auto max-w-7xl px-3 py-6 sm:px-4 sm:py-8 md:px-6 md:py-12 lg:px-8">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-12">
+              {/* 头像区域 */}
+              <div className="order-1 lg:order-1 lg:col-span-4">
+                <div className="lg:sticky lg:top-8">
+                  {/* 头像卡片 */}
+                  <div className="group relative overflow-hidden rounded-xl bg-white/70 p-3 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-4 md:p-6 md:shadow-xl md:hover:shadow-2xl">
+                    {/* 卡片装饰背景 */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-purple-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-900/20 dark:to-purple-900/20" />
 
-                  {/* 头像容器 */}
-                  <div className="relative z-10 flex justify-center">
-                    <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-none">
-                      <Avatar />
+                    {/* 头像容器 */}
+                    <div className="relative z-10 flex justify-center">
+                      <div className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-none">
+                        <Avatar />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* 装饰元素 */}
-                  <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-gradient-to-br from-blue-200/30 to-purple-200/30 blur-2xl transition-all duration-500 group-hover:scale-110 dark:from-blue-800/30 dark:to-purple-800/30 md:h-24 md:w-24" />
-                  <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-gradient-to-tr from-purple-200/20 to-pink-200/20 blur-2xl transition-all duration-500 group-hover:scale-110 dark:from-purple-800/20 dark:to-pink-800/20 md:h-32 md:w-32" />
+                    {/* 装饰元素 - 移动端更小 */}
+                    <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-blue-200/30 to-purple-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-blue-800/30 dark:to-purple-800/30 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12 md:-right-4 md:-top-4 md:h-16 md:w-16 md:blur-2xl lg:h-20 lg:w-20 xl:h-24 xl:w-24" />
+                    <div className="absolute -bottom-2 -left-2 h-10 w-10 rounded-full bg-gradient-to-tr from-purple-200/20 to-pink-200/20 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-purple-800/20 dark:to-pink-800/20 sm:-bottom-3 sm:-left-3 sm:h-14 sm:w-14 md:-bottom-4 md:-left-4 md:h-20 md:w-20 md:blur-2xl lg:h-24 lg:w-24 xl:h-32 xl:w-32" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* 信息区域 */}
-            <div className="lg:col-span-8">
-              <div className="space-y-6 md:space-y-8">
-                {/* 个人信息卡片 */}
-                <div className="group relative overflow-hidden rounded-2xl bg-white/70 p-6 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl dark:bg-gray-800/70 md:p-8">
-                  {/* 卡片装饰背景 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-blue-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-blue-900/20" />
+              {/* 信息区域 */}
+              <div className="order-2 lg:order-2 lg:col-span-8">
+                <div className="space-y-4 sm:space-y-6 md:space-y-8">
+                  {/* 个人信息卡片 */}
+                  <div className="group relative overflow-hidden rounded-xl bg-white/70 p-4 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-5 md:p-6 md:shadow-xl md:hover:shadow-2xl lg:p-8">
+                    {/* 卡片装饰背景 */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-blue-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-blue-900/20" />
 
-                  <div className="relative z-10 space-y-4 md:space-y-6">
-                    {/* 标题区域 */}
-                    <div className="border-b border-gray-200/50 pb-4 dark:border-gray-700/50 md:pb-6">
-                      <Heading />
+                    <div className="relative z-10 space-y-3 sm:space-y-4 md:space-y-6">
+                      {/* 标题区域 */}
+                      <div className="border-b border-gray-200/50 pb-3 dark:border-gray-700/50 sm:pb-4 md:pb-6">
+                        <Heading />
+                      </div>
+
+                      {/* 动态介绍 */}
+                      <div className="rounded-lg bg-gray-50/50 p-2.5 dark:bg-gray-900/50 sm:rounded-xl sm:p-3 md:p-4">
+                        <TypedBios />
+                      </div>
+
+                      {/* 简短描述 */}
+                      <div className="text-sm text-gray-600 dark:text-gray-300 sm:text-base">
+                        <ShortDescription />
+                      </div>
                     </div>
 
-                    {/* 动态介绍 */}
-                    <div className="rounded-xl bg-gray-50/50 p-3 dark:bg-gray-900/50 md:p-4">
-                      <TypedBios />
-                    </div>
-
-                    {/* 简短描述 */}
-                    <div className="text-gray-600 dark:text-gray-300">
-                      <ShortDescription />
-                    </div>
+                    {/* 装饰元素 - 移动端更小 */}
+                    <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-green-200/30 to-blue-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-blue-800/30 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12 md:-right-4 md:-top-4 md:h-16 md:w-16 md:blur-xl lg:-right-6 lg:-top-6 lg:h-20 lg:w-20" />
                   </div>
 
-                  {/* 装饰元素 */}
-                  <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-gradient-to-br from-green-200/30 to-blue-200/30 blur-xl transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-blue-800/30 md:-right-6 md:-top-6 md:h-20 md:w-20" />
-                </div>
+                  {/* 链接和音乐卡片 */}
+                  <div className="space-y-3 sm:space-y-4 md:space-y-6">
+                    {/* 博客链接卡片 */}
+                    <div className="group relative overflow-hidden rounded-xl bg-white/70 p-3 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-4 md:p-6 md:shadow-xl md:hover:shadow-2xl">
+                      {/* 卡片装饰背景 */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/20 via-transparent to-orange-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-yellow-900/20 dark:to-orange-900/20" />
 
-                {/* 链接和音乐卡片 */}
-                <div className="space-y-4 md:space-y-6">
-                  {/* 博客链接卡片 */}
-                  <div className="group relative overflow-hidden rounded-2xl bg-white/70 p-4 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl dark:bg-gray-800/70 md:p-6">
-                    {/* 卡片装饰背景 */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-100/20 via-transparent to-orange-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-yellow-900/20 dark:to-orange-900/20" />
-
-                    <div className="relative z-10">
-                      <div className="mb-3 flex items-center gap-2 md:mb-4">
-                        <div className="h-2 w-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400" />
-                        <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 md:text-lg">
-                          Quick Links
-                        </h3>
+                      <div className="relative z-10">
+                        <div className="mb-2 flex items-center gap-2 sm:mb-3 md:mb-4">
+                          <div className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-yellow-400 to-orange-400 sm:h-2 sm:w-2" />
+                          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 sm:text-base md:text-lg">
+                            Quick Links
+                          </h3>
+                        </div>
+                        <BlogLinks />
                       </div>
-                      <BlogLinks />
+
+                      {/* 装饰元素 - 移动端更小 */}
+                      <div className="absolute -bottom-2 -right-2 h-6 w-6 rounded-full bg-gradient-to-br from-yellow-200/30 to-orange-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-yellow-800/30 dark:to-orange-800/30 sm:-bottom-3 sm:-right-3 sm:h-8 sm:w-8 md:-bottom-4 md:-right-4 md:h-12 md:w-12 md:blur-xl lg:h-16 lg:w-16" />
                     </div>
 
-                    {/* 装饰元素 */}
-                    <div className="absolute -bottom-3 -right-3 h-12 w-12 rounded-full bg-gradient-to-br from-yellow-200/30 to-orange-200/30 blur-xl transition-all duration-500 group-hover:scale-110 dark:from-yellow-800/30 dark:to-orange-800/30 md:-bottom-4 md:-right-4 md:h-16 md:w-16" />
-                  </div>
+                    {/* 音乐播放器卡片 */}
+                    <div className="group relative overflow-hidden rounded-xl bg-white/70 p-3 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-4 md:p-6 md:shadow-xl md:hover:shadow-2xl">
+                      {/* 卡片装饰背景 */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-teal-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-teal-900/20" />
 
-                  {/* 音乐播放器卡片 */}
-                  <div className="group relative overflow-hidden rounded-2xl bg-white/70 p-4 shadow-xl backdrop-blur-sm transition-all duration-500 hover:shadow-2xl dark:bg-gray-800/70 md:p-6">
-                    {/* 卡片装饰背景 */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-teal-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-teal-900/20" />
-
-                    <div className="relative z-10">
-                      <div className="mb-3 flex items-center gap-2 md:mb-4">
-                        <div className="h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-green-400 to-teal-400" />
-                        <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 md:text-lg">
-                          Now Playing
-                        </h3>
+                      <div className="relative z-10">
+                        <div className="mb-2 flex items-center gap-2 sm:mb-3 md:mb-4">
+                          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-gradient-to-r from-green-400 to-teal-400 sm:h-2 sm:w-2" />
+                          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 sm:text-base md:text-lg">
+                            Now Playing
+                          </h3>
+                        </div>
+                        <SmartMusicWidget />
                       </div>
-                      <SmartMusicWidget />
-                    </div>
 
-                    {/* 装饰元素 */}
-                    <div className="absolute -left-3 -top-3 h-12 w-12 rounded-full bg-gradient-to-br from-green-200/30 to-teal-200/30 blur-xl transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-teal-800/30 md:-left-4 md:-top-4 md:h-16 md:w-16" />
+                      {/* 装饰元素 - 移动端更小 */}
+                      <div className="absolute -left-2 -top-2 h-6 w-6 rounded-full bg-gradient-to-br from-green-200/30 to-teal-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-teal-800/30 sm:-left-3 sm:-top-3 sm:h-8 sm:w-8 md:-left-4 md:-top-4 md:h-12 md:w-12 md:blur-xl lg:h-16 lg:w-16" />
+                    </div>
                   </div>
                 </div>
               </div>
