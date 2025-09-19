@@ -20,6 +20,7 @@ import Docker from 'public/static/icons/docker.svg';
 import Postgres from 'public/static/icons/postgres.svg';
 import Mongodb from 'public/static/icons/mongodb.svg';
 import Java from 'public/static/icons/java.svg';
+import AI from 'public/static/icons/ai.svg';
 
 export const BrandIconsMap = {
   React,
@@ -44,6 +45,7 @@ export const BrandIconsMap = {
   Postgres,
   Mongodb,
   Java,
+  AI,
 };
 
 export type BrandIconType = keyof typeof BrandIconsMap;
