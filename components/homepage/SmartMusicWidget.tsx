@@ -195,9 +195,38 @@ const SmartMusicWidget = () => {
   };
 
   return (
-    <div className="my-3 flex max-w-[540px] items-center gap-2 rounded bg-gray-200 px-3 py-2 shadow-md transition-all duration-300 hover:shadow-lg dark:bg-[#24283b] dark:shadow-gray-800/40">
-      <Spotify className="w-6 flex-shrink-0 text-spotify" />
-      <div className="inline-flex min-w-0 flex-1 truncate">{getCurrentContent()}</div>
+    <div className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-green-50 via-teal-50 to-blue-50 p-4 transition-all duration-300 hover:shadow-lg dark:from-green-900/20 dark:via-teal-900/20 dark:to-blue-900/20">
+      {/* 背景装饰 */}
+      <div className="absolute inset-0 bg-gradient-to-r from-green-100/0 via-green-100/10 to-teal-100/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-green-400/0 dark:via-green-400/5 dark:to-teal-400/0" />
+
+      {/* 主要内容 */}
+      <div className="relative z-10 flex items-center gap-3">
+        {/* Spotify 图标容器 */}
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-green-100 transition-all duration-300 group-hover:scale-110 group-hover:bg-green-200 dark:bg-green-900/50 dark:group-hover:bg-green-800/50">
+          <Spotify className="h-5 w-5 text-spotify" />
+        </div>
+
+        {/* 音乐信息 */}
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-sm font-medium text-gray-800 dark:text-gray-200">{getCurrentContent()}</div>
+        </div>
+
+        {/* 状态指示器 */}
+        <div className="flex-shrink-0">
+          {isPlaying ? (
+            <div className="flex items-center gap-1">
+              <div className="h-1 w-1 animate-bounce rounded-full bg-green-500 [animation-delay:-0.3s]" />
+              <div className="h-1 w-1 animate-bounce rounded-full bg-green-500 [animation-delay:-0.15s]" />
+              <div className="h-1 w-1 animate-bounce rounded-full bg-green-500" />
+            </div>
+          ) : (
+            <div className="h-2 w-2 rounded-full bg-gray-400 dark:bg-gray-500" />
+          )}
+        </div>
+      </div>
+
+      {/* 装饰性波浪线 */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-green-200 via-teal-200 to-blue-200 opacity-30 dark:from-green-800 dark:via-teal-800 dark:to-blue-800" />
     </div>
   );
 };
