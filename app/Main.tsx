@@ -236,8 +236,8 @@ export default function Home({ posts }) {
                 className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-orange-900/30 dark:to-yellow-900/30 dark:text-gray-300"
               >
                 <Twemoji emoji="backhand-index-pointing-right" />
-                <span>View All Posts</span>
-                <div className="transition-transform duration-200 group-hover:translate-x-1">→</div>
+                <span>Discover All Posts</span>
+                {/* <div className="transition-transform duration-200 group-hover:translate-x-1">→</div> */}
               </Link>
 
               {/* 装饰性统计信息 */}

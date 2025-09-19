@@ -44,7 +44,7 @@ const PopularTags = () => {
             >
               <Twemoji emoji="backhand-index-pointing-right" />
               <span>Explore All Tags</span>
-              <div className="transition-transform duration-200 group-hover:translate-x-1">→</div>
+              {/* <div className="transition-transform duration-200 group-hover:translate-x-1">→</div> */}
             </Link>
 
             {/* 装饰性统计信息 */}
