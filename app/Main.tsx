@@ -17,14 +17,47 @@ import {
 } from '@/components/homepage';
 import { newCanvas } from '../utils/newCanvas'; // Ensure correct import path
 import { useEffect, useState } from 'react';
+import { IconCloud } from '@/components/ui/icon-cloud';
 import { RoughNotation } from 'react-rough-notation';
 import CubeSplitter from '@/components/ui/CubeSplitter';
 
 const MAX_DISPLAY = 5;
-
+const slugs = [
+  'typescript',
+  'javascript',
+  'dart',
+  'java',
+  'react',
+  'flutter',
+  'android',
+  'html5',
+  'css3',
+  'nodedotjs',
+  'express',
+  'nextdotjs',
+  'prisma',
+  'amazonaws',
+  'postgresql',
+  'firebase',
+  'nginx',
+  'vercel',
+  'testinglibrary',
+  'jest',
+  'cypress',
+  'docker',
+  'git',
+  'jira',
+  'github',
+  'gitlab',
+  'visualstudiocode',
+  'androidstudio',
+  'sonarqube',
+  'figma',
+];
 export default function Home({ posts }) {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
+  const images = slugs.map((slug) => `https://cdn.simpleicons.org/${slug}/${slug}`);
   // useEffect(() => {
   //   // Initialize canvas animation
   //   newCanvas('canvas');
@@ -91,30 +124,37 @@ export default function Home({ posts }) {
             <div className="absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-300/20 via-purple-300/20 to-pink-300/20 blur-xl dark:from-blue-800/20 dark:via-purple-800/20 dark:to-pink-800/20" />
           </div>
 
-          {/* 主要内容区域 - 优化移动端响应式网格布局 */}
-          <div className="mx-auto max-w-7xl px-3 py-6 sm:px-4 sm:py-8 md:px-6 md:py-12 lg:px-8">
-            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-12">
+          {/* 主要内容区域 - 优化响应式布局 */}
+          <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12 lg:px-8">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
               {/* 头像区域 */}
-              <div className="order-1 lg:order-1 lg:col-span-4">
-                <div className="lg:sticky lg:top-8">
+              <aside className="lg:col-span-4" aria-label="个人信息">
+                <div className="space-y-8 lg:sticky lg:top-8 lg:pr-4">
                   {/* 头像卡片 */}
-                  <div className="group relative overflow-hidden rounded-xl bg-white/70 p-3 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-4 md:p-6 md:shadow-xl md:hover:shadow-2xl">
+                  <article className="group relative overflow-hidden rounded-2xl bg-white/80 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:shadow-xl dark:bg-gray-800/80">
                     {/* 卡片装饰背景 */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-purple-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-blue-900/20 dark:to-purple-900/20" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-900/30 dark:to-purple-900/30" />
 
                     {/* 头像容器 */}
                     <div className="relative z-10 flex justify-center">
-                      <div className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-none">
+                      <div className="w-full max-w-[240px] lg:max-w-none">
                         <Avatar />
                       </div>
                     </div>
 
-                    {/* 装饰元素 - 移动端更小 */}
-                    <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-blue-200/30 to-purple-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-blue-800/30 dark:to-purple-800/30 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12 md:-right-4 md:-top-4 md:h-16 md:w-16 md:blur-2xl lg:h-20 lg:w-20 xl:h-24 xl:w-24" />
-                    <div className="absolute -bottom-2 -left-2 h-10 w-10 rounded-full bg-gradient-to-tr from-purple-200/20 to-pink-200/20 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-purple-800/20 dark:to-pink-800/20 sm:-bottom-3 sm:-left-3 sm:h-14 sm:w-14 md:-bottom-4 md:-left-4 md:h-20 md:w-20 md:blur-2xl lg:h-24 lg:w-24 xl:h-32 xl:w-32" />
+                    {/* 简化装饰元素 */}
+                    <div className="absolute -right-3 -top-3 h-12 w-12 rounded-full bg-gradient-to-br from-blue-200/40 to-purple-200/40 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-blue-700/40 dark:to-purple-700/40 lg:h-16 lg:w-16" />
+                    <div className="absolute -bottom-3 -left-3 h-16 w-16 rounded-full bg-gradient-to-tr from-purple-200/30 to-pink-200/30 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-purple-700/30 dark:to-pink-700/30 lg:h-20 lg:w-20" />
+                  </article>
+
+                  {/* 技能云图 */}
+                  <div className="rounded-2xl bg-white/60 p-6 backdrop-blur-sm dark:bg-gray-800/60">
+                    <div className="flex h-[300px] w-full items-center justify-center sm:h-[350px] lg:h-[400px]">
+                      <IconCloud images={images} />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </aside>
 
               {/* 信息区域 */}
               <div className="order-2 lg:order-2 lg:col-span-8">
