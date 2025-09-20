@@ -4,7 +4,7 @@ import { slug } from 'github-slugger';
 import { allBlogs } from 'contentlayer/generated';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 
-import { ListLayout } from 'layouts';
+import ModernListLayout from '@/layouts/ModernListLayout';
 import tagData from 'app/tag-data.json';
 import { genPageMetadata } from 'app/seo';
 import siteMetadata from '@/data/siteMetadata';
@@ -50,5 +50,5 @@ export default function TagPage({ params }: { params: { tag: string } }) {
     return notFound();
   }
 
-  return <ListLayout posts={filteredPosts} title={title} />;
+  return <ModernListLayout posts={filteredPosts} title={title} />;
 }

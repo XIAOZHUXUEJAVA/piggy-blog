@@ -21,13 +21,15 @@ export default async function Projects() {
   const sideProjects = projectsData.filter(({ type }) => type === 'self');
 
   return (
-    <>
-      <div className="dark:divide-gray divide-y divide-gray-200">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Projects
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="container mx-auto px-4 py-16">
+        {/* Header Section */}
+        <div className="mb-16 text-center">
+          <div className="inline-block">
+            <h1 className="mb-4 text-5xl font-bold text-blue-600 dark:text-blue-400 md:text-7xl">Projects</h1>
+            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+          </div>
+          <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
         {/* <div className="container py-12">
@@ -41,10 +43,8 @@ export default async function Projects() {
           </div>
         </div> */}
 
-        <div className="container py-12">
-          <h3 className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
-            Side projects
-          </h3>
+        <div className="py-12">
+          {/* <h3 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-200">Side projects</h3> */}
           <div className="-m-4 flex flex-wrap">
             {sideProjects.map((project) => (
               <ProjectCard key={project.title} project={project} />
@@ -52,6 +52,6 @@ export default async function Projects() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
