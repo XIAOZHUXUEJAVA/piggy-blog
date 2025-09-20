@@ -128,16 +128,16 @@ export default function Home({ posts }) {
           <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12 lg:px-8">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
               {/* 头像区域 */}
-              <aside className="lg:col-span-4" aria-label="个人信息">
+              <aside className="lg:col-span-5" aria-label="个人信息">
                 <div className="space-y-8 lg:sticky lg:top-8 lg:pr-4">
                   {/* 头像卡片 */}
-                  <article className="group relative overflow-hidden rounded-2xl bg-white/80 p-6 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-[1.02] hover:shadow-xl dark:bg-gray-800/80">
+                  <article className="group relative overflow-hidden rounded-2xl bg-white/80 p-2 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800/80 sm:p-3 md:p-3">
                     {/* 卡片装饰背景 */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-900/30 dark:to-purple-900/30" />
 
                     {/* 头像容器 */}
                     <div className="relative z-10 flex justify-center">
-                      <div className="w-full max-w-[240px] lg:max-w-none">
+                      <div className="w-full">
                         <Avatar />
                       </div>
                     </div>
@@ -157,7 +157,7 @@ export default function Home({ posts }) {
               </aside>
 
               {/* 信息区域 */}
-              <div className="order-2 lg:order-2 lg:col-span-8">
+              <div className="order-2 lg:order-2 lg:col-span-7">
                 <div className="space-y-4 sm:space-y-6 md:space-y-8">
                   {/* 个人信息卡片 */}
                   <div className="group relative overflow-hidden rounded-xl bg-white/70 p-4 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-5 md:p-6 md:shadow-xl md:hover:shadow-2xl lg:p-8">
