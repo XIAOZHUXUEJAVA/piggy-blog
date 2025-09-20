@@ -148,7 +148,7 @@ export default function Home({ posts }) {
                   </article>
 
                   {/* 技能云图 */}
-                  <div className="rounded-2xl bg-white/60 p-6 backdrop-blur-sm dark:bg-gray-800/60">
+                  <div className="rounded-2xl p-6">
                     <div className="flex h-[300px] w-full items-center justify-center sm:h-[350px] lg:h-[400px]">
                       <IconCloud images={images} />
                     </div>
