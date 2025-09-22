@@ -3,7 +3,7 @@ import { slug } from 'github-slugger';
 import tagData from 'app/tag-data.json';
 import { genPageMetadata } from 'app/seo';
 
-import { Link, Tag } from '@/components/ui';
+import { Link } from '@/components/ui';
 
 export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' });
 
@@ -14,118 +14,156 @@ export default async function Page() {
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Background Elements */}
+      <div className="fixed inset-0 overflow-hidden">
+        <div className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-green-200/30 to-yellow-200/30 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-gradient-to-br from-orange-200/30 to-yellow-200/30 blur-3xl"></div>
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 py-16">
         {/* Header Section */}
         <div className="mb-16 text-center">
           <div className="inline-block">
-            <h1 className="mb-4 text-5xl font-bold text-blue-600 dark:text-blue-400 md:text-7xl">Tags</h1>
-            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            <h1 className="mb-6 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">Tags</h1>
+            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+          <p className="mx-auto mt-8 max-w-2xl text-lg font-medium text-gray-600 dark:text-gray-300">
             Explore all article tags and discover topics of interest
           </p>
         </div>
 
         {/* Tags Grid */}
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-7xl">
           {tagKeys.length === 0 ? (
             <div className="py-16 text-center">
               <div className="mb-4 text-6xl">🏷️</div>
               <p className="text-xl text-gray-500 dark:text-gray-400">No tags found</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {sortedTags.map((tag, index) => {
                 const count = tagCounts[tag];
                 const isPopular = count >= 5;
                 const isMedium = count >= 3 && count < 5;
 
                 return (
-                  <div
+                  <Link
                     key={tag}
-                    className={`group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
-                      isPopular
-                        ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg'
-                        : isMedium
-                          ? 'bg-gradient-to-br from-indigo-100 to-purple-100 shadow-md dark:from-indigo-900/30 dark:to-purple-900/30'
-                          : 'border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800'
-                    }`}
-                    style={{
-                      animationDelay: `${index * 50}ms`,
-                    }}
+                    href={`/tags/${slug(tag)}`}
+                    className="group block"
+                    aria-label={`View articles tagged with ${tag}`}
                   >
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0 opacity-10">
-                      <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-white/20"></div>
-                      <div className="absolute -bottom-2 -left-2 h-8 w-8 rounded-full bg-white/10"></div>
-                    </div>
+                    <div
+                      className="relative overflow-hidden rounded-2xl border border-white/20 p-6 shadow-lg backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl"
+                      style={{
+                        background: isPopular
+                          ? 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)'
+                          : isMedium
+                            ? 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.7) 100%)'
+                            : 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.6) 100%)',
+                        boxShadow: isPopular
+                          ? '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)'
+                          : '0 4px 16px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)',
+                        animationDelay: `${index * 50}ms`,
+                      }}
+                    >
+                      {/* 内部光泽效果 */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-60"></div>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <div className="mb-3 flex items-center justify-between">
+                      {/* 悬浮时的光效 */}
+                      <div className="absolute inset-0 -translate-x-full transform rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity transition-transform duration-1000 duration-500 group-hover:translate-x-full group-hover:opacity-100"></div>
+
+                      {/* 装饰性元素 */}
+                      <div className="absolute right-4 top-4 opacity-20">
                         <div
-                          className={`h-3 w-3 rounded-full ${
-                            isPopular ? 'bg-white/80' : isMedium ? 'bg-indigo-500' : 'bg-gray-400 dark:bg-gray-500'
+                          className={`h-2 w-2 rounded-full ${
+                            isPopular ? 'bg-green-500' : isMedium ? 'bg-yellow-500' : 'bg-gray-400'
                           }`}
                         ></div>
-                        <span
-                          className={`rounded-full px-2 py-1 text-sm font-bold ${
-                            isPopular
-                              ? 'bg-white/20 text-white'
-                              : isMedium
-                                ? 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-300'
-                                : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
-                          }`}
-                        >
-                          {count}
-                        </span>
                       </div>
 
-                      <div className="mb-4">
-                        <Tag text={tag} />
+                      {/* 内容 */}
+                      <div className="relative z-10">
+                        {/* 标签名称 */}
+                        <div className="mb-4">
+                          <h3 className="text-lg font-semibold text-gray-800 transition-colors duration-300 group-hover:text-gray-900 dark:text-gray-200 dark:group-hover:text-white">
+                            {tag}
+                          </h3>
+                        </div>
+
+                        {/* 文章数量 */}
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                            {count === 1 ? '1 article' : `${count} articles`}
+                          </span>
+
+                          {/* 数量徽章 */}
+                          <div
+                            className={`inline-flex h-7 min-w-[28px] items-center justify-center rounded-full px-2 text-xs font-bold transition-all duration-300 ${
+                              isPopular
+                                ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
+                                : isMedium
+                                  ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white shadow-md'
+                                  : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                            }`}
+                          >
+                            {count}
+                          </div>
+                        </div>
+
+                        {/* 热门标识 */}
+                        {isPopular && (
+                          <div className="absolute -right-2 -top-2 rotate-12 transform rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 px-2 py-1 text-xs font-bold text-white shadow-lg">
+                            Popular
+                          </div>
+                        )}
                       </div>
 
-                      <Link
-                        href={`/tags/${slug(tag)}`}
-                        className={`inline-flex items-center text-sm font-medium transition-colors duration-200 ${
+                      {/* 底部装饰线 */}
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl ${
                           isPopular
-                            ? 'text-white/80 hover:text-white'
+                            ? 'bg-gradient-to-r from-green-500 to-yellow-500'
                             : isMedium
-                              ? 'text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300'
-                              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
-                        }`}
-                        aria-label={`View posts tagged ${tag}`}
-                      >
-                        {count === 1 ? '1 post' : `${count} posts`}
-                        <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </Link>
+                              ? 'bg-gradient-to-r from-yellow-400 to-orange-400'
+                              : 'bg-gradient-to-r from-gray-300 to-gray-400'
+                        } opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
+                      ></div>
                     </div>
-
-                    {/* Hover Effect */}
-                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full"></div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
           )}
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-20 text-center">
-          <div className="inline-flex items-center space-x-8 rounded-2xl border border-gray-200/50 bg-white/80 px-8 py-6 shadow-lg backdrop-blur-sm dark:border-gray-700/50 dark:bg-gray-800/80">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{tagKeys.length}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Total Tags</div>
+        {/* 统计信息卡片 */}
+        <div className="mt-20 flex justify-center">
+          <div
+            className="inline-flex items-center space-x-8 rounded-3xl border border-white/30 p-8 shadow-2xl backdrop-blur-xl"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)',
+            }}
+          >
+            {/* 内部光泽 */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/50 via-transparent to-transparent opacity-60"></div>
+
+            <div className="relative z-10 text-center">
+              <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-4xl font-bold text-transparent">
+                {tagKeys.length}
+              </div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Tags</div>
             </div>
-            <div className="h-12 w-px bg-gray-300 dark:bg-gray-600"></div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+
+            <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+
+            <div className="relative z-10 text-center">
+              <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-4xl font-bold text-transparent">
                 {Object.values(tagCounts).reduce((sum, count) => sum + count, 0)}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Total Posts</div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Articles</div>
             </div>
           </div>
         </div>
