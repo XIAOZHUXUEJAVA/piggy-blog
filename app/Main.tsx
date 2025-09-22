@@ -103,14 +103,14 @@ export default function Home({ posts }) {
       {/* 现代化的英雄区域 */}
       <div className="relative mt-8 md:mt-12">
         {/* 背景装饰 */}
-        <div className="absolute -inset-x-4 -inset-y-8 rounded-3xl bg-gradient-to-br from-blue-50/50 via-white/30 to-purple-50/50 blur-3xl dark:from-blue-900/20 dark:via-gray-900/30 dark:to-purple-900/20" />
+        <div className="absolute -inset-x-4 -inset-y-8 rounded-3xl bg-gradient-to-br from-green-50/50 via-white/30 to-yellow-50/50 blur-3xl dark:from-green-900/20 dark:via-gray-900/30 dark:to-yellow-900/20" />
 
         {/* 主要内容容器 */}
         <div className="relative">
           {/* 问候语部分 - 全新现代化设计 */}
           <div className="relative mb-16 md:mb-20">
             {/* 背景装饰容器 */}
-            <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-blue-50/30 via-purple-50/20 to-pink-50/30 blur-2xl dark:from-blue-900/10 dark:via-purple-900/10 dark:to-pink-900/10" />
+            <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-green-50/30 via-yellow-50/20 to-orange-50/30 blur-2xl dark:from-green-900/10 dark:via-yellow-900/10 dark:to-orange-900/10" />
 
             {/* Greeting 组件容器 */}
             <div className="relative z-10 overflow-hidden rounded-3xl bg-white/40 backdrop-blur-sm dark:bg-gray-900/40">
@@ -118,7 +118,7 @@ export default function Home({ posts }) {
             </div>
 
             {/* 底部装饰光效 */}
-            <div className="absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-r from-blue-300/20 via-purple-300/20 to-pink-300/20 blur-xl dark:from-blue-800/20 dark:via-purple-800/20 dark:to-pink-800/20" />
+            <div className="absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-r from-green-300/20 via-yellow-300/20 to-orange-300/20 blur-xl dark:from-green-800/20 dark:via-yellow-800/20 dark:to-orange-800/20" />
           </div>
 
           {/* 主要内容区域 - 优化响应式布局 */}
@@ -130,7 +130,7 @@ export default function Home({ posts }) {
                   {/* 头像卡片 */}
                   <article className="group relative overflow-hidden rounded-2xl bg-white/80 p-2 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl dark:bg-gray-800/80 sm:p-3 md:p-3">
                     {/* 卡片装饰背景 */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-900/30 dark:to-purple-900/30" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-transparent to-yellow-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-green-900/30 dark:to-yellow-900/30" />
 
                     {/* 头像容器 */}
                     <div className="relative z-10 flex justify-center">
@@ -140,8 +140,8 @@ export default function Home({ posts }) {
                     </div>
 
                     {/* 简化装饰元素 */}
-                    <div className="absolute -right-3 -top-3 h-12 w-12 rounded-full bg-gradient-to-br from-blue-200/40 to-purple-200/40 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-blue-700/40 dark:to-purple-700/40 lg:h-16 lg:w-16" />
-                    <div className="absolute -bottom-3 -left-3 h-16 w-16 rounded-full bg-gradient-to-tr from-purple-200/30 to-pink-200/30 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-purple-700/30 dark:to-pink-700/30 lg:h-20 lg:w-20" />
+                    <div className="absolute -right-3 -top-3 h-12 w-12 rounded-full bg-gradient-to-br from-green-200/40 to-yellow-200/40 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-green-700/40 dark:to-yellow-700/40 lg:h-16 lg:w-16" />
+                    <div className="absolute -bottom-3 -left-3 h-16 w-16 rounded-full bg-gradient-to-tr from-yellow-200/30 to-orange-200/30 blur-xl transition-transform duration-300 group-hover:scale-110 dark:from-yellow-700/30 dark:to-orange-700/30 lg:h-20 lg:w-20" />
                   </article>
 
                   {/* 技能云图 */}
@@ -159,7 +159,7 @@ export default function Home({ posts }) {
                   {/* 个人信息卡片 */}
                   <div className="group relative overflow-hidden rounded-xl bg-white/70 p-4 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-xl dark:bg-gray-800/70 sm:rounded-2xl sm:p-5 md:p-6 md:shadow-xl md:hover:shadow-2xl lg:p-8">
                     {/* 卡片装饰背景 */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-blue-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-blue-900/20" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-green-100/20 via-transparent to-yellow-100/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:to-yellow-900/20" />
 
                     <div className="relative z-10 space-y-3 sm:space-y-4 md:space-y-6">
                       {/* 标题区域 */}
@@ -179,7 +179,7 @@ export default function Home({ posts }) {
                     </div>
 
                     {/* 装饰元素 - 移动端更小 */}
-                    <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-green-200/30 to-blue-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-blue-800/30 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12 md:-right-4 md:-top-4 md:h-16 md:w-16 md:blur-xl lg:-right-6 lg:-top-6 lg:h-20 lg:w-20" />
+                    <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-green-200/30 to-yellow-200/30 blur-lg transition-all duration-500 group-hover:scale-110 dark:from-green-800/30 dark:to-yellow-800/30 sm:-right-3 sm:-top-3 sm:h-12 sm:w-12 md:-right-4 md:-top-4 md:h-16 md:w-16 md:blur-xl lg:-right-6 lg:-top-6 lg:h-20 lg:w-20" />
                   </div>
 
                   {/* 链接和音乐卡片 */}
@@ -231,14 +231,14 @@ export default function Home({ posts }) {
 
       {/* 标签云部分 */}
       <div className="relative my-12">
-        <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-yellow-100/10 via-blue-100/10 to-rose-100/10 blur-2xl dark:from-yellow-900/10 dark:via-blue-900/10 dark:to-rose-900/10" />
+        <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-green-100/10 via-yellow-100/10 to-orange-100/10 blur-2xl dark:from-green-900/10 dark:via-yellow-900/10 dark:to-orange-900/10" />
         <PopularTags />
       </div>
 
       {/* 博客列表部分 */}
       <div className="relative">
         {/* 背景装饰 */}
-        <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-orange-50/30 via-yellow-50/20 to-red-50/30 blur-xl dark:from-orange-900/10 dark:via-yellow-900/10 dark:to-red-900/10" />
+        <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-green-50/30 via-yellow-50/20 to-orange-50/30 blur-xl dark:from-green-900/10 dark:via-yellow-900/10 dark:to-orange-900/10" />
 
         <div className="relative z-10">
           {/* 标题区域 - 左右布局 */}
@@ -272,7 +272,7 @@ export default function Home({ posts }) {
             <div className="flex flex-col items-start gap-4 md:items-end">
               <Link
                 href="/blog"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-orange-900/30 dark:to-yellow-900/30 dark:text-gray-300"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-yellow-900/30 dark:text-gray-300"
               >
                 <Twemoji emoji="backhand-index-pointing-right" />
                 <span>Discover All Posts</span>
@@ -282,7 +282,7 @@ export default function Home({ posts }) {
               {/* 装饰性统计信息 */}
               <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex items-center gap-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
                   <span>{posts.length} Articles</span>
                 </div>
                 <div className="flex items-center gap-1">
@@ -312,22 +312,22 @@ export default function Home({ posts }) {
                   }`}
                 >
                   {/* 背景装饰 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-50/50 via-yellow-50/30 to-red-50/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-orange-900/20 dark:via-yellow-900/20 dark:to-red-900/20" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-yellow-50/30 to-orange-50/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-green-900/20 dark:via-yellow-900/20 dark:to-orange-900/20" />
 
                   <div className="relative z-10">
                     {/* 日期标签 */}
                     <div className="mb-4 flex items-center justify-between">
                       <time
                         dateTime={date}
-                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange-100 to-yellow-100 px-3 py-1 text-xs font-medium text-gray-700 dark:from-orange-900/50 dark:to-yellow-900/50 dark:text-gray-300"
+                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-3 py-1 text-xs font-medium text-gray-700 dark:from-green-900/50 dark:to-yellow-900/50 dark:text-gray-300"
                       >
-                        <div className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
                         {formatDate(date, siteMetadata.locale)}
                       </time>
 
                       {isFirstPost && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-2 py-1 text-xs font-medium text-blue-700 dark:from-blue-900/50 dark:to-purple-900/50 dark:text-blue-300">
-                          <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
+                        <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-yellow-100 to-orange-100 px-2 py-1 text-xs font-medium text-yellow-700 dark:from-yellow-900/50 dark:to-orange-900/50 dark:text-yellow-300">
+                          <div className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
                           Latest
                         </span>
                       )}
@@ -342,7 +342,7 @@ export default function Home({ posts }) {
                         className="group/title relative text-gray-900 transition-colors duration-300 dark:text-gray-100"
                       >
                         {title}
-                        <span className="absolute -bottom-0.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 transition-transform duration-300 group-hover/title:scale-x-100" />
+                        <span className="absolute -bottom-0.5 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-gradient-to-r from-green-400 to-yellow-400 transition-transform duration-300 group-hover/title:scale-x-100" />
                       </Link>
                     </h2>
 
@@ -369,7 +369,7 @@ export default function Home({ posts }) {
                     <div className="flex items-center justify-between">
                       <Link
                         href={`/blog/${slug}`}
-                        className="group/read inline-flex items-center gap-2 text-sm font-medium text-orange-600 transition-colors duration-200 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                        className="group/read inline-flex items-center gap-2 text-sm font-medium text-green-600 transition-colors duration-200 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300"
                         aria-label={`Read "${title}"`}
                       >
                         Read more
@@ -378,16 +378,16 @@ export default function Home({ posts }) {
 
                       {/* 装饰性元素 */}
                       <div className="flex items-center gap-1">
-                        <div className="h-1 w-1 rounded-full bg-orange-300 opacity-60" />
+                        <div className="h-1 w-1 rounded-full bg-green-300 opacity-60" />
                         <div className="h-1 w-1 rounded-full bg-yellow-300 opacity-60" />
-                        <div className="h-1 w-1 rounded-full bg-red-300 opacity-60" />
+                        <div className="h-1 w-1 rounded-full bg-orange-300 opacity-60" />
                       </div>
                     </div>
                   </div>
 
                   {/* 装饰性光效 */}
-                  <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-orange-200/30 to-yellow-200/30 opacity-0 blur-xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-orange-800/30 dark:to-yellow-800/30" />
-                  <div className="absolute -bottom-2 -left-2 h-6 w-6 rounded-full bg-gradient-to-br from-red-200/30 to-pink-200/30 opacity-0 blur-lg transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-red-800/30 dark:to-pink-800/30" />
+                  <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-gradient-to-br from-green-200/30 to-yellow-200/30 opacity-0 blur-xl transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-green-800/30 dark:to-yellow-800/30" />
+                  <div className="absolute -bottom-2 -left-2 h-6 w-6 rounded-full bg-gradient-to-br from-yellow-200/30 to-orange-200/30 opacity-0 blur-lg transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 dark:from-yellow-800/30 dark:to-orange-800/30" />
                 </article>
               );
             })}
@@ -414,9 +414,9 @@ export default function Home({ posts }) {
         <button
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-50 transform rounded-full bg-gradient-to-r 
-                     from-yellow-400 to-rose-400 p-4 text-white shadow-lg transition-all 
-                     duration-300 hover:scale-110 hover:shadow-xl dark:from-yellow-500 
-                     dark:to-rose-500"
+                     from-green-400 to-yellow-400 p-4 text-white shadow-lg transition-all 
+                     duration-300 hover:scale-110 hover:shadow-xl dark:from-green-500 
+                     dark:to-yellow-500"
           aria-label="Back to Top"
         >
           <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
