@@ -20,8 +20,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
         }}
       >
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-        <div className="absolute inset-0 rounded-xl ring-1 ring-gray-200 transition-all duration-300 group-hover:ring-2 group-hover:ring-blue-400/50 dark:ring-gray-700 dark:group-hover:ring-blue-500/50"></div>
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-green-500/10 via-yellow-500/10 to-orange-500/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+        <div className="absolute inset-0 rounded-xl ring-1 ring-gray-200 transition-all duration-300 group-hover:ring-2 group-hover:ring-green-400/50 dark:ring-gray-700 dark:group-hover:ring-green-500/50"></div>
 
         <div className="relative overflow-hidden">
           <Image
@@ -34,7 +34,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
         </div>
         <div className="relative z-10 flex flex-1 flex-col p-6">
-          <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+          <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight transition-colors duration-300 group-hover:text-green-600 dark:group-hover:text-green-400">
             {href ? (
               <Link href={href} aria-label={`Link to ${title}`}>
                 {title}
@@ -51,7 +51,16 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               return (
                 <span
                   key={index}
-                  className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 transition-colors duration-300 group-hover:bg-blue-100 group-hover:text-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:group-hover:bg-blue-900/30 dark:group-hover:text-blue-300"
+                  className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 transition-colors duration-300 group-hover:bg-green-100 group-hover:text-green-700 dark:bg-gray-700 dark:text-gray-300 dark:group-hover:bg-green-900/30 dark:group-hover:text-green-300"
+                  style={{
+                    background:
+                      index % 3 === 0
+                        ? 'linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(255,255,255,0.8) 100%)'
+                        : index % 3 === 1
+                          ? 'linear-gradient(135deg, rgba(234,179,8,0.1) 0%, rgba(255,255,255,0.8) 100%)'
+                          : 'linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(255,255,255,0.8) 100%)',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
+                  }}
                 >
                   {tool}
                 </span>
@@ -65,7 +74,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               href && (
                 <Link
                   href={href}
-                  className="inline-flex items-center text-base font-medium leading-6 text-blue-600 transition-all duration-300 hover:text-blue-700 group-hover:translate-x-1 dark:text-blue-400 dark:hover:text-blue-300"
+                  className="inline-flex items-center text-base font-medium leading-6 text-green-600 transition-all duration-300 hover:text-green-700 group-hover:translate-x-1 dark:text-green-400 dark:hover:text-green-300"
                   aria-label={`Link to ${title}`}
                 >
                   Learn more

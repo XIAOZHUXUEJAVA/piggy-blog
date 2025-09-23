@@ -73,14 +73,14 @@ function ModernTimelineItem({
   const isWork = type === 'work';
   const colors = {
     work: {
-      dot: 'bg-blue-500',
-      badge: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-      accent: 'from-blue-500 to-purple-500',
-    },
-    education: {
       dot: 'bg-green-500',
       badge: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-      accent: 'from-green-500 to-teal-500',
+      accent: 'from-green-500 to-yellow-500',
+    },
+    education: {
+      dot: 'bg-orange-500',
+      badge: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+      accent: 'from-yellow-500 to-orange-500',
     },
   };
 
@@ -130,7 +130,7 @@ function ModernTimelineItem({
             {title}
           </h3>
 
-          <p className="mb-3 flex items-center gap-2 text-base font-semibold text-blue-600 dark:text-blue-400">
+          <p className="mb-3 flex items-center gap-2 text-base font-semibold text-green-600 dark:text-green-400">
             <span>{isWork ? '🏢' : '🏫'}</span>
             {company}
           </p>
@@ -190,14 +190,14 @@ export default function ModernCareerTimeline() {
       transition={{ duration: 0.8, delay: 0.2 }}
       className="rounded-2xl border border-gray-200/50 bg-white/80 p-8 shadow-lg backdrop-blur-sm dark:border-gray-700/50 dark:bg-gray-800/80"
     >
-      <h2 className="mb-8 flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-2xl font-bold text-transparent">
+      <h2 className="mb-8 flex items-center gap-3 bg-gradient-to-r from-green-600 to-orange-600 bg-clip-text text-2xl font-bold text-transparent">
         <span className="text-2xl">🚀</span>
         职业历程
       </h2>
 
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute bottom-0 left-6 top-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 opacity-30"></div>
+        <div className="absolute bottom-0 left-6 top-0 w-0.5 bg-gradient-to-b from-green-500 via-yellow-500 to-orange-500 opacity-30"></div>
 
         <div className="space-y-8">
           {timelineData.map((item, index) => (
@@ -218,7 +218,7 @@ export default function ModernCareerTimeline() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="mt-8 rounded-xl border border-green-200/50 bg-gradient-to-r from-green-50 to-blue-50 p-4 dark:border-green-700/50 dark:from-green-900/20 dark:to-blue-900/20"
+        className="mt-8 rounded-xl border border-green-200/50 bg-gradient-to-r from-green-50 to-yellow-50 p-4 dark:border-green-700/50 dark:from-green-900/20 dark:to-yellow-900/20"
       >
         <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
           <span className="text-lg">📈</span>

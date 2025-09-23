@@ -34,7 +34,7 @@ export default function AboutProfile({ author }: AboutProfileProps) {
       <div className="rounded-2xl border border-gray-200/50 bg-white/80 p-6 shadow-lg backdrop-blur-sm dark:border-gray-700/50 dark:bg-gray-800/80">
         {/* Avatar */}
         <div className="relative mx-auto mb-6 h-32 w-32">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 p-1">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400 to-yellow-500 p-1">
             <div className="h-full w-full rounded-full bg-white p-1 dark:bg-gray-800">
               <Image
                 src={author.avatar || '/static/images/avatar.png'}
@@ -53,7 +53,7 @@ export default function AboutProfile({ author }: AboutProfileProps) {
         {/* Basic Info */}
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{author.name || 'Anonymous'}</h2>
-          <p className="mt-2 text-lg font-medium text-blue-600 dark:text-blue-400">
+          <p className="mt-2 text-lg font-medium text-green-600 dark:text-green-400">
             {author.occupation || 'Developer'}
           </p>
           {author.company && <p className="text-gray-600 dark:text-gray-300">@ {author.company}</p>}
@@ -70,7 +70,7 @@ export default function AboutProfile({ author }: AboutProfileProps) {
               <Icon icon="mdi:email" className="h-4 w-4 text-gray-400" />
               <Link
                 href={`mailto:${author.email}`}
-                className="transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                className="transition-colors hover:text-green-600 dark:hover:text-green-400"
               >
                 {author.email}
               </Link>
@@ -90,7 +90,7 @@ export default function AboutProfile({ author }: AboutProfileProps) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-lg transition-colors hover:bg-blue-100 dark:bg-gray-700 dark:hover:bg-blue-900/50"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-lg transition-colors hover:bg-green-100 dark:bg-gray-700 dark:hover:bg-green-900/50"
               title={link.name}
             >
               {link.icon}
@@ -107,19 +107,27 @@ export default function AboutProfile({ author }: AboutProfileProps) {
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">50+</div>
+            <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-2xl font-bold text-transparent">
+              50+
+            </div>
             <div className="text-sm text-gray-600 dark:text-gray-300">项目经验</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600 dark:text-green-400">3+</div>
+            <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-2xl font-bold text-transparent">
+              3+
+            </div>
             <div className="text-sm text-gray-600 dark:text-gray-300">工作年限</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">100+</div>
+            <div className="bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-2xl font-bold text-transparent">
+              100+
+            </div>
             <div className="text-sm text-gray-600 dark:text-gray-300">博客文章</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">10k+</div>
+            <div className="bg-gradient-to-r from-green-600 to-orange-600 bg-clip-text text-2xl font-bold text-transparent">
+              10k+
+            </div>
             <div className="text-sm text-gray-600 dark:text-gray-300">代码提交</div>
           </div>
         </div>

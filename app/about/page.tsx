@@ -17,7 +17,7 @@ export default function Page() {
       {/* Main Content */}
       <div className="relative">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/30 to-transparent dark:via-blue-900/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-50/30 to-transparent dark:via-green-900/10"></div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
           <div className="grid gap-16 lg:grid-cols-3 lg:gap-20">

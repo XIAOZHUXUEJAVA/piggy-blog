@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function AboutHero() {
   return (
-    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-900 dark:via-blue-900/20 dark:to-purple-900/20">
+    <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-50 via-yellow-50 to-orange-50 dark:from-gray-900 dark:via-green-900/20 dark:to-yellow-900/20">
       {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-40"
@@ -15,8 +15,8 @@ export default function AboutHero() {
 
       {/* Floating Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -right-32 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-blue-400/20 to-purple-400/20 blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 h-80 w-80 rounded-full bg-gradient-to-br from-indigo-400/20 to-pink-400/20 blur-3xl"></div>
+        <div className="absolute -right-32 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-green-400/20 to-yellow-400/20 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 h-80 w-80 rounded-full bg-gradient-to-br from-yellow-400/20 to-orange-400/20 blur-3xl"></div>
       </div>
 
       <div className="relative  px-4 py-24 sm:px-6 sm:py-32 lg:py-40">
@@ -24,7 +24,7 @@ export default function AboutHero() {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl">
               <span className="block">你好，我是</span>
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-green-600 via-yellow-600 to-orange-600 bg-clip-text text-transparent">
                 XIAOZHU
               </span>
             </h1>
@@ -50,7 +50,7 @@ export default function AboutHero() {
               正在学习新技术
             </div>
             <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm font-medium text-gray-700 shadow-lg backdrop-blur-sm dark:bg-gray-800/80 dark:text-gray-300">
-              <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+              <div className="h-2 w-2 rounded-full bg-orange-500"></div>
               开放合作机会
             </div>
           </motion.div>

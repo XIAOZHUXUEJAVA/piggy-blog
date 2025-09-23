@@ -21,13 +21,19 @@ export default async function Projects() {
   const sideProjects = projectsData.filter(({ type }) => type === 'self');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      {/* Background decorative elements */}
+      <div className="fixed inset-0 overflow-hidden">
+        <div className="absolute -right-40 -top-40 h-80 w-80 rounded-full bg-gradient-to-br from-green-200/30 to-yellow-200/30 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-gradient-to-br from-yellow-200/30 to-orange-200/30 blur-3xl"></div>
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4 py-16">
         {/* Header Section */}
         <div className="mb-16 text-center">
           <div className="inline-block">
-            <h1 className="mb-4 text-5xl font-bold text-blue-600 dark:text-blue-400 md:text-7xl">Projects</h1>
-            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">Projects</h1>
+            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
           <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">{description}</p>
         </div>
