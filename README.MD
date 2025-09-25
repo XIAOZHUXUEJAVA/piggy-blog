@@ -147,3 +147,9 @@ yarn lint         # 代码检查
 ## 感谢
 
 借鉴于开源项目： https://github.com/timlrx/tailwind-nextjs-starter-blog
+
+## 许可证
+
+本项目基于 [MIT License](./LICENSE) 开源协议发布。
+
+Copyright (c) 2025 xiaozhu <https://github.com/XIAOZHUXUEJAVA>
