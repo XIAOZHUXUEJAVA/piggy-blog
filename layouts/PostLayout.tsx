@@ -33,50 +33,59 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
     <SectionContainer>
       <ReadingProgress />
       <ScrollTopAndComment />
-      <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
+      <article className="relative">
+        <div className="xl:divide-y xl:divide-amber-100/50 xl:dark:divide-amber-800/30">
+          <header className="pt-8 xl:pb-8">
+            <div className="space-y-6 text-center">
+              <dl className="space-y-4">
                 <div>
                   <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <dd className="inline-flex items-center rounded-full border border-amber-200/50 bg-gradient-to-r from-amber-50 to-orange-50 px-3 py-1 text-sm font-medium text-amber-700 dark:border-amber-700/30 dark:from-amber-900/20 dark:to-orange-900/20 dark:text-amber-300">
                     <time dateTime={date}>
                       {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
                     </time>
                   </dd>
                 </div>
               </dl>
-              <div>
+              <div className="relative">
                 <PageTitle>{title}</PageTitle>
+                <div className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 transform rounded-full bg-gradient-to-r from-emerald-300 via-amber-300 to-orange-300 opacity-60"></div>
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
-            <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+          <div className="grid-rows-[auto_1fr] divide-y divide-emerald-100/50 pb-8 dark:divide-emerald-800/30 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:divide-y-0">
+            <dl className="pb-10 pt-8 xl:border-b xl:border-emerald-100/50 xl:pt-12 xl:dark:border-emerald-800/30">
               <dt className="sr-only">Authors</dt>
               <dd>
-                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
+                <ul className="flex flex-wrap justify-center gap-6 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-6">
                   {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
+                    <li
+                      className="group flex items-center space-x-3 rounded-xl p-3 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-amber-50/50 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10"
+                      key={author.name}
+                    >
                       {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
+                        <div className="relative">
+                          <Image
+                            src={author.avatar}
+                            width={42}
+                            height={42}
+                            alt="avatar"
+                            className="h-11 w-11 rounded-full ring-2 ring-emerald-200/50 transition-all duration-200 group-hover:ring-amber-300/60 dark:ring-emerald-700/30 dark:group-hover:ring-amber-600/40"
+                          />
+                          <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-gradient-to-br from-emerald-400 to-amber-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
+                        </div>
                       )}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                        <dd className="text-gray-800 transition-colors duration-200 group-hover:text-emerald-700 dark:text-gray-200 dark:group-hover:text-emerald-300">
+                          {author.name}
+                        </dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           {author.twitter && (
                             <Link
                               href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                              className="text-xs text-amber-600 transition-colors duration-200 hover:text-orange-500 dark:text-amber-400 dark:hover:text-orange-300"
                             >
                               {author.twitter.replace('https://twitter.com/', '@').replace('https://x.com/', '@')}
                             </Link>
@@ -88,26 +97,40 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </ul>
               </dd>
             </dl>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
-                {/* <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
+            <div className="divide-y divide-emerald-100/50 dark:divide-emerald-800/30 xl:col-span-3 xl:row-span-2 xl:pb-0">
+              <div className="prose prose-gray max-w-none pb-10 pt-12 dark:prose-invert prose-headings:text-gray-800 prose-p:text-gray-700 prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:text-amber-600 prose-blockquote:border-l-emerald-300 prose-blockquote:text-gray-600 prose-code:bg-orange-50/50 prose-code:text-orange-600 prose-pre:bg-gray-50 prose-pre:text-gray-800 prose-li:text-gray-700 dark:prose-headings:text-gray-100 dark:prose-p:text-gray-300 dark:prose-a:text-emerald-400 dark:hover:prose-a:text-amber-400 dark:prose-blockquote:border-l-emerald-600 dark:prose-blockquote:text-gray-400 dark:prose-code:bg-orange-900/20 dark:prose-code:text-orange-400 dark:prose-pre:bg-gray-800/50 dark:prose-pre:text-gray-200 dark:prose-li:text-gray-300">
+                {children}
+              </div>
+              <div className="flex items-center justify-center pb-8 pt-8">
+                <Link
+                  href={editUrl(filePath)}
+                  className="inline-flex items-center rounded-lg border border-emerald-200/50 bg-gradient-to-r from-emerald-50 to-amber-50 px-4 py-2 text-sm font-medium text-emerald-700 transition-all duration-200 hover:from-emerald-100 hover:to-amber-100 hover:shadow-sm dark:border-emerald-700/30 dark:from-emerald-900/20 dark:to-amber-900/20 dark:text-emerald-300 dark:hover:from-emerald-800/30 dark:hover:to-amber-800/30"
+                >
+                  <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                      fillRule="evenodd"
+                      d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  View on GitHub
                 </Link>
-                {` • `} */}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
               </div>
               {siteMetadata.comments && (
-                <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
-                  <Comments slug={slug} />
+                <div className="pb-8 pt-8 text-center" id="comment">
+                  <div className="mx-auto max-w-4xl">
+                    <Comments slug={slug} />
+                  </div>
                 </div>
               )}
             </div>
             <footer>
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
+              <div className="divide-emerald-100/50 text-sm font-medium leading-5 dark:divide-emerald-800/30 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Tags</h2>
+                  <div className="py-6 xl:py-8">
+                    <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                      Tags
+                    </h2>
                     <div className="flex flex-wrap gap-2">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
@@ -116,37 +139,49 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   </div>
                 )}
                 {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+                  <div className="flex justify-between py-6 xl:block xl:space-y-6 xl:py-8">
                     {prev && prev.path && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <div className="group rounded-xl p-4 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/30 hover:to-amber-50/30 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10">
+                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
                           Previous Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
+                        <div className="text-emerald-600 transition-colors duration-200 hover:text-orange-500 dark:text-emerald-400 dark:hover:text-orange-300">
+                          <Link href={`/${prev.path}`} className="font-medium">
+                            {prev.title}
+                          </Link>
                         </div>
                       </div>
                     )}
                     {next && next.path && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                      <div className="group rounded-xl p-4 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/30 hover:to-amber-50/30 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10">
+                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
                           Next Article
                         </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
+                        <div className="text-emerald-600 transition-colors duration-200 hover:text-orange-500 dark:text-emerald-400 dark:hover:text-orange-300">
+                          <Link href={`/${next.path}`} className="font-medium">
+                            {next.title}
+                          </Link>
                         </div>
                       </div>
                     )}
                   </div>
                 )}
               </div>
-              <div className="pt-4 xl:pt-8">
+              <div className="pt-6 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  className="inline-flex items-center rounded-lg px-4 py-2 text-sm font-medium text-emerald-600 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-amber-50/50 hover:text-orange-500 dark:text-emerald-400 dark:hover:from-emerald-900/20 dark:hover:to-amber-900/20 dark:hover:text-orange-300"
                   aria-label="Back to the blog"
                 >
-                  &larr; Back to the blog
+                  <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                    />
+                  </svg>
+                  Back to the blog
                 </Link>
               </div>
             </footer>
