@@ -69,6 +69,13 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/personal-portfolio',
     builtWith: ['Nuxt.js', 'Tailwind', 'Typescript'],
   },
+{
+    type: 'self',
+    title: 'Go Manage Starter Template',
+    imgSrc: '/static/images/projects/go-manage.png',
+    repo: 'XIAOZHUXUEJAVA/go-manage-starter',
+    builtWith: ['Go', 'Tailwind', 'Typescript'],
+  },
 ];
 
 export default projectsData;
