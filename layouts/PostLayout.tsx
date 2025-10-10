@@ -97,32 +97,34 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </ul>
               </dd>
             </dl>
-            <div className="divide-y divide-emerald-100/50 dark:divide-emerald-800/30 xl:col-span-3 xl:row-span-2 xl:pb-0">
+            <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose prose-gray max-w-none pb-10 pt-12 dark:prose-invert prose-headings:text-gray-800 prose-p:text-gray-700 prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:text-amber-600 prose-blockquote:border-l-emerald-300 prose-blockquote:text-gray-600 prose-code:bg-orange-50/50 prose-code:text-orange-600 prose-pre:bg-gray-50 prose-pre:text-gray-800 prose-li:text-gray-700 dark:prose-headings:text-gray-100 dark:prose-p:text-gray-300 dark:prose-a:text-emerald-400 dark:hover:prose-a:text-amber-400 dark:prose-blockquote:border-l-emerald-600 dark:prose-blockquote:text-gray-400 dark:prose-code:bg-orange-900/20 dark:prose-code:text-orange-400 dark:prose-pre:bg-gray-800/50 dark:prose-pre:text-gray-200 dark:prose-li:text-gray-300">
                 {children}
               </div>
-              <div className="flex items-center justify-center pb-8 pt-8">
-                <Link
-                  href={editUrl(filePath)}
-                  className="inline-flex items-center rounded-lg border border-emerald-200/50 bg-gradient-to-r from-emerald-50 to-amber-50 px-4 py-2 text-sm font-medium text-emerald-700 transition-all duration-200 hover:from-emerald-100 hover:to-amber-100 hover:shadow-sm dark:border-emerald-700/30 dark:from-emerald-900/20 dark:to-amber-900/20 dark:text-emerald-300 dark:hover:from-emerald-800/30 dark:hover:to-amber-800/30"
-                >
-                  <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  View on GitHub
-                </Link>
-              </div>
-              {siteMetadata.comments && (
-                <div className="pb-8 pt-8 text-center" id="comment">
-                  <div className="mx-auto max-w-4xl">
-                    <Comments slug={slug} />
-                  </div>
+              <div className="border-t border-emerald-100/50 py-8 dark:border-emerald-800/30">
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <Link
+                    href={editUrl(filePath)}
+                    className="inline-flex items-center rounded-lg border border-emerald-200/50 bg-gradient-to-r from-emerald-50 to-amber-50 px-4 py-2 text-sm font-medium text-emerald-700 transition-all duration-200 hover:from-emerald-100 hover:to-amber-100 hover:shadow-sm dark:border-emerald-700/30 dark:from-emerald-900/20 dark:to-amber-900/20 dark:text-emerald-300 dark:hover:from-emerald-800/30 dark:hover:to-amber-800/30"
+                  >
+                    <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    View on GitHub
+                  </Link>
+                  {siteMetadata.comments && (
+                    <div className="w-full text-center" id="comment">
+                      <div className="mx-auto max-w-4xl">
+                        <Comments slug={slug} />
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
             <footer>
               <div className="divide-emerald-100/50 text-sm font-medium leading-5 dark:divide-emerald-800/30 xl:col-start-1 xl:row-start-2 xl:divide-y">

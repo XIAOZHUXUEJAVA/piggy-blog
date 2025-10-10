@@ -78,7 +78,20 @@ go version go1.25.1 linux/amd64
 
 ---
 
-## 🧪 6. 编写 Hello World 程序
+## 🚀 6. 配置 Go 代理（推荐）
+
+为了加速 Go 模块下载，建议配置国内代理：
+
+```
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOSUMDB=sum.golang.google.cn
+```
+
+这样可以显著提升包下载速度。
+
+---
+
+## 🧪 7. 编写 Hello World 程序
 
 1. 创建项目目录：
 
