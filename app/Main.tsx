@@ -242,9 +242,9 @@ export default function Home({ posts }) {
 
         <div className="relative z-10">
           {/* 标题区域 - 左右布局 */}
-          <div className="flex flex-col items-start justify-between gap-6 py-8 md:flex-row md:items-center">
+          <div className="flex flex-col items-center justify-between gap-8 py-8 lg:flex-row lg:items-end">
             {/* 左侧标题内容 */}
-            <div className="flex-1">
+            <div className="flex-1 text-center lg:text-left">
               {/* <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-2 shadow-lg backdrop-blur-sm dark:bg-gray-800/60">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-orange-400" />
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Latest Articles</span>
@@ -263,13 +263,13 @@ export default function Home({ posts }) {
                 </RoughNotation>
               </h1>
 
-              <p className="max-w-xl text-lg leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 lg:max-w-none">
                 {siteMetadata.description}
               </p>
             </div>
 
             {/* 右侧查看更多按钮和装饰 */}
-            <div className="flex flex-col items-start gap-4 md:items-end">
+            <div className="flex flex-col items-center gap-4 lg:items-end">
               <Link
                 href="/blog"
                 className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-yellow-900/30 dark:text-gray-300"
