@@ -212,7 +212,7 @@ export default function Home({ posts }) {
                         <div className="mb-2 flex items-center gap-2 sm:mb-3 md:mb-4">
                           <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-gradient-to-r from-green-400 to-teal-400 sm:h-2 sm:w-2" />
                           <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 sm:text-base md:text-lg">
-                            Now Playing
+                            Recommended Music
                           </h3>
                         </div>
                         <SmartMusicWidget />
