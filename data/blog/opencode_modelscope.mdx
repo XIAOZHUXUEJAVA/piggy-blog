@@ -1,0 +1,69 @@
+---
+title: OpenCode 集成 ModelScope
+date: '2025-10-16'
+tags: ['wsl2', 'linux', 'ai']
+draft: false
+summary: OpenCode with ModelScope
+---
+
+> 如果你还没有安装 **OpenCode**，请先参考 👉 [OpenCode 安装教程（PiggyBlog）](https://piggyblog.xyz/blog/opencode_kimi_k2)
+
+---
+
+## 📁 一、配置文件结构
+
+```bash
+vim  ~/.config/opencode/opencode.json
+```
+
+OpenCode 使用根目录下的 **`opencode.json`** 文件来配置 AI 模型提供者及其相关参数。
+
+---
+
+## ⚙️ 二、ModelScope 集成示例
+
+可以使用如下 `opencode.json` 配置文件：
+
+```
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "one-dark",
+  "provider": {
+    "my-model": {
+      "npm": "@ai-sdk/anthropic",
+      "options": {
+        "baseURL": "https://api-inference.modelscope.cn/v1",
+        "apiKey": "你的 ModelScope API 密钥"
+      },
+      "models": {
+        "deepseek-ai/DeepSeek-V3.2-Exp": {}
+      }
+    }
+  }
+}
+```
+
+---
+
+## 🧩 三、配置字段说明
+
+| 字段                  | 说明                                                                        |
+| --------------------- | --------------------------------------------------------------------------- |
+| **`theme`**           | 界面主题，使用 `"one-dark"`，视觉效果良好。                                 |
+| **`provider`**        | 定义 AI 模型提供者信息。                                                    |
+| **`my-model`**        | 自定义提供者名称（可根据项目需要修改）。                                    |
+| **`npm`**             | 指定 SDK 包名称，这里使用 `@ai-sdk/anthropic`。                             |
+| **`options.baseURL`** | ModelScope 推理 API 地址，固定为 `https://api-inference.modelscope.cn/v1`。 |
+| **`options.apiKey`**  | 你的 ModelScope API 密钥（登录官网获取）。                                  |
+| **`models`**          | 定义可用的模型，这里示例为 `deepseek-ai/DeepSeek-V3.2-Exp`。                |
+
+---
+
+## 🔑 四、获取 ModelScope API 密钥步骤
+
+1. 访问 [ModelScope 官网](https://modelscope.cn)
+2. 注册并登录账户
+3. 在 **个人中心 → API Key 管理** 页面生成新的密钥，可以使用长期的，这样API Key就不会过期了
+4. 将密钥复制并替换到上方配置文件中的 `"apiKey"` 字段
+5. 若提示权限不足，请确保 **绑定了阿里云账号**，这一步是非常重要的，如果不绑定可能会报错
+6. ModelScope 每天有 2000 次额度的api调用机会，应对正常代码、翻译需求还是不错的
