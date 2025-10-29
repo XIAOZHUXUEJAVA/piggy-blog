@@ -28,10 +28,24 @@ const projectsData: Project[] = [
   },
   {
     type: 'self',
+    title: 'Go Manage Starter Template',
+    imgSrc: '/static/images/projects/go-manage.png',
+    repo: 'XIAOZHUXUEJAVA/go-react-admin',
+    builtWith: ['Go', 'Tailwind', 'Typescript'],
+  },
+  {
+    type: 'self',
     title: 'Go React Web Monitor',
     imgSrc: '/static/images/projects/go-react-monitor-compose.png',
     repo: 'XIAOZHUXUEJAVA/go-react-monitor-compose',
     builtWith: ['Go', 'React', 'Typescript'],
+  },
+  {
+    type: 'self',
+    title: 'Personal Portfolio',
+    imgSrc: '/static/images/projects/personal-portfolio.png',
+    repo: 'XIAOZHUXUEJAVA/personal-portfolio',
+    builtWith: ['Nuxt.js', 'Tailwind', 'Typescript'],
   },
   {
     type: 'self',
@@ -61,20 +75,6 @@ const projectsData: Project[] = [
     imgSrc: '/static/images/projects/magic-game-ranking.png',
     repo: 'XIAOZHUXUEJAVA/magic-game-ranking',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
-  },
-  {
-    type: 'self',
-    title: 'Personal Portfolio',
-    imgSrc: '/static/images/projects/personal-portfolio.png',
-    repo: 'XIAOZHUXUEJAVA/personal-portfolio',
-    builtWith: ['Nuxt.js', 'Tailwind', 'Typescript'],
-  },
-{
-    type: 'self',
-    title: 'Go Manage Starter Template',
-    imgSrc: '/static/images/projects/go-manage.png',
-    repo: 'XIAOZHUXUEJAVA/go-manage-starter',
-    builtWith: ['Go', 'Tailwind', 'Typescript'],
   },
 ];
 
