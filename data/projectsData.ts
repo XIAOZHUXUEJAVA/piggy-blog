@@ -76,6 +76,13 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/magic-game-ranking',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
   },
+  {
+    type: 'self',
+    title: 'Build Times',
+    imgSrc: '/static/images/projects/buildtimes.png',
+    repo: 'XIAOZHUXUEJAVA/buildtimes-next',
+    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
+  },
 ];
 
 export default projectsData;
