@@ -55,30 +55,22 @@ export default async function Page() {
                     aria-label={`View articles tagged with ${tag}`}
                   >
                     <div
-                      className="relative overflow-hidden rounded-2xl border border-white/20 p-6 shadow-lg backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl"
+                      className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/80 p-6 shadow-lg backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl dark:border-gray-600/30 dark:bg-gray-800/80 dark:shadow-gray-900/20"
                       style={{
-                        background: isPopular
-                          ? 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)'
-                          : isMedium
-                            ? 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.7) 100%)'
-                            : 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.6) 100%)',
-                        boxShadow: isPopular
-                          ? '0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)'
-                          : '0 4px 16px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6)',
                         animationDelay: `${index * 50}ms`,
                       }}
                     >
                       {/* 内部光泽效果 */}
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-60"></div>
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 via-transparent to-transparent opacity-60 dark:from-gray-600/30"></div>
 
                       {/* 悬浮时的光效 */}
-                      <div className="absolute inset-0 -translate-x-full transform rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity transition-transform duration-1000 duration-500 group-hover:translate-x-full group-hover:opacity-100"></div>
+                      <div className="absolute inset-0 -translate-x-full transform rounded-2xl bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity transition-transform duration-1000 duration-500 group-hover:translate-x-full group-hover:opacity-100 dark:via-gray-400/20"></div>
 
                       {/* 装饰性元素 */}
-                      <div className="absolute right-4 top-4 opacity-20">
+                      <div className="absolute right-4 top-4 opacity-20 dark:opacity-40">
                         <div
                           className={`h-2 w-2 rounded-full ${
-                            isPopular ? 'bg-green-500' : isMedium ? 'bg-yellow-500' : 'bg-gray-400'
+                            isPopular ? 'bg-green-500' : isMedium ? 'bg-yellow-500' : 'bg-gray-400 dark:bg-gray-500'
                           }`}
                         ></div>
                       </div>
@@ -105,7 +97,7 @@ export default async function Page() {
                                 ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
                                 : isMedium
                                   ? 'bg-gradient-to-r from-yellow-400 to-orange-400 text-white shadow-md'
-                                  : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                                  : 'bg-gray-200 text-gray-700 shadow-sm dark:bg-gray-600 dark:text-gray-200'
                             }`}
                           >
                             {count}
@@ -127,7 +119,7 @@ export default async function Page() {
                             ? 'bg-gradient-to-r from-green-500 to-yellow-500'
                             : isMedium
                               ? 'bg-gradient-to-r from-yellow-400 to-orange-400'
-                              : 'bg-gradient-to-r from-gray-300 to-gray-400'
+                              : 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-500'
                         } opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
                       ></div>
                     </div>
@@ -139,28 +131,22 @@ export default async function Page() {
         </div>
 
         {/* 统计信息卡片 */}
-        <div className="mt-20 flex justify-center">
-          <div
-            className="inline-flex items-center space-x-8 rounded-3xl border border-white/30 p-8 shadow-2xl backdrop-blur-xl"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)',
-            }}
-          >
-            {/* 内部光泽 */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/50 via-transparent to-transparent opacity-60"></div>
+        <div className="mt-20 text-center">
+          <div className="relative inline-flex items-center rounded-2xl bg-white/90 shadow-2xl backdrop-blur-xl dark:bg-gray-800/90">
+            {/* 简化的边框效果 */}
+            <div className="absolute inset-0 rounded-2xl border border-white/20 dark:border-gray-600/30"></div>
 
-            <div className="relative z-10 text-center">
-              <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-4xl font-bold text-transparent">
+            <div className="relative z-10 px-8 py-6 text-center">
+              <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-3xl font-bold text-transparent">
                 {tagKeys.length}
               </div>
               <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Tags</div>
             </div>
 
-            <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+            <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-600"></div>
 
-            <div className="relative z-10 text-center">
-              <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-4xl font-bold text-transparent">
+            <div className="relative z-10 px-8 py-6 text-center">
+              <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
                 {Object.values(tagCounts).reduce((sum, count) => sum + count, 0)}
               </div>
               <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Articles</div>

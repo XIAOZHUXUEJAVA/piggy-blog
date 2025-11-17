@@ -385,14 +385,9 @@ export default function ModernListLayout({
 
         {/* Stats Section */}
         <div className="mt-20 text-center">
-          <div
-            className="inline-flex items-center rounded-2xl border border-gray-200/50 bg-white/80 shadow-lg backdrop-blur-sm dark:border-gray-700/50 dark:bg-gray-800/80"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.8) 100%)',
-              boxShadow: '0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)',
-            }}
-          >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/50 via-transparent to-transparent opacity-60"></div>
+          <div className="relative inline-flex items-center rounded-2xl bg-white/90 shadow-2xl backdrop-blur-xl dark:bg-gray-800/90">
+            {/* 简化的边框效果 */}
+            <div className="absolute inset-0 rounded-2xl border border-white/20 dark:border-gray-600/30"></div>
 
             {/* Total Posts */}
             <div className="relative z-10 px-8 py-6 text-center">
@@ -403,7 +398,7 @@ export default function ModernListLayout({
             </div>
 
             {/* Divider */}
-            <div className="h-16 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+            <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-600"></div>
 
             {/* Topics */}
             <div className="relative z-10 px-8 py-6 text-center">
