@@ -200,7 +200,7 @@ module.exports = {
             'ul li::marker': {
               backgroundColor: theme('colors.gray.400'),
             },
-            strong: { color: theme('colors.gray.100') },
+            strong: { color: theme('colors.white') },
             thead: {
               th: {
                 color: theme('colors.gray.100'),
@@ -209,6 +209,9 @@ module.exports = {
             tbody: {
               tr: {
                 borderBottomColor: theme('colors.gray.700'),
+              },
+              td: {
+                color: theme('colors.gray.200'),
               },
             },
             blockquote: {
