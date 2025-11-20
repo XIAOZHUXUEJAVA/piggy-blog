@@ -83,6 +83,13 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/buildtimes-next',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
   },
+  {
+    type: 'self',
+    title: 'Build Times',
+    imgSrc: '/static/images/projects/spring-piggy-blog.png',
+    repo: 'XIAOZHUXUEJAVA/spring-piggy-blog',
+    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
+  },
 ];
 
 export default projectsData;
