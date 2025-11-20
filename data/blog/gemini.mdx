@@ -1,0 +1,142 @@
+---
+title: Gemini 3 Pro AI 复刻实验
+date: '2025-11-20'
+tags: ['ai', 'gemini']
+draft: false
+summary: 探索 Gemini 3 Pro
+---
+
+使用 **Google Antigravity + Gemini 3 Pro** 进行 UI 复刻的完整测试记录，需要安装谷歌反重力IDE Antigravity，以及一个谷歌账号用于登录Antigravity，登录的时候若认证回调失败，请开启代理软件的TUN模式。
+
+## 🎯 项目目标
+
+本项目是一次 **AI 辅助开发能力的实验**，通过让 AI 根据截图完整复刻 [yysuni.com](https://www.yysuni.com/) 的主页设计，来测试：
+
+- 🤖 **Gemini 3 Pro** 的图像识别和代码生成能力
+- 🛠️ **Google Antigravity IDE** 的智能编码辅助功能
+- 🎨 AI 对设计细节的理解和还原精度
+
+**声明**：原网站设计归原作者所有，本项目仅用于 AI 能力测试和学习目的。
+
+---
+
+## 📸 AI 复刻流程
+
+### 第一步：项目初始化
+
+使用 Next.js 官方脚手架创建项目（这一步很通用）：
+
+```bash
+npx create-next-app@latest gemini3pro-copy-test --typescript --tailwind --app --no-src-dir --import-alias "@/*"
+```
+
+### 第二步：向 AI 提供复刻提示词
+
+将以下提示词 + 原网站截图发送给 Gemini 3 Pro （注意， 使用Fast模式 配合 Gemini 3 Pro（High））：
+
+```
+请根据我提供的图片，使用我已经初始化好的项目结构，
+严格按照 Next.js 16（App Router）+ TypeScript + Tailwind CSS 4 的最佳实践，
+完整复刻同款界面。
+
+要求如下：
+
+1. 技术栈统一使用：
+   - Next.js 16（App Router）
+   - TypeScript
+   - Tailwind CSS
+   - 遵守组件拆分、布局结构、语义化 HTML 最佳实践
+
+2. 你需要输出：
+   - 完整的项目结构（哪些文件放在哪些目录）
+   - 所需的布局文件（layout.tsx）
+   - 页面文件（page.tsx）
+   - 可复用组件（components）的代码
+   - 工具类
+   - Tailwind 配置
+   - 任何资源引用（如图标、颜色、阴影、圆角、间距等）
+
+3. 风格要求：
+   - 完全复刻图片 UI，做到像素级相似
+   - 保持 Tailwind 命名风格整洁
+   - 组件拆分合理，避免过长文件
+   - 响应式设计，适配移动端
+   - 保留 Next.js 最佳实践（例如 Metadata、Image 优化）
+```
+
+### 第三步：AI 生成代码
+
+AI 会让你安装一些必要的依赖库：
+
+```bash
+npm install lucide-react clsx tailwind-merge date-fns
+```
+
+然后就是等待 AI 生成代码，它会自动创建所有需要的组件和页面。
+
+### 第四步：迭代优化
+
+初版可以复刻出大概的样子，但你还需要：
+
+- 📸 继续截图细节部分，比如说截图日历部分，贴给AI
+- 💬 用文字说明需要调整的地方
+- 🔄 与 AI 多轮对话，逐步优化
+- ⚠️ 最重要的是，每当实现一个小功能，请你及时commit，因为AI随时会将你的代码改崩掉，而且IDE自带的revert功能不一定好用。
+
+---
+
+## 📝 实验总结
+
+通过这次实验，验证了 **Gemini 3 Pro + Antigravity** 在 UI 复刻方面的能力：
+
+**个人感受**：比 GPT-4o、Claude 4.5 优秀一些，但并没有达到完全像素级复刻的程度。
+
+**优势**：
+
+- ✅ 图像识别较为准确，但没有很准确识别布局，复杂的布局很难识别，项目复刻过程中尝试多次复刻布局，均失败。
+- ✅ 代码质量高，符合最佳实践
+- ✅ 组件拆分合理
+- ✅ 迭代响应中等，避免高峰期的时候速度很快
+
+**不足**：
+
+- ⚠️ 细节还原度并非没有想象的优秀，仍有一定的差距
+- ⚠️ 仍然需要多轮对话调整，和传统AI Model、AI IDE类似
+- ⚠️ 经常Error，可能目前使用的人较多
+
+---
+
+## 🚀 本项目快速开始
+
+### 克隆项目
+
+```bash
+https://github.com/XIAOZHUXUEJAVA/spring-piggy-blog.git
+cd spring-piggy-blog
+```
+
+### 安装依赖
+
+```bash
+npm install
+```
+
+### 启动开发服务器
+
+```bash
+npm run dev
+```
+
+访问 [http://localhost:3000](http://localhost:3000) 查看复刻效果。
+
+### 构建生产版本
+
+```bash
+npm run build
+```
+
+---
+
+##
+
+本项目仅用于 AI 能力测试和学习目的。原型设计版权归原作者所有。
