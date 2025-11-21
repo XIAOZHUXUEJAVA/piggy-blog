@@ -85,7 +85,7 @@ const projectsData: Project[] = [
   },
   {
     type: 'self',
-    title: 'Build Times',
+    title: 'Spring Piggy Blog Copy',
     imgSrc: '/static/images/projects/spring-piggy-blog.png',
     repo: 'XIAOZHUXUEJAVA/spring-piggy-blog',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
