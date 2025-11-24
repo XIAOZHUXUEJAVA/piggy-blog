@@ -6,35 +6,44 @@ draft: false
 summary: 探索 Gemini 3 Pro
 ---
 
-使用 **Google Antigravity + Gemini 3 Pro** 进行 UI 复刻的完整测试记录，需要安装谷歌反重力IDE Antigravity，以及一个谷歌账号用于登录Antigravity，登录的时候若认证回调失败，请开启代理软件的TUN模式。
+## 项目背景
 
-## 🎯 项目目标
+最近新出的Gemini 3 Pro号称复刻大师，我想测试一下 Gemini 3 Pro 在前端界面复刻方面的实际能力。做法是让 AI 根据截图重新还原网站 [yysuni.com](https://www.yysuni.com/) 的首页设计，看看它到底能做到什么程度。
 
-本项目是一次 **AI 辅助开发能力的实验**，通过让 AI 根据截图完整复刻 [yysuni.com](https://www.yysuni.com/) 的主页设计，来测试：
+整个过程使用了：
 
-- 🤖 **Gemini 3 Pro** 的图像识别和代码生成能力
-- 🛠️ **Google Antigravity IDE** 的智能编码辅助功能
-- 🎨 AI 对设计细节的理解和还原精度
+- Gemini 3 Pro（谷歌最近新发布的AI Model）
+- Google Antigravity IDE（谷歌最近新发布的 AI IDE）
+- 一个谷歌账号用于登录 Antigravity
+  登录时如果出现认证回调失败，可以尝试开启代理软件的 TUN 模式。
 
-**声明**：原网站设计归原作者所有，本项目仅用于 AI 能力测试和学习目的。
+原站地址：[https://www.yysuni.com/](https://www.yysuni.com/)
+
+复刻结果：[https://spring-piggy-blog.netlify.app/](https://spring-piggy-blog.netlify.app/)
 
 ---
 
-## 📸 AI 复刻流程
+## 复刻流程记录
 
 ### 第一步：项目初始化
 
-使用 Next.js 官方脚手架创建项目（这一步很通用）：
+使用 Next.js 创建项目：
 
 ```bash
 npx create-next-app@latest gemini3pro-copy-test --typescript --tailwind --app --no-src-dir --import-alias "@/*"
 ```
 
-### 第二步：向 AI 提供复刻提示词
+### 第二步：向 AI 提供提示词
 
-将以下提示词 + 原网站截图发送给 Gemini 3 Pro （注意， 使用Fast模式 配合 Gemini 3 Pro（High））：
+将网站截图交给 Gemini 3 Pro，并补充提示，例如：
 
 ```
+请基于我当前的项目结构，
+使用 Next.js 16（App Router）+ TypeScript + Tailwind CSS4，
+复刻截图中的界面设计。
+
+要求：
+
 请根据我提供的图片，使用我已经初始化好的项目结构，
 严格按照 Next.js 16（App Router）+ TypeScript + Tailwind CSS 4 的最佳实践，
 完整复刻同款界面。
@@ -64,49 +73,53 @@ npx create-next-app@latest gemini3pro-copy-test --typescript --tailwind --app --
    - 保留 Next.js 最佳实践（例如 Metadata、Image 优化）
 ```
 
-### 第三步：AI 生成代码
+建议使用 Fast 模式搭配 Gemini 3 Pro（High）。
 
-AI 会让你安装一些必要的依赖库：
+### 第三步：AI 生成初版代码
+
+AI 会提示安装必要依赖：
 
 ```bash
 npm install lucide-react clsx tailwind-merge date-fns
 ```
 
-然后就是等待 AI 生成代码，它会自动创建所有需要的组件和页面。
+随后会生成页面结构、组件以及布局代码，项目基本可以运行。
 
-### 第四步：迭代优化
+### 第四步：持续优化
 
-初版可以复刻出大概的样子，但你还需要：
+AI 一次性很难做到完全一致，需要你：
 
-- 📸 继续截图细节部分，比如说截图日历部分，贴给AI
-- 💬 用文字说明需要调整的地方
-- 🔄 与 AI 多轮对话，逐步优化
-- ⚠️ 最重要的是，每当实现一个小功能，请你及时commit，因为AI随时会将你的代码改崩掉，而且IDE自带的revert功能不一定好用。
+- 继续截图细节部分给它
 
----
+- 描述哪些地方需要微调
 
-## 📝 实验总结
+- 多轮对话迭代
 
-通过这次实验，验证了 **Gemini 3 Pro + Antigravity** 在 UI 复刻方面的能力：
-
-**个人感受**：比 GPT-4o、Claude 4.5 优秀一些，但并没有达到完全像素级复刻的程度。
-
-**优势**：
-
-- ✅ 图像识别较为准确，但没有很准确识别布局，复杂的布局很难识别，项目复刻过程中尝试多次复刻布局，均失败。
-- ✅ 代码质量高，符合最佳实践
-- ✅ 组件拆分合理
-- ✅ 迭代响应中等，避免高峰期的时候速度很快
-
-**不足**：
-
-- ⚠️ 细节还原度并非没有想象的优秀，仍有一定的差距
-- ⚠️ 仍然需要多轮对话调整，和传统AI Model、AI IDE类似
-- ⚠️ 经常Error，可能目前使用的人较多
+⚠️ 非常重要：
+每完成一点小功能就提交一次代码。Antigravity 偶尔会给出大改动，甚至改崩项目，回退功能也不太稳定。
 
 ---
 
-## 🚀 本项目快速开始
+## 使用体验总结
+
+#### 优点
+
+- 图像识别能力不错，但复杂布局仍存在理解偏差
+- 生成代码整体规范
+- 组件划分比较合理
+- 响应速度较快（避开高峰期时表现更明显）
+
+#### 不足
+
+- 细节还原度与预期有差距
+- 需要大量人工指导与调整
+- 稳定性一般，偶尔会出现报错
+
+整体来看，在 UI 复刻方面相比 GPT-4o 和 Claude 4.5 略有优势，但还远未达到“给一张图就能完整复刻”的程度。
+
+---
+
+## 项目运行方式
 
 ### 克隆项目
 
@@ -121,13 +134,13 @@ cd spring-piggy-blog
 npm install
 ```
 
-### 启动开发服务器
+### 启动开发环境
 
 ```bash
 npm run dev
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看复刻效果。
+打开 [http://localhost:3000](http://localhost:3000) 查看效果。
 
 ### 构建生产版本
 
@@ -137,6 +150,6 @@ npm run build
 
 ---
 
-##
+## 结尾说明
 
-本项目仅用于 AI 能力测试和学习目的。原型设计版权归原作者所有。
+本项目仅用于学习和技术验证，原网站设计版权归原作者所有。
