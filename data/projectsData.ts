@@ -90,6 +90,13 @@ const projectsData: Project[] = [
     repo: 'XIAOZHUXUEJAVA/spring-piggy-blog',
     builtWith: ['Next.js', 'Tailwind', 'Typescript'],
   },
+  {
+    type: 'self',
+    title: 'Hand Draw NoteBook',
+    imgSrc: '/static/images/projects/hand-draw-notebook.png',
+    repo: 'XIAOZHUXUEJAVA/hand-drawn-notebook',
+    builtWith: ['Next.js', 'Tailwind', 'Typescript'],
+  },
 ];
 
 export default projectsData;
