@@ -1,12 +1,3 @@
-export interface SpotifyNowPlayingData {
-  isPlaying: boolean;
-  songUrl?: string;
-  title?: string;
-  artist?: string;
-  album?: string;
-  albumImageUrl?: string;
-}
-
 export interface GithubRepository {
   stargazerCount: number;
   description: string;
@@ -20,10 +11,6 @@ export interface GithubRepository {
   url: string;
   forkCount: number;
   repositoryTopics: string[];
-}
-
-export interface ViewApiResponse {
-  total: string;
 }
 
 export interface TagCounts {

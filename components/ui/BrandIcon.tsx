@@ -10,10 +10,8 @@ import Prisma from 'public/static/icons/prisma.svg';
 import Railway from 'public/static/icons/railway.svg';
 import React from 'public/static/icons/react.svg';
 import Remix from 'public/static/icons/remix.svg';
-import Spotify from 'public/static/icons/spotify.svg';
 import TailwindCSS from 'public/static/icons/tailwind.svg';
 import Typescript from 'public/static/icons/typescript.svg';
-import Umami from 'public/static/icons/umami.svg';
 import Vercel from 'public/static/icons/vercel.svg';
 import NestJS from 'public/static/icons/nestjs.svg';
 import Docker from 'public/static/icons/docker.svg';
@@ -36,10 +34,8 @@ export const BrandIconsMap = {
   NextJS,
   TailwindCSS,
   Prisma,
-  Umami,
   Vercel,
   Railway,
-  Spotify,
   NestJS,
   Docker,
   Postgres,

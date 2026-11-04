@@ -13,7 +13,6 @@
 - **部署**: Vercel / Netlify
 - **评论系统**: Giscus
 - **搜索**: Kbar
-- **分析**: Umami Analytics
 
 ## 功能特性
 
@@ -139,10 +138,6 @@ yarn lint         # 代码检查
 ### 评论系统不显示
 
 确保 Giscus 相关的环境变量已正确配置，并且 GitHub 仓库已启用 Discussions 功能。
-
-### Spotify
-
-确保自己的 Spotify 环境变量配置正确，否则无法播放音乐。
 
 ## 感谢
 

@@ -36,7 +36,6 @@ const ProfileCardInfo = () => {
             href={siteMetadata.github}
             rel="noreferrer"
             className="flex items-center text-sm hover:underline"
-            data-umami-event="profile-card-github"
           >
             <Github size={20} strokeWidth={1} />
             <span className="ml-px text-gray-500">/</span>
@@ -48,7 +47,6 @@ const ProfileCardInfo = () => {
             href={siteMetadata.linkedin}
             rel="noreferrer"
             className="flex items-center text-sm hover:underline"
-            data-umami-event="profile-card-linkedin"
           >
             <Linkedin size={20} strokeWidth={1} />
             <span className="ml-px text-gray-500">/</span>
@@ -60,7 +58,6 @@ const ProfileCardInfo = () => {
             href={siteMetadata.linkedin}
             rel="noreferrer"
             className="flex items-center text-sm hover:underline"
-            data-umami-event="profile-card-facebook"
           >
             <Facebook size={20} strokeWidth={1} />
             <span className="ml-px text-gray-500">/</span>

@@ -34,7 +34,6 @@ export default function GithubRepo({ repo }: { repo: GithubRepository }) {
               target="_blank"
               rel="noreferrer"
               className="flex items-center"
-              data-umami-event="project-demo"
             >
               <ExternalLink size={20} strokeWidth={1} />
             </a>
@@ -48,7 +47,6 @@ export default function GithubRepo({ repo }: { repo: GithubRepository }) {
           target="_blank"
           rel="noreferrer"
           className="flex items-center space-x-1"
-          data-umami-event="project-repo"
         >
           <Github size={20} strokeWidth={1} />
         </a>

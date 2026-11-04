@@ -257,7 +257,7 @@ export default function Home({ posts }) {
             aria-label="All posts"
           >
             <Twemoji emoji="backhand-index-pointing-right" />
-            <span data-umami-event="home-link-blog">All Posts</span>
+            <span>All Posts</span>
             <div className="transition-transform duration-200 group-hover:translate-x-1">→</div>
           </Link>
         </div>

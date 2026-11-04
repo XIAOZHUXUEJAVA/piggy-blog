@@ -6,7 +6,6 @@ import 'remark-github-blockquote-alert/alert.css';
 
 import { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
-// import { Analytics, AnalyticsConfig } from 'pliny/analytics';
 
 import siteMetadata from '@/data/siteMetadata';
 

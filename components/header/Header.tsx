@@ -14,7 +14,6 @@ import Logo from 'public/static/images/logo.svg';
 import MobileNav from './MobileNav';
 import ThemeSwitch from './ThemeSwitch';
 // import SearchButton from './SearchButton';
-import AnalyticsLink from './AnalyticsLink';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = memo(() => {
@@ -57,7 +56,6 @@ const Header = memo(() => {
               <Link
                 key={link.key}
                 href={link.href}
-                data-umami-event={`nav-${link.href.replace('/', '')}`}
                 onMouseEnter={() => handleMouseEnter(link.href)}
                 className={clsx(
                   'group relative mx-2 rounded-lg px-3 py-2 font-medium transition-all duration-200',
@@ -95,7 +93,6 @@ const Header = memo(() => {
           />
           <div className="flex items-center">
             <LanguageSwitcher />
-            {/* <AnalyticsLink /> */}
             <ThemeSwitch />
             {/* <SearchButton /> */}
             <MobileNav />

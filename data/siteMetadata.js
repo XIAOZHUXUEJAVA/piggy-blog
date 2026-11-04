@@ -9,8 +9,6 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system',
   siteUrl: 'https://karhdo.dev',
-  // analyticsURL: 'https://analytics.karhdo.dev/share/5atUzHulqItdW3PK/karhdo.dev',
-  analyticsURL: 'https://umami-three-lime.vercel.app/share/II90CgZCaWfG3Jvh/piggy-blog.netlify.app',
   // siteRepo: 'https://github.com/Karhdo/karhdo.dev',
   siteRepo: 'https://github.com/XIAOZHUXUEJAVA/piggy-blog',
   siteLogo: '/static/images/avatar.jpg',
@@ -27,11 +25,6 @@ const siteMetadata = {
     github: 'Karhdo',
     linkedin: 'karhdo',
     facebook: 'karhdo.dev',
-  },
-  analytics: {
-    umamiAnalytics: {
-      umamiWebsiteId: process.env.UMAMI_WEBSITE_ID,
-    },
   },
   newsletter: {
     provider: 'buttondown',

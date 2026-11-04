@@ -32,7 +32,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 <dl>
                   <div>
                     <dt className="sr-only">Published on</dt>
-                    <BlogMeta date={date} slug={slug} readingTime={readingTime} />
+                    <BlogMeta date={date} readingTime={readingTime} />
                   </div>
                 </dl>
               </div>

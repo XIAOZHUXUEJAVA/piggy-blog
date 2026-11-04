@@ -26,32 +26,9 @@ module.exports = {
           '60%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(0deg)' },
         },
-        'music-bar-1': {
-          '0%, 100%': { height: '0%' },
-          '50%': { height: '70%' },
-        },
-        'music-bar-2': {
-          '0%, 100%': { height: '50%' },
-          '25%': { height: '0%' },
-          '75%': { height: '100%' },
-        },
-        'music-bar-3': {
-          '0%, 100%': { height: '70%' },
-          '15%': { height: '100%' },
-          '65%': { height: '0%' },
-        },
-        'music-bar-4': {
-          '0%, 100%': { height: '50%' },
-          '35.7%': { height: '0%' },
-          '85.7%': { height: '70%' },
-        },
       },
       animation: {
         wave: 'wave-animation 2.5s linear infinite',
-        'music-bar-1': 'music-bar-1 .8s linear infinite',
-        'music-bar-2': 'music-bar-2 .8s linear infinite',
-        'music-bar-3': 'music-bar-3 .8s linear infinite',
-        'music-bar-4': 'music-bar-4 .8s linear infinite',
       },
       boxShadow: {
         nextjs: '0 8px 20px rgb(0,0,0,0.12)',
@@ -78,7 +55,6 @@ module.exports = {
         sky: colors.sky,
         gray: colors.neutral,
         dark: '#1A1B26',
-        spotify: '#1DB954',
         coral: '#EF596F',
       },
       zIndex: {

@@ -43,7 +43,6 @@ const TimelineItem = ({ exp, last }: { exp: (typeof EXPERIENCES)[0]; last?: bool
               'transition-transform duration-300 ease-in-out',
               'text-gray-600 dark:text-gray-500',
             ])}
-            data-umami-event={`${event} expand`}
           />
           <Minus
             size={18}
@@ -53,7 +52,6 @@ const TimelineItem = ({ exp, last }: { exp: (typeof EXPERIENCES)[0]; last?: bool
               'transition-transform duration-300 ease-in-out',
               'text-gray-600 dark:text-gray-500',
             ])}
-            data-umami-event={`${event} collapse`}
           />
           <div className="flex flex-col">
             <div className="line-clamp-1 text-xs tabular-nums text-gray-500 dark:text-gray-400">

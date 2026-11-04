@@ -12,11 +12,5 @@ export type ReadingTime = ReturnType<typeof readingTime>;
 
 export interface BlogMetaProps {
   date: string;
-  slug: string;
   readingTime: ReadingTime;
-}
-
-export interface ViewCounterProps {
-  slug: string;
-  className?: string;
 }
