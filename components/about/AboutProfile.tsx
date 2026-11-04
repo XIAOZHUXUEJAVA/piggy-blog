@@ -1,45 +1,54 @@
-'use client';
-
 import Image from 'next/image';
-import Link from 'next/link';
-import { Icon } from '@iconify/react';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { Authors } from 'contentlayer/generated';
+import { getTranslations } from 'next-intl/server';
+import type { CoreContent } from 'pliny/utils/contentlayer';
+import type { Authors } from 'contentlayer/generated';
+import styles from './AboutPage.module.css';
 
 interface AboutProfileProps {
   author: CoreContent<Authors>;
 }
 
-export default function AboutProfile({ author }: AboutProfileProps) {
+export default async function AboutProfile({ author }: AboutProfileProps) {
+  const t = await getTranslations('AboutProfile');
+
   return (
-    <section className="grid items-center gap-8 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-10" aria-label="个人资料">
+    <section className={styles.profile} aria-labelledby="profile-name">
       <Image
         src={author.avatar || '/static/images/my-avatar.jpg'}
-        alt="个人照片"
-        width={192}
-        height={192}
-        className="mx-auto aspect-square w-40 rounded-lg object-cover sm:mx-0 sm:w-48"
+        alt={t('avatarAlt', { name: author.name })}
+        width={112}
+        height={112}
+        className={styles.avatar}
         priority
       />
 
-      <ul className="divide-y divide-gray-200 dark:divide-gray-800">
-        <li className="flex min-h-14 items-center gap-4 py-3 text-gray-700 dark:text-gray-300">
-          <Icon icon="mdi:map-marker" className="h-5 w-5 shrink-0 text-gray-500 dark:text-gray-400" />
-          <span>China</span>
-        </li>
-        <li className="flex min-h-14 min-w-0 items-center gap-4 py-3 text-gray-700 dark:text-gray-300">
-          <Icon icon="mdi:email" className="h-5 w-5 shrink-0 text-gray-500 dark:text-gray-400" />
+      <div className={styles.introduction}>
+        <h1 id="profile-name" className={styles.name}>
+          {author.name}
+        </h1>
+        <p className={styles.bio}>{t('intro')}</p>
+
+        <dl className={styles.details}>
+          <div className={styles.detail}>
+            <dt>{t('locationLabel')}</dt>
+            <dd>{t('location')}</dd>
+          </div>
           {author.email && (
-            <Link href={`mailto:${author.email}`} className="min-w-0 break-all hover:underline">
-              {author.email}
-            </Link>
+            <div className={styles.detail}>
+              <dt>{t('emailLabel')}</dt>
+              <dd>
+                <a href={`mailto:${author.email}`} className={styles.email}>
+                  {author.email}
+                </a>
+              </dd>
+            </div>
           )}
-        </li>
-        <li className="flex min-h-14 items-center gap-4 py-3 text-gray-700 dark:text-gray-300">
-          <Icon icon="mdi:calendar" className="h-5 w-5 shrink-0 text-gray-500 dark:text-gray-400" />
-          <span>开始工作于 2023</span>
-        </li>
-      </ul>
+          <div className={styles.detail}>
+            <dt>{t('startedLabel')}</dt>
+            <dd>2023</dd>
+          </div>
+        </dl>
+      </div>
     </section>
   );
 }

@@ -6,7 +6,7 @@ const BlogTags = ({ tags }: { tags: string[] }) => {
   }
 
   return (
-    <div className="!mt-1 flex flex-wrap">
+    <div className="flex flex-wrap gap-x-3 gap-y-2">
       {tags.map((tag) => (
         <Tag key={tag} text={tag} />
       ))}

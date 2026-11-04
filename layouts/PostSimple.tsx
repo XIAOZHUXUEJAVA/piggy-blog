@@ -4,6 +4,7 @@ import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
 import siteMetadata from '@/data/siteMetadata';
+import JourneyBackLink from '@/components/about/JourneyBackLink';
 
 import { BlogTags, BlogMeta } from '@/components/blog';
 import { Link, Comments, PageTitle, SectionContainer, ScrollTopAndComment } from '@/components/ui';
@@ -20,6 +21,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
 
   return (
     <SectionContainer>
+      {slug.startsWith('journey/') && <JourneyBackLink />}
       <ScrollTopAndComment />
 
       <article>

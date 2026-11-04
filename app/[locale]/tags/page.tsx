@@ -28,14 +28,11 @@ export default async function Page({ params }: { params: { locale: string } }) {
 
       <div className="container relative z-10 mx-auto px-4 py-16">
         {/* Header Section */}
-        <div className="mb-16 text-center">
+        <div className="mb-12 text-center">
           <div className="inline-block">
             <h1 className="mb-6 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{t('title')}</h1>
             <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
-          <p className="mx-auto mt-8 max-w-2xl text-lg font-medium text-gray-600 dark:text-gray-300">
-            {t('description')}
-          </p>
         </div>
 
         {/* Tags Grid */}

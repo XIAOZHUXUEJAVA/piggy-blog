@@ -48,6 +48,20 @@
     "totalTags": "Total Tags",
     "totalArticles": "Total Articles"
   },
+  "AboutProfile": {
+    "avatarAlt": "Avatar of {name}",
+    "intro": "Notes on development, projects, and thoughts along the way.",
+    "locationLabel": "Based in",
+    "location": "China",
+    "emailLabel": "Email",
+    "startedLabel": "Working since"
+  },
+  "AboutJourney": {
+    "title": "Journey",
+    "description": "Moments from work, projects, and learning. Open an entry to read the story behind it.",
+    "sampleNote": "These are fictional sample experiences, to be replaced with real stories.",
+    "backToJourney": "Back to my journey"
+  },
   "Projects": {
     "title": "Projects",
     "description": "My personal side projects",

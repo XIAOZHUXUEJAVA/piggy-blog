@@ -48,6 +48,20 @@
     "totalTags": "标签总数",
     "totalArticles": "文章总数"
   },
+  "AboutProfile": {
+    "avatarAlt": "{name} 的头像",
+    "intro": "记录开发、项目，以及一路上的思考。",
+    "locationLabel": "所在地",
+    "location": "中国",
+    "emailLabel": "邮箱",
+    "startedLabel": "开始工作"
+  },
+  "AboutJourney": {
+    "title": "我的历程",
+    "description": "工作、项目与成长中的一些时刻。点击一段经历，读读背后的故事。",
+    "sampleNote": "以下为虚构的示例履历，后续会替换为真实经历。",
+    "backToJourney": "返回我的历程"
+  },
   "Projects": {
     "title": "项目",
     "description": "我的个人项目",

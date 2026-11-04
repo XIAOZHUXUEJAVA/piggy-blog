@@ -1,0 +1,121 @@
+.sheet {
+  --journey-background: #f5f4ef;
+  --journey-hover: #ebeae5;
+  --journey-text: #111827;
+  --journey-muted: #686868;
+  --journey-line: #d1d5db;
+  --journey-border: #d4d3cb;
+  --journey-card: rgb(255 255 255 / 60%);
+  --journey-featured: #fff;
+  --journey-shadow: #000;
+  --journey-soft-shadow: #c0bdad;
+  width: 100%;
+  background: var(--journey-background);
+  padding: 2.5rem 1.5rem 1.5rem;
+  color: var(--journey-text);
+}
+
+:global(.dark) .sheet {
+  --journey-background: #20212b;
+  --journey-hover: #2c2d38;
+  --journey-text: #eeeef0;
+  --journey-muted: #b0afb9;
+  --journey-line: #464753;
+  --journey-border: #4d4e59;
+  --journey-card: rgb(255 255 255 / 3%);
+  --journey-featured: #2b2c37;
+  --journey-shadow: #bcbcc5;
+  --journey-soft-shadow: #666572;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+  max-width: 35rem;
+  margin: 0 auto;
+}
+
+.avatar {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.introduction {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.bio {
+  margin: 0.75rem 0 0;
+  color: var(--journey-muted);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.details {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.25rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.detail dt {
+  color: var(--journey-muted);
+}
+
+.detail dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.email {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 4px;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.email:focus-visible {
+  outline: 2px solid var(--journey-text);
+  outline-offset: 4px;
+}
+
+@media (max-width: 639px) {
+  .sheet {
+    padding: 1.5rem 1rem 1.25rem;
+  }
+
+  .profile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .avatar {
+    width: 6rem;
+    height: 6rem;
+  }
+}

@@ -34,12 +34,11 @@ export default async function Projects({ params }: { params: { locale: string } 
 
       <div className="container relative z-10 mx-auto px-4 py-16">
         {/* Header Section */}
-        <div className="mb-16 text-center">
+        <div className="mb-12 text-center">
           <div className="inline-block">
             <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{t('title')}</h1>
             <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
-          <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">{t('description')}</p>
         </div>
 
         {/* <div className="container py-12">
@@ -53,7 +52,7 @@ export default async function Projects({ params }: { params: { locale: string } 
           </div>
         </div> */}
 
-        <div className="py-12">
+        <div>
           {/* <h3 className="mb-8 text-center text-3xl font-bold text-gray-800 dark:text-gray-200">Side projects</h3> */}
           <div className="-m-4 flex flex-wrap">
             {sideProjects.map((project) => (
