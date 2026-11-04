@@ -1,0 +1,59 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "blog": "Blog",
+    "tags": "Tags",
+    "projects": "Projects",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "language": "Language",
+    "switchToEnglish": "Switch to English",
+    "switchToChinese": "Switch to Chinese"
+  },
+  "Homepage": {
+    "popularTags": "Popular Tags",
+    "exploreAllTags": "Explore All Tags",
+    "topicsCount": "{count, plural, one {# Topic} other {# Topics}}",
+    "updatedDaily": "Updated Daily",
+    "recentPosts": "Recent Posts",
+    "discoverAllPosts": "Discover All Posts",
+    "articlesCount": "{count, plural, one {# Article} other {# Articles}}",
+    "freshContent": "Fresh Content",
+    "noPostsFound": "No posts found.",
+    "latest": "Latest",
+    "readMore": "Read more",
+    "backToTop": "Back to top"
+  },
+  "Blog": {
+    "title": "Blog",
+    "description": "Discover insights, tutorials, and thoughts on technology and development.",
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search articles...",
+    "noPostsFound": "No posts found",
+    "totalPosts": "Total Posts",
+    "topics": "Topics",
+    "readArticle": "Read article: {title}",
+    "moreTags": "+{count} more",
+    "previous": "Previous",
+    "previousShort": "Prev",
+    "next": "Next"
+  },
+  "Tags": {
+    "title": "Tags",
+    "description": "Explore all article tags and discover topics of interest.",
+    "noTagsFound": "No tags found",
+    "viewTag": "View articles tagged with {tag}",
+    "articleCount": "{count, plural, one {# article} other {# articles}}",
+    "popular": "Popular",
+    "totalTags": "Total Tags",
+    "totalArticles": "Total Articles"
+  },
+  "Projects": {
+    "title": "Projects",
+    "description": "My personal side projects",
+    "linkTo": "View project: {title}",
+    "learnMore": "Learn more",
+    "viewDemo": "View project demo",
+    "viewRepository": "View GitHub repository"
+  }
+}

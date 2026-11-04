@@ -3,16 +3,18 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { Fragment, useState, useEffect, useRef, memo, useCallback } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import Link from '../ui/Link';
+import { useTranslations } from 'next-intl';
+import { Link, usePathname as useLocalizedPathname, useRouter as useLocalizedRouter } from '@/i18n/navigation';
+import LanguageSwitcher from './LanguageSwitcher';
 import headerNavLinks from '@/data/headerNavLinks';
 import clsx from 'clsx';
 
 const MobileNav = memo(() => {
   const [navShow, setNavShow] = useState(false);
   const navRef = useRef(null);
-  const router = useRouter();
-  const pathname = usePathname();
+  const router = useLocalizedRouter();
+  const pathname = useLocalizedPathname();
+  const t = useTranslations('Navigation');
 
   const onToggleNav = useCallback(() => {
     setNavShow((status) => {
@@ -121,7 +123,7 @@ const MobileNav = memo(() => {
               <nav ref={navRef} className="flex flex-col space-y-2 overflow-y-auto px-6 pb-6">
                 {headerNavLinks.map((link, index) => (
                   <Transition.Child
-                    key={link.title}
+                    key={link.key}
                     as={Fragment}
                     enter="transition ease-out duration-300"
                     enterFrom="opacity-0 translate-x-4"
@@ -150,7 +152,7 @@ const MobileNav = memo(() => {
                           <div className="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-yellow-400 to-orange-500" />
                         )}
 
-                        <span className="relative z-10 ml-2">{link.title}</span>
+                        <span className="relative z-10 ml-2">{t(link.key)}</span>
 
                         {/* 悬停箭头 */}
                         <svg
@@ -166,6 +168,10 @@ const MobileNav = memo(() => {
                   </Transition.Child>
                 ))}
               </nav>
+
+              <div className="px-8 py-3">
+                <LanguageSwitcher />
+              </div>
 
               {/* 底部装饰 */}
               <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white/50 to-transparent dark:from-gray-900/50" />

@@ -1977,6 +1977,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eloqnt/config@npm:^0.1.0, @eloqnt/config@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@eloqnt/config@npm:0.1.1"
+  checksum: 251cb7fa72206e4dd15923bd8e4655c18bb183ccf47ec3ab87efdb70ff3eeefab3feccbaaf863a346cc129b7412c2efa733c6978c45dd669b553e24e9f1f90c8
+  languageName: node
+  linkType: hard
+
+"@eloqnt/format-json@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@eloqnt/format-json@npm:0.1.0"
+  dependencies:
+    "@eloqnt/config": ^0.1.0
+  checksum: 60d01fb9e4f59107f711a6efefb7a457be05100061c6c00ee7ec1f7e856424969c186b0b30761bd7db91960e4438f54c48fbf6eba86bb9826171f98325e7a03c
+  languageName: node
+  linkType: hard
+
+"@eloqnt/format-po@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@eloqnt/format-po@npm:0.1.1"
+  dependencies:
+    "@eloqnt/config": ^0.1.1
+    po-parser: ^2.2.0
+  checksum: c8d86e6b6952a1433c423cae49305d6dc293577dc9f1b5a6c651519619f7b11f8505053307e3f77d6e5e7f72a630a4c0bf5c175e131b3715d6d37a2a53ed6dab
+  languageName: node
+  linkType: hard
+
 "@esbuild-plugins/node-resolve@npm:^0.2.2":
   version: 0.2.2
   resolution: "@esbuild-plugins/node-resolve@npm:0.2.2"
@@ -2253,6 +2279,54 @@ __metadata:
   version: 2.1.2
   resolution: "@fal-works/esbuild-plugin-global-externals@npm:2.1.2"
   checksum: c59715902b9062aa7ff38973f298b509499fd146dbf564dc338b3f9e896da5bffb4ca676c27587fde79b3586003e24d65960acb62f009bca43dca34c76f8cbf7
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:3.1.7, @formatjs/fast-memoize@npm:^3.1.0":
+  version: 3.1.7
+  resolution: "@formatjs/fast-memoize@npm:3.1.7"
+  checksum: e43851af836f868075fc59cef63913e1bbee39ff8716c79b2465cad38594750cf89d6fb3bd0542d68ea76b34987583df453c8193e2b96dcac2f10fa968718117
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-messageformat-parser@npm:3.5.18":
+  version: 3.5.18
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.18"
+  dependencies:
+    "@formatjs/icu-skeleton-parser": 2.1.11
+  checksum: c9fac5a30d25ce1f2e9385db6dede41c36e0c9a71c7ea1405607dd9e338bfd61535ef8b5b63a19a97f15a642655d7bde0949cbd43408ee678cb83681a19d2a09
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-messageformat-parser@npm:^3.4.0":
+  version: 3.5.22
+  resolution: "@formatjs/icu-messageformat-parser@npm:3.5.22"
+  dependencies:
+    "@formatjs/icu-skeleton-parser": 2.1.12
+  checksum: 76c2148361ed9d4795f6576adf260505c06fa0251bdc7e43ffe9c13bebc66387e27b7e489eb1c8ee3c6b6db34d88e90243034232e31b9f052e615c55ceadf76d
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-skeleton-parser@npm:2.1.11":
+  version: 2.1.11
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.1.11"
+  checksum: 7cd6666da4760bf29d2578462b77886a16e8ac48b3cb19ee59f3577b0a1c5a21d258095d4ae98c94d7aafdffc2364e4f8189916c8438827c75f2b44a7416ef59
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-skeleton-parser@npm:2.1.12":
+  version: 2.1.12
+  resolution: "@formatjs/icu-skeleton-parser@npm:2.1.12"
+  checksum: aae336289b7ae30e89f50087656b75a99ed5df6f2f81688029f054e4919bd786894730a5f9a1f6b7ff49dcb95d505da2ca9a060231fb6b53ed10692f387261b6
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:^0.8.1":
+  version: 0.8.14
+  resolution: "@formatjs/intl-localematcher@npm:0.8.14"
+  dependencies:
+    "@formatjs/fast-memoize": 3.1.7
+  checksum: 33c64a200b236bea15dd6fd2ab40577b43f40816b199d47d06785797c35d1e73ceebc9c43feeeb6a7e709fe99e0eaeef68a18d61e6687206fabc29b2aa95ae37
   languageName: node
   linkType: hard
 
@@ -3173,6 +3247,140 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parcel/watcher-android-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-android-arm64@npm:2.6.0"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-darwin-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-darwin-arm64@npm:2.6.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-darwin-x64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-darwin-x64@npm:2.6.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-freebsd-x64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-freebsd-x64@npm:2.6.0"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-arm-glibc@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-arm-glibc@npm:2.6.0"
+  conditions: os=linux & cpu=arm & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-arm-musl@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-arm-musl@npm:2.6.0"
+  conditions: os=linux & cpu=arm & libc=musl
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-arm64-glibc@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-arm64-glibc@npm:2.6.0"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-arm64-musl@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-arm64-musl@npm:2.6.0"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-x64-glibc@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-x64-glibc@npm:2.6.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-linux-x64-musl@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-linux-x64-musl@npm:2.6.0"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-win32-arm64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-win32-arm64@npm:2.6.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher-win32-x64@npm:2.6.0":
+  version: 2.6.0
+  resolution: "@parcel/watcher-win32-x64@npm:2.6.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@parcel/watcher@npm:^2.4.1":
+  version: 2.6.0
+  resolution: "@parcel/watcher@npm:2.6.0"
+  dependencies:
+    "@parcel/watcher-android-arm64": 2.6.0
+    "@parcel/watcher-darwin-arm64": 2.6.0
+    "@parcel/watcher-darwin-x64": 2.6.0
+    "@parcel/watcher-freebsd-x64": 2.6.0
+    "@parcel/watcher-linux-arm-glibc": 2.6.0
+    "@parcel/watcher-linux-arm-musl": 2.6.0
+    "@parcel/watcher-linux-arm64-glibc": 2.6.0
+    "@parcel/watcher-linux-arm64-musl": 2.6.0
+    "@parcel/watcher-linux-x64-glibc": 2.6.0
+    "@parcel/watcher-linux-x64-musl": 2.6.0
+    "@parcel/watcher-win32-arm64": 2.6.0
+    "@parcel/watcher-win32-x64": 2.6.0
+    detect-libc: ^2.0.3
+    is-glob: ^4.0.3
+    node-addon-api: ^7.0.0
+    node-gyp: latest
+    picomatch: ^4.0.4
+  dependenciesMeta:
+    "@parcel/watcher-android-arm64":
+      optional: true
+    "@parcel/watcher-darwin-arm64":
+      optional: true
+    "@parcel/watcher-darwin-x64":
+      optional: true
+    "@parcel/watcher-freebsd-x64":
+      optional: true
+    "@parcel/watcher-linux-arm-glibc":
+      optional: true
+    "@parcel/watcher-linux-arm-musl":
+      optional: true
+    "@parcel/watcher-linux-arm64-glibc":
+      optional: true
+    "@parcel/watcher-linux-arm64-musl":
+      optional: true
+    "@parcel/watcher-linux-x64-glibc":
+      optional: true
+    "@parcel/watcher-linux-x64-musl":
+      optional: true
+    "@parcel/watcher-win32-arm64":
+      optional: true
+    "@parcel/watcher-win32-x64":
+      optional: true
+  checksum: 5c0869c2c0bbce6898148f619488aeb768760e025d601be45277e1d00829328379228c50b7346daf26ed8cc62868634ccbc9aee16c6b64df160c3efe8ecc2742
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -3426,6 +3634,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@schummar/icu-type-parser@npm:1.21.5":
+  version: 1.21.5
+  resolution: "@schummar/icu-type-parser@npm:1.21.5"
+  checksum: 41a8467a9dae149599d4ada1f82cc3dab03e394e82aef2744f46e6b9b7e5d8cc341a3cbbb9a75a7def795d30c877bfd976176516e2c14de8191c535dcac1b816
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0":
   version: 8.0.0
   resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:8.0.0"
@@ -3582,6 +3797,142 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@swc/core-darwin-arm64@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-darwin-arm64@npm:1.16.21"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-darwin-x64@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-darwin-x64@npm:1.16.21"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm-gnueabihf@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-arm-gnueabihf@npm:1.16.21"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm64-gnu@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-arm64-gnu@npm:1.16.21"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-arm64-musl@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-arm64-musl@npm:1.16.21"
+  conditions: os=linux & cpu=arm64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-ppc64-gnu@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-ppc64-gnu@npm:1.16.21"
+  conditions: os=linux & cpu=ppc64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-s390x-gnu@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-s390x-gnu@npm:1.16.21"
+  conditions: os=linux & cpu=s390x & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-x64-gnu@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-x64-gnu@npm:1.16.21"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@swc/core-linux-x64-musl@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-linux-x64-musl@npm:1.16.21"
+  conditions: os=linux & cpu=x64 & libc=musl
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-arm64-msvc@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-win32-arm64-msvc@npm:1.16.21"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-ia32-msvc@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-win32-ia32-msvc@npm:1.16.21"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"@swc/core-win32-x64-msvc@npm:1.16.21":
+  version: 1.16.21
+  resolution: "@swc/core-win32-x64-msvc@npm:1.16.21"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@swc/core@npm:~1.16.0":
+  version: 1.16.21
+  resolution: "@swc/core@npm:1.16.21"
+  dependencies:
+    "@swc/core-darwin-arm64": 1.16.21
+    "@swc/core-darwin-x64": 1.16.21
+    "@swc/core-linux-arm-gnueabihf": 1.16.21
+    "@swc/core-linux-arm64-gnu": 1.16.21
+    "@swc/core-linux-arm64-musl": 1.16.21
+    "@swc/core-linux-ppc64-gnu": 1.16.21
+    "@swc/core-linux-s390x-gnu": 1.16.21
+    "@swc/core-linux-x64-gnu": 1.16.21
+    "@swc/core-linux-x64-musl": 1.16.21
+    "@swc/core-win32-arm64-msvc": 1.16.21
+    "@swc/core-win32-ia32-msvc": 1.16.21
+    "@swc/core-win32-x64-msvc": 1.16.21
+    "@swc/counter": ^0.1.3
+    "@swc/types": ^0.1.28
+  peerDependencies:
+    "@swc/helpers": ">=0.5.17"
+  dependenciesMeta:
+    "@swc/core-darwin-arm64":
+      optional: true
+    "@swc/core-darwin-x64":
+      optional: true
+    "@swc/core-linux-arm-gnueabihf":
+      optional: true
+    "@swc/core-linux-arm64-gnu":
+      optional: true
+    "@swc/core-linux-arm64-musl":
+      optional: true
+    "@swc/core-linux-ppc64-gnu":
+      optional: true
+    "@swc/core-linux-s390x-gnu":
+      optional: true
+    "@swc/core-linux-x64-gnu":
+      optional: true
+    "@swc/core-linux-x64-musl":
+      optional: true
+    "@swc/core-win32-arm64-msvc":
+      optional: true
+    "@swc/core-win32-ia32-msvc":
+      optional: true
+    "@swc/core-win32-x64-msvc":
+      optional: true
+  peerDependenciesMeta:
+    "@swc/helpers":
+      optional: true
+  checksum: 60e457cf26bbecc23ba85ff1c10faa23e9be9fe937fa48e96a85c6c45cdef0510192b7e9a942ba76d88ba41de9c4bbdf049f1aa0e543d62cbf6c1749ee413c8b
+  languageName: node
+  linkType: hard
+
 "@swc/counter@npm:^0.1.3":
   version: 0.1.3
   resolution: "@swc/counter@npm:0.1.3"
@@ -3596,6 +3947,15 @@ __metadata:
     "@swc/counter": ^0.1.3
     tslib: ^2.4.0
   checksum: d4f207b191e54b29460804ddf2984ba6ece1d679a0b2f6a9c765dcf27bba92c5769e7965668a4546fb9f1021eaf0ff9be4bf5c235ce12adcd65acdfe77187d11
+  languageName: node
+  linkType: hard
+
+"@swc/types@npm:^0.1.28":
+  version: 0.1.28
+  resolution: "@swc/types@npm:0.1.28"
+  dependencies:
+    "@swc/counter": ^0.1.3
+  checksum: f322cbd289965d530b3015488917eed7d7634c76c38a696672004caa48384bd6b5fd3f0e5a67009d25f4c3f5d0d1f5ff3c8b9a845969aaf2f0527ece23c4021d
   languageName: node
   linkType: hard
 
@@ -5289,6 +5649,13 @@ __metadata:
   version: 2.0.3
   resolution: "dequal@npm:2.0.3"
   checksum: 8679b850e1a3d0ebbc46ee780d5df7b478c23f335887464023a631d1b9af051ad4a6595a44220f9ff8ff95a8ddccf019b5ad778a976fd7bbf77383d36f412f90
+  languageName: node
+  linkType: hard
+
+"detect-libc@npm:^2.0.3":
+  version: 2.1.2
+  resolution: "detect-libc@npm:2.1.2"
+  checksum: 471740d52365084c4b2ae359e507b863f2b1d79b08a92835ebdf701918e08fc9cfba175b3db28483ca33b155e1311a91d69dc42c6d192b476f41a9e1f094ce6a
   languageName: node
   linkType: hard
 
@@ -7157,6 +7524,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"icu-minify@npm:^4.14.9":
+  version: 4.14.9
+  resolution: "icu-minify@npm:4.14.9"
+  dependencies:
+    "@formatjs/icu-messageformat-parser": ^3.4.0
+  checksum: d203d87341f063bf515cca24c248fb4898315b17906ef5483f4f06b0b12cc32e6f91591bb59772d424ff68b017d73122ac33a4558046bf09480e942f11e6501e
+  languageName: node
+  linkType: hard
+
 "ieee754@npm:^1.1.13":
   version: 1.2.1
   resolution: "ieee754@npm:1.2.1"
@@ -7259,6 +7635,16 @@ __metadata:
     hasown: ^2.0.0
     side-channel: ^1.0.4
   checksum: cadc5eea5d7d9bc2342e93aae9f31f04c196afebb11bde97448327049f492cd7081e18623ae71388aac9cd237b692ca3a105be9c68ac39c1dec679d7409e33eb
+  languageName: node
+  linkType: hard
+
+"intl-messageformat@npm:^11.1.0":
+  version: 11.2.15
+  resolution: "intl-messageformat@npm:11.2.15"
+  dependencies:
+    "@formatjs/fast-memoize": 3.1.7
+    "@formatjs/icu-messageformat-parser": 3.5.18
+  checksum: b4cee90120290c59498dc0bb4cf1327ab2e49106fe7879907e413e6598f93e046326a78ec45c6afef60cb74ec58f8706b9e145c5a2d787c0c783ef7b010da9eb
   languageName: node
   linkType: hard
 
@@ -7811,6 +8197,7 @@ __metadata:
     lucide-react: ^0.454.0
     next: 14.2.3
     next-contentlayer2: 0.5.1
+    next-intl: ^4.14.9
     next-themes: ^0.3.0
     pliny: 0.4.1
     postcss: ^8.4.24
@@ -9284,6 +9671,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-intl-swc-plugin-extractor@npm:4.14.9":
+  version: 4.14.9
+  resolution: "next-intl-swc-plugin-extractor@npm:4.14.9"
+  checksum: c1f76ccc0df43eafcc05ac15359b43621d094895891734f51d91455be8e2707292da5b4dff0f005b0ada03cf9692932632481aa5a5e2a226ca4f624b4725835e
+  languageName: node
+  linkType: hard
+
+"next-intl@npm:^4.14.9":
+  version: 4.14.9
+  resolution: "next-intl@npm:4.14.9"
+  dependencies:
+    "@eloqnt/config": ^0.1.1
+    "@eloqnt/format-json": ^0.1.0
+    "@eloqnt/format-po": ^0.1.1
+    "@formatjs/intl-localematcher": ^0.8.1
+    "@parcel/watcher": ^2.4.1
+    "@swc/core": ~1.16.0
+    icu-minify: ^4.14.9
+    negotiator: ^1.0.0
+    next-intl-swc-plugin-extractor: 4.14.9
+    use-intl: ^4.14.9
+  peerDependencies:
+    "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 7c905080c752a5bcb40b34557e68c914604ca641ea2f6dfd321ffea5c2d308189d84b33385b3baa5c21f5082c09730055f4a41a9f887647dcf4d9b2a84231712
+  languageName: node
+  linkType: hard
+
 "next-themes@npm:^0.3.0":
   version: 0.3.0
   resolution: "next-themes@npm:0.3.0"
@@ -9359,6 +9778,15 @@ __metadata:
     lower-case: ^2.0.2
     tslib: ^2.0.3
   checksum: 0b2ebc113dfcf737d48dde49cfebf3ad2d82a8c3188e7100c6f375e30eafbef9e9124aadc3becef237b042fd5eb0aad2fd78669c20972d045bbe7fea8ba0be5c
+  languageName: node
+  linkType: hard
+
+"node-addon-api@npm:^7.0.0":
+  version: 7.1.1
+  resolution: "node-addon-api@npm:7.1.1"
+  dependencies:
+    node-gyp: latest
+  checksum: 46051999e3289f205799dfaf6bcb017055d7569090f0004811110312e2db94cb4f8654602c7eb77a60a1a05142cc2b96e1b5c56ca4622c41a5c6370787faaf30
   languageName: node
   linkType: hard
 
@@ -9780,6 +10208,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"picomatch@npm:^4.0.4":
+  version: 4.0.7
+  resolution: "picomatch@npm:4.0.7"
+  checksum: a97edd7659fc7f39769734bcacd8e9c2f8711d0c30f0caf143577c4d59b3338e17e884ead92805701c71d54040067909e8d3dd45ed814fc8af154ca747fb06a4
+  languageName: node
+  linkType: hard
+
 "pidtree@npm:0.6.0":
   version: 0.6.0
   resolution: "pidtree@npm:0.6.0"
@@ -9825,6 +10260,13 @@ __metadata:
     react: ^17.0.2 || ^18 || ^19 || ^19.0.0-rc
     react-dom: ^17.0.2 || ^18 || ^19 || ^19.0.0-rc
   checksum: 0400965974c7b1c1c5d96d5541978aec43c6137874b51e2dd59f1c8f688150c53158fefa8a2d17e35b8e16d9827e70aa86afc8ab6374f230aa27636240a2d9d9
+  languageName: node
+  linkType: hard
+
+"po-parser@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "po-parser@npm:2.2.0"
+  checksum: 9e89c8f225131cd60119b66d43865e985f270ffdcdd668d746e4fbb3d32d66fbeea21e16d428b52b466bf9528eba463ed903400d34713f2022f53aa6672f31b4
   languageName: node
   linkType: hard
 
@@ -12258,6 +12700,24 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-intl@npm:^4.14.9":
+  version: 4.14.9
+  resolution: "use-intl@npm:4.14.9"
+  dependencies:
+    "@formatjs/fast-memoize": ^3.1.0
+    "@schummar/icu-type-parser": 1.21.5
+    icu-minify: ^4.14.9
+    intl-messageformat: ^11.1.0
+  peerDependencies:
+    "@types/react": ^17.0.0 || ^18.0.0 || ^19.0.0
+    react: ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 4836b7115289faa8c86d7bd24cb683775ec170d2a97932c5fa74b0dba01ad7552389a0d52602f415604427eb32375e39cf8cd7fa350927aeb9fc5ce1f1b3685f
   languageName: node
   linkType: hard
 

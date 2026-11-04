@@ -1,8 +1,15 @@
 import ModernListLayout from '@/layouts/ModernListLayout';
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
 import { allBlogs } from 'contentlayer/generated';
+import { genPageMetadata } from 'app/seo';
+import { getTranslations } from 'next-intl/server';
 
 const POSTS_PER_PAGE = 6;
+
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Blog' });
+  return genPageMetadata({ title: t('title'), description: t('description') });
+}
 
 export const generateStaticParams = async () => {
   const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE);
@@ -21,6 +28,6 @@ export default function Page({ params }: { params: { page: string } }) {
   };
 
   return (
-    <ModernListLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} title="Blog" />
+    <ModernListLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} />
   );
 }

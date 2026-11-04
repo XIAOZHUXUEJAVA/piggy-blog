@@ -2,12 +2,17 @@ import { slug } from 'github-slugger';
 
 import tagData from 'app/tag-data.json';
 import { genPageMetadata } from 'app/seo';
+import { getTranslations } from 'next-intl/server';
 
-import { Link } from '@/components/ui';
+import { Link } from '@/i18n/navigation';
 
-export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' });
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Tags' });
+  return genPageMetadata({ title: t('title'), description: t('description') });
+}
 
-export default async function Page() {
+export default async function Page({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Tags' });
   const tagCounts = tagData as Record<string, number>;
 
   const tagKeys = Object.keys(tagCounts);
@@ -25,11 +30,11 @@ export default async function Page() {
         {/* Header Section */}
         <div className="mb-16 text-center">
           <div className="inline-block">
-            <h1 className="mb-6 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">Tags</h1>
+            <h1 className="mb-6 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{t('title')}</h1>
             <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-lg font-medium text-gray-600 dark:text-gray-300">
-            Explore all article tags and discover topics of interest
+            {t('description')}
           </p>
         </div>
 
@@ -38,7 +43,7 @@ export default async function Page() {
           {tagKeys.length === 0 ? (
             <div className="py-16 text-center">
               <div className="mb-4 text-6xl">🏷️</div>
-              <p className="text-xl text-gray-500 dark:text-gray-400">No tags found</p>
+              <p className="text-xl text-gray-500 dark:text-gray-400">{t('noTagsFound')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -52,7 +57,7 @@ export default async function Page() {
                     key={tag}
                     href={`/tags/${slug(tag)}`}
                     className="group block"
-                    aria-label={`View articles tagged with ${tag}`}
+                    aria-label={t('viewTag', { tag })}
                   >
                     <div
                       className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/80 p-6 shadow-lg backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl dark:border-gray-600/30 dark:bg-gray-800/80 dark:shadow-gray-900/20"
@@ -87,7 +92,7 @@ export default async function Page() {
                         {/* 文章数量 */}
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                            {count === 1 ? '1 article' : `${count} articles`}
+                            {t('articleCount', { count })}
                           </span>
 
                           {/* 数量徽章 */}
@@ -107,7 +112,7 @@ export default async function Page() {
                         {/* 热门标识 */}
                         {isPopular && (
                           <div className="absolute -right-2 -top-2 rotate-12 transform rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 px-2 py-1 text-xs font-bold text-white shadow-lg">
-                            Popular
+                            {t('popular')}
                           </div>
                         )}
                       </div>
@@ -140,7 +145,7 @@ export default async function Page() {
               <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-3xl font-bold text-transparent">
                 {tagKeys.length}
               </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Tags</div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('totalTags')}</div>
             </div>
 
             <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-600"></div>
@@ -149,7 +154,7 @@ export default async function Page() {
               <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
                 {Object.values(tagCounts).reduce((sum, count) => sum + count, 0)}
               </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Articles</div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('totalArticles')}</div>
             </div>
           </div>
         </div>

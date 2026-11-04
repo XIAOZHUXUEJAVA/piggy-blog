@@ -1,13 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { usePathname, useRouter, Link } from '@/i18n/navigation';
 
 import siteMetadata from '@/data/siteMetadata';
 import headerNavLinks from '@/data/headerNavLinks';
 
-import Link from '@/components/ui/Link';
-import { useRouter } from 'next/navigation';
 import { memo, useCallback } from 'react';
 
 import Logo from 'public/static/images/logo.svg';
@@ -16,10 +15,12 @@ import MobileNav from './MobileNav';
 import ThemeSwitch from './ThemeSwitch';
 // import SearchButton from './SearchButton';
 import AnalyticsLink from './AnalyticsLink';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = memo(() => {
   const pathname = usePathname();
   const router = useRouter();
+  const t = useTranslations('Navigation');
 
   // 预加载页面函数
   const handleMouseEnter = useCallback(
@@ -54,7 +55,7 @@ const Header = memo(() => {
           <div className="hidden sm:block">
             {headerNavLinks.map((link) => (
               <Link
-                key={link.title}
+                key={link.key}
                 href={link.href}
                 data-umami-event={`nav-${link.href.replace('/', '')}`}
                 onMouseEnter={() => handleMouseEnter(link.href)}
@@ -64,7 +65,7 @@ const Header = memo(() => {
                   pathname === link.href ? 'text-yellow-600 dark:text-yellow-400' : 'text-gray-900 dark:text-gray-100'
                 )}
               >
-                <span className="relative z-10">{link.title}</span>
+                <span className="relative z-10">{t(link.key)}</span>
                 {/* 背景动画效果 */}
                 <span
                   className={clsx(
@@ -93,6 +94,7 @@ const Header = memo(() => {
             className="hidden h-4 w-px shrink-0 bg-gray-200 dark:bg-gray-600 md:block"
           />
           <div className="flex items-center">
+            <LanguageSwitcher />
             {/* <AnalyticsLink /> */}
             <ThemeSwitch />
             {/* <SearchButton /> */}

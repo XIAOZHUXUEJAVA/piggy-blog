@@ -2,12 +2,15 @@ import { map } from 'lodash';
 
 import popularTags from '@/data/popularTags';
 
-import Link from '@/components/ui/Link';
+import { Link } from '@/i18n/navigation';
 import BrandIcon from '@/components/ui/BrandIcon';
 import Twemoji from '../ui/Twemoji';
 import { RoughNotation } from 'react-rough-notation';
+import { useTranslations } from 'next-intl';
 
 const PopularTags = () => {
+  const t = useTranslations('Homepage');
+
   return (
     <div className="relative">
       {/* 背景装饰 */}
@@ -18,7 +21,7 @@ const PopularTags = () => {
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-end">
           {/* 左侧：标题和描述 */}
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-0 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl lg:text-5xl">
               <RoughNotation
                 type="highlight"
                 show={true}
@@ -27,13 +30,9 @@ const PopularTags = () => {
                 animationDuration={1200}
                 padding={[8, 16]}
               >
-                <span className="text-gray-800 dark:text-gray-200">Popular Tags</span>
+                <span className="text-gray-800 dark:text-gray-200">{t('popularTags')}</span>
               </RoughNotation>
             </h1>
-
-            <p className="max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 lg:max-w-none">
-              Discover the most popular technologies and topics in my blog posts
-            </p>
           </div>
 
           {/* 右侧：查看更多按钮和装饰 */}
@@ -43,7 +42,7 @@ const PopularTags = () => {
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-teal-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-teal-900/30 dark:text-gray-300"
             >
               <Twemoji emoji="backhand-index-pointing-right" />
-              <span>Explore All Tags</span>
+              <span>{t('exploreAllTags')}</span>
               {/* <div className="transition-transform duration-200 group-hover:translate-x-1">→</div> */}
             </Link>
 
@@ -51,11 +50,11 @@ const PopularTags = () => {
             <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
               <div className="flex items-center gap-1">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
-                <span>{popularTags.length} Topics</span>
+                <span>{t('topicsCount', { count: popularTags.length })}</span>
               </div>
               <div className="flex items-center gap-1">
                 <div className="h-1.5 w-1.5 rounded-full bg-teal-400" />
-                <span>Updated Daily</span>
+                <span>{t('updatedDaily')}</span>
               </div>
             </div>
           </div>

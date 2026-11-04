@@ -1,14 +1,13 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePathname, Link } from '@/i18n/navigation';
 import { formatDate } from 'pliny/utils/formatDate';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
-import { Link } from '@/components/ui';
 import SimpleTag from '@/components/ui/SimpleTag';
-import siteMetadata from '@/data/siteMetadata';
 
 interface PaginationProps {
   totalPages: number;
@@ -17,7 +16,7 @@ interface PaginationProps {
 
 interface ModernListLayoutProps {
   posts: CoreContent<Blog>[];
-  title: string;
+  title?: string;
   initialDisplayPosts?: CoreContent<Blog>[];
   pagination?: PaginationProps;
 }
@@ -28,6 +27,8 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const locale = useLocale();
+  const t = useTranslations('Blog');
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -80,7 +81,7 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
       />
 
       {/* Background Link for entire card */}
-      <Link href={`/blog/${slug}`} className="absolute inset-0 z-10" aria-label={`Read article: ${title}`} />
+      <Link href={`/blog/${slug}`} className="absolute inset-0 z-10" aria-label={t('readArticle', { title })} />
 
       <div className="pointer-events-none relative z-20 p-6">
         {/* Date Badge */}
@@ -93,7 +94,7 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
               boxShadow: '0 2px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
             }}
           >
-            {formatDate(date, siteMetadata.locale)}
+            {formatDate(date, locale === 'zh' ? 'zh-CN' : 'en-US')}
           </time>
         </div>
 
@@ -112,7 +113,9 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
               <SimpleTag key={tag} text={tag} />
             ))}
             {tags.length > 3 && (
-              <span className="text-sm text-gray-500 dark:text-gray-400">+{tags.length - 3} more</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                {t('moreTags', { count: tags.length - 3 })}
+              </span>
             )}
           </div>
         )}
@@ -134,6 +137,7 @@ const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: numb
 function ModernPagination({ totalPages, currentPage }: PaginationProps) {
   const pathname = usePathname();
   const basePath = pathname.split('/')[1];
+  const t = useTranslations('Blog');
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
 
@@ -176,7 +180,7 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
       <div className="flex items-center space-x-1 sm:space-x-2">
         {prevPage ? (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={currentPage - 1 === 1 ? `/${basePath}` : `/${basePath}/page/${currentPage - 1}`}
             rel="prev"
             className="group flex items-center space-x-1 rounded-lg bg-gradient-to-r from-green-500 to-yellow-500 px-3 py-2 text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:px-4 sm:py-2 sm:text-base"
             style={{
@@ -192,8 +196,8 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="hidden sm:inline">Previous</span>
-            <span className="sm:hidden">Prev</span>
+            <span className="hidden sm:inline">{t('previous')}</span>
+            <span className="sm:hidden">{t('previousShort')}</span>
           </Link>
         ) : (
           <button
@@ -203,8 +207,8 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
             <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="hidden sm:inline">Previous</span>
-            <span className="sm:hidden">Prev</span>
+            <span className="hidden sm:inline">{t('previous')}</span>
+            <span className="sm:hidden">{t('previousShort')}</span>
           </button>
         )}
 
@@ -214,7 +218,7 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <Link
                 key={page}
-                href={page === 1 ? `/${basePath}/` : `/${basePath}/page/${page}`}
+                href={page === 1 ? `/${basePath}` : `/${basePath}/page/${page}`}
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 sm:h-10 sm:w-10 ${
                   page === currentPage
                     ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
@@ -244,7 +248,7 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
               ) : (
                 <Link
                   key={page}
-                  href={page === 1 ? `/${basePath}/` : `/${basePath}/page/${page}`}
+                  href={page === 1 ? `/${basePath}` : `/${basePath}/page/${page}`}
                   className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 ${
                     page === currentPage
                       ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
@@ -276,8 +280,8 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
               boxShadow: '0 4px 16px rgba(234,179,8,0.3), inset 0 1px 0 rgba(255,255,255,0.3)',
             }}
           >
-            <span className="hidden sm:inline">Next</span>
-            <span className="sm:hidden">Next</span>
+            <span className="hidden sm:inline">{t('next')}</span>
+            <span className="sm:hidden">{t('next')}</span>
             <svg
               className="h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4"
               fill="none"
@@ -292,8 +296,8 @@ function ModernPagination({ totalPages, currentPage }: PaginationProps) {
             disabled
             className="flex items-center space-x-1 rounded-lg bg-gray-200 px-3 py-2 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-500 sm:px-4 sm:py-2 sm:text-base"
           >
-            <span className="hidden sm:inline">Next</span>
-            <span className="sm:hidden">Next</span>
+            <span className="hidden sm:inline">{t('next')}</span>
+            <span className="sm:hidden">{t('next')}</span>
             <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
@@ -311,6 +315,7 @@ export default function ModernListLayout({
   pagination,
 }: ModernListLayoutProps) {
   const [searchValue, setSearchValue] = useState('');
+  const t = useTranslations('Blog');
   const filteredBlogPosts = posts.filter((post) => {
     const searchContent = post.title + post.summary + post.tags?.join(' ');
     return searchContent.toLowerCase().includes(searchValue.toLowerCase());
@@ -324,11 +329,11 @@ export default function ModernListLayout({
         {/* Header Section */}
         <div className="mb-16 text-center">
           <div className="inline-block">
-            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{title}</h1>
+            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{title || t('title')}</h1>
             <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-            Discover insights, tutorials, and thoughts on technology and development
+            {t('description')}
           </p>
         </div>
 
@@ -336,10 +341,10 @@ export default function ModernListLayout({
         <div className="mb-12 flex justify-center">
           <div className="relative w-full max-w-md">
             <input
-              aria-label="Search articles"
+              aria-label={t('searchLabel')}
               type="text"
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search articles..."
+              placeholder={t('searchPlaceholder')}
               className="w-full rounded-2xl border-2 border-gray-200 bg-white/80 px-6 py-4 pl-12 text-gray-900 backdrop-blur-sm transition-all duration-300 focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/20 dark:border-gray-600 dark:bg-gray-800/80 dark:text-gray-100 dark:focus:border-green-400"
               style={{
                 boxShadow: '0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
@@ -367,7 +372,7 @@ export default function ModernListLayout({
           {!filteredBlogPosts.length ? (
             <div className="py-16 text-center">
               <div className="mb-4 text-6xl">📝</div>
-              <p className="text-xl text-gray-500 dark:text-gray-400">No posts found</p>
+              <p className="text-xl text-gray-500 dark:text-gray-400">{t('noPostsFound')}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -394,7 +399,7 @@ export default function ModernListLayout({
               <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-3xl font-bold text-transparent">
                 {posts.length}
               </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Total Posts</div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('totalPosts')}</div>
             </div>
 
             {/* Divider */}
@@ -405,7 +410,7 @@ export default function ModernListLayout({
               <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
                 {Array.from(new Set(posts.flatMap((post) => post.tags || []))).length}
               </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">Topics</div>
+              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('topics')}</div>
             </div>
           </div>
         </div>

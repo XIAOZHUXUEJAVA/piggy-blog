@@ -1,0 +1,59 @@
+{
+  "Navigation": {
+    "home": "首页",
+    "blog": "博客",
+    "tags": "标签",
+    "projects": "项目",
+    "about": "关于",
+    "portfolio": "作品集",
+    "language": "语言",
+    "switchToEnglish": "切换到英文",
+    "switchToChinese": "切换到中文"
+  },
+  "Homepage": {
+    "popularTags": "热门标签",
+    "exploreAllTags": "查看全部标签",
+    "topicsCount": "{count} 个话题",
+    "updatedDaily": "每日更新",
+    "recentPosts": "近期文章",
+    "discoverAllPosts": "查看全部文章",
+    "articlesCount": "{count} 篇文章",
+    "freshContent": "持续更新",
+    "noPostsFound": "没有找到文章。",
+    "latest": "最新",
+    "readMore": "阅读全文",
+    "backToTop": "回到顶部"
+  },
+  "Blog": {
+    "title": "博客",
+    "description": "分享技术与开发领域的见解、教程与思考。",
+    "searchLabel": "搜索文章",
+    "searchPlaceholder": "搜索文章...",
+    "noPostsFound": "没有找到文章",
+    "totalPosts": "文章总数",
+    "topics": "话题",
+    "readArticle": "阅读文章：{title}",
+    "moreTags": "另有 {count} 个",
+    "previous": "上一页",
+    "previousShort": "上一页",
+    "next": "下一页"
+  },
+  "Tags": {
+    "title": "标签",
+    "description": "浏览全部文章标签，发现感兴趣的主题。",
+    "noTagsFound": "没有找到标签",
+    "viewTag": "查看带有“{tag}”标签的文章",
+    "articleCount": "{count} 篇文章",
+    "popular": "热门",
+    "totalTags": "标签总数",
+    "totalArticles": "文章总数"
+  },
+  "Projects": {
+    "title": "项目",
+    "description": "我的个人项目",
+    "linkTo": "查看项目：{title}",
+    "learnMore": "了解更多",
+    "viewDemo": "查看项目演示",
+    "viewRepository": "查看 GitHub 仓库"
+  }
+}

@@ -15,13 +15,14 @@ interface Icon {
 interface IconCloudProps {
   icons?: React.ReactNode[];
   images?: string[];
+  className?: string;
 }
 
 function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export function IconCloud({ icons, images }: IconCloudProps) {
+export function IconCloud({ icons, images, className }: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -301,7 +302,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className="rounded-lg"
+      className={`rounded-lg ${className ?? ''}`}
       aria-label="Interactive 3D Icon Cloud"
       role="img"
     />

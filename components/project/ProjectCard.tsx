@@ -1,9 +1,11 @@
 import type { GithubRepository, ProjectCardProps } from '@/types/index';
+import { useTranslations } from 'next-intl';
 
 import { Link, Image } from '@/components/ui';
 import { GithubRepo } from '@/components/project';
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
+  const t = useTranslations('Projects');
   const { title, description, imgSrc, url, repo, builtWith } = project;
 
   const repository = repo as GithubRepository | undefined;
@@ -36,7 +38,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <div className="relative z-10 flex flex-1 flex-col p-6">
           <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight transition-colors duration-300 group-hover:text-green-600 dark:group-hover:text-green-400">
             {href ? (
-              <Link href={href} aria-label={`Link to ${title}`}>
+              <Link href={href} aria-label={t('linkTo', { title })}>
                 {title}
               </Link>
             ) : (
@@ -75,9 +77,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 <Link
                   href={href}
                   className="inline-flex items-center text-base font-medium leading-6 text-green-600 transition-all duration-300 hover:text-green-700 group-hover:translate-x-1 dark:text-green-400 dark:hover:text-green-300"
-                  aria-label={`Link to ${title}`}
+                  aria-label={t('linkTo', { title })}
                 >
-                  Learn more
+                  {t('learnMore')}
                   <svg
                     className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"

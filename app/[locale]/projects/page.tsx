@@ -3,10 +3,16 @@ import { genPageMetadata } from 'app/seo';
 import projectsData from '@/data/projectsData';
 import { fetchRepoData } from '@/servers/github.server';
 import ProjectCard from '@/components/project/ProjectCard';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata = genPageMetadata({ title: 'Projects' });
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Projects' });
+  return genPageMetadata({ title: t('title'), description: t('description') });
+}
 
-export default async function Projects() {
+export default async function Projects({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'Projects' });
+
   await Promise.all(
     projectsData.map(async (p) => {
       if (p.repo && typeof p.repo === 'string') {
@@ -14,8 +20,6 @@ export default async function Projects() {
       }
     })
   );
-
-  const description = 'My personal side projects';
 
   // const workProjects = projectsData.filter(({ type }) => type === 'work');
   const sideProjects = projectsData.filter(({ type }) => type === 'self');
@@ -32,10 +36,10 @@ export default async function Projects() {
         {/* Header Section */}
         <div className="mb-16 text-center">
           <div className="inline-block">
-            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">Projects</h1>
+            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{t('title')}</h1>
             <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
           </div>
-          <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">{description}</p>
+          <p className="mt-6 text-xl text-gray-600 dark:text-gray-300">{t('description')}</p>
         </div>
 
         {/* <div className="container py-12">

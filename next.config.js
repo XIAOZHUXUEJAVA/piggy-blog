@@ -1,8 +1,10 @@
 const { withContentlayer } = require('next-contentlayer2');
+const createNextIntlPlugin = require('next-intl/plugin');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
@@ -62,7 +64,7 @@ const unoptimized = process.env.UNOPTIMIZED ? true : undefined;
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 module.exports = () => {
-  const plugins = [withContentlayer, withBundleAnalyzer];
+  const plugins = [withContentlayer, withBundleAnalyzer, withNextIntl];
   return plugins.reduce((acc, next) => next(acc), {
     output,
     basePath,
