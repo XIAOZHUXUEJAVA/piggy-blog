@@ -100,15 +100,15 @@ export default function Home({ posts }) {
 
         <div className="relative z-10">
           {/* 标题区域 - 左右布局 */}
-          <div className="flex flex-col items-center justify-between gap-8 py-8 lg:flex-row lg:items-end">
+          <div className="grid items-center justify-items-center gap-x-8 gap-y-4 py-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:justify-items-start">
             {/* 左侧标题内容 */}
-            <div className="flex-1 text-center lg:text-left">
+            <div className="min-w-0 text-center lg:text-left">
               {/* <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-2 shadow-lg backdrop-blur-sm dark:bg-gray-800/60">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-orange-400" />
                 <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Latest Articles</span>
               </div> */}
 
-              <h1 className="mb-0 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl md:text-5xl">
+              <h1 className="mb-0 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl lg:text-5xl">
                 <RoughNotation
                   type="highlight"
                   show={true}
@@ -123,10 +123,10 @@ export default function Home({ posts }) {
             </div>
 
             {/* 右侧查看更多按钮和装饰 */}
-            <div className="flex flex-col items-center gap-4 lg:items-end">
+            <div className="contents">
               <Link
                 href="/blog"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-yellow-900/30 dark:text-gray-300"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-yellow-900/30 dark:text-gray-300 lg:col-start-2 lg:row-start-1 lg:justify-self-end"
               >
                 <Twemoji emoji="backhand-index-pointing-right" />
                 <span>{t('discoverAllPosts')}</span>
@@ -134,7 +134,7 @@ export default function Home({ posts }) {
               </Link>
 
               {/* 装饰性统计信息 */}
-              <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400 lg:col-start-2 lg:justify-self-end">
                 <div className="flex items-center gap-1">
                   <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
                   <span>{t('articlesCount', { count: posts.length })}</span>

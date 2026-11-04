@@ -18,9 +18,9 @@ const PopularTags = () => {
 
       <div className="relative z-10 space-y-6 py-8">
         {/* 标题区域 - 左右布局 */}
-        <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:items-end">
-          {/* 左侧：标题和描述 */}
-          <div className="flex-1 text-center lg:text-left">
+        <div className="grid items-center justify-items-center gap-x-8 gap-y-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:justify-items-start">
+          {/* 左侧标题与右侧按钮在同一行居中对齐 */}
+          <div className="min-w-0 text-center lg:text-left">
             <h1 className="mb-0 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl lg:text-5xl">
               <RoughNotation
                 type="highlight"
@@ -35,11 +35,11 @@ const PopularTags = () => {
             </h1>
           </div>
 
-          {/* 右侧：查看更多按钮和装饰 */}
-          <div className="flex flex-col items-center gap-4 lg:items-end">
+          {/* 右侧：查看更多按钮和统计信息 */}
+          <div className="contents">
             <Link
               href="/tags"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-teal-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-teal-900/30 dark:text-gray-300"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-teal-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-teal-900/30 dark:text-gray-300 lg:col-start-2 lg:row-start-1 lg:justify-self-end"
             >
               <Twemoji emoji="backhand-index-pointing-right" />
               <span>{t('exploreAllTags')}</span>
@@ -47,7 +47,7 @@ const PopularTags = () => {
             </Link>
 
             {/* 装饰性统计信息 */}
-            <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-gray-500 dark:text-gray-400 lg:col-start-2 lg:justify-self-end">
               <div className="flex items-center gap-1">
                 <div className="h-1.5 w-1.5 rounded-full bg-green-400" />
                 <span>{t('topicsCount', { count: popularTags.length })}</span>
