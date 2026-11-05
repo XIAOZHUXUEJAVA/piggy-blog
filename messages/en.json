@@ -2,7 +2,6 @@
   "Navigation": {
     "home": "Home",
     "blog": "Blog",
-    "projects": "Projects",
     "about": "About",
     "portfolio": "Portfolio",
     "language": "Language",
@@ -43,6 +42,25 @@
     "previousShort": "Prev",
     "next": "Next"
   },
+  "Post": {
+    "publishedOn": "Published on",
+    "authors": "Authors",
+    "authorName": "Name",
+    "avatarAlt": "Avatar of {name}",
+    "tags": "Tags",
+    "previousArticle": "Previous Article",
+    "nextArticle": "Next Article",
+    "previousPost": "Previous post: {title}",
+    "nextPost": "Next post: {title}",
+    "backToBlog": "Back to the blog",
+    "viewOnGithub": "View on GitHub",
+    "readingTime": "{minutes, plural, one {# min read} other {# mins read}}",
+    "loadComments": "Load Comments",
+    "scrollToComments": "Scroll to comments",
+    "backToTop": "Back to top",
+    "copyCode": "Copy code",
+    "copied": "Copied!"
+  },
   "AboutProfile": {
     "avatarAlt": "Avatar of {name}",
     "intro": "Notes on development, projects, and thoughts along the way.",
@@ -56,13 +74,5 @@
     "description": "Moments from work, projects, and learning. Open an entry to read the story behind it.",
     "sampleNote": "These are fictional sample experiences, to be replaced with real stories.",
     "backToJourney": "Back to my journey"
-  },
-  "Projects": {
-    "title": "Projects",
-    "description": "My personal side projects",
-    "linkTo": "View project: {title}",
-    "learnMore": "Learn more",
-    "viewDemo": "View project demo",
-    "viewRepository": "View GitHub repository"
   }
 }

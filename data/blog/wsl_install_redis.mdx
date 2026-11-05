@@ -2,17 +2,17 @@
 title: WSL2 安装 Redis
 date: '2025-10-08'
 tags: ['linux', 'database']
-draft: false
+draft: true
 summary: WSL2 install Redis
 ---
 
-##  🪟一、更新系统
+## 🪟一、更新系统
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-------
+---
 
 ## 🔧 二、安装 Redis
 
@@ -26,12 +26,12 @@ sudo apt install redis-server -y
 redis-server --version
 ```
 
-------
+---
 
 ## ⚙️ 三、修改配置（推荐）
 
 默认 Redis 只监听本地 (`127.0.0.1`)，如果你只在 WSL 内使用，可以保持默认。
- 如果希望 **从 Windows 或其他设备访问 Redis**，需要修改配置。
+如果希望 **从 Windows 或其他设备访问 Redis**，需要修改配置。
 
 打开配置文件：
 
@@ -64,7 +64,7 @@ protected-mode no
 ```
 
 > ⚠️ 注意：**如果你要开放远程访问，务必设置密码！**
->  否则任何人都能访问你的 Redis 实例。
+> 否则任何人都能访问你的 Redis 实例。
 
 设置密码（在同一个配置文件中）：
 
@@ -74,7 +74,7 @@ requirepass yourStrongPassword
 
 保存退出后（`Ctrl + O` → 回车 → `Ctrl + X`）。
 
-------
+---
 
 ## 🚀 四、启动与开机自启
 
@@ -96,7 +96,7 @@ sudo service redis-server status
 sudo systemctl enable redis-server
 ```
 
-------
+---
 
 ## 🧪 五、测试 Redis 是否正常
 

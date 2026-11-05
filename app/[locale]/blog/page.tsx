@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default function BlogPage() {
-  const posts = allCoreContent(sortPosts(allBlogs));
+  const posts = allCoreContent(sortPosts(allBlogs.filter((post) => post.draft !== true)));
 
   return <ModernListLayout posts={posts} />;
 }

@@ -12,12 +12,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export const generateStaticParams = async () => {
-  const totalLegacyPages = Math.ceil(allBlogs.length / LEGACY_POSTS_PER_PAGE);
+  const totalLegacyPages = Math.ceil(allBlogs.filter((post) => post.draft !== true).length / LEGACY_POSTS_PER_PAGE);
   return Array.from({ length: totalLegacyPages }, (_, index) => ({ page: String(index + 1) }));
 };
 
 export default function Page() {
-  const posts = allCoreContent(sortPosts(allBlogs));
+  const posts = allCoreContent(sortPosts(allBlogs.filter((post) => post.draft !== true)));
 
   return <ModernListLayout posts={posts} />;
 }

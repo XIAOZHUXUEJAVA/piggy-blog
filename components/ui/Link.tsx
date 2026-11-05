@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import NextLink from 'next/link';
+import { Link as NextLink } from '@/i18n/navigation';
 import type { LinkProps } from 'next/link';
-import { AnchorHTMLAttributes } from 'react';
+import type { AnchorHTMLAttributes } from 'react';
 
-const Link = ({ href, ...rest }: LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>) => {
+const Link = ({
+  href,
+  ...rest
+}: Omit<LinkProps, 'href' | 'locale'> & AnchorHTMLAttributes<HTMLAnchorElement> & { locale?: string }) => {
   const isInternalLink = href && href.startsWith('/');
   const isAnchorLink = href && href.startsWith('#');
 
-  if (isInternalLink) {
+  if (href && isInternalLink) {
     return <NextLink className="break-words" href={href} {...rest} />;
   }
 

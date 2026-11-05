@@ -1,20 +1,30 @@
 'use client';
 
 import { useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { Comments as CommentsComponent } from 'pliny/comments';
 
 import siteMetadata from '@/data/siteMetadata';
 
 export default function Comments({ slug }: { slug: string }) {
+  const locale = useLocale();
+  const t = useTranslations('Post');
   const [loadComments, setLoadComments] = useState(false);
 
   if (!siteMetadata.comments?.provider) {
     return null;
   }
+  const commentsConfig =
+    siteMetadata.comments.provider === 'giscus'
+      ? {
+          ...siteMetadata.comments,
+          giscusConfig: { ...siteMetadata.comments.giscusConfig, lang: locale === 'zh' ? 'zh-CN' : 'en' },
+        }
+      : siteMetadata.comments;
   return (
     <>
       {loadComments ? (
-        <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
+        <CommentsComponent key={locale} commentsConfig={commentsConfig} slug={slug} />
       ) : (
         <button
           onClick={() => setLoadComments(true)}
@@ -27,7 +37,7 @@ export default function Comments({ slug }: { slug: string }) {
               clipRule="evenodd"
             />
           </svg>
-          Load Comments
+          {t('loadComments')}
         </button>
       )}
     </>

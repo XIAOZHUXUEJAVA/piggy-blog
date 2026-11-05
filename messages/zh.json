@@ -2,7 +2,6 @@
   "Navigation": {
     "home": "首页",
     "blog": "博客",
-    "projects": "项目",
     "about": "关于",
     "portfolio": "作品集",
     "language": "语言",
@@ -43,6 +42,25 @@
     "previousShort": "上一页",
     "next": "下一页"
   },
+  "Post": {
+    "publishedOn": "发布于",
+    "authors": "作者",
+    "authorName": "姓名",
+    "avatarAlt": "{name} 的头像",
+    "tags": "标签",
+    "previousArticle": "上一篇",
+    "nextArticle": "下一篇",
+    "previousPost": "上一篇：{title}",
+    "nextPost": "下一篇：{title}",
+    "backToBlog": "返回博客",
+    "viewOnGithub": "在 GitHub 上查看",
+    "readingTime": "阅读约需 {minutes} 分钟",
+    "loadComments": "加载评论",
+    "scrollToComments": "跳转到评论",
+    "backToTop": "回到顶部",
+    "copyCode": "复制代码",
+    "copied": "已复制！"
+  },
   "AboutProfile": {
     "avatarAlt": "{name} 的头像",
     "intro": "记录开发、项目，以及一路上的思考。",
@@ -56,13 +74,5 @@
     "description": "工作、项目与成长中的一些时刻。点击一段经历，读读背后的故事。",
     "sampleNote": "以下为虚构的示例履历，后续会替换为真实经历。",
     "backToJourney": "返回我的历程"
-  },
-  "Projects": {
-    "title": "项目",
-    "description": "我的个人项目",
-    "linkTo": "查看项目：{title}",
-    "learnMore": "了解更多",
-    "viewDemo": "查看项目演示",
-    "viewRepository": "查看 GitHub 仓库"
   }
 }

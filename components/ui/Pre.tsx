@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface PreProps {
   children?: React.ReactNode;
@@ -9,6 +10,7 @@ interface PreProps {
 }
 
 export default function Pre({ children, className, ...props }: PreProps) {
+  const t = useTranslations('Post');
   const [copied, setCopied] = useState(false);
   const preRef = useRef<HTMLPreElement>(null);
 
@@ -26,15 +28,16 @@ export default function Pre({ children, className, ...props }: PreProps) {
   };
 
   return (
-    <div className="group relative">
+    <div className="code-block">
       <pre ref={preRef} className={className} {...props}>
         {children}
       </pre>
       <button
+        type="button"
         onClick={handleCopy}
-        className="absolute right-3 top-3 z-10 rounded-lg border border-emerald-200/50 bg-gradient-to-r from-emerald-50/95 to-amber-50/95 p-2.5 opacity-0 shadow-md backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:from-emerald-100 hover:to-amber-100 hover:shadow-lg group-hover:opacity-100 dark:border-emerald-700/30 dark:from-emerald-900/90 dark:to-amber-900/90 dark:hover:from-emerald-800/95 dark:hover:to-amber-800/95"
-        aria-label="Copy code"
-        title={copied ? 'Copied!' : 'Copy code'}
+        className="code-copy"
+        aria-label={copied ? t('copied') : t('copyCode')}
+        title={copied ? t('copied') : t('copyCode')}
       >
         {copied ? (
           <svg
@@ -43,20 +46,10 @@ export default function Pre({ children, className, ...props }: PreProps) {
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M5 13l4 4L19 7"
-            />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         ) : (
-          <svg
-            className="h-4 w-4 text-gray-700 transition-colors group-hover:text-emerald-600 dark:text-gray-300 dark:group-hover:text-emerald-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"

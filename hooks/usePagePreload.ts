@@ -24,7 +24,7 @@ export const usePagePreload = () => {
   useEffect(() => {
     if (!mounted || typeof window === 'undefined') return;
 
-    const mainPages = ['/', '/blog', '/about', '/projects', '/tags'];
+    const mainPages = ['/', '/blog', '/about'];
     mainPages.forEach((page) => {
       router.prefetch(page);
     });

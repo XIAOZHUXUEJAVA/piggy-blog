@@ -43,7 +43,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1);
 
   const filteredPosts = allCoreContent(
-    sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
+    sortPosts(allBlogs.filter((post) => post.draft !== true && post.tags?.some((t) => slug(t) === tag)))
   );
 
   if (filteredPosts.length === 0) {

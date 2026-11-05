@@ -19,18 +19,21 @@ const layouts = {
   PostBanner,
 };
 
-export async function generateMetadata({ params }: { params: { slug: string[] } }): Promise<Metadata | undefined> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string; slug: string[] };
+}): Promise<Metadata | undefined> {
   const slug = decodeURI(params.slug.join('/'));
-  const post = allBlogs.find((p) => p.slug === slug);
+  const post = allBlogs.find((p) => p.slug === slug && p.draft !== true);
+  if (!post) {
+    return notFound();
+  }
   const authorList = post?.authors || ['default'];
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author);
     return coreContent(authorResults as Authors);
   });
-  if (!post) {
-    return;
-  }
-
   const publishedAt = new Date(post.date).toISOString();
   const modifiedAt = new Date(post.lastmod || post.date).toISOString();
   const authors = authorDetails.map((author) => author.name);
@@ -51,7 +54,7 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
       title: post.title,
       description: post.summary,
       siteName: siteMetadata.title,
-      locale: 'en_US',
+      locale: params.locale === 'zh' ? 'zh_CN' : 'en_US',
       type: 'article',
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
@@ -69,13 +72,14 @@ export async function generateMetadata({ params }: { params: { slug: string[] } 
 }
 
 export const generateStaticParams = async () => {
-  return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }));
+  return allBlogs
+    .filter((post) => post.draft !== true)
+    .map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }));
 };
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = decodeURI(params.slug.join('/'));
-  // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs));
+  const sortedCoreContents = allCoreContent(sortPosts(allBlogs.filter((post) => post.draft !== true)));
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
   if (postIndex === -1) {
     return notFound();

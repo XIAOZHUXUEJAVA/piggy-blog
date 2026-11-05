@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 import Bleed from 'pliny/ui/Bleed';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
@@ -14,6 +15,7 @@ interface LayoutProps {
 }
 
 export default function PostMinimal({ content, next, prev, children }: LayoutProps) {
+  const t = useTranslations('Post');
   const { slug, title, images } = content;
   const displayImage = images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400';
 
@@ -47,7 +49,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                   <Link
                     href={`/${prev.path}`}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Previous post: ${prev.title}`}
+                    aria-label={t('previousPost', { title: prev.title })}
                   >
                     &larr; {prev.title}
                   </Link>
@@ -58,7 +60,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                   <Link
                     href={`/${next.path}`}
                     className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Next post: ${next.title}`}
+                    aria-label={t('nextPost', { title: next.title })}
                   >
                     {next.title} &rarr;
                   </Link>

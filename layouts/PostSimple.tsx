@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
@@ -17,6 +18,7 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
+  const t = useTranslations('Post');
   const { slug, date, title, tags, readingTime } = content;
 
   return (
@@ -33,7 +35,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 <BlogTags tags={tags} />
                 <dl>
                   <div>
-                    <dt className="sr-only">Published on</dt>
+                    <dt className="sr-only">{t('publishedOn')}</dt>
                     <BlogMeta date={date} readingTime={readingTime} />
                   </div>
                 </dl>
@@ -58,7 +60,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                     <Link
                       href={`/${prev.path}`}
                       className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
-                      aria-label={`Previous post: ${prev.title}`}
+                      aria-label={t('previousPost', { title: prev.title })}
                     >
                       &larr; {prev.title}
                     </Link>
@@ -69,7 +71,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                     <Link
                       href={`/${next.path}`}
                       className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
-                      aria-label={`Next post: ${next.title}`}
+                      aria-label={t('nextPost', { title: next.title })}
                     >
                       {next.title} &rarr;
                     </Link>
