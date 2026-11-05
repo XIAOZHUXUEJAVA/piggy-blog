@@ -5,16 +5,17 @@ import 'pliny/search/algolia.css';
 import 'remark-github-blockquote-alert/alert.css';
 
 import { Metadata } from 'next';
-import { Outfit } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import siteMetadata from '@/data/siteMetadata';
 
 import { ThemeProviders } from './theme-providers';
 
-const FONT_OUTFIT = Outfit({
-  subsets: ['latin'],
+const FONT_OUTFIT = localFont({
+  src: './fonts/Outfit-Variable.ttf',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: '100 900',
+  style: 'normal',
   variable: '--font-outfit',
 });
 
