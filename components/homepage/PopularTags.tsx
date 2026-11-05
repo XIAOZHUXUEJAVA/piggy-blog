@@ -38,11 +38,11 @@ const PopularTags = () => {
           {/* 右侧：查看更多按钮和统计信息 */}
           <div className="contents">
             <Link
-              href="/tags"
+              href="/blog"
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-teal-100 px-6 py-3 text-sm font-medium text-gray-700 shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg dark:from-green-900/30 dark:to-teal-900/30 dark:text-gray-300 lg:col-start-2 lg:row-start-1 lg:justify-self-end"
             >
               <Twemoji emoji="backhand-index-pointing-right" />
-              <span>{t('exploreAllTags')}</span>
+              <span>{t('discoverAllPosts')}</span>
               {/* <div className="transition-transform duration-200 group-hover:translate-x-1">→</div> */}
             </Link>
 

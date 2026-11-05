@@ -1,4 +1,16 @@
 /* Blog specific styles */
+.archive-page {
+  padding-bottom: 4rem;
+}
+
+.archive-shell {
+  width: 100%;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;

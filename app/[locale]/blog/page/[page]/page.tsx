@@ -4,7 +4,7 @@ import { allBlogs } from 'contentlayer/generated';
 import { genPageMetadata } from 'app/seo';
 import { getTranslations } from 'next-intl/server';
 
-const POSTS_PER_PAGE = 6;
+const LEGACY_POSTS_PER_PAGE = 6;
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   const t = await getTranslations({ locale: params.locale, namespace: 'Blog' });
@@ -12,22 +12,12 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export const generateStaticParams = async () => {
-  const totalPages = Math.ceil(allBlogs.length / POSTS_PER_PAGE);
-  const paths = Array.from({ length: totalPages }, (_, i) => ({ page: (i + 1).toString() }));
-
-  return paths;
+  const totalLegacyPages = Math.ceil(allBlogs.length / LEGACY_POSTS_PER_PAGE);
+  return Array.from({ length: totalLegacyPages }, (_, index) => ({ page: String(index + 1) }));
 };
 
-export default function Page({ params }: { params: { page: string } }) {
+export default function Page() {
   const posts = allCoreContent(sortPosts(allBlogs));
-  const pageNumber = parseInt(params.page as string);
-  const initialDisplayPosts = posts.slice(POSTS_PER_PAGE * (pageNumber - 1), POSTS_PER_PAGE * pageNumber);
-  const pagination = {
-    currentPage: pageNumber,
-    totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-  };
 
-  return (
-    <ModernListLayout posts={posts} initialDisplayPosts={initialDisplayPosts} pagination={pagination} />
-  );
+  return <ModernListLayout posts={posts} />;
 }

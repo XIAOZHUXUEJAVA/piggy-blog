@@ -1,416 +1,270 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useMemo, useState } from 'react';
+import { ChevronDown, Search, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, Link } from '@/i18n/navigation';
-import { formatDate } from 'pliny/utils/formatDate';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
-import SimpleTag from '@/components/ui/SimpleTag';
-
-interface PaginationProps {
-  totalPages: number;
-  currentPage: number;
-}
+import { Link } from '@/i18n/navigation';
 
 interface ModernListLayoutProps {
   posts: CoreContent<Blog>[];
   title?: string;
-  initialDisplayPosts?: CoreContent<Blog>[];
-  pagination?: PaginationProps;
 }
 
-// Interactive Card Component with mouse follow effect
-const InteractiveCard = ({ post, index }: { post: CoreContent<Blog>; index: number }) => {
-  const { slug, date, title, summary, tags } = post;
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const locale = useLocale();
-  const t = useTranslations('Blog');
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    setMousePosition({ x, y });
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const rotate = {
-    x: isHovered ? (mousePosition.y - 200) / 15 : 0,
-    y: isHovered ? (mousePosition.x - 200) / 15 : 0,
-  };
-
-  return (
-    <article
-      ref={cardRef}
-      className="group relative overflow-hidden rounded-2xl border border-gray-200/50 bg-white/80 shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-2xl dark:border-gray-700/50 dark:bg-gray-800/80"
-      style={{
-        animationDelay: `${index * 100}ms`,
-        transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
-        transformStyle: 'preserve-3d',
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute -right-4 -top-4 h-20 w-20 rounded-full bg-green-500/20"></div>
-        <div className="absolute -bottom-2 -left-2 h-12 w-12 rounded-full bg-orange-500/20"></div>
-      </div>
-
-      {/* Mouse follow shine effect */}
-      <div
-        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.3) 0%, transparent 50%)`,
-        }}
-      />
-
-      {/* Background Link for entire card */}
-      <Link href={`/blog/${slug}`} className="absolute inset-0 z-10" aria-label={t('readArticle', { title })} />
-
-      <div className="pointer-events-none relative z-20 p-6">
-        {/* Date Badge */}
-        <div className="mb-4">
-          <time
-            dateTime={date}
-            className="inline-block rounded-full bg-gradient-to-r from-green-100 to-yellow-100 px-3 py-1 text-sm font-medium text-green-700 shadow-sm backdrop-blur-sm dark:from-green-900/30 dark:to-yellow-900/30 dark:text-green-300"
-            style={{
-              background: 'linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(234,179,8,0.1) 100%)',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
-            }}
-          >
-            {formatDate(date, locale === 'zh' ? 'zh-CN' : 'en-US')}
-          </time>
-        </div>
-
-        {/* Title */}
-        <h2 className="relative z-10 mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-green-600 dark:text-gray-100 dark:group-hover:text-green-400">
-          {title}
-        </h2>
-
-        {/* Summary */}
-        <p className="mb-4 line-clamp-3 text-gray-600 dark:text-gray-300">{summary}</p>
-
-        {/* Tags */}
-        {tags && tags.length > 0 && (
-          <div className="pointer-events-auto relative z-30 flex flex-wrap gap-2">
-            {tags.slice(0, 3).map((tag) => (
-              <SimpleTag key={tag} text={tag} />
-            ))}
-            {tags.length > 3 && (
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {t('moreTags', { count: tags.length - 3 })}
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Read More Arrow */}
-        <div className="pointer-events-none absolute bottom-4 right-4 z-30 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
-          <svg className="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      </div>
-
-      {/* Hover Effect */}
-      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full"></div>
-    </article>
-  );
-};
-
-function ModernPagination({ totalPages, currentPage }: PaginationProps) {
-  const pathname = usePathname();
-  const basePath = pathname.split('/')[1];
-  const t = useTranslations('Blog');
-  const prevPage = currentPage - 1 > 0;
-  const nextPage = currentPage + 1 <= totalPages;
-
-  // Generate visible page numbers for mobile
-  const getVisiblePages = () => {
-    const delta = 1;
-    const result: (number | string)[] = [];
-
-    // Always show first page
-    result.push(1);
-
-    // Add dots if needed
-    if (currentPage - delta > 2) {
-      result.push('...');
-    }
-
-    // Add pages around current page
-    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
-      if (i !== 1 && i !== totalPages) {
-        result.push(i);
-      }
-    }
-
-    // Add dots if needed
-    if (currentPage + delta < totalPages - 1) {
-      result.push('...');
-    }
-
-    // Always show last page if more than 1 page
-    if (totalPages > 1) {
-      result.push(totalPages);
-    }
-
-    // Remove duplicates
-    return result.filter((item, index) => result.indexOf(item) === index);
-  };
-
-  return (
-    <div className="flex items-center justify-center px-4 py-8">
-      <div className="flex items-center space-x-1 sm:space-x-2">
-        {prevPage ? (
-          <Link
-            href={currentPage - 1 === 1 ? `/${basePath}` : `/${basePath}/page/${currentPage - 1}`}
-            rel="prev"
-            className="group flex items-center space-x-1 rounded-lg bg-gradient-to-r from-green-500 to-yellow-500 px-3 py-2 text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:px-4 sm:py-2 sm:text-base"
-            style={{
-              background: 'linear-gradient(135deg, #22c55e 0%, #eab308 100%)',
-              boxShadow: '0 4px 16px rgba(34,197,94,0.3), inset 0 1px 0 rgba(255,255,255,0.3)',
-            }}
-          >
-            <svg
-              className="h-3 w-3 transition-transform group-hover:-translate-x-1 sm:h-4 sm:w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="hidden sm:inline">{t('previous')}</span>
-            <span className="sm:hidden">{t('previousShort')}</span>
-          </Link>
-        ) : (
-          <button
-            disabled
-            className="flex items-center space-x-1 rounded-lg bg-gray-200 px-3 py-2 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-500 sm:px-4 sm:py-2 sm:text-base"
-          >
-            <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="hidden sm:inline">{t('previous')}</span>
-            <span className="sm:hidden">{t('previousShort')}</span>
-          </button>
-        )}
-
-        <div className="flex items-center space-x-1">
-          {/* Desktop: Show all pages */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <Link
-                key={page}
-                href={page === 1 ? `/${basePath}` : `/${basePath}/page/${page}`}
-                className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 sm:h-10 sm:w-10 ${
-                  page === currentPage
-                    ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-                }`}
-                style={
-                  page === currentPage
-                    ? {
-                        background: 'linear-gradient(135deg, #22c55e 0%, #eab308 100%)',
-                        boxShadow: '0 4px 12px rgba(34,197,94,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
-                      }
-                    : {}
-                }
-              >
-                {page}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile: Show limited pages with dots */}
-          <div className="flex items-center space-x-1 sm:hidden">
-            {getVisiblePages().map((page, index) =>
-              page === '...' ? (
-                <span key={index} className="px-2 text-gray-400">
-                  ...
-                </span>
-              ) : (
-                <Link
-                  key={page}
-                  href={page === 1 ? `/${basePath}` : `/${basePath}/page/${page}`}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full text-sm transition-all duration-200 ${
-                    page === currentPage
-                      ? 'bg-gradient-to-r from-green-500 to-yellow-500 text-white shadow-lg'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
-                  }`}
-                  style={
-                    page === currentPage
-                      ? {
-                          background: 'linear-gradient(135deg, #22c55e 0%, #eab308 100%)',
-                          boxShadow: '0 4px 12px rgba(34,197,94,0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
-                        }
-                      : {}
-                  }
-                >
-                  {page}
-                </Link>
-              )
-            )}
-          </div>
-        </div>
-
-        {nextPage ? (
-          <Link
-            href={`/${basePath}/page/${currentPage + 1}`}
-            rel="next"
-            className="group flex items-center space-x-1 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 px-3 py-2 text-sm text-white transition-all duration-300 hover:scale-105 hover:shadow-lg sm:px-4 sm:py-2 sm:text-base"
-            style={{
-              background: 'linear-gradient(135deg, #eab308 0%, #f97316 100%)',
-              boxShadow: '0 4px 16px rgba(234,179,8,0.3), inset 0 1px 0 rgba(255,255,255,0.3)',
-            }}
-          >
-            <span className="hidden sm:inline">{t('next')}</span>
-            <span className="sm:hidden">{t('next')}</span>
-            <svg
-              className="h-3 w-3 transition-transform group-hover:translate-x-1 sm:h-4 sm:w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        ) : (
-          <button
-            disabled
-            className="flex items-center space-x-1 rounded-lg bg-gray-200 px-3 py-2 text-sm text-gray-400 dark:bg-gray-700 dark:text-gray-500 sm:px-4 sm:py-2 sm:text-base"
-          >
-            <span className="hidden sm:inline">{t('next')}</span>
-            <span className="sm:hidden">{t('next')}</span>
-            <svg className="h-3 w-3 sm:h-4 sm:w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        )}
-      </div>
-    </div>
-  );
+interface YearGroup {
+  year: number;
+  posts: CoreContent<Blog>[];
 }
 
-export default function ModernListLayout({
-  posts,
-  title,
-  initialDisplayPosts = [],
-  pagination,
-}: ModernListLayoutProps) {
-  const [searchValue, setSearchValue] = useState('');
-  const t = useTranslations('Blog');
-  const filteredBlogPosts = posts.filter((post) => {
-    const searchContent = post.title + post.summary + post.tags?.join(' ');
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase());
+function getDateParts(date: string, locale: string) {
+  const value = new Date(date);
+  const month = String(value.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(value.getUTCDate()).padStart(2, '0');
+  const year = value.getUTCFullYear();
+
+  return {
+    day: `${month}-${day}`,
+    year,
+    full: new Intl.DateTimeFormat(locale === 'zh' ? 'zh-CN' : 'en-US', {
+      dateStyle: 'medium',
+      timeZone: 'UTC',
+    }).format(value),
+  };
+}
+
+function getTagCounts(posts: CoreContent<Blog>[]) {
+  const counts = new Map<string, number>();
+
+  posts.forEach((post) => {
+    (post.tags ?? []).forEach((tag) => counts.set(tag, (counts.get(tag) ?? 0) + 1));
   });
 
-  const displayPosts = initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts;
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
+export default function ModernListLayout({ posts, title }: ModernListLayoutProps) {
+  const locale = useLocale();
+  const t = useTranslations('Blog');
+  const [searchValue, setSearchValue] = useState('');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [showAllTags, setShowAllTags] = useState(false);
+
+  const tagCounts = useMemo(() => getTagCounts(posts), [posts]);
+  const visibleTagCounts = useMemo(() => {
+    if (showAllTags) return tagCounts;
+
+    const commonTags = tagCounts.slice(0, 8);
+    const selectedTagsNotInCommon = tagCounts.filter(
+      ([tag]) => selectedTags.includes(tag) && !commonTags.some(([commonTag]) => commonTag === tag)
+    );
+
+    return [...commonTags, ...selectedTagsNotInCommon];
+  }, [selectedTags, showAllTags, tagCounts]);
+
+  const filteredPosts = useMemo(() => {
+    const query = searchValue.trim().toLowerCase();
+
+    return posts.filter((post) => {
+      const content = [post.title, post.summary ?? '', ...(post.tags ?? [])].join(' ').toLowerCase();
+      const matchesSearch = !query || content.includes(query);
+      const matchesTags = selectedTags.every((tag) => post.tags?.includes(tag));
+
+      return matchesSearch && matchesTags;
+    });
+  }, [posts, searchValue, selectedTags]);
+
+  const yearGroups = useMemo(() => {
+    const groups = new Map<number, CoreContent<Blog>[]>();
+
+    filteredPosts.forEach((post) => {
+      const { year } = getDateParts(post.date, locale);
+      const group = groups.get(year) ?? [];
+      group.push(post);
+      groups.set(year, group);
+    });
+
+    return [...groups.entries()]
+      .sort(([first], [second]) => second - first)
+      .map(([year, groupedPosts]) => ({ year, posts: groupedPosts }) satisfies YearGroup);
+  }, [filteredPosts, locale]);
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((current) => (current.includes(tag) ? current.filter((item) => item !== tag) : [...current, tag]));
+  };
+
+  const clearFilters = () => {
+    setSearchValue('');
+    setSelectedTags([]);
+  };
+
+  const hasFilters = searchValue.trim().length > 0 || selectedTags.length > 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-yellow-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16">
-        {/* Header Section */}
-        <div className="mb-12 text-center">
-          <div className="inline-block">
-            <h1 className="mb-4 text-5xl font-bold text-gray-900 dark:text-white md:text-7xl">{title || t('title')}</h1>
-            <div className="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-500 shadow-lg"></div>
-          </div>
-        </div>
+    <div className="archive-page">
+      <div className="archive-shell">
+        <header className="border-b border-gray-200 pb-6 dark:border-gray-700">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+                {title || t('title')}
+              </h1>
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{t('archiveDescription')}</p>
+            </div>
 
-        {/* Search Section */}
-        <div className="mb-12 flex justify-center">
-          <div className="relative w-full max-w-md">
-            <input
-              aria-label={t('searchLabel')}
-              type="text"
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder={t('searchPlaceholder')}
-              className="w-full rounded-2xl border-2 border-gray-200 bg-white/80 px-6 py-4 pl-12 text-gray-900 backdrop-blur-sm transition-all duration-300 focus:border-green-500 focus:outline-none focus:ring-4 focus:ring-green-500/20 dark:border-gray-600 dark:bg-gray-800/80 dark:text-gray-100 dark:focus:border-green-400"
-              style={{
-                boxShadow: '0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6)',
-              }}
-            />
-            <svg
-              className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 dark:text-gray-500"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            <label className="relative block w-full sm:max-w-xs">
+              <span className="sr-only">{t('searchLabel')}</span>
+              <Search
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+                aria-hidden="true"
               />
-            </svg>
+              <input
+                aria-label={t('searchLabel')}
+                type="search"
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                placeholder={t('searchPlaceholder')}
+                className="h-10 w-full rounded-lg border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-lime-600 focus:ring-2 focus:ring-lime-600/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-lime-400"
+              />
+            </label>
           </div>
-        </div>
+        </header>
 
-        {/* Posts Grid */}
-        <div className="mx-auto max-w-6xl">
-          {!filteredBlogPosts.length ? (
-            <div className="py-16 text-center">
-              <div className="mb-4 text-6xl">📝</div>
-              <p className="text-xl text-gray-500 dark:text-gray-400">{t('noPostsFound')}</p>
+        <section className="border-b border-gray-200 py-5 dark:border-gray-700" aria-labelledby="archive-tags-heading">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <h2 id="archive-tags-heading" className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                {t('filterTags')}
+              </h2>
+              <span className="text-xs text-gray-400">{tagCounts.length}</span>
+            </div>
+            <div className="flex shrink-0 items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+              <span>{t('articleCount', { count: filteredPosts.length })}</span>
+              {hasFilters && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="inline-flex items-center gap-1 text-gray-700 underline decoration-gray-300 underline-offset-4 transition hover:text-gray-950 dark:text-gray-200 dark:hover:text-white"
+                >
+                  <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  {t('clearFilters')}
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            {visibleTagCounts.map(([tag, count]) => {
+              const active = selectedTags.includes(tag);
+
+              return (
+                <button
+                  key={tag}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => toggleTag(tag)}
+                  className={`inline-flex min-h-8 items-center gap-2 rounded-md px-3 py-1.5 text-sm transition ${
+                    active
+                      ? 'bg-lime-600 font-medium text-white dark:bg-lime-500 dark:text-gray-950'
+                      : 'bg-lime-50 text-gray-700 hover:bg-lime-100 hover:text-gray-950 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
+                  }`}
+                >
+                  <span>{tag}</span>
+                  <span className={`text-xs ${active ? 'text-white/80 dark:text-gray-950/70' : 'text-gray-400'}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+            {tagCounts.length > 8 && (
+              <button
+                type="button"
+                aria-expanded={showAllTags}
+                onClick={() => setShowAllTags((current) => !current)}
+                className="inline-flex min-h-8 items-center gap-1 rounded-md px-2 text-sm font-medium text-lime-700 transition hover:bg-lime-50 hover:text-lime-900 dark:text-lime-400 dark:hover:bg-gray-800 dark:hover:text-lime-300"
+              >
+                {showAllTags ? t('showFewerTags') : t('showMoreTags', { count: tagCounts.length - 8 })}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${showAllTags ? 'rotate-180' : ''}`}
+                  aria-hidden="true"
+                />
+              </button>
+            )}
+          </div>
+        </section>
+
+        <main className="pt-7" aria-label={t('archiveLabel')}>
+          {yearGroups.length === 0 ? (
+            <div className="border-y border-dashed border-gray-300 py-16 text-center dark:border-gray-700">
+              <p className="text-gray-500 dark:text-gray-400">{t('noPostsFound')}</p>
+              {hasFilters && (
+                <button
+                  type="button"
+                  onClick={clearFilters}
+                  className="mt-3 text-sm font-medium text-lime-700 underline underline-offset-4 hover:text-lime-900 dark:text-lime-400 dark:hover:text-lime-300"
+                >
+                  {t('clearFilters')}
+                </button>
+              )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {displayPosts.map((post, index) => (
-                <InteractiveCard key={post.slug} post={post} index={index} />
+            <div className="space-y-10">
+              {yearGroups.map((group) => (
+                <section key={group.year} aria-labelledby={`year-${group.year}`}>
+                  <div className="grid grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]">
+                    <h2
+                      id={`year-${group.year}`}
+                      className="text-2xl font-bold leading-10 text-gray-900 dark:text-gray-100 md:text-3xl"
+                    >
+                      {group.year}
+                    </h2>
+                    <div className="flex items-center justify-center">
+                      <span className="h-3 w-3 rounded-full border-2 border-lime-600 bg-white dark:border-lime-400 dark:bg-gray-900" />
+                    </div>
+                    <p className="flex items-center pl-4 text-sm text-gray-500 dark:text-gray-400 md:pl-5">
+                      {t('articleCount', { count: group.posts.length })}
+                    </p>
+                  </div>
+
+                  <div className="relative before:absolute before:bottom-0 before:left-[4.25rem] before:top-0 before:border-l before:border-dashed before:border-gray-300 dark:before:border-gray-700 md:before:left-[5.25rem]">
+                    {group.posts.map((post) => {
+                      const date = getDateParts(post.date, locale);
+
+                      return (
+                        <article
+                          key={post.slug}
+                          className="group relative grid min-h-11 grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]"
+                        >
+                          <time
+                            dateTime={post.date}
+                            title={date.full}
+                            className="flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 dark:text-gray-400 md:text-sm"
+                          >
+                            {date.day}
+                          </time>
+                          <div className="relative z-10 flex items-center justify-center">
+                            <span className="h-1.5 w-1.5 rounded-full bg-gray-500 outline outline-4 outline-white transition-all group-hover:h-2.5 group-hover:w-2.5 group-hover:bg-lime-600 group-hover:outline-gray-50 dark:bg-gray-500 dark:outline-gray-950 dark:group-hover:bg-lime-400 dark:group-hover:outline-gray-900" />
+                          </div>
+                          <Link
+                            href={`/blog/${post.slug}`}
+                            aria-label={t('readArticle', { title: post.title })}
+                            className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-gray-800 transition-colors hover:text-lime-700 focus-visible:z-20 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600 dark:text-gray-200 dark:hover:text-lime-400 md:pl-5 md:text-base"
+                          >
+                            <span className="truncate">{post.title}</span>
+                          </Link>
+                          <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 dark:text-gray-500 md:flex">
+                            {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </section>
               ))}
             </div>
           )}
-        </div>
-
-        {/* Pagination */}
-        {pagination && pagination.totalPages > 1 && !searchValue && (
-          <ModernPagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
-        )}
-
-        {/* Stats Section */}
-        <div className="mt-20 text-center">
-          <div className="relative inline-flex items-center rounded-2xl bg-white/90 shadow-2xl backdrop-blur-xl dark:bg-gray-800/90">
-            {/* 简化的边框效果 */}
-            <div className="absolute inset-0 rounded-2xl border border-white/20 dark:border-gray-600/30"></div>
-
-            {/* Total Posts */}
-            <div className="relative z-10 px-8 py-6 text-center">
-              <div className="bg-gradient-to-r from-green-600 to-yellow-600 bg-clip-text text-3xl font-bold text-transparent">
-                {posts.length}
-              </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('totalPosts')}</div>
-            </div>
-
-            {/* Divider */}
-            <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent dark:via-gray-600"></div>
-
-            {/* Topics */}
-            <div className="relative z-10 px-8 py-6 text-center">
-              <div className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-3xl font-bold text-transparent">
-                {Array.from(new Set(posts.flatMap((post) => post.tags || []))).length}
-              </div>
-              <div className="mt-1 text-sm font-medium text-gray-600 dark:text-gray-400">{t('topics')}</div>
-            </div>
-          </div>
-        </div>
+        </main>
       </div>
     </div>
   );

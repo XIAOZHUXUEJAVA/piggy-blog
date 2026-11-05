@@ -1,7 +1,6 @@
 const headerNavLinks = [
   { href: '/', key: 'home' },
   { href: '/blog', key: 'blog' },
-  { href: '/tags', key: 'tags' },
   { href: '/projects', key: 'projects' },
   { href: '/about', key: 'about' },
   { href: 'https://piggyportfolio.netlify.app/', key: 'portfolio' },

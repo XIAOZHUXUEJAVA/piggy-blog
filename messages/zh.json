@@ -2,7 +2,6 @@
   "Navigation": {
     "home": "首页",
     "blog": "博客",
-    "tags": "标签",
     "projects": "项目",
     "about": "关于",
     "portfolio": "作品集",
@@ -12,7 +11,6 @@
   },
   "Homepage": {
     "popularTags": "热门标签",
-    "exploreAllTags": "查看全部标签",
     "topicsCount": "{count} 个话题",
     "updatedDaily": "每日更新",
     "recentPosts": "近期文章",
@@ -27,9 +25,16 @@
   "Blog": {
     "title": "博客",
     "description": "分享技术与开发领域的见解、教程与思考。",
+    "archiveLabel": "文章归档",
+    "archiveDescription": "按时间浏览所有文章，寻找过去留下的记录。",
     "searchLabel": "搜索文章",
     "searchPlaceholder": "搜索文章...",
     "noPostsFound": "没有找到文章",
+    "articleCount": "{count} 篇文章",
+    "filterTags": "按标签筛选",
+    "showMoreTags": "展开其余 {count} 个标签",
+    "showFewerTags": "收起标签",
+    "clearFilters": "清除筛选",
     "totalPosts": "文章总数",
     "topics": "话题",
     "readArticle": "阅读文章：{title}",
@@ -37,16 +42,6 @@
     "previous": "上一页",
     "previousShort": "上一页",
     "next": "下一页"
-  },
-  "Tags": {
-    "title": "标签",
-    "description": "浏览全部文章标签，发现感兴趣的主题。",
-    "noTagsFound": "没有找到标签",
-    "viewTag": "查看带有“{tag}”标签的文章",
-    "articleCount": "{count} 篇文章",
-    "popular": "热门",
-    "totalTags": "标签总数",
-    "totalArticles": "文章总数"
   },
   "AboutProfile": {
     "avatarAlt": "{name} 的头像",
