@@ -13,7 +13,6 @@ import Logo from 'public/static/images/logo.svg';
 
 import MobileNav from './MobileNav';
 import ThemeSwitch from './ThemeSwitch';
-// import SearchButton from './SearchButton';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = memo(() => {
@@ -94,7 +93,6 @@ const Header = memo(() => {
           <div className="flex items-center">
             <LanguageSwitcher />
             <ThemeSwitch />
-            {/* <SearchButton /> */}
             <MobileNav />
           </div>
         </div>

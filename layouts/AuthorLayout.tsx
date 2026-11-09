@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import type { Authors } from 'contentlayer/generated';
 import { Icon } from '@iconify/react';
-// import { CareerTimeline } from '@/components/about';
 import { Link, Image, Twemoji } from '@/components/ui';
 
 interface Props {
@@ -55,7 +54,6 @@ export default function AuthorLayout({ children, content }: Props) {
               Hello, friends! <Twemoji className="mx-2" emoji="waving-hand" /> I'm Piggy DP.
             </h2>
             <div className="flex items-center justify-between">{/* <h2>My Career</h2> */}</div>
-            {/* <CareerTimeline /> */}
             {/* <h2>Tech stack</h2>
             <p>
               This blog is built with{' '}

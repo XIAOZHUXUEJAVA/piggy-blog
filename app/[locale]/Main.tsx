@@ -278,8 +278,6 @@ export default function Home({ posts }) {
           </svg>
         </button>
       )}
-
-      {/* <CubeSplitter /> */}
     </div>
   );
 }
