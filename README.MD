@@ -1,36 +1,24 @@
 # Piggy's Blog
 
-一个基于 Next.js 14 构建的现代化博客系统，支持 MDX 文章、深色模式、搜索功能和评论系统。
+基于 Next.js 14 的个人博客系统，使用 MDX 编写文章，支持深色模式、搜索、评论和多语言。
 
-体验地址： https://piggyblog.xyz/
+体验地址：https://piggyblog.xyz/
 
 ## 技术栈
 
-- **框架**: Next.js 14 (App Router)
-- **样式**: Tailwind CSS
-- **内容管理**: Contentlayer2 + MDX
-
-- **部署**: Vercel / Netlify
-- **评论系统**: Giscus
-- **搜索**: Kbar
-
-## 功能特性
-
-- 📝 支持 MDX 格式的博客文章
-- 🌙 深色/浅色主题切换
-- 🔍 全站搜索功能
-- 💬 基于 GitHub Discussions 的评论系统
-
-- 🏷️ 标签分类系统
-- 📱 响应式设计
-- ⚡ 性能优化和 SEO 友好
+- **框架**：Next.js 14 (App Router)
+- **语言**：TypeScript
+- **样式**：Tailwind CSS
+- **内容**：Contentlayer2 + MDX
+- **国际化**：next-intl
+- **组件库**：pliny
 
 ## 快速开始
 
 ### 环境要求
 
 - Node.js 18+
-- Yarn 包管理器
+- Yarn
 
 ### 安装依赖
 
@@ -38,17 +26,16 @@
 yarn install
 ```
 
-### 环境配置
+### 环境变量
 
-创建 `.env.local` 文件并配置以下环境变量：
+创建 `.env.local` 文件：
 
 ```bash
-# Giscus 评论系统配置
+# Giscus 评论配置
 NEXT_PUBLIC_GISCUS_REPO="your-username/your-repo"
 NEXT_PUBLIC_GISCUS_REPOSITORY_ID="your-repository-id"
 NEXT_PUBLIC_GISCUS_CATEGORY="General"
 NEXT_PUBLIC_GISCUS_CATEGORY_ID="your-category-id"
-
 ```
 
 ### 启动开发服务器
@@ -57,14 +44,11 @@ NEXT_PUBLIC_GISCUS_CATEGORY_ID="your-category-id"
 yarn dev
 ```
 
-访问 [http://localhost:3000](http://localhost:3000) 查看博客。
+访问 http://localhost:3000。
 
 ## 内容管理
 
-### 添加文章
-
-1. 在 `data/blog/` 目录下创建 `.mdx` 文件
-2. 文件头部添加 frontmatter：
+在 `data/blog/` 目录下创建 `.mdx` 文件，frontmatter 示例：
 
 ```yaml
 ---
@@ -76,75 +60,62 @@ summary: '文章摘要'
 ---
 ```
 
-3. 使用 Markdown 或 MDX 语法编写内容
+## 项目结构
+
+```
+├── app/                    # Next.js App Router
+│   ├── [locale]/           # 国际化路由
+│   │   ├── about/
+│   │   ├── blog/
+│   │   ├── career/
+│   │   ├── projects/
+│   │   └── tags/
+│   └── api/                # API 路由
+├── components/             # React 组件
+├── contentlayer.config.ts  # Contentlayer 配置
+├── css/                    # 全局样式
+├── data/                   # 内容和数据
+│   ├── authors/
+│   └── blog/
+├── hooks/                  # 自定义 Hooks
+├── i18n/                   # 国际化配置
+├── layouts/                # 页面布局
+├── messages/               # 多语言文案
+├── prisma/                 # Prisma 数据库配置
+├── public/                 # 静态资源
+├── scripts/                # 构建脚本
+├── servers/                # 服务端代码
+├── types/                  # TypeScript 类型
+└── utils/                  # 工具函数
+```
+
+## 常用脚本
+
+```bash
+yarn dev      # 启动开发服务器
+yarn build    # 构建生产版本
+yarn serve    # 启动生产服务器
+yarn lint     # 代码检查
+```
 
 ## 部署
 
-### Vercel 部署
+### Vercel
 
 1. 将代码推送到 GitHub
-2. 在 Vercel 中导入项目
+2. 在 Vercel 导入项目
 3. 配置环境变量
-4. 部署完成
+4. 完成部署
 
-### Netlify 部署
-
-1. 将代码推送到 GitHub
-2. 在 Netlify 中连接仓库
-3. 配置环境变量
-
-### Docker 部署
+### Docker
 
 ```bash
-# 构建镜像
 docker build -t piggy-blog .
-
-# 运行容器
 docker run -p 3000:3000 --env-file .env.local piggy-blog
 ```
 
-## 开发指南
-
-### 项目结构
-
-```
-├── app/                 # Next.js App Router 页面
-├── components/          # React 组件
-├── data/               # 博客文章和配置
-├── public/             # 静态资源
-├── styles/             # 样式文件
-├── utils/              # 工具函数
-```
-
-### 可用脚本
-
-```bash
-yarn dev          # 启动开发服务器
-yarn build        # 构建生产版本
-yarn start        # 启动生产服务器
-yarn lint         # 代码检查
-```
-
-### 自定义主题
-
-编辑 `tailwind.config.js` 文件来自定义颜色、字体等样式配置。
-
-## 常见问题
-
-### 构建失败
-
-检查所有环境变量是否正确配置。
-
-### 评论系统不显示
-
-确保 Giscus 相关的环境变量已正确配置，并且 GitHub 仓库已启用 Discussions 功能。
-
-## 感谢
-
-借鉴于开源项目： https://github.com/timlrx/tailwind-nextjs-starter-blog
-
 ## 许可证
 
-本项目基于 [MIT License](./LICENSE) 开源协议发布。
+[MIT License](./LICENSE)
 
 Copyright (c) 2025 xiaozhu <https://github.com/XIAOZHUXUEJAVA>

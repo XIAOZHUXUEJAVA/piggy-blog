@@ -1,43 +1,51 @@
-# Build BASE
-FROM node:18-alpine as BASE
-LABEL author="karhdo <karhdo.trong@gmail.com>"
+# 安装依赖
+FROM node:20-alpine AS deps
+LABEL author="xiaozhu <xiaozhuzhulzq@163.com>"
 
 WORKDIR /app
+
+# sharp 在 alpine 上需要 libc6-compat
+RUN apk add --no-cache libc6-compat
+
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn/releases /app/.yarn/releases
 
-RUN apk add --no-cache git \
-    && yarn install --frozen-lockfile \
-    && yarn cache clean
+RUN yarn install --frozen-lockfile
 
-# Build Image
-FROM karhdo/node:18-alpine AS BUILD
-LABEL author="karhdo <karhdo.trong@gmail.com>"
+# 构建
+FROM node:20-alpine AS builder
+LABEL author="xiaozhu <xiaozhuzhulzq@163.com>"
 
 WORKDIR /app
-COPY --from=BASE /app/node_modules ./node_modules
+
+ENV NEXT_TELEMETRY_DISABLED=1
+
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN apk add --no-cache git curl \
-    && yarn add sharp \
-    && yarn build \
-    && rm -rf node_modules \
-    && yarn install --production --frozen-lockfile --ignore-scripts --prefer-offline \
-    && node-prune
 
-# Build production
-FROM node:18-alpine AS PRODUCTION
-LABEL author="karhdo <karhdo.trong@gmail.com>"
+RUN yarn build
+
+# 生产运行
+FROM node:20-alpine AS runner
+LABEL author="xiaozhu <xiaozhuzhulzq@163.com>"
 
 WORKDIR /app
 
-COPY --from=BUILD /app/public ./public
-COPY --from=BUILD /app/next.config.js ./
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Set mode "standalone" in file "next.config.js"
-COPY --from=BUILD /app/.next/standalone ./
-COPY --from=BUILD /app/.next/static ./.next/static
-COPY --from=BUILD /app/.next/server ./.next/server
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+USER nextjs
 
 EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
 CMD ["node", "server.js"]
