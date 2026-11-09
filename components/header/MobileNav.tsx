@@ -48,7 +48,7 @@ const MobileNav = memo(() => {
       <button
         aria-label="Toggle Menu"
         onClick={onToggleNav}
-        className="group relative rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 sm:hidden"
+        className="group relative rounded-lg p-2 transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-800 lg:hidden"
       >
         <div className="flex h-6 w-6 flex-col items-center justify-center">
           <span

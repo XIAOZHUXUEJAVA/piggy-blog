@@ -2,6 +2,7 @@
   "Navigation": {
     "home": "Home",
     "blog": "Blog",
+    "career": "Career",
     "about": "About",
     "portfolio": "Portfolio",
     "language": "Language",
@@ -85,6 +86,40 @@
     "light": "light",
     "dark": "dark",
     "signoff": "A little learning, a little building, a little better every day."
+  },
+  "Career": {
+    "backToCareer": "Back to career",
+    "title": "Career",
+    "description": "The work, the projects, and the things learned along the way. A commit history of a developer in progress.",
+    "sampleBadge": "Sample history",
+    "sampleNote": "Companies, experiences and statistics above are fictional examples, to be replaced with real stories.",
+    "statsLabel": "Sample career at a glance",
+    "stats": {
+      "experience": "working in development",
+      "companies": "teams worked with",
+      "projects": "projects contributed to",
+      "technologies": "technologies explored"
+    },
+    "overview": "THE BIG PICTURE",
+    "overviewHint": "Pick a chapter to explore its story",
+    "lane": { "work": "Work", "education": "Learn", "project": "Build" },
+    "ongoing": "Still unfolding",
+    "overviewScrollLabel": "Career overview by year; scroll horizontally",
+    "now": "now",
+    "present": "Present",
+    "kind": { "work": "Work", "education": "Education & learning", "project": "Independent projects" },
+    "history": "The commit history",
+    "historyHint": "A new chapter. A new commit.",
+    "mergeMessage": "Merge branch ''{branch}'' into main",
+    "completed": "Completed {name}, taking the lessons into the next chapter.",
+    "stackHint": "+ First encountered · Used before",
+    "newTool": "First encountered in this chapter",
+    "keptTool": "Previously used technology",
+    "logEnd": "It all starts with curiosity.",
+    "contactTitle": "Here’s to the next chapter.",
+    "contactDescription": "See what I’m working on, or drop a note about your ideas.",
+    "email": "Email",
+    "about": "About me"
   },
   "AboutJourney": {
     "title": "Journey",

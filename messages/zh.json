@@ -2,6 +2,7 @@
   "Navigation": {
     "home": "首页",
     "blog": "博客",
+    "career": "历程",
     "about": "关于",
     "portfolio": "作品集",
     "language": "语言",
@@ -85,6 +86,40 @@
     "light": "浅色",
     "dark": "深色",
     "signoff": "在这里，一点点积累，一点点变好。"
+  },
+  "Career": {
+    "backToCareer": "返回职业历程",
+    "title": "职业历程",
+    "description": "做过的工作，亲手搭建的项目，以及一路积累的经验。把成长写成一段可以回看的提交记录。",
+    "sampleBadge": "示例履历",
+    "sampleNote": "以上公司、经历与统计均为虚构示例，后续会替换为真实内容。",
+    "statsLabel": "示例经历概览",
+    "stats": {
+      "experience": "开发工作时间",
+      "companies": "工作过的团队",
+      "projects": "参与的项目",
+      "technologies": "探索过的技术"
+    },
+    "overview": "时间概览",
+    "overviewHint": "点击经历，展开它的故事",
+    "lane": { "work": "工作", "education": "学习", "project": "创造" },
+    "ongoing": "故事仍在继续",
+    "overviewScrollLabel": "经历年份概览，可左右滚动",
+    "now": "现在",
+    "present": "至今",
+    "kind": { "work": "工作经历", "education": "教育与学习", "project": "独立项目" },
+    "history": "经历记录",
+    "historyHint": "每一段经历，都是一次新的提交。",
+    "mergeMessage": "Merge branch ''{branch}'' into main",
+    "completed": "完成「{name}」，带着新的积累继续向前。",
+    "stackHint": "+ 首次接触 · 持续使用",
+    "newTool": "在这段经历中首次接触",
+    "keptTool": "继续使用已有技术",
+    "logEnd": "一切从好奇开始。",
+    "contactTitle": "下一段故事，保持联系。",
+    "contactDescription": "看看我正在做的东西，或来聊聊你的想法。",
+    "email": "邮件联系",
+    "about": "关于我"
   },
   "AboutJourney": {
     "title": "我的历程",

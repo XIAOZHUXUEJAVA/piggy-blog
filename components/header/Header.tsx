@@ -51,7 +51,7 @@ const Header = memo(() => {
           </div>
         </Link>
         <div className="flex items-center gap-3 text-base leading-5">
-          <div className="hidden sm:block">
+          <div className="hidden lg:block">
             {headerNavLinks.map((link) => (
               <Link
                 key={link.key}
