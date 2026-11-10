@@ -1,11 +1,13 @@
 import Image from 'next/image';
-import { ArrowUpRight, Github, Mail } from 'lucide-react';
+import { ArrowUpRight, Github, Mail, Sprout } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors } from 'contentlayer/generated';
 import { Link } from '@/i18n/navigation';
 import { LocalTime, TerminalTheme } from './AboutTerminalLive';
 import styles from './AboutPage.module.css';
+import AboutMotion from './AboutMotion';
+import AboutShowcase from './AboutShowcase';
 
 interface AboutProfileProps {
   author: CoreContent<Authors>;
@@ -27,6 +29,7 @@ function Prompt({ command }: { command?: string }) {
 
 export default async function AboutProfile({ author, postCount }: AboutProfileProps) {
   const t = await getTranslations('AboutProfile');
+  const studio = await getTranslations('AboutStudio');
   const details = [
     { label: t('roleLabel'), value: t('role') },
     { label: t('focusLabel'), value: 'Java · TypeScript · AI' },
@@ -46,104 +49,133 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
   ];
 
   return (
-    <section className={styles.about} aria-labelledby="profile-name">
-      <div className={styles.pageIntro}>
-        <p className={styles.eyebrow}>ABOUT ME</p>
-        <p className={styles.pageDescription}>{t('intro')}</p>
-      </div>
+    <AboutMotion className={styles.about}>
+      <div className={styles.terminalStage} data-terminal-stage>
+        <div className={styles.window} data-terminal-surface aria-labelledby="profile-name">
+          <div className={styles.titleBar} aria-hidden="true">
+            <span className={styles.windowControls}>
+              <span />
+              <span />
+              <span />
+            </span>
+            <span className={styles.windowTitle}>piggy@blog: ~/about</span>
+            <span className={styles.shell}>zsh</span>
+          </div>
 
-      <div className={styles.window}>
-        <div className={styles.titleBar} aria-hidden="true">
-          <span className={styles.windowControls}>
-            <span />
-            <span />
-            <span />
-          </span>
-          <span className={styles.windowTitle}>piggy@blog: ~/about</span>
-          <span className={styles.shell}>zsh</span>
-        </div>
+          <div className={styles.windowBody}>
+            <aside className={styles.profile} aria-label={t('contactLabel')}>
+              <div className={styles.avatarFrame}>
+                <Image
+                  src={author.avatar || '/static/images/my-avatar.jpg'}
+                  alt={t('avatarAlt', { name: author.name })}
+                  width={160}
+                  height={160}
+                  sizes="(max-width: 639px) 88px, 160px"
+                  className={styles.avatar}
+                  priority
+                />
+              </div>
+              <p className={styles.handle}>@piggy</p>
+              <p className={styles.profileNote}>{t('profileNote')}</p>
 
-        <div className={styles.windowBody}>
-          <aside className={styles.profile} aria-label={t('contactLabel')}>
-            <div className={styles.avatarFrame}>
-              <Image
-                src={author.avatar || '/static/images/my-avatar.jpg'}
-                alt={t('avatarAlt', { name: author.name })}
-                width={160}
-                height={160}
-                sizes="(max-width: 639px) 88px, 160px"
-                className={styles.avatar}
-                priority
-              />
+              <div className={styles.socials}>
+                {author.github && (
+                  <a
+                    href={author.github}
+                    className={styles.socialLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t('githubLabel')}
+                    title="GitHub"
+                  >
+                    <Github size={18} strokeWidth={1.6} aria-hidden="true" />
+                  </a>
+                )}
+                {author.email && (
+                  <a
+                    href={`mailto:${author.email}`}
+                    className={styles.socialLink}
+                    aria-label={t('emailLabel')}
+                    title={t('emailLabel')}
+                  >
+                    <Mail size={18} strokeWidth={1.6} aria-hidden="true" />
+                  </a>
+                )}
+              </div>
+
+              <Link href="/blog" className={styles.readLink}>
+                {t('readPosts')}
+                <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden="true" />
+              </Link>
+            </aside>
+
+            <div className={styles.terminal}>
+              <Prompt command="fastfetch" />
+
+              <div className={styles.identity}>
+                <h1 id="profile-name" className={styles.name}>
+                  {author.name}
+                  <span className={styles.nameDot}>.</span>
+                </h1>
+                <p className={styles.tagline}>{t('tagline')}</p>
+              </div>
+
+              <dl className={styles.details}>
+                {details.map(({ label, value }) => (
+                  <div className={styles.detail} key={label}>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className={styles.palette} aria-hidden="true">
+                {Array.from({ length: 8 }, (_, index) => (
+                  <span key={index} />
+                ))}
+              </div>
+
+              <Prompt />
             </div>
-            <p className={styles.handle}>@piggy</p>
-            <p className={styles.profileNote}>{t('profileNote')}</p>
-
-            <div className={styles.socials}>
-              {author.github && (
-                <a
-                  href={author.github}
-                  className={styles.socialLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={t('githubLabel')}
-                  title="GitHub"
-                >
-                  <Github size={18} strokeWidth={1.6} aria-hidden="true" />
-                </a>
-              )}
-              {author.email && (
-                <a
-                  href={`mailto:${author.email}`}
-                  className={styles.socialLink}
-                  aria-label={t('emailLabel')}
-                  title={t('emailLabel')}
-                >
-                  <Mail size={18} strokeWidth={1.6} aria-hidden="true" />
-                </a>
-              )}
-            </div>
-
-            <Link href="/blog" className={styles.readLink}>
-              {t('readPosts')}
-              <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden="true" />
-            </Link>
-          </aside>
-
-          <div className={styles.terminal}>
-            <Prompt command="fastfetch" />
-
-            <div className={styles.identity}>
-              <h1 id="profile-name" className={styles.name}>
-                {author.name}
-                <span className={styles.nameDot}>.</span>
-              </h1>
-              <p className={styles.tagline}>{t('tagline')}</p>
-            </div>
-
-            <dl className={styles.details}>
-              {details.map(({ label, value }) => (
-                <div className={styles.detail} key={label}>
-                  <dt>{label}</dt>
-                  <dd>{value}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <div className={styles.palette} aria-hidden="true">
-              {Array.from({ length: 8 }, (_, index) => (
-                <span key={index} />
-              ))}
-            </div>
-
-            <Prompt />
           </div>
         </div>
+        <div className={styles.windowCaption}>
+          <span>
+            <i />
+            {studio('terminalCaption')}
+          </span>
+          <span>FASTFETCH / PIGGY OS</span>
+        </div>
       </div>
 
-      <p className={styles.signoff}>
-        <span aria-hidden="true">↳</span> {t('signoff')}
-      </p>
-    </section>
+      <AboutShowcase />
+
+      <footer className={styles.closing} data-about-reveal>
+        <span className={styles.closingMark} aria-hidden="true">
+          <Sprout size={28} strokeWidth={1.4} />
+        </span>
+        <p className={styles.eyebrow}>ALWAYS A WORK IN PROGRESS</p>
+        <h2>{studio('closingTitle')}</h2>
+        <p>{studio('closingDescription')}</p>
+        <div className={styles.closingLinks}>
+          {author.github && (
+            <a href={author.github} target="_blank" rel="noopener noreferrer">
+              <Github size={16} aria-hidden="true" />
+              GitHub
+              <ArrowUpRight size={13} aria-hidden="true" />
+            </a>
+          )}
+          <Link href="/blog">
+            {t('readPosts')}
+            <ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
+          <Link href="/career">
+            {studio('career')}
+            <ArrowUpRight size={13} aria-hidden="true" />
+          </Link>
+        </div>
+        <span className={styles.sampleNote}>{studio('sampleNote')}</span>
+      </footer>
+    </AboutMotion>
   );
 }
