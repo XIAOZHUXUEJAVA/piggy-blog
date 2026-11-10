@@ -16,7 +16,7 @@ export default function LanguageSwitcher() {
       aria-label={locale === 'zh' ? t('switchToEnglish') : t('switchToChinese')}
       title={locale === 'zh' ? t('switchToEnglish') : t('switchToChinese')}
       onClick={() => router.replace(pathname, { locale: nextLocale })}
-      className="rounded-md px-2 py-1 text-sm font-semibold text-gray-700 transition-colors hover:text-yellow-600 dark:text-gray-200 dark:hover:text-yellow-400"
+      className="rounded-md px-2 py-1 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent"
     >
       {locale === 'zh' ? 'EN' : '中文'}
     </button>

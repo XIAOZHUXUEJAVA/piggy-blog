@@ -1,0 +1,197 @@
+:root {
+  --paper-base-rgb: 243 242 238;
+  --paper-base: rgb(var(--paper-base-rgb));
+  --paper-solid: #fffefd;
+  --paper-surface: rgb(255 255 253 / 88%);
+  --paper-reading: rgb(255 254 251 / 96%);
+  --paper-inset: #f3f0e9;
+  --paper-ink: #37352f;
+  --paper-muted: #777268;
+  --paper-accent: #806543;
+  --paper-accent-hover: #624b30;
+  --paper-line: rgb(142 125 97 / 22%);
+  --paper-line-hover: rgb(142 125 97 / 42%);
+  --paper-shadow: 0 2px 8px rgb(59 46 25 / 3%);
+  --paper-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, Georgia, serif;
+}
+
+.dark {
+  --paper-base-rgb: 27 26 24;
+  --paper-base: rgb(var(--paper-base-rgb));
+  --paper-solid: #22211e;
+  --paper-surface: rgb(34 33 30 / 92%);
+  --paper-reading: rgb(34 33 30 / 97%);
+  --paper-inset: #2a2823;
+  --paper-ink: #e5e0d6;
+  --paper-muted: #a49e93;
+  --paper-accent: #c3ab83;
+  --paper-accent-hover: #e2caa2;
+  --paper-line: rgb(190 174 146 / 17%);
+  --paper-line-hover: rgb(190 174 146 / 36%);
+  --paper-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+body {
+  background: var(--paper-base);
+  color: var(--paper-ink);
+}
+
+.paper-background {
+  position: fixed;
+  z-index: -20;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--paper-base);
+}
+
+.paper-header {
+  background: rgb(var(--paper-base-rgb) / 85%);
+}
+
+.paper-nav-link {
+  color: var(--paper-muted);
+}
+
+.paper-nav-link:hover,
+.paper-nav-link[aria-current='page'] {
+  color: var(--paper-accent);
+}
+
+.paper-nav-hover {
+  background: var(--paper-inset);
+}
+
+.paper-nav-underline {
+  background: var(--paper-accent);
+}
+
+.paper-surface,
+.paper-reading {
+  min-width: 0;
+  border: 1px solid var(--paper-line);
+  border-radius: 1rem;
+  background: var(--paper-surface);
+  box-shadow: var(--paper-shadow);
+}
+
+.paper-reading {
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: var(--paper-reading);
+}
+
+.paper-button,
+.paper-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--paper-line);
+  background: var(--paper-surface);
+  color: var(--paper-ink);
+  transition:
+    border-color 180ms,
+    background-color 180ms,
+    color 180ms;
+}
+
+.paper-button {
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.paper-tag {
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: var(--paper-inset);
+  color: var(--paper-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.paper-button:hover,
+.paper-tag:hover {
+  border-color: var(--paper-line-hover);
+  background: var(--paper-inset);
+  color: var(--paper-accent);
+}
+
+.paper-tag[aria-pressed='true'] {
+  border-color: var(--paper-accent);
+  background: var(--paper-accent);
+  color: var(--paper-solid);
+}
+
+.paper-tag[aria-pressed='true'] > span {
+  color: inherit;
+}
+
+.paper-popover {
+  border: 1px solid var(--paper-line);
+  background: var(--paper-solid);
+  color: var(--paper-ink);
+  box-shadow: var(--paper-shadow);
+}
+
+.paper-reading .prose {
+  color: var(--paper-ink);
+  --tw-prose-body: var(--paper-ink);
+  --tw-prose-headings: var(--paper-ink);
+  --tw-prose-bold: var(--paper-ink);
+  --tw-prose-links: var(--paper-accent);
+}
+
+.paper-reading .prose :where(h1, h2, h3, h4, h5, h6, p, li, strong, th, td) {
+  color: var(--paper-ink);
+}
+
+.paper-reading .prose :where(a) {
+  color: var(--paper-accent);
+  text-decoration-color: var(--paper-line-hover);
+  text-underline-offset: 0.2em;
+}
+
+.paper-reading .prose :where(a:hover) {
+  color: var(--paper-accent-hover) !important;
+}
+
+.paper-reading .prose :where(blockquote) {
+  border-color: var(--paper-line-hover);
+  color: var(--paper-muted);
+}
+
+.paper-reading .prose :where(hr, thead, tr) {
+  border-color: var(--paper-line);
+}
+
+.paper-reading .prose :where(details) {
+  background: var(--paper-inset);
+}
+
+body :where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--paper-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-button,
+  .paper-tag {
+    transition: none;
+  }
+}
+
+@media print {
+  .paper-background {
+    display: none;
+  }
+
+  .paper-reading {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+}

@@ -26,10 +26,10 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
       {slug.startsWith('journey/') && <JourneyBackLink />}
       <ScrollTopAndComment />
 
-      <article>
+      <article className="paper-reading">
         <div>
           <header>
-            <div className="dark:border-gray space-y-1 border-b border-gray-200 pb-10">
+            <div className="space-y-1 border-b border-paper-line pb-10">
               <div className="space-y-6">
                 <PageTitle>{title}</PageTitle>
                 <BlogTags tags={tags} />
@@ -59,7 +59,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${prev.path}`}
-                      className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
+                      className="text-paper-accent hover:text-paper-accent-hover"
                       aria-label={t('previousPost', { title: prev.title })}
                     >
                       &larr; {prev.title}
@@ -70,7 +70,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/${next.path}`}
-                      className="text-primary hover:text-sky-600 dark:hover:text-sky-400"
+                      className="text-paper-accent hover:text-paper-accent-hover"
                       aria-label={t('nextPost', { title: next.title })}
                     >
                       {next.title} &rarr;

@@ -1,3 +1,3 @@
-import PopularTags from './PopularTags';
+import FeaturedPosts from './FeaturedPosts';
 
-export { PopularTags };
+export { FeaturedPosts };

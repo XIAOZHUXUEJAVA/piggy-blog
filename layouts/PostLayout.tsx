@@ -36,14 +36,14 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
     <SectionContainer size="article">
       <ReadingProgress />
       <ScrollTopAndComment />
-      <article className="relative">
-        <div className="xl:divide-y xl:divide-amber-100/50 xl:dark:divide-amber-800/30">
+      <article className="paper-reading relative">
+        <div className="xl:divide-y xl:divide-paper-line">
           <header className="pt-8 xl:pb-8">
             <div className="space-y-6 text-center">
               <dl className="space-y-4">
                 <div>
                   <dt className="sr-only">{t('publishedOn')}</dt>
-                  <dd className="inline-flex items-center rounded-full border border-amber-200/50 bg-gradient-to-r from-amber-50 to-orange-50 px-3 py-1 text-sm font-medium text-amber-700 dark:border-amber-700/30 dark:from-amber-900/20 dark:to-orange-900/20 dark:text-amber-300">
+                  <dd className="paper-tag">
                     <time dateTime={date}>
                       {new Date(date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', postDateTemplate)}
                     </time>
@@ -52,18 +52,18 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dl>
               <div className="relative">
                 <PageTitle>{title}</PageTitle>
-                <div className="absolute -bottom-2 left-1/2 h-1 w-24 -translate-x-1/2 transform rounded-full bg-gradient-to-r from-emerald-300 via-amber-300 to-orange-300 opacity-60"></div>
+                <div className="absolute -bottom-3 left-1/2 h-px w-12 -translate-x-1/2 bg-paper-line-hover"></div>
               </div>
             </div>
           </header>
-          <div className="grid-rows-[auto_1fr] divide-y divide-emerald-100/50 pb-8 dark:divide-emerald-800/30 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:divide-y-0">
-            <dl className="pb-10 pt-8 xl:border-b xl:border-emerald-100/50 xl:pt-12 xl:dark:border-emerald-800/30">
+          <div className="grid-rows-[auto_1fr] divide-y divide-paper-line pb-8 xl:grid xl:grid-cols-4 xl:gap-x-8 xl:divide-y-0">
+            <dl className="pb-10 pt-8 xl:border-b xl:border-paper-line xl:pt-12">
               <dt className="sr-only">{t('authors')}</dt>
               <dd>
                 <ul className="flex flex-wrap justify-center gap-6 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-6">
                   {authorDetails.map((author) => (
                     <li
-                      className="group flex items-center space-x-3 rounded-xl p-3 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-amber-50/50 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10"
+                      className="group flex items-center space-x-3 rounded-xl p-3 transition-colors duration-200 hover:bg-paper-inset"
                       key={author.name}
                     >
                       {author.avatar && (
@@ -73,22 +73,19 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                             width={42}
                             height={42}
                             alt={t('avatarAlt', { name: author.name })}
-                            className="h-11 w-11 rounded-full ring-2 ring-emerald-200/50 transition-all duration-200 group-hover:ring-amber-300/60 dark:ring-emerald-700/30 dark:group-hover:ring-amber-600/40"
+                            className="h-11 w-11 rounded-full ring-1 ring-paper-line"
                           />
-                          <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-gradient-to-br from-emerald-400 to-amber-400 opacity-0 transition-opacity duration-200 group-hover:opacity-100"></div>
                         </div>
                       )}
                       <dl className="whitespace-nowrap text-sm font-medium leading-5">
                         <dt className="sr-only">{t('authorName')}</dt>
-                        <dd className="text-gray-800 transition-colors duration-200 group-hover:text-emerald-700 dark:text-gray-200 dark:group-hover:text-emerald-300">
-                          {author.name}
-                        </dd>
+                        <dd className="text-paper-ink">{author.name}</dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           {author.twitter && (
                             <Link
                               href={author.twitter}
-                              className="text-xs text-amber-600 transition-colors duration-200 hover:text-orange-500 dark:text-amber-400 dark:hover:text-orange-300"
+                              className="text-xs text-paper-accent hover:text-paper-accent-hover"
                             >
                               {author.twitter.replace('https://twitter.com/', '@').replace('https://x.com/', '@')}
                             </Link>
@@ -101,15 +98,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
             <div className="mx-auto w-full min-w-0 max-w-3xl xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose-tbody:text-gray-700 dark:prose-tbody:text-gray-200 prose prose-gray max-w-none pb-10 pt-12 dark:prose-invert prose-headings:text-gray-800 prose-p:text-gray-700 prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:text-amber-600 prose-blockquote:border-l-emerald-300 prose-blockquote:text-gray-600 prose-strong:text-gray-800 prose-li:text-gray-700 prose-table:text-gray-700 prose-thead:text-gray-800 dark:prose-headings:text-gray-100 dark:prose-p:text-gray-300 dark:prose-a:text-emerald-400 dark:hover:prose-a:text-amber-400 dark:prose-blockquote:border-l-emerald-600 dark:prose-blockquote:text-gray-400 dark:prose-strong:text-white dark:prose-li:text-gray-300 dark:prose-table:text-gray-200 dark:prose-thead:text-gray-100">
-                {children}
-              </div>
-              <div className="border-t border-emerald-100/50 py-8 dark:border-emerald-800/30">
+              <div className="prose max-w-none pb-10 pt-12 dark:prose-invert">{children}</div>
+              <div className="border-t border-paper-line py-8">
                 <div className="flex flex-col items-center justify-center gap-6">
-                  <Link
-                    href={editUrl(filePath)}
-                    className="inline-flex items-center rounded-lg border border-emerald-200/50 bg-gradient-to-r from-emerald-50 to-amber-50 px-4 py-2 text-sm font-medium text-emerald-700 transition-all duration-200 hover:from-emerald-100 hover:to-amber-100 hover:shadow-sm dark:border-emerald-700/30 dark:from-emerald-900/20 dark:to-amber-900/20 dark:text-emerald-300 dark:hover:from-emerald-800/30 dark:hover:to-amber-800/30"
-                  >
+                  <Link href={editUrl(filePath)} className="paper-button">
                     <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
@@ -130,12 +122,10 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </div>
             </div>
             <footer>
-              <div className="divide-emerald-100/50 text-sm font-medium leading-5 dark:divide-emerald-800/30 xl:col-start-1 xl:row-start-2 xl:divide-y">
+              <div className="divide-paper-line text-sm font-medium leading-5 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {tags && (
                   <div className="py-6 xl:py-8">
-                    <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
-                      {t('tags')}
-                    </h2>
+                    <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-paper-muted">{t('tags')}</h2>
                     <div className="flex flex-wrap gap-2">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
@@ -146,11 +136,11 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 {(next || prev) && (
                   <div className="flex justify-between py-6 xl:block xl:space-y-6 xl:py-8">
                     {prev && prev.path && (
-                      <div className="group rounded-xl p-4 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/30 hover:to-amber-50/30 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10">
-                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                      <div className="group rounded-xl p-4 transition-colors duration-200 hover:bg-paper-inset">
+                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-paper-muted">
                           {t('previousArticle')}
                         </h2>
-                        <div className="text-emerald-600 transition-colors duration-200 hover:text-orange-500 dark:text-emerald-400 dark:hover:text-orange-300">
+                        <div className="text-paper-accent hover:text-paper-accent-hover">
                           <Link href={`/${prev.path}`} className="font-medium">
                             {prev.title}
                           </Link>
@@ -158,11 +148,11 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                       </div>
                     )}
                     {next && next.path && (
-                      <div className="group rounded-xl p-4 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/30 hover:to-amber-50/30 dark:hover:from-emerald-900/10 dark:hover:to-amber-900/10">
-                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
+                      <div className="group rounded-xl p-4 transition-colors duration-200 hover:bg-paper-inset">
+                        <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-paper-muted">
                           {t('nextArticle')}
                         </h2>
-                        <div className="text-emerald-600 transition-colors duration-200 hover:text-orange-500 dark:text-emerald-400 dark:hover:text-orange-300">
+                        <div className="text-paper-accent hover:text-paper-accent-hover">
                           <Link href={`/${next.path}`} className="font-medium">
                             {next.title}
                           </Link>
@@ -173,11 +163,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 )}
               </div>
               <div className="pt-6 xl:pt-8">
-                <Link
-                  href={`/${basePath}`}
-                  className="inline-flex items-center rounded-lg px-4 py-2 text-sm font-medium text-emerald-600 transition-all duration-200 hover:bg-gradient-to-r hover:from-emerald-50/50 hover:to-amber-50/50 hover:text-orange-500 dark:text-emerald-400 dark:hover:from-emerald-900/20 dark:hover:to-amber-900/20 dark:hover:text-orange-300"
-                  aria-label={t('backToBlog')}
-                >
+                <Link href={`/${basePath}`} className="paper-button" aria-label={t('backToBlog')}>
                   <svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"

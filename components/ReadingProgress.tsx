@@ -31,22 +31,13 @@ const ReadingProgress = () => {
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div className="h-1 w-full bg-gray-200 dark:bg-gray-700">
+      <div className="h-1 w-full bg-paper-line">
         <div
           style={{ width: `${completion}%` }}
-          className="after:animate-shimmer h-full bg-gradient-to-r from-yellow-400 via-yellow-500 
-            to-yellow-600 shadow-lg transition-all duration-150 
-            ease-out after:absolute after:right-0 after:top-0 after:h-full 
-            after:w-24 after:translate-x-12 after:bg-gradient-to-r 
-            after:from-transparent after:to-white/20"
+          className="h-full bg-paper-accent transition-[width] duration-150 ease-out"
         />
       </div>
-      <div
-        className="absolute -bottom-6 right-4 rounded-full bg-white px-2 py-1 
-        text-xs font-medium text-gray-500 opacity-70 shadow-sm 
-        transition-opacity duration-200 hover:opacity-100 
-        dark:bg-gray-800 dark:text-gray-400"
-      >
+      <div className="paper-popover absolute -bottom-6 right-4 rounded-full px-2 py-1 text-xs font-medium text-paper-muted">
         {Math.round(completion)}%
       </div>
     </div>

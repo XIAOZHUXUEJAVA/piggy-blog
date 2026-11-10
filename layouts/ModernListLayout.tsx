@@ -103,7 +103,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
 
   return (
     <div className="archive-page">
-      <div className="archive-shell">
+      <div className="archive-shell paper-surface p-4 sm:p-7 lg:p-9">
         <header className="border-b border-gray-200 pb-6 dark:border-gray-700">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -125,7 +125,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}
                 placeholder={t('searchPlaceholder')}
-                className="h-10 w-full rounded-lg border border-gray-300 bg-white pl-9 pr-3 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-lime-600 focus:ring-2 focus:ring-lime-600/20 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-lime-400"
+                className="h-10 w-full rounded-lg border border-paper-line bg-paper-solid pl-9 pr-3 text-sm text-paper-ink transition placeholder:text-paper-muted focus:border-paper-accent"
               />
             </label>
           </div>
@@ -164,16 +164,10 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                   type="button"
                   aria-pressed={active}
                   onClick={() => toggleTag(tag)}
-                  className={`inline-flex min-h-8 items-center gap-2 rounded-md px-3 py-1.5 text-sm transition ${
-                    active
-                      ? 'bg-lime-600 font-medium text-white dark:bg-lime-500 dark:text-gray-950'
-                      : 'bg-lime-50 text-gray-700 hover:bg-lime-100 hover:text-gray-950 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white'
-                  }`}
+                  className="paper-tag min-h-8"
                 >
                   <span>{tag}</span>
-                  <span className={`text-xs ${active ? 'text-white/80 dark:text-gray-950/70' : 'text-gray-400'}`}>
-                    {count}
-                  </span>
+                  <span className="text-xs opacity-70">{count}</span>
                 </button>
               );
             })}
@@ -182,7 +176,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                 type="button"
                 aria-expanded={showAllTags}
                 onClick={() => setShowAllTags((current) => !current)}
-                className="inline-flex min-h-8 items-center gap-1 rounded-md px-2 text-sm font-medium text-lime-700 transition hover:bg-lime-50 hover:text-lime-900 dark:text-lime-400 dark:hover:bg-gray-800 dark:hover:text-lime-300"
+                className="inline-flex min-h-8 items-center gap-1 rounded-md px-2 text-sm font-medium text-paper-accent transition-colors hover:bg-paper-inset"
               >
                 {showAllTags ? t('showFewerTags') : t('showMoreTags', { count: tagCounts.length - 8 })}
                 <ChevronDown
@@ -202,7 +196,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="mt-3 text-sm font-medium text-lime-700 underline underline-offset-4 hover:text-lime-900 dark:text-lime-400 dark:hover:text-lime-300"
+                  className="mt-3 text-sm font-medium text-paper-accent underline underline-offset-4 hover:text-paper-accent-hover"
                 >
                   {t('clearFilters')}
                 </button>
@@ -220,7 +214,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                       {group.year}
                     </h2>
                     <div className="flex items-center justify-center">
-                      <span className="h-3 w-3 rounded-full border-2 border-lime-600 bg-white dark:border-lime-400 dark:bg-gray-900" />
+                      <span className="h-3 w-3 rounded-full border-2 border-paper-accent bg-paper-solid" />
                     </div>
                     <p className="flex items-center pl-4 text-sm text-gray-500 dark:text-gray-400 md:pl-5">
                       {t('articleCount', { count: group.posts.length })}
@@ -244,12 +238,12 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                             {date.day}
                           </time>
                           <div className="relative z-10 flex items-center justify-center">
-                            <span className="h-1.5 w-1.5 rounded-full bg-gray-500 outline outline-4 outline-white transition-all group-hover:h-2.5 group-hover:w-2.5 group-hover:bg-lime-600 group-hover:outline-gray-50 dark:bg-gray-500 dark:outline-gray-950 dark:group-hover:bg-lime-400 dark:group-hover:outline-gray-900" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-paper-muted outline outline-4 outline-paper-solid transition-colors group-hover:bg-paper-accent" />
                           </div>
                           <Link
                             href={`/blog/${post.slug}`}
                             aria-label={t('readArticle', { title: post.title })}
-                            className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-gray-800 transition-colors hover:text-lime-700 focus-visible:z-20 focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600 dark:text-gray-200 dark:hover:text-lime-400 md:pl-5 md:text-base"
+                            className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent focus-visible:z-20 focus-visible:rounded md:pl-5 md:text-base"
                           >
                             <span className="truncate">{post.title}</span>
                           </Link>

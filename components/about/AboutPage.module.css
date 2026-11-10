@@ -3,16 +3,16 @@
 }
 
 .about {
-  --terminal-surface: #fffcf6;
-  --terminal-text: #302c26;
-  --terminal-muted: #746d61;
-  --terminal-accent: #a56813;
+  --terminal-surface: var(--paper-solid);
+  --terminal-text: var(--paper-ink);
+  --terminal-muted: var(--paper-muted);
+  --terminal-accent: var(--paper-accent);
   --terminal-green: #507644;
-  --terminal-border: #e9dfcd;
-  --terminal-hover: #f7edda;
-  --panel: #fffefd;
-  --panel-subtle: #faf9f6;
-  --line: rgb(115 100 76 / 13%);
+  --terminal-border: var(--paper-line);
+  --terminal-hover: var(--paper-inset);
+  --panel: var(--paper-solid);
+  --panel-subtle: var(--paper-inset);
+  --line: var(--paper-line);
   --shadow: rgb(76 59 34 / 9%);
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   width: 100%;
@@ -21,16 +21,16 @@
 }
 
 :global(.dark) .about {
-  --terminal-surface: #20212b;
-  --terminal-text: #ede8df;
-  --terminal-muted: #ada99e;
-  --terminal-accent: #e9b86b;
+  --terminal-surface: var(--paper-solid);
+  --terminal-text: var(--paper-ink);
+  --terminal-muted: var(--paper-muted);
+  --terminal-accent: var(--paper-accent);
   --terminal-green: #a3be8c;
-  --terminal-border: #3b3a40;
-  --terminal-hover: #34302b;
-  --panel: #23242d;
-  --panel-subtle: #292a33;
-  --line: rgb(220 212 195 / 12%);
+  --terminal-border: var(--paper-line);
+  --terminal-hover: var(--paper-inset);
+  --panel: var(--paper-solid);
+  --panel-subtle: var(--paper-inset);
+  --line: var(--paper-line);
   --shadow: rgb(0 0 0 / 27%);
 }
 
@@ -49,22 +49,7 @@
   border: 1px solid var(--line);
   border-radius: 1.25rem;
   background: var(--panel);
-  box-shadow:
-    0 26px 70px -30px var(--shadow),
-    0 2px 5px rgb(129 95 42 / 3%),
-    inset 0 1px 0 rgb(255 255 255 / 40%);
-}
-
-.window::before {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 0 30%, rgb(235 184 102 / 8%), transparent 65%);
-  content: '';
-  pointer-events: none;
-}
-
-:global(.dark) .window {
-  box-shadow: 0 24px 64px -24px rgb(0 0 0 / 40%);
+  box-shadow: var(--paper-shadow);
 }
 
 .titleBar {
@@ -482,18 +467,7 @@
     border-color 220ms ease,
     box-shadow 220ms ease;
 }
-.showcaseCard::before {
-  position: absolute;
-  z-index: -1;
-  inset: 24% 0 0;
-  background: radial-gradient(
-    ellipse at 55% 70%,
-    color-mix(in srgb, var(--scene-tone) 6%, transparent),
-    transparent 70%
-  );
-  content: '';
-  pointer-events: none;
-}
+
 .cardHeading {
   flex: 1;
   min-height: 163px;
