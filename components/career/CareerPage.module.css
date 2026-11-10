@@ -10,8 +10,8 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   display: grid;
   gap: 2.5rem;
-  max-width: 58rem;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
   padding: 3.5rem 0 2rem;
   color: var(--text);
 }

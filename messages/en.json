@@ -160,9 +160,6 @@
     "workflowSummary": "A workflow scrolls through ideas, planning, building, checks, polish, notes, commits and shipping, followed by commit details and a completion notice.",
     "pauseDemo": "Pause or resume the {name} demo",
     "cardFooter": "CURIOSITY DRIVEN · ALWAYS EVOLVING",
-    "closingTitle": "The next good idea is on its way.",
-    "closingDescription": "This space is growing, just like me. Take a look around, read a few notes, or share an idea of your own.",
-    "sampleNote": "Projects, reading and lifestyle scenes are placeholders for now. The story continues.",
     "scene": {
       "toolkitFoot": "Always something new to learn",
       "typecheck": "All checks passed",

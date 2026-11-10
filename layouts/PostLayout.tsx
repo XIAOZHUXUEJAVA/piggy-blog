@@ -33,7 +33,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
   const basePath = path.split('/')[0];
 
   return (
-    <SectionContainer>
+    <SectionContainer size="article">
       <ReadingProgress />
       <ScrollTopAndComment />
       <article className="relative">
@@ -100,7 +100,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 </ul>
               </dd>
             </dl>
-            <div className="min-w-0 xl:col-span-3 xl:row-span-2 xl:pb-0">
+            <div className="mx-auto w-full min-w-0 max-w-3xl xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose-tbody:text-gray-700 dark:prose-tbody:text-gray-200 prose prose-gray max-w-none pb-10 pt-12 dark:prose-invert prose-headings:text-gray-800 prose-p:text-gray-700 prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:text-amber-600 prose-blockquote:border-l-emerald-300 prose-blockquote:text-gray-600 prose-strong:text-gray-800 prose-li:text-gray-700 prose-table:text-gray-700 prose-thead:text-gray-800 dark:prose-headings:text-gray-100 dark:prose-p:text-gray-300 dark:prose-a:text-emerald-400 dark:hover:prose-a:text-amber-400 dark:prose-blockquote:border-l-emerald-600 dark:prose-blockquote:text-gray-400 dark:prose-strong:text-white dark:prose-li:text-gray-300 dark:prose-table:text-gray-200 dark:prose-thead:text-gray-100">
                 {children}
               </div>

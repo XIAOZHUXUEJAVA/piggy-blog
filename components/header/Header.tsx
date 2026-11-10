@@ -39,7 +39,7 @@ const Header = memo(() => {
 
   return (
     <header className={headerClass}>
-      <div className="mx-auto flex max-w-4xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
+      <div className="site-container flex items-center justify-between">
         <Link href="/" aria-label={siteMetadata.headerTitle} className="flex items-center">
           <div className="animate-wave">
             <Logo className="fill-dark dark:fill-white" />

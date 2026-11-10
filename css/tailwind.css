@@ -4,6 +4,13 @@
 
 @import './blog.css';
 
+@layer components {
+  /* The 91rem shell leaves 85rem (1360px) for content after desktop gutters. */
+  .site-container {
+    @apply mx-auto w-full max-w-[91rem] px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+}
+
 .task-list-item::before {
   @apply hidden;
 }

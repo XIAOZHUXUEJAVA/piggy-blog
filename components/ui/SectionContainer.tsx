@@ -2,8 +2,15 @@ import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
+  size?: 'site' | 'article' | 'reading';
 }
 
-export default function SectionContainer({ children }: Props) {
-  return <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">{children}</section>;
+const containerClasses = {
+  site: 'site-container',
+  article: 'mx-auto w-full max-w-5xl',
+  reading: 'mx-auto w-full max-w-3xl',
+};
+
+export default function SectionContainer({ children, size = 'site' }: Props) {
+  return <section className={containerClasses[size]}>{children}</section>;
 }

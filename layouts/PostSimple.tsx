@@ -22,7 +22,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
   const { slug, date, title, tags, readingTime } = content;
 
   return (
-    <SectionContainer>
+    <SectionContainer size="reading">
       {slug.startsWith('journey/') && <JourneyBackLink />}
       <ScrollTopAndComment />
 

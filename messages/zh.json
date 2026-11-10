@@ -160,9 +160,6 @@
     "workflowSummary": "工作轨迹依次向上滚动：想法、规划、实现、检查、打磨、记录、提交与发布；随后滑出提交详情和完成通知。",
     "pauseDemo": "暂停或继续「{name}」的演示",
     "cardFooter": "好奇心驱动 · 持续更新",
-    "closingTitle": "下一个有趣的想法，正在路上。",
-    "closingDescription": "这个空间和我一样，仍在慢慢生长。欢迎看看我的记录，也期待与你交换想法。",
-    "sampleNote": "场景中的项目、阅读与生活内容暂为示例，故事还在继续。",
     "scene": {
       "toolkitFoot": "总有新的东西想学",
       "typecheck": "类型检查通过",

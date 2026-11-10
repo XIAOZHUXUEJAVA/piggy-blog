@@ -62,7 +62,7 @@ const PopularTags = () => {
       </div>
       {/* 标签网格 - 彩色渐变布局 */}
       <div className="py-6">
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fit,minmax(8rem,1fr))]">
           {map(popularTags, (popularTag, index) => {
             const { slug, iconType, href, title } = popularTag;
 

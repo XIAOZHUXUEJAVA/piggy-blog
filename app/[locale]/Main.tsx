@@ -74,7 +74,7 @@ export default function Home({ posts }) {
   return (
     <div className="relative">
       {/* 背景装饰元素 - 保留网格背景 */}
-      <div className="pointer-events-none fixed inset-0 z-[-2] overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 z-[-20] overflow-hidden">
         {/* 装饰性网格背景 */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
       </div>
@@ -148,7 +148,7 @@ export default function Home({ posts }) {
           </div>
 
           {/* 博客列表容器 - 网格布局 */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {!posts.length && (
               <div className="col-span-full py-12 text-center">
                 <p className="text-gray-500 dark:text-gray-400">{t('noPostsFound')}</p>
@@ -162,7 +162,7 @@ export default function Home({ posts }) {
                 <article
                   key={slug}
                   className={`group relative overflow-hidden rounded-2xl bg-white/70 p-6 shadow-lg backdrop-blur-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl dark:bg-gray-800/70 ${
-                    isFirstPost ? 'md:col-span-2 lg:col-span-1 xl:col-span-2' : ''
+                    isFirstPost ? 'md:col-span-2' : ''
                   }`}
                 >
                   {/* 背景装饰 */}

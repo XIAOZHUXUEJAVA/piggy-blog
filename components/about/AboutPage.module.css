@@ -16,8 +16,7 @@
   --shadow: rgb(76 59 34 / 9%);
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   width: 100%;
-  max-width: 64rem;
-  margin: 0 auto;
+  min-width: 0;
   color: var(--terminal-text);
 }
 
@@ -1450,75 +1449,7 @@
   margin-left: 0.5rem;
   color: var(--terminal-muted);
 }
-.closing {
-  position: relative;
-  isolation: isolate;
-  margin-top: 6rem;
-  border-top: 1px solid var(--line);
-  padding: 4rem 1rem 0;
-  text-align: center;
-}
-.closingMark {
-  display: grid;
-  width: 58px;
-  height: 58px;
-  place-items: center;
-  margin: 0 auto 1.5rem;
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  background: color-mix(in srgb, var(--terminal-green) 5%, var(--panel));
-  color: var(--terminal-green);
-  box-shadow: 0 6px 18px -12px var(--shadow);
-  transform: rotate(-6deg);
-}
-.closing .eyebrow {
-  font-size: 0.5625rem;
-}
-.closing h2 {
-  margin: 1rem 0 0;
-  font-size: clamp(1.625rem, 3.5vw, 2.375rem);
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.4;
-  text-wrap: balance;
-}
-.closing > p:not(.eyebrow) {
-  margin: 0.875rem auto 0;
-  color: var(--terminal-muted);
-  font-size: 0.875rem;
-  line-height: 1.9;
-  text-wrap: balance;
-}
-.closingLinks {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  margin-top: 1.5rem;
-}
-.closingLinks > a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  color: var(--terminal-text);
-  font-size: 0.75rem;
-  text-decoration: none;
-}
-.closingLinks > a > svg:last-child {
-  color: var(--terminal-muted);
-}
-.sampleNote {
-  display: block;
-  margin-top: 2rem;
-  color: var(--terminal-muted);
-  font-size: 0.625rem;
-  opacity: 0.8;
-  line-height: 1.8;
-}
-.sceneControl:focus-visible,
-.closingLinks > a:focus-visible {
+.sceneControl:focus-visible {
   outline: 2px solid var(--terminal-accent);
   outline-offset: 4px;
 }
@@ -1530,9 +1461,6 @@
   .showcaseCard:hover {
     border-color: color-mix(in srgb, var(--scene-tone) 30%, var(--line));
     box-shadow: 0 15px 35px -24px var(--shadow);
-  }
-  .closingLinks > a:hover {
-    color: var(--terminal-accent);
   }
 }
 @keyframes toolkit-scroll {
@@ -1863,13 +1791,6 @@
   .exploreHeader > p:last-child {
     font-size: 0.75rem;
     padding: 0 0.5rem;
-  }
-  .closing {
-    margin-top: 3.5rem;
-    padding: 3rem 0.5rem 0;
-  }
-  .closing > p:not(.eyebrow) {
-    font-size: 0.8125rem;
   }
   .cardFooter {
     font-size: 0.4375rem;

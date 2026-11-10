@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ArrowUpRight, Github, Mail, Sprout } from 'lucide-react';
+import { ArrowUpRight, Github, Mail } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors } from 'contentlayer/generated';
@@ -149,33 +149,6 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
       </div>
 
       <AboutShowcase />
-
-      <footer className={styles.closing} data-about-reveal>
-        <span className={styles.closingMark} aria-hidden="true">
-          <Sprout size={28} strokeWidth={1.4} />
-        </span>
-        <p className={styles.eyebrow}>ALWAYS A WORK IN PROGRESS</p>
-        <h2>{studio('closingTitle')}</h2>
-        <p>{studio('closingDescription')}</p>
-        <div className={styles.closingLinks}>
-          {author.github && (
-            <a href={author.github} target="_blank" rel="noopener noreferrer">
-              <Github size={16} aria-hidden="true" />
-              GitHub
-              <ArrowUpRight size={13} aria-hidden="true" />
-            </a>
-          )}
-          <Link href="/blog">
-            {t('readPosts')}
-            <ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
-          <Link href="/career">
-            {studio('career')}
-            <ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
-        </div>
-        <span className={styles.sampleNote}>{studio('sampleNote')}</span>
-      </footer>
     </AboutMotion>
   );
 }
