@@ -378,6 +378,7 @@ export default async function AboutShowcase() {
             data-about-reveal
             aria-labelledby={`about-${card.id}`}
           >
+            <span className={styles.cardPaper} aria-hidden="true" />
             <header className={styles.cardHeading}>
               <p className={styles.cardIndex}>{card.index}</p>
               <h3 id={`about-${card.id}`}>{card.title}</h3>

@@ -436,21 +436,48 @@
 }
 .showcaseCard {
   --terminal-muted: color-mix(in srgb, var(--paper-ink) 78%, var(--paper-muted));
+  --card-paper: #fcfaf5;
   position: relative;
   isolation: isolate;
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--panel) 80%, var(--terminal-surface));
-  box-shadow:
-    0 3px 6px -5px var(--shadow),
-    inset 0 1px 0 rgb(255 255 255 / 20%);
-  transition:
-    border-color 220ms ease,
-    box-shadow 220ms ease;
+}
+
+:global(.dark) .showcaseCard {
+  --card-paper: #2c2923;
+}
+
+/* Only the backing has torn edges; controls, focus rings and scenes stay unclipped. */
+.cardPaper {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  filter: drop-shadow(0 3px 4px var(--shadow));
+  pointer-events: none;
+  transition: filter 220ms ease;
+}
+
+.cardPaper::before {
+  position: absolute;
+  inset: 0;
+  background: var(--card-paper) url('/static/images/nav-paper-texture.svg');
+  mask-image: url('/static/images/nav-paper-edge-top.svg'), url('/static/images/nav-paper-edge-bottom.svg'),
+    url('/static/images/paper-edge-left.svg'), url('/static/images/paper-edge-right.svg'), linear-gradient(#fff, #fff);
+  mask-size:
+    160px 6px,
+    160px 6px,
+    6px 160px,
+    6px 160px,
+    calc(100% - 12px) calc(100% - 12px);
+  mask-position:
+    left top,
+    right bottom,
+    left top,
+    right bottom,
+    center;
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+  content: '';
 }
 
 .cardHeading {
@@ -788,7 +815,11 @@
   opacity: 0.5;
 }
 .ideaScene {
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--terminal-muted) 20%, transparent) 0.65px, transparent 0.8px);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--terminal-muted) 20%, transparent) 0.65px,
+    transparent 0.8px
+  );
   background-size: 18px 18px;
   border-radius: 0.75rem;
 }
@@ -1029,14 +1060,23 @@
   border: 4px solid #302d29;
   border-radius: 50%;
   background: repeating-radial-gradient(circle, #403d37 0 1px, #302d29 2px 3px);
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 12%), 0 5px 10px rgb(0 0 0 / 16%);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 12%),
+    0 5px 10px rgb(0 0 0 / 16%);
   animation: record-spin 16s linear infinite;
 }
 .record::before {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: conic-gradient(transparent 20deg, rgb(255 255 255 / 13%) 50deg, transparent 85deg, transparent 195deg, rgb(255 255 255 / 9%) 225deg, transparent 260deg);
+  background: conic-gradient(
+    transparent 20deg,
+    rgb(255 255 255 / 13%) 50deg,
+    transparent 85deg,
+    transparent 195deg,
+    rgb(255 255 255 / 9%) 225deg,
+    transparent 260deg
+  );
   content: '';
 }
 .record > span {
@@ -1518,9 +1558,8 @@
   transform: translateY(24px);
 }
 @media (hover: hover) {
-  .showcaseCard:hover {
-    border-color: color-mix(in srgb, var(--scene-tone) 30%, var(--line));
-    box-shadow: 0 15px 35px -24px var(--shadow);
+  .showcaseCard:hover .cardPaper {
+    filter: drop-shadow(0 5px 7px var(--shadow));
   }
 }
 @keyframes toolkit-scroll {
@@ -1901,7 +1940,7 @@
   .sceneControl {
     display: none;
   }
-  .showcaseCard {
+  .cardPaper {
     transition: none;
   }
 
