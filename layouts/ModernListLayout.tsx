@@ -7,6 +7,7 @@ import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
 import { Link } from '@/i18n/navigation';
+import styles from './ArchiveTimeline.module.css';
 
 interface ModernListLayoutProps {
   posts: CoreContent<Blog>[];
@@ -103,7 +104,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
 
   return (
     <div className="archive-page">
-      <div className="archive-shell paper-surface p-4 sm:p-7 lg:p-9">
+      <div className="archive-shell p-4 sm:p-7 lg:p-9">
         <header className="border-b border-gray-200 pb-6 dark:border-gray-700">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -228,24 +229,24 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                       return (
                         <article
                           key={post.slug}
-                          className="group relative grid min-h-11 grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]"
+                          className={`${styles.row} relative grid min-h-11 grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]`}
                         >
                           <time
                             dateTime={post.date}
                             title={date.full}
-                            className="flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 dark:text-gray-400 md:text-sm"
+                            className={`${styles.date} flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 dark:text-gray-400 md:text-sm`}
                           >
                             {date.day}
                           </time>
-                          <div className="relative z-10 flex items-center justify-center">
-                            <span className="h-1.5 w-1.5 rounded-full bg-paper-muted outline outline-4 outline-paper-solid transition-colors group-hover:bg-paper-accent" />
+                          <div className="relative z-10 flex items-center justify-center" aria-hidden="true">
+                            <span className={styles.node} />
                           </div>
                           <Link
                             href={`/blog/${post.slug}`}
                             aria-label={t('readArticle', { title: post.title })}
                             className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent focus-visible:z-20 focus-visible:rounded md:pl-5 md:text-base"
                           >
-                            <span className="truncate">{post.title}</span>
+                            <span className={`${styles.title} truncate`}>{post.title}</span>
                           </Link>
                           <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 dark:text-gray-500 md:flex">
                             {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}

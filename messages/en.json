@@ -109,14 +109,14 @@
       "projects": "projects contributed to",
       "technologies": "technologies explored"
     },
-    "overview": "THE BIG PICTURE",
-    "overviewHint": "Pick a chapter to explore its story",
+    "overview": "Timeline",
+    "overviewHint": "Select a time span to read the details.",
     "lane": {
       "work": "Work",
       "education": "Learn",
       "project": "Build"
     },
-    "ongoing": "Still unfolding",
+    "ongoing": "In progress",
     "overviewScrollLabel": "Career overview by year; scroll horizontally",
     "now": "now",
     "present": "Present",

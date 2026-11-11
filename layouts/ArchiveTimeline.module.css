@@ -1,0 +1,122 @@
+.row {
+  --timeline-node-color: var(--paper-muted);
+}
+
+.date {
+  transition: color 220ms ease;
+}
+
+.node {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  outline: 4px solid var(--paper-base);
+  background: var(--timeline-node-color);
+  transition: background-color 220ms ease;
+}
+
+.node::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--paper-accent);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  content: '';
+}
+
+.title {
+  transition:
+    color 220ms ease,
+    transform 300ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.row:focus-within {
+  --timeline-node-color: var(--paper-accent);
+}
+
+.row:focus-within .date,
+.row:focus-within .title {
+  color: var(--paper-accent);
+}
+
+.row:focus-within .title {
+  transform: translateX(4px);
+}
+
+.row:focus-within .node {
+  animation: node-breathe 1800ms ease-in-out infinite;
+}
+
+.row:focus-within .node::after {
+  animation: node-ripple 1800ms ease-out infinite;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover {
+    --timeline-node-color: var(--paper-accent);
+  }
+
+  .row:hover .date,
+  .row:hover .title {
+    color: var(--paper-accent);
+  }
+
+  .row:hover .title {
+    transform: translateX(4px);
+  }
+
+  .row:hover .node {
+    animation: node-breathe 1800ms ease-in-out infinite;
+  }
+
+  .row:hover .node::after {
+    animation: node-ripple 1800ms ease-out infinite;
+  }
+}
+
+@keyframes node-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes node-ripple {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.4;
+  }
+
+  85%,
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row:is(:hover, :focus-within) .node,
+  .row:is(:hover, :focus-within) .node::after {
+    animation: none;
+  }
+
+  .row:is(:hover, :focus-within) .title {
+    transform: none;
+  }
+
+  .node,
+  .date,
+  .title {
+    transition: none;
+  }
+}

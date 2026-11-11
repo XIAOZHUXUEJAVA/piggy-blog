@@ -110,13 +110,13 @@
       "technologies": "探索过的技术"
     },
     "overview": "时间概览",
-    "overviewHint": "点击经历，展开它的故事",
+    "overviewHint": "点击时间段，查看对应经历",
     "lane": {
       "work": "工作",
       "education": "学习",
       "project": "创造"
     },
-    "ongoing": "故事仍在继续",
+    "ongoing": "持续记录中",
     "overviewScrollLabel": "经历年份概览，可左右滚动",
     "now": "现在",
     "present": "至今",

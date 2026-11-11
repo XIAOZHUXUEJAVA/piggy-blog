@@ -15,15 +15,15 @@ export default async function CareerRuler({ entries, now, locale }: Props) {
   const t = await getTranslations({ locale, namespace: 'Career' });
   const { years, bars, nowLeft } = careerRuler(entries, now);
   const lanes = [
-    { kind: 'education', Icon: GraduationCap },
-    { kind: 'work', Icon: BriefcaseBusiness },
-    { kind: 'project', Icon: Code2 },
+    { kind: 'education', Icon: GraduationCap, className: styles.learningLaneLabel },
+    { kind: 'work', Icon: BriefcaseBusiness, className: styles.workLaneLabel },
+    { kind: 'project', Icon: Code2, className: styles.projectLaneLabel },
   ] as const;
 
   return (
     <figure className={styles.ruler} data-career-reveal>
       <figcaption className={styles.rulerCaption}>
-        <div>
+        <div className={styles.rulerHeading}>
           <span className={styles.rulerEyebrow}>THE JOURNEY</span>
           <span className={styles.rulerTitle}>{t('overview')}</span>
         </div>
@@ -42,9 +42,9 @@ export default async function CareerRuler({ entries, now, locale }: Props) {
       >
         <div className={styles.rulerCanvas}>
           <div className={styles.rulerLaneLabels} aria-hidden="true">
-            {lanes.map(({ kind, Icon }) => (
-              <span key={kind}>
-                <Icon size={14} strokeWidth={1.5} />
+            {lanes.map(({ kind, Icon, className }) => (
+              <span key={kind} className={`${styles.rulerLaneLabel} ${className}`}>
+                <Icon size={15} strokeWidth={1.5} />
                 <span>{t(`lane.${kind}`)}</span>
               </span>
             ))}
@@ -69,13 +69,15 @@ export default async function CareerRuler({ entries, now, locale }: Props) {
                   <a
                     key={entry.id}
                     data-career-bar
-                    className={`${styles.rulerBar} ${styles[entry.tone]} ${width < 12 ? styles.shortBar : ''}`}
+                    className={`${styles.rulerBar} ${lanes[track].className} ${width < 12 ? styles.shortBar : ''} ${!entry.end ? styles.ongoingBar : ''} ${entry.kind === 'project' ? styles.lastLaneBar : ''}`}
                     href={`#${entry.id}`}
-                    style={{ left: `calc(${left}% + 3px)`, width: `calc(${width}% - 6px)`, top: `${track * 48}px` }}
+                    style={{ left: `${left}%`, width: `${width}%`, top: `calc(${track} * var(--lane-height))` }}
                     title={`${entry.organization[locale]} · ${range}`}
                     aria-label={`${entry.organization[locale]} · ${range}`}
                   >
-                    <span className={styles.barLabel}>{(entry.shortName || entry.organization)[locale]}</span>
+                    <span className={styles.barFace}>
+                      <span className={styles.barLabel}>{(entry.shortName || entry.organization)[locale]}</span>
+                    </span>
                     <span className={styles.barTooltip} aria-hidden="true">
                       <strong>{entry.organization[locale]}</strong>
                       <span>{range}</span>
@@ -95,8 +97,8 @@ export default async function CareerRuler({ entries, now, locale }: Props) {
         </div>
       </div>
       <div className={styles.rulerFooter}>
-        <span>
-          <ArrowDownRight size={14} strokeWidth={1.5} aria-hidden="true" />
+        <span className={styles.rulerHint}>
+          <ArrowDownRight size={13} strokeWidth={1.5} aria-hidden="true" />
           {t('overviewHint')}
         </span>
         <span className={styles.rulerStatus}>

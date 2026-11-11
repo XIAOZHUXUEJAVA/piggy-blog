@@ -1,14 +1,4 @@
-import {
-  BookOpen,
-  BriefcaseBusiness,
-  Code2,
-  FolderGit2,
-  GraduationCap,
-  GitMerge,
-  Layers3,
-  Sprout,
-  Sparkles,
-} from 'lucide-react';
+import { GitMerge } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { CareerEntry, CareerLocale } from '@/data/careerData';
 import {
@@ -44,7 +34,7 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
           <p className={styles.command}>
             <span>$</span> git log --graph
           </p>
-          <h2 id="career-history-title">{t('history')}</h2>
+          <h1 id="career-history-title">{t('history')}</h1>
         </div>
         <span className={styles.historyHint}>{t('historyHint')}</span>
       </div>
@@ -53,8 +43,6 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
         {rows.map((row) => {
           const { entry, type, lanes } = row;
           const merge = type === 'merge';
-          const Icon = entry.kind === 'work' ? BriefcaseBusiness : entry.kind === 'education' ? GraduationCap : Code2;
-          const Emblem = entry.kind === 'project' ? Sprout : entry.kind === 'education' ? GraduationCap : Layers3;
           const range = `${formatMonth(entry.start, locale)} – ${entry.end ? formatMonth(entry.end, locale) : t('present')}`;
           return (
             <li
@@ -114,36 +102,22 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
                     data-career-delay="100"
                   >
                     <header className={styles.chapterHeader}>
-                      <span className={styles.orgMark} aria-hidden="true">
-                        <Emblem size={23} strokeWidth={1.6} />
-                      </span>
                       <div className={styles.roleHeading}>
-                        <span className={styles.kind}>
-                          <Icon size={12} aria-hidden="true" />
-                          {t(`kind.${entry.kind}`)}
-                        </span>
-                        <h3 id={`${entry.id}-title`}>{entry.organization[locale]}</h3>
+                        <span className={styles.kind}>{t(`kind.${entry.kind}`)}</span>
+                        <h2 id={`${entry.id}-title`}>{entry.organization[locale]}</h2>
                         <p>{entry.role[locale]}</p>
                       </div>
                       <div className={styles.tenure}>
-                        <span className={styles.duration}>{formatDuration(elapsedMonths(entry, now), locale)}</span>
                         <span className={styles.dateRange}>{range}</span>
+                        <span aria-hidden="true">·</span>
+                        <span>{formatDuration(elapsedMonths(entry, now), locale)}</span>
                       </div>
                     </header>
 
                     <ul className={styles.highlights}>
                       {entry.highlights.map((highlight) => (
                         <li key={highlight.title.en}>
-                          <h4>
-                            {highlight.projectId ? (
-                              <FolderGit2 size={15} aria-hidden="true" />
-                            ) : entry.kind === 'education' ? (
-                              <BookOpen size={15} aria-hidden="true" />
-                            ) : (
-                              <Sparkles size={15} aria-hidden="true" />
-                            )}
-                            {highlight.title[locale]}
-                          </h4>
+                          <h3>{highlight.title[locale]}</h3>
                           <p>{highlight.description[locale]}</p>
                         </li>
                       ))}
