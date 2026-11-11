@@ -29,7 +29,6 @@ function Prompt({ command }: { command?: string }) {
 
 export default async function AboutProfile({ author, postCount }: AboutProfileProps) {
   const t = await getTranslations('AboutProfile');
-  const studio = await getTranslations('AboutStudio');
   const details = [
     { label: t('roleLabel'), value: t('role') },
     { label: t('focusLabel'), value: 'Java · TypeScript · AI' },
@@ -140,10 +139,6 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
           </div>
         </div>
         <div className={styles.windowCaption}>
-          <span>
-            <i />
-            {studio('terminalCaption')}
-          </span>
           <span>FASTFETCH / PIGGY OS</span>
         </div>
       </div>

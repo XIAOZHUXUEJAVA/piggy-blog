@@ -1,30 +1,31 @@
 import type { CSSProperties, ReactNode } from 'react';
 import {
-  ArrowUpRight,
-  BookOpen,
   Check,
   CheckCheck,
   ChevronRight,
   Circle,
   Code2,
   Command,
-  FileCode2,
   FileText,
   FolderGit2,
   GitBranch,
   GitCommitHorizontal,
   Headphones,
+  Lightbulb,
   Music2,
   Pause,
   Play,
+  PencilRuler,
+  Rocket,
+  Repeat2,
   Search,
-  Sprout,
-  Timer,
+  Sparkles,
   Terminal,
-  Wand2,
 } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import CareerTechIcon from '@/components/career/CareerTechIcon';
+import { LifeClock } from './AboutTerminalLive';
+import CruiserMotorcycle from './CruiserMotorcycle';
 import styles from './AboutPage.module.css';
 
 type SceneCopy = Record<string, string>;
@@ -72,9 +73,6 @@ function ToolkitScene({ copy }: { copy: SceneCopy }) {
             ))}
           </div>
         </div>
-        <div className={styles.toolkitFoot}>
-          <span /> {copy.toolkitFoot}
-        </div>
       </div>
       <div className={styles.floatingEditor}>
         <div className={styles.miniToolbar}>
@@ -121,97 +119,58 @@ function ToolkitScene({ copy }: { copy: SceneCopy }) {
 }
 
 function ProjectsScene({ copy }: { copy: SceneCopy }) {
-  const files = [
-    { title: 'digital-garden.mdx', detail: copy.garden, Icon: FileText },
-    { title: 'little-tools.ts', detail: copy.tools, Icon: FileCode2 },
-    { title: 'what-if.md', detail: copy.ideas, Icon: Wand2 },
-    { title: 'reading-notes.mdx', detail: copy.readingNotes, Icon: BookOpen },
-    { title: 'focus-timer.tsx', detail: copy.focusTool, Icon: Timer },
-    { title: 'design-tokens.css', detail: copy.designSystem, Icon: Code2 },
-    { title: 'release-notes.md', detail: copy.releaseNotes, Icon: GitCommitHorizontal },
-  ];
   return (
-    <div className={styles.scene} aria-hidden="true">
-      <div className={styles.projectFiles}>
-        <div className={styles.sceneLabel}>
-          <FolderGit2 size={12} /> WORK IN PROGRESS
-        </div>
-        <div className={styles.projectViewport}>
-          <div className={styles.projectTrack}>
-            {[...files, ...files.slice(0, 4)].map(({ title, detail, Icon }, index) => (
-              <div className={styles.projectFile} key={`${title}-${index}`}>
-                <span className={styles.fileIcon}>
-                  <Icon size={19} strokeWidth={1.6} />
-                </span>
-                <span>
-                  <strong>{title}</strong>
-                  <small>{detail}</small>
-                </span>
-                <ArrowUpRight size={13} />
-              </div>
-            ))}
-          </div>
+    <div className={`${styles.scene} ${styles.ideaScene}`} aria-hidden="true">
+      <div className={styles.ideaBoardLabel}>
+        <span>THE LITTLE IDEA BOARD</span>
+        <Sparkles size={14} strokeWidth={1.4} />
+      </div>
+      <svg className={styles.ideaThread} viewBox="0 0 600 316" preserveAspectRatio="none" fill="none">
+        <path d="M210 99 C325 36 455 62 457 111 C460 157 287 138 270 214 C263 247 336 279 422 254" />
+        <path d="m412 247 12 7-9 10" />
+      </svg>
+      <div className={`${styles.ideaNote} ${styles.ideaSeed}`}>
+        <span className={styles.noteTape} />
+        <span className={styles.noteLabel}>
+          <Lightbulb size={15} /> WHAT IF...
+        </span>
+        <strong>{copy.noteIdea}</strong>
+        <p>{copy.noteIdeaDetail}</p>
+        <span className={styles.noteScribble} />
+      </div>
+      <div className={`${styles.ideaNote} ${styles.ideaTrial}`}>
+        <span className={styles.noteTape} />
+        <span className={styles.noteLabel}>
+          <PencilRuler size={15} /> TRY IT OUT
+        </span>
+        <strong>{copy.noteTry}</strong>
+        <p>{copy.noteTryDetail}</p>
+        <div className={styles.noteSketch}>
+          <i />
+          <i />
+          <i />
+          <span />
         </div>
       </div>
-      <div className={styles.previewWindow}>
-        <div className={styles.miniToolbar}>
-          <Dots />
-          <span>piggy.dev / garden</span>
-          <ArrowUpRight size={11} />
-        </div>
-        <div className={styles.gardenPreview}>
-          <span>
-            <Sprout size={15} /> THE DIGITAL GARDEN
-          </span>
-          <strong>{copy.previewTitle}</strong>
-          <p>{copy.previewDescription}</p>
-          <div>
-            <i />
-            <i />
-            <i />
-          </div>
-        </div>
-      </div>
-      <div className={styles.diffWindow}>
-        <div>
-          <GitBranch size={12} />
-          <span>about-me.ts</span>
-          <b>+2 −1</b>
-        </div>
-        <p className={styles.diffRemoved}>
-          <span>−</span> someday: true
-        </p>
-        <p className={styles.diffAdded}>
-          <span>+</span> start: 'today'
-        </p>
-        <p className={styles.diffAdded}>
-          <span>+</span> ship(something)
+      <div className={`${styles.ideaNote} ${styles.ideaDone}`}>
+        <span className={styles.noteLabel}>
+          <Rocket size={15} /> MADE IT REAL
+        </span>
+        <strong>{copy.noteDone}</strong>
+        <p>
+          <Check size={13} /> {copy.noteDoneDetail}
         </p>
       </div>
     </div>
   );
 }
 
-function LifeScene({ copy }: { copy: SceneCopy }) {
+function LifeScene() {
   return (
-    <div className={styles.scene} aria-hidden="true">
-      <div className={styles.readingCard}>
-        <span className={styles.bookCover}>
-          <BookOpen size={22} strokeWidth={1.3} />
-          <small>
-            THE ART
-            <br />
-            OF NOTICING
-          </small>
-        </span>
-        <div>
-          <span className={styles.sceneLabel}>ON MY DESK</span>
-          <strong>{copy.book}</strong>
-          <small>{copy.reading}</small>
-          <span className={styles.readingProgress}>
-            <i />
-          </span>
-        </div>
+    <div className={`${styles.scene} ${styles.lifeScene}`} aria-hidden="true">
+      <div className={styles.motorcycleCard}>
+        <span className={styles.motorcycleLabel}>OUT FOR A RIDE</span>
+        <CruiserMotorcycle />
       </div>
       <div className={styles.musicPlayer}>
         <div className={styles.playerTop}>
@@ -231,39 +190,31 @@ function LifeScene({ copy }: { copy: SceneCopy }) {
             </span>
           </span>
           <div>
-            <strong>Somewhere, Slowly</strong>
-            <small>{copy.playlist}</small>
+            <span className={styles.trackAlbum}>LA LA LAND</span>
+            <strong>City of Stars</strong>
           </div>
         </div>
         <div className={styles.trackProgress}>
           <i />
         </div>
+        <div className={styles.trackTimes}>
+          <span>01:28</span>
+          <span>04:12</span>
+        </div>
         <div className={styles.playerBottom}>
-          <span>01:28 / 04:12</span>
+          <Music2 size={13} />
           <div>
             <ChevronRight size={14} className={styles.previousTrack} />
             <span>
-              <Pause size={12} fill="currentColor" />
+              <Pause size={13} fill="currentColor" className={styles.pauseIcon} />
+              <Play size={13} fill="currentColor" className={styles.playIcon} />
             </span>
             <ChevronRight size={14} />
           </div>
-          <span>↻</span>
+          <Repeat2 size={13} />
         </div>
       </div>
-      <div className={styles.focusWidget}>
-        <span>
-          <Timer size={12} /> {copy.focus}
-        </span>
-        <strong>
-          24<span>:</span>38
-        </strong>
-        <small>
-          <i /> {copy.oneThing}
-        </small>
-      </div>
-      <div className={styles.lifeNote}>
-        <Sprout size={12} /> {copy.lifeNote}
-      </div>
+      <LifeClock />
     </div>
   );
 }
@@ -399,7 +350,7 @@ export default async function AboutShowcase() {
       title: t('lifeTitle'),
       description: t('lifeDescription'),
       summary: t('lifeSummary'),
-      Scene: <LifeScene copy={copy} />,
+      Scene: <LifeScene />,
       tone: styles.toneClay,
     },
     {
@@ -416,12 +367,7 @@ export default async function AboutShowcase() {
     <section id="about-explore" className={styles.explore} aria-labelledby="about-explore-title">
       <header className={styles.exploreHeader} data-about-reveal>
         <p className={styles.eyebrow}>A FEW THINGS ABOUT ME</p>
-        <h2 id="about-explore-title">
-          {t('sectionTitle')}
-          <br />
-          <span>{t('sectionSubtitle')}</span>
-        </h2>
-        <p>{t('sectionDescription')}</p>
+        <h2 id="about-explore-title">{t('sectionDescription')}</h2>
       </header>
       <div className={styles.showcaseGrid}>
         {cards.map((card, index) => (
@@ -450,9 +396,7 @@ export default async function AboutShowcase() {
             </button>
             {card.Scene}
             <div className={styles.cardFooter}>
-              <span>
-                <i /> {t('cardFooter')}
-              </span>
+              <span>{['🐷', '🌷', '🧸', '🍀'][index]}</span>
               <span>0{index + 1} / 04</span>
             </div>
           </article>
