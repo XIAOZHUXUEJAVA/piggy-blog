@@ -7,7 +7,7 @@ import { usePathname, useRouter, Link } from '@/i18n/navigation';
 import siteMetadata from '@/data/siteMetadata';
 import headerNavLinks from '@/data/headerNavLinks';
 
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
 import Logo from 'public/static/images/logo.svg';
 
@@ -19,6 +19,30 @@ const Header = memo(() => {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations('Navigation');
+  const [isCompact, setIsCompact] = useState(false);
+
+  useEffect(() => {
+    let compact = false;
+
+    const updateHeader = () => {
+      // Separate thresholds keep small scroll reversals from toggling the header.
+      const nextCompact = compact ? window.scrollY > 24 : window.scrollY > 80;
+
+      if (nextCompact !== compact) {
+        compact = nextCompact;
+        setIsCompact(compact);
+      }
+    };
+
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('pageshow', updateHeader);
+
+    return () => {
+      window.removeEventListener('scroll', updateHeader);
+      window.removeEventListener('pageshow', updateHeader);
+    };
+  }, []);
 
   // 预加载页面函数
   const handleMouseEnter = useCallback(
@@ -30,26 +54,21 @@ const Header = memo(() => {
     [router]
   );
 
-  let headerClass = 'paper-header supports-backdrop-blur fixed left-0 right-0 top-0 z-40 py-4 backdrop-blur';
-
-  if (siteMetadata.stickyNav) {
-    headerClass += ' sticky top-0 z-50';
-  }
-
   return (
-    <header className={headerClass}>
-      <div className="site-container flex items-center justify-between">
-        <Link href="/" aria-label={siteMetadata.headerTitle} className="flex items-center">
-          <div className="animate-wave">
-            <Logo className="fill-paper-ink" />
+    <header className="paper-header fixed left-0 right-0 top-0 z-40" data-compact={isCompact}>
+      <div className="paper-header-shell site-container flex items-center justify-between">
+        <span className="paper-header-sheet" aria-hidden="true" />
+        <Link href="/" aria-label={siteMetadata.headerTitle} className="flex shrink-0 items-center">
+          <div className="animate-wave motion-reduce:animate-none">
+            <Logo className="paper-header-logo fill-paper-ink" />
           </div>
-          <div className="group ml-2 text-xl font-bold transition duration-300">
+          <div className="paper-header-brand group ml-2 text-xl font-bold transition duration-300">
             PiggyBlog
             <span className="block h-0.5 max-w-0 bg-paper-accent transition-all duration-500 group-hover:max-w-[85%]"></span>
           </div>
         </Link>
-        <div className="flex items-center gap-3 text-base leading-5">
-          <div className="hidden lg:block">
+        <div className="flex shrink-0 items-center gap-3 text-base leading-5">
+          <div className="hidden whitespace-nowrap lg:block">
             {headerNavLinks.map((link) => (
               <Link
                 key={link.key}
