@@ -26,10 +26,7 @@ export default function Comments({ slug }: { slug: string }) {
       {loadComments ? (
         <CommentsComponent key={locale} commentsConfig={commentsConfig} slug={slug} />
       ) : (
-        <button
-          onClick={() => setLoadComments(true)}
-          className="inline-flex items-center rounded-lg border border-orange-200/50 bg-gradient-to-r from-orange-50 to-yellow-50 px-4 py-2 text-sm font-medium text-orange-700 transition-all duration-200 hover:from-orange-100 hover:to-yellow-100 hover:shadow-sm"
-        >
+        <button onClick={() => setLoadComments(true)} className="paper-button">
           <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"

@@ -287,6 +287,161 @@ body {
   background: var(--paper-inset);
 }
 
+/* Shared reading layout for regular posts and journey entries. */
+.post-article {
+  position: relative;
+  isolation: isolate;
+  margin-bottom: 1rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Keep texture and deckled edges behind the content so text stays sharp. */
+.post-article::before,
+.post-article::after {
+  position: absolute;
+  pointer-events: none;
+  content: '';
+}
+
+.post-article::before {
+  z-index: -1;
+  inset: 0;
+  background-color: #fcf8ee;
+  background-image: url('/static/images/article-paper-texture.svg'),
+    linear-gradient(90deg, rgb(175 147 95 / 7%), transparent 8%, transparent 92%, rgb(175 147 95 / 6%));
+  mask-image: linear-gradient(#fff, #fff), url('/static/images/nav-paper-edge-top.svg'),
+    url('/static/images/nav-paper-edge-bottom.svg'), url('/static/images/paper-edge-left.svg'),
+    url('/static/images/paper-edge-right.svg');
+  mask-size:
+    calc(100% - 12px) calc(100% - 12px),
+    160px 6px,
+    160px 6px,
+    6px 160px,
+    6px 160px;
+  mask-position:
+    center,
+    left top,
+    right bottom,
+    left top,
+    right top;
+  mask-repeat: no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+}
+
+.post-article::after {
+  z-index: -2;
+  inset: 7px -4px -5px 4px;
+  border: 1px solid rgb(142 125 97 / 18%);
+  background: #eee7d8 url('/static/images/article-paper-texture.svg');
+  box-shadow:
+    0 2px 3px rgb(75 54 24 / 8%),
+    0 12px 28px -18px rgb(75 54 24 / 28%);
+}
+
+.post-article > header {
+  border-bottom: 3px double var(--paper-line);
+}
+
+.post-article .paper-tag {
+  border-style: dashed;
+  border-radius: 2px;
+  background: rgb(175 147 95 / 5%);
+  color: var(--paper-accent);
+}
+
+.post-title,
+.post-prose :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--paper-serif);
+}
+
+.post-title {
+  margin: 0;
+  color: var(--paper-ink);
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.post-prose {
+  font-size: 1.0625rem;
+  line-height: 1.95;
+  overflow-wrap: anywhere;
+}
+
+.post-prose :where(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: 7rem;
+}
+
+.post-prose h2 {
+  margin: 2em 0 0.75em;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.post-prose h3 {
+  margin: 1.75em 0 0.75em;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.post-prose :where(p, ul, ol) {
+  margin-top: 1.1em;
+  margin-bottom: 1.1em;
+}
+
+.paper-reading .post-prose blockquote {
+  border-left: 2px solid rgb(142 125 97 / 48%);
+  border-radius: 0;
+  background: rgb(175 147 95 / 8%) url('/static/images/article-paper-texture.svg');
+  padding: 0.75em 1em;
+  font-size: 0.9375em;
+  font-style: normal;
+  font-weight: 400;
+  quotes: none;
+}
+
+.post-prose blockquote > p {
+  margin: 0;
+}
+
+.post-prose > :first-child {
+  margin-top: 0;
+}
+
+.post-prose > :last-child {
+  margin-bottom: 0;
+}
+
+.post-adjacent {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px dashed var(--paper-line);
+  border-radius: 2px;
+  padding: 0.875rem 1rem;
+  color: var(--paper-ink);
+  overflow-wrap: anywhere;
+  transition:
+    background-color 180ms,
+    border-color 180ms;
+}
+
+.post-adjacent:hover {
+  border-color: var(--paper-line-hover);
+  background: var(--paper-inset);
+}
+
+@media (max-width: 639px) {
+  .post-prose {
+    font-size: 1rem;
+  }
+}
+
 body :where(a, button, input, select, textarea):focus-visible {
   outline: 2px solid var(--paper-accent);
   outline-offset: 3px;
@@ -313,5 +468,10 @@ body :where(a, button, input, select, textarea):focus-visible {
     padding: 0;
     background: transparent;
     box-shadow: none;
+  }
+
+  .post-article::before,
+  .post-article::after {
+    display: none;
   }
 }

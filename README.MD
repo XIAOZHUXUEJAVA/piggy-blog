@@ -1,6 +1,6 @@
 # Piggy's Blog
 
-基于 Next.js 14 的个人博客系统，使用 MDX 编写文章，支持深色模式、搜索、评论和多语言。
+基于 Next.js 14 的个人博客系统，使用 MDX 编写文章，支持搜索、评论和多语言。
 
 体验地址：https://piggyblog.xyz/
 
@@ -81,7 +81,6 @@ summary: '文章摘要'
 ├── i18n/                   # 国际化配置
 ├── layouts/                # 页面布局
 ├── messages/               # 多语言文案
-├── prisma/                 # Prisma 数据库配置
 ├── public/                 # 静态资源
 ├── scripts/                # 构建脚本
 ├── servers/                # 服务端代码

@@ -8,6 +8,7 @@ import { Link, usePathname as useLocalizedPathname, useRouter as useLocalizedRou
 import LanguageSwitcher from './LanguageSwitcher';
 import headerNavLinks from '@/data/headerNavLinks';
 import clsx from 'clsx';
+import { isActivePath } from '@/utils/isActivePath';
 
 const MobileNav = memo(() => {
   const [navShow, setNavShow] = useState(false);
@@ -136,17 +137,17 @@ const MobileNav = memo(() => {
                     <div style={{ transitionDelay: `${index * 50}ms` }}>
                       <Link
                         href={link.href}
-                        aria-current={pathname === link.href ? 'page' : undefined}
+                        aria-current={isActivePath(pathname, link.href) ? 'page' : undefined}
                         className={clsx(
                           'group relative flex items-center rounded-xl px-4 py-4 text-lg font-medium transition-all duration-200',
                           'hover:bg-paper-inset hover:text-paper-accent',
-                          pathname === link.href ? 'bg-paper-inset text-paper-accent' : 'text-paper-ink'
+                          isActivePath(pathname, link.href) ? 'bg-paper-inset text-paper-accent' : 'text-paper-ink'
                         )}
                         onClick={onToggleNav}
                         onMouseEnter={() => handleMouseEnter(link.href)}
                       >
                         {/* 活跃状态指示器 */}
-                        {pathname === link.href && (
+                        {isActivePath(pathname, link.href) && (
                           <div className="absolute left-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-paper-accent" />
                         )}
 

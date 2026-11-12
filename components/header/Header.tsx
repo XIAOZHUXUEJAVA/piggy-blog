@@ -13,6 +13,7 @@ import Logo from 'public/static/images/logo.svg';
 
 import MobileNav from './MobileNav';
 import LanguageSwitcher from './LanguageSwitcher';
+import { isActivePath } from '@/utils/isActivePath';
 
 const Header = memo(() => {
   const pathname = usePathname();
@@ -72,7 +73,7 @@ const Header = memo(() => {
               <Link
                 key={link.key}
                 href={link.href}
-                aria-current={pathname === link.href ? 'page' : undefined}
+                aria-current={isActivePath(pathname, link.href) ? 'page' : undefined}
                 onMouseEnter={() => handleMouseEnter(link.href)}
                 className="paper-nav-link group relative mx-2 rounded-lg px-3 py-2 font-medium transition-colors duration-200"
               >
@@ -85,7 +86,7 @@ const Header = memo(() => {
                     'paper-nav-underline absolute bottom-0 left-0 h-0.5 w-full scale-x-0 transform',
                     'transition-transform duration-300 ease-out',
                     'group-hover:scale-x-100',
-                    pathname === link.href ? 'scale-x-100' : ''
+                    isActivePath(pathname, link.href) ? 'scale-x-100' : ''
                   )}
                 />
               </Link>

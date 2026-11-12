@@ -53,6 +53,8 @@
     "next": "Next"
   },
   "Post": {
+    "articleNavigation": "Article navigation",
+    "readingDuration": "Reading time",
     "publishedOn": "Published on",
     "authors": "Authors",
     "authorName": "Name",
