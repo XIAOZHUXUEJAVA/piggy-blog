@@ -1,8 +1,62 @@
+/** Keep supported browsers' scroll-driven transforms off the JavaScript frame loop. */
+function attachNativeTerminalScroll(root, stage, preference) {
+  let frame = 0;
+  const render = () => {
+    frame = 0;
+    const top = stage.getBoundingClientRect().top + window.scrollY;
+    const start = Math.max(0, top - window.innerHeight * 0.8);
+    const distance = Math.max(window.innerHeight * 0.6, top + stage.offsetHeight * 0.45 - start);
+    stage.style.setProperty('--terminal-scroll-start', `${start}px`);
+    stage.style.setProperty('--terminal-scroll-end', `${start + distance}px`);
+    stage.setAttribute('data-terminal-motion', '');
+    stage.setAttribute('data-terminal-native', '');
+  };
+  const measure = () => {
+    if (!frame && !preference.matches) frame = window.requestAnimationFrame(render);
+  };
+  const reset = () => {
+    stage.removeAttribute('data-terminal-motion');
+    stage.removeAttribute('data-terminal-native');
+    stage.style.removeProperty('--terminal-scroll-start');
+    stage.style.removeProperty('--terminal-scroll-end');
+  };
+  const configure = () => {
+    window.cancelAnimationFrame(frame);
+    frame = 0;
+    if (preference.matches) reset();
+    else measure();
+  };
+  const resize = 'ResizeObserver' in window ? new ResizeObserver(measure) : null;
+  resize?.observe(root);
+  resize?.observe(stage);
+  const visibility =
+    'IntersectionObserver' in window
+      ? new IntersectionObserver(([entry]) => stage.toggleAttribute('data-terminal-visible', entry.isIntersecting))
+      : null;
+  visibility?.observe(stage);
+  window.addEventListener('resize', measure);
+  preference.addEventListener('change', configure);
+  configure();
+
+  return () => {
+    window.cancelAnimationFrame(frame);
+    resize?.disconnect();
+    visibility?.disconnect();
+    window.removeEventListener('resize', measure);
+    preference.removeEventListener('change', configure);
+    stage.removeAttribute('data-terminal-visible');
+    reset();
+  };
+}
+
 /** Tie the terminal's perspective to document scroll without intercepting wheel/touch input. */
 function attachTerminalScroll(root, preference) {
   const stage = root.querySelector('[data-terminal-stage]');
   const surface = stage?.querySelector('[data-terminal-surface]');
   if (!stage || !surface) return () => {};
+  if (CSS.supports('animation-timeline', 'scroll(root block)') && CSS.supports('animation-range', '0px 100px')) {
+    return attachNativeTerminalScroll(root, stage, preference);
+  }
 
   let frame = 0;
   let previousTime = 0;
@@ -38,8 +92,7 @@ function attachTerminalScroll(root, preference) {
 
     stage.setAttribute('data-terminal-motion', '');
     stage.toggleAttribute('data-terminal-visible', window.scrollY > start && progress < 1);
-    surface.style.setProperty('--terminal-tilt', `${(progress * (compact ? 5.5 : 12)).toFixed(4)}deg`);
-    surface.style.setProperty('--terminal-scale', (1 - progress * (compact ? 0.022 : 0.045)).toFixed(6));
+    surface.style.transform = `perspective(1600px) rotateX(${(progress * (compact ? 5.5 : 12)).toFixed(4)}deg) scale(${(1 - progress * (compact ? 0.022 : 0.045)).toFixed(6)})`;
     previousTime = settled ? 0 : time;
     if (!settled) frame = window.requestAnimationFrame(render);
   };
@@ -53,8 +106,7 @@ function attachTerminalScroll(root, preference) {
   const reset = () => {
     stage.removeAttribute('data-terminal-motion');
     stage.removeAttribute('data-terminal-visible');
-    surface.style.removeProperty('--terminal-tilt');
-    surface.style.removeProperty('--terminal-scale');
+    surface.style.removeProperty('transform');
   };
   const configure = () => {
     stop();
@@ -88,6 +140,94 @@ function attachTerminalScroll(root, preference) {
   };
 }
 
+/** Ease into the expanded content, yielding immediately to manual navigation. */
+export function scrollToAboutExplore(section) {
+  const profileFrames = [];
+  let profilePrevious = 0;
+  const profileStart = performance.now();
+  const profile = (time) => {
+    if (profilePrevious) profileFrames.push(time - profilePrevious);
+    profilePrevious = time;
+    if (time - profileStart < 3200) window.requestAnimationFrame(profile);
+    else {
+      const sorted = [...profileFrames].sort((a, b) => a - b);
+      section.setAttribute(
+        'data-motion-profile',
+        JSON.stringify({
+          frames: sorted.length,
+          median: sorted[Math.floor(sorted.length * 0.5)],
+          p95: sorted[Math.floor(sorted.length * 0.95)],
+          over33ms: sorted.filter((duration) => duration > 34).length,
+        })
+      );
+    }
+  };
+  window.requestAnimationFrame(profile);
+  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const start = window.scrollY;
+  const margin = parseFloat(window.getComputedStyle(section).scrollMarginTop) || 0;
+  const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const destination = Math.max(0, Math.min(maximum, start + section.getBoundingClientRect().top - margin));
+  const distance = destination - start;
+  const focus = () => section.querySelector('#about-explore-title')?.focus({ preventScroll: true });
+
+  if (preference.matches || Math.abs(distance) < 1) {
+    window.scrollTo({ top: destination, behavior: 'instant' });
+    focus();
+    return () => {};
+  }
+
+  const root = section.closest('[data-about-ready]');
+  let active = true;
+  let timeout = 0;
+  const cleanup = () => {
+    active = false;
+    window.clearTimeout(timeout);
+    window.removeEventListener('wheel', stop);
+    window.removeEventListener('touchstart', stop);
+    window.removeEventListener('pointerdown', stop);
+    window.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+    document.removeEventListener('scrollend', finish);
+    preference.removeEventListener('change', onPreferenceChange);
+    root?.removeAttribute('data-about-scrolling');
+  };
+  const stop = () => {
+    if (!active) return;
+    window.scrollTo({ top: window.scrollY, behavior: 'instant' });
+    cleanup();
+  };
+  const finish = () => {
+    if (!active) return;
+    cleanup();
+    focus();
+  };
+  const onKeyDown = (event) => {
+    if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Tab', 'Escape'].includes(event.key)) stop();
+  };
+  const onVisibilityChange = () => {
+    if (document.hidden) stop();
+  };
+  const onPreferenceChange = () => {
+    if (!preference.matches) return;
+    stop();
+    window.scrollTo({ top: destination, behavior: 'instant' });
+    focus();
+  };
+  root?.setAttribute('data-about-scrolling', '');
+  window.addEventListener('wheel', stop, { passive: true });
+  window.addEventListener('touchstart', stop, { passive: true });
+  window.addEventListener('pointerdown', stop, { passive: true });
+  window.addEventListener('keydown', onKeyDown);
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  document.addEventListener('scrollend', finish);
+  preference.addEventListener('change', onPreferenceChange);
+  // The browser can scroll on its compositor thread, even while content is being rasterized.
+  window.scrollTo({ top: destination, behavior: 'smooth' });
+  timeout = window.setTimeout(finish, 2200);
+  return stop;
+}
+
 /** Enhance server-rendered content; pause every scene while it is out of view. */
 export function attachAboutMotion(root) {
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -102,7 +242,12 @@ export function attachAboutMotion(root) {
       const paused = scene.hasAttribute('data-paused');
       scene.toggleAttribute(
         'data-scene-running',
-        visible.has(scene) && !paused && !document.hidden && !preference.matches
+        visible.has(scene) &&
+          !paused &&
+          !scene.hasAttribute('data-about-revealing') &&
+          !root.hasAttribute('data-about-scrolling') &&
+          !document.hidden &&
+          !preference.matches
       );
       const button = scene.querySelector('[data-scene-toggle]');
       button?.setAttribute('aria-pressed', String(paused));
@@ -112,15 +257,33 @@ export function attachAboutMotion(root) {
     if (element.hasAttribute('data-about-revealed')) return;
     element.setAttribute('data-about-revealed', '');
     if (preference.matches || !element.animate) return;
+    const isCard = element.hasAttribute('data-about-scene');
+    const columns = window.innerWidth < 700 ? 1 : 2;
+    const column = Number(element.dataset.aboutRevealOrder || 0) % columns;
+    const previousWillChange = element.style.willChange;
+    element.style.willChange = 'transform, opacity';
+    element.setAttribute('data-about-revealing', '');
     const animation = element.animate(
       [
-        { opacity: 0, transform: 'translateY(24px)' },
+        { opacity: 0, transform: 'translateY(32px)' },
         { opacity: 1, transform: 'translateY(0)' },
       ],
-      { duration: 850, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+      {
+        duration: isCard ? 1500 : 1200,
+        delay: isCard ? 280 + column * 200 : 80,
+        easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+        fill: 'backwards',
+      }
     );
     animations.add(animation);
-    animation.onfinish = () => animations.delete(animation);
+    const finish = () => {
+      animations.delete(animation);
+      element.style.willChange = previousWillChange;
+      element.removeAttribute('data-about-revealing');
+      sync();
+    };
+    animation.onfinish = finish;
+    animation.oncancel = finish;
   };
   const observer =
     'IntersectionObserver' in window
@@ -166,12 +329,15 @@ export function attachAboutMotion(root) {
     scenes.forEach((scene) => visible.add(scene));
   }
   configure();
+  const scrollObserver = new MutationObserver(sync);
+  scrollObserver.observe(root, { attributes: true, attributeFilter: ['data-about-scrolling'] });
   root.addEventListener('click', toggle);
   document.addEventListener('visibilitychange', sync);
   preference.addEventListener('change', configure);
   return () => {
     detachTerminalScroll();
     observer?.disconnect();
+    scrollObserver.disconnect();
     for (const animation of animations) animation.cancel();
     root.removeEventListener('click', toggle);
     document.removeEventListener('visibilitychange', sync);

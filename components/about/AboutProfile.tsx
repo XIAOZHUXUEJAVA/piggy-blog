@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors } from 'contentlayer/generated';
 import { Link } from '@/i18n/navigation';
-import { LocalTime } from './AboutTerminalLive';
+import { LocalTime, TerminalCommand } from './AboutTerminalLive';
 import styles from './AboutPage.module.css';
 import AboutMotion from './AboutMotion';
 import AboutShowcase from './AboutShowcase';
@@ -14,7 +14,7 @@ interface AboutProfileProps {
   postCount: number;
 }
 
-function Prompt({ command }: { command?: string }) {
+function Prompt({ command }: { command: string }) {
   return (
     <p className={styles.prompt} aria-hidden="true">
       <span className={styles.user}>piggy</span>
@@ -22,7 +22,7 @@ function Prompt({ command }: { command?: string }) {
       <span className={styles.host}>blog</span>
       <span className={styles.path}>~/about</span>
       <span className={styles.dollar}>$</span>
-      {command ? <span className={styles.command}>{command}</span> : <span className={styles.caret} />}
+      <span className={styles.command}>{command}</span>
     </p>
   );
 }
@@ -47,7 +47,7 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
   ];
 
   return (
-    <AboutMotion className={styles.about}>
+    <AboutMotion className={styles.about} showcase={<AboutShowcase />}>
       <div className={styles.terminalStage} data-terminal-stage>
         <div className={styles.window} data-terminal-surface aria-labelledby="profile-name">
           <div className={styles.titleBar} aria-hidden="true">
@@ -133,7 +133,7 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
                 ))}
               </div>
 
-              <Prompt />
+              <TerminalCommand />
             </div>
           </div>
         </div>
@@ -141,8 +141,6 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
           <span>FASTFETCH / PIGGY OS</span>
         </div>
       </div>
-
-      <AboutShowcase />
     </AboutMotion>
   );
 }

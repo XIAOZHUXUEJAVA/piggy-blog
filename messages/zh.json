@@ -93,7 +93,10 @@
     "writing": "技术笔记、项目实践与日常想法",
     "postsLabel": "Posts",
     "postsCount": "{count} 篇已发布",
-    "signoff": "在这里，一点点积累，一点点变好。"
+    "signoff": "在这里，一点点积累，一点点变好。",
+    "terminalLabel": "终端命令",
+    "terminalHint": "输入 ls，按回车，看看我的工具、想法和生活。",
+    "terminalUnknown": "zsh: command not found: {command}。输入 ls，按回车试试。"
   },
   "Career": {
     "backToCareer": "返回职业历程",

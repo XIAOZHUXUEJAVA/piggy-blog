@@ -224,6 +224,57 @@
   color: var(--terminal-text);
 }
 
+.promptPrefix {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.commandField {
+  position: relative;
+  flex: 1;
+  min-width: 4rem;
+  overflow: hidden;
+}
+
+.commandInput {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0 0.5rem 0 0;
+  color: var(--terminal-text);
+  caret-color: transparent;
+  font: inherit;
+  line-height: inherit;
+  box-shadow: none;
+}
+
+.commandInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.caret {
+  position: absolute;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.9375rem;
+  background: var(--terminal-accent);
+  pointer-events: none;
+  transform: translateY(-50%);
+  animation: caret-blink 1.2s step-end infinite;
+}
+
+.terminalHint {
+  margin: 0.375rem 0 0;
+  color: var(--terminal-muted);
+  font-size: 0.6875rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
 .identity {
   margin: 1rem 0 1.125rem;
   border-bottom: 1px dashed var(--terminal-border);
@@ -342,13 +393,6 @@
   background: #b09bb8;
 }
 
-.caret {
-  width: 0.5rem;
-  height: 0.9375rem;
-  background: var(--terminal-accent);
-  animation: caret-blink 1.2s step-end infinite;
-}
-
 .toolkitFoot > span,
 .traceFooter i {
   display: inline-block;
@@ -359,12 +403,18 @@
   background: var(--terminal-green);
 }
 .terminalStage {
+  --terminal-end-tilt: 12deg;
+  --terminal-end-scale: 0.955;
   position: relative;
   margin: 0 1.75rem;
 }
 .terminalStage[data-terminal-motion] > .window {
-  transform: perspective(1600px) rotateX(var(--terminal-tilt, 0deg)) scale(var(--terminal-scale, 1));
   transform-origin: center center;
+}
+.terminalStage[data-terminal-native] > .window {
+  animation: terminal-scroll-tilt linear both;
+  animation-timeline: scroll(root block);
+  animation-range: var(--terminal-scroll-start) var(--terminal-scroll-end);
 }
 .terminalStage[data-terminal-visible] > .window {
   will-change: transform;
@@ -395,6 +445,9 @@
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.4;
+}
+.exploreHeader h2:focus {
+  outline: none;
 }
 .showcaseGrid {
   display: grid;
@@ -764,31 +817,6 @@
   gap: 4px;
   color: var(--terminal-green);
 }
-.stackFloat {
-  position: absolute;
-  right: 5%;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 0.4375rem;
-  border: 1px solid var(--line);
-  border-radius: 2rem;
-  background: var(--panel);
-  box-shadow: 0 5px 16px -9px var(--shadow);
-  padding: 0.5rem 0.75rem;
-  color: var(--terminal-muted);
-  font-size: 0.6875rem;
-  transform: rotate(3deg);
-}
-.stackFloat > svg {
-  color: var(--terminal-green);
-  width: 13px;
-  height: 13px;
-}
-.stackFloat > span:nth-child(3) {
-  margin: 0 0.125rem;
-  opacity: 0.5;
-}
 .ideaScene {
   background-image: radial-gradient(
     circle,
@@ -824,6 +852,16 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 4 6;
+}
+.ideaThreadReveal {
+  stroke: white;
+  stroke-width: 6;
+  stroke-dasharray: 1;
+  animation: idea-thread-draw 9s linear infinite;
+}
+.ideaThreadArrow {
+  stroke-dasharray: none;
+  animation: idea-thread-arrow 9s linear infinite;
 }
 .ideaNote {
   position: absolute;
@@ -1530,11 +1568,19 @@
 }
 .about[data-about-ready] [data-about-reveal]:not([data-about-revealed]) {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(32px);
 }
 @media (hover: hover) {
   .showcaseCard:hover .cardPaper {
     filter: drop-shadow(0 5px 7px var(--shadow));
+  }
+}
+@keyframes terminal-scroll-tilt {
+  from {
+    transform: perspective(1600px) rotateX(0deg) scale(1);
+  }
+  to {
+    transform: perspective(1600px) rotateX(var(--terminal-end-tilt)) scale(var(--terminal-end-scale));
   }
 }
 @keyframes toolkit-scroll {
@@ -1594,6 +1640,37 @@
   100% {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+@keyframes idea-thread-draw {
+  0%,
+  8% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  64%,
+  88% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  98%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes idea-thread-arrow {
+  0%,
+  63% {
+    opacity: 0;
+  }
+  67%,
+  88% {
+    opacity: 1;
+  }
+  98%,
+  100% {
+    opacity: 0;
   }
 }
 @keyframes idea-note-float {
@@ -1797,6 +1874,10 @@
 }
 
 @media (max-width: 639px) {
+  .terminalStage {
+    --terminal-end-tilt: 5.5deg;
+    --terminal-end-scale: 0.978;
+  }
   .page {
     padding: 0 0 2rem;
   }
@@ -1897,6 +1978,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .terminalStage[data-terminal-motion] > .window {
+    animation: none;
     transform: none;
     will-change: auto;
   }

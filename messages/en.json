@@ -93,7 +93,10 @@
     "writing": "Tech notes, side projects & everyday thoughts",
     "postsLabel": "Posts",
     "postsCount": "{count, plural, one {# published post} other {# published posts}}",
-    "signoff": "A little learning, a little building, a little better every day."
+    "signoff": "A little learning, a little building, a little better every day.",
+    "terminalLabel": "Terminal command",
+    "terminalHint": "Type ls and press Enter to explore my tools, ideas, and life.",
+    "terminalUnknown": "zsh: command not found: {command}. Try ls and press Enter."
   },
   "Career": {
     "backToCareer": "Back to career",

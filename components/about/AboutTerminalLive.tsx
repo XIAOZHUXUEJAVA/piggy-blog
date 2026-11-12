@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { Clock3 } from 'lucide-react';
 import { lifeClock } from '@/utils/lifeClock';
+import { AboutExploreContext } from './AboutMotion';
 import styles from './AboutPage.module.css';
 
 const clockFormat = new Intl.DateTimeFormat('en-GB', {
@@ -12,6 +13,82 @@ const clockFormat = new Intl.DateTimeFormat('en-GB', {
   minute: '2-digit',
   hourCycle: 'h23',
 });
+
+export function TerminalCommand() {
+  const t = useTranslations('AboutProfile');
+  const revealExplore = useContext(AboutExploreContext);
+  const hintId = useId();
+  const [command, setCommand] = useState('');
+  const [feedback, setFeedback] = useState<string | null>(null);
+  const [caret, setCaret] = useState({ position: 0, scrollLeft: 0, selected: false });
+
+  const syncCaret = (input: HTMLInputElement) => {
+    setCaret({
+      position: input.selectionStart ?? input.value.length,
+      scrollLeft: input.scrollLeft,
+      selected: input.selectionStart !== input.selectionEnd,
+    });
+  };
+
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const value = command.trim();
+    if (!value) return;
+    if (value === 'ls') {
+      setFeedback('');
+      revealExplore?.();
+    } else {
+      setFeedback(t('terminalUnknown', { command: value }));
+    }
+  };
+
+  return (
+    <div>
+      <form className={styles.prompt} onSubmit={submit}>
+        <span className={styles.promptPrefix} aria-hidden="true">
+          <span className={styles.user}>piggy</span>
+          <span className={styles.at}>@</span>
+          <span className={styles.host}>blog</span>
+          <span className={styles.path}>~/about</span>
+          <span className={styles.dollar}>$</span>
+        </span>
+        <span className={styles.commandField}>
+          <input
+            className={styles.commandInput}
+            aria-label={t('terminalLabel')}
+            aria-describedby={feedback === '' ? undefined : hintId}
+            aria-controls="about-explore"
+            autoComplete="off"
+            autoCapitalize="none"
+            spellCheck={false}
+            value={command}
+            onChange={(event) => {
+              setCommand(event.target.value);
+              syncCaret(event.currentTarget);
+            }}
+            onSelect={(event) => syncCaret(event.currentTarget)}
+            onScroll={(event) => syncCaret(event.currentTarget)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && event.nativeEvent.isComposing) event.preventDefault();
+            }}
+          />
+          {!caret.selected && (
+            <span
+              className={styles.caret}
+              aria-hidden="true"
+              style={{ left: `calc(${caret.position}ch - ${caret.scrollLeft}px)` }}
+            />
+          )}
+        </span>
+      </form>
+      {feedback !== '' && (
+        <p id={hintId} className={styles.terminalHint} role="status">
+          {feedback ?? t('terminalHint')}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export function LocalTime() {
   const [now, setNow] = useState<Date | null>(null);

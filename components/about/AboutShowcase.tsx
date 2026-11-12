@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { useId, type CSSProperties, type ReactNode } from 'react';
 import {
   Check,
   CheckCheck,
@@ -107,18 +107,14 @@ function ToolkitScene({ copy }: { copy: SceneCopy }) {
           <span>TS</span>
         </div>
       </div>
-      <div className={styles.stackFloat}>
-        <CareerTechIcon name="Next.js" />
-        <span>Next.js</span>
-        <span>+</span>
-        <CareerTechIcon name="Tailwind CSS" />
-        <span>Tailwind</span>
-      </div>
     </div>
   );
 }
 
 function ProjectsScene({ copy }: { copy: SceneCopy }) {
+  const threadMaskId = `idea-thread-${useId()}`;
+  const threadPath = 'M210 99 C325 36 455 62 457 111 C460 157 287 138 270 214 C263 247 336 279 422 254';
+
   return (
     <div className={`${styles.scene} ${styles.ideaScene}`} aria-hidden="true">
       <div className={styles.ideaBoardLabel}>
@@ -126,8 +122,13 @@ function ProjectsScene({ copy }: { copy: SceneCopy }) {
         <Sparkles size={14} strokeWidth={1.4} />
       </div>
       <svg className={styles.ideaThread} viewBox="0 0 600 316" preserveAspectRatio="none" fill="none">
-        <path d="M210 99 C325 36 455 62 457 111 C460 157 287 138 270 214 C263 247 336 279 422 254" />
-        <path d="m412 247 12 7-9 10" />
+        <defs>
+          <mask id={threadMaskId} maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="316">
+            <path className={styles.ideaThreadReveal} d={threadPath} pathLength="1" />
+          </mask>
+        </defs>
+        <path d={threadPath} mask={`url(#${threadMaskId})`} />
+        <path className={styles.ideaThreadArrow} d="m412 247 12 7-9 10" />
       </svg>
       <div className={`${styles.ideaNote} ${styles.ideaSeed}`}>
         <span className={styles.noteTape} />
@@ -367,7 +368,9 @@ export default async function AboutShowcase() {
     <section id="about-explore" className={styles.explore} aria-labelledby="about-explore-title">
       <header className={styles.exploreHeader} data-about-reveal>
         <p className={styles.eyebrow}>A FEW THINGS ABOUT ME</p>
-        <h2 id="about-explore-title">{t('sectionDescription')}</h2>
+        <h2 id="about-explore-title" tabIndex={-1}>
+          {t('sectionDescription')}
+        </h2>
       </header>
       <div className={styles.showcaseGrid}>
         {cards.map((card, index) => (
@@ -376,6 +379,7 @@ export default async function AboutShowcase() {
             key={card.id}
             data-about-scene
             data-about-reveal
+            data-about-reveal-order={index}
             aria-labelledby={`about-${card.id}`}
           >
             <span className={styles.cardPaper} aria-hidden="true" />
