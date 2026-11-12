@@ -3,6 +3,7 @@ import { genPageMetadata } from 'app/seo';
 import careerData from '@/data/careerData';
 import CareerHistory from '@/components/career/CareerHistory';
 import CareerMotion from '@/components/career/CareerMotion';
+import CareerProcess from '@/components/career/CareerProcess';
 import styles from '@/components/career/CareerPage.module.css';
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
@@ -18,6 +19,7 @@ export default async function CareerPage({ params }: { params: { locale: string 
 
   return (
     <CareerMotion className={styles.page}>
+      <CareerProcess entries={careerData} locale={locale} />
       <CareerHistory entries={careerData} now={new Date()} locale={locale} />
     </CareerMotion>
   );

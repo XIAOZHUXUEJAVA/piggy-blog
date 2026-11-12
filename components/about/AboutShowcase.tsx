@@ -1,15 +1,9 @@
 import { useId, type CSSProperties, type ReactNode } from 'react';
 import {
   Check,
-  CheckCheck,
   ChevronRight,
-  Circle,
   Code2,
   Command,
-  FileText,
-  FolderGit2,
-  GitBranch,
-  GitCommitHorizontal,
   Headphones,
   Lightbulb,
   Music2,
@@ -18,14 +12,13 @@ import {
   PencilRuler,
   Rocket,
   Repeat2,
-  Search,
   Sparkles,
-  Terminal,
 } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import CareerTechIcon from '@/components/career/CareerTechIcon';
 import { LifeClock } from './AboutTerminalLive';
 import CruiserMotorcycle from './CruiserMotorcycle';
+import SceneryImage from './SceneryImage';
 import styles from './AboutPage.module.css';
 
 type SceneCopy = Record<string, string>;
@@ -220,97 +213,19 @@ function LifeScene() {
   );
 }
 
-function WorkflowScene({ copy }: { copy: SceneCopy }) {
-  const activity = [22, 38, 16, 52, 30, 65, 42, 26, 58, 35, 72, 48, 32, 60, 44, 80, 56, 40, 68, 48, 86, 62, 42, 72];
-  const steps = [
-    { Icon: Circle, key: 'idea', status: '01', label: copy.idea, detail: 'notes/idea.md' },
-    { Icon: FolderGit2, key: 'plan', status: '02', label: copy.plan, detail: 'read: src/components/' },
-    { Icon: Code2, key: 'build', status: '03', label: copy.build, detail: 'feat: make it work' },
-    { Icon: Terminal, key: 'check', status: '04', label: copy.check, detail: 'check: types · lint · a11y' },
-    { Icon: CheckCheck, key: 'polish', status: '05', label: copy.polish, detail: 'fix: the little details' },
-    { Icon: FileText, key: 'document', status: '06', label: copy.document, detail: 'docs: what I learned' },
-    {
-      Icon: GitCommitHorizontal,
-      key: 'commit',
-      status: '07',
-      label: copy.commit,
-      detail: 'git commit -m "a little better"',
-    },
-    { Icon: GitBranch, key: 'ship', status: '08', label: copy.ship, detail: 'git push origin main' },
-  ];
+function SceneryScene({ copy }: { copy: SceneCopy }) {
   return (
-    <div className={styles.scene} aria-hidden="true">
-      <div className={styles.traceWindow}>
-        <div className={styles.miniToolbar}>
-          <span>
-            <GitBranch size={12} /> main
-          </span>
-          <span className={styles.traceSearch}>
-            <Search size={10} /> {copy.trace}
-          </span>
-          <span>⌘ K</span>
-        </div>
-        <div className={styles.activityGraph}>
-          {activity.map((height, i) => (
-            <i key={i} style={{ '--bar': `${height}%`, '--i': i } as CSSProperties} />
-          ))}
-        </div>
-        <div className={styles.traceViewport}>
-          <div className={styles.traceSteps}>
-            {steps.map(({ Icon, key, status, label, detail }, index) => (
-              <div className={styles.traceStep} key={key} style={{ '--i': index } as CSSProperties}>
-                <span className={styles.stepNumber}>{status}</span>
-                <span className={styles.stepIcon}>
-                  <Icon size={14} />
-                </span>
-                <span>
-                  <strong>{label}</strong>
-                  <small>{detail}</small>
-                </span>
-                <Check size={13} className={styles.stepCheck} />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.traceDetail}>
-          <div className={styles.traceDetailHeading}>
-            <Terminal size={12} />
-            <span>{copy.commitDetails}</span>
-            <span>×</span>
-          </div>
-          <p className={styles.traceDetailCommand}>git commit</p>
-          <dl>
-            <dt>{copy.branch}</dt>
-            <dd>main</dd>
-            <dt>{copy.changed}</dt>
-            <dd>3 files</dd>
-            <dt>{copy.result}</dt>
-            <dd>
-              <Check size={10} /> {copy.complete}
-            </dd>
-          </dl>
-          <div className={styles.traceDetailDiff}>
-            <span>+ 24</span>
-            <span>− 8</span>
-          </div>
-        </div>
-        <div className={styles.traceFooter}>
-          <span>
-            <i /> {copy.iterating}
-          </span>
-          <span>8 steps · 1 idea</span>
-        </div>
-      </div>
-      <div className={styles.shipToast}>
-        <span>
-          <Check size={14} />
-        </span>
-        <div>
-          <strong>{copy.shipped}</strong>
-          <small>small steps. every day.</small>
-        </div>
-        <GitCommitHorizontal size={16} />
-      </div>
+    <div className={`${styles.scene} ${styles.sceneryScene}`}>
+      <figure className={`${styles.sceneryPhoto} ${styles.sceneryClouds}`}>
+        <span className={styles.photoTape} aria-hidden="true" />
+        <SceneryImage src="/1bc2057a-2e67-4789-8cf1-be072ecd26f5.png" alt={copy.cloudsAlt} />
+        <figcaption>01 / GOLDEN HOUR</figcaption>
+      </figure>
+      <figure className={`${styles.sceneryPhoto} ${styles.sceneryStreet}`}>
+        <span className={styles.photoTape} aria-hidden="true" />
+        <SceneryImage src="/cb544003-3626-439b-b24e-bf6b0395a216.png" alt={copy.streetAlt} />
+        <figcaption>02 / A LITTLE POETRY</figcaption>
+      </figure>
     </div>
   );
 }
@@ -326,6 +241,7 @@ export default async function AboutShowcase() {
     summary: string;
     Scene: ReactNode;
     tone: string;
+    animated?: boolean;
   }[] = [
     {
       id: 'toolkit',
@@ -335,6 +251,7 @@ export default async function AboutShowcase() {
       summary: t('toolkitSummary'),
       Scene: <ToolkitScene copy={copy} />,
       tone: styles.toneAmber,
+      animated: true,
     },
     {
       id: 'projects',
@@ -344,6 +261,7 @@ export default async function AboutShowcase() {
       summary: t('projectsSummary'),
       Scene: <ProjectsScene copy={copy} />,
       tone: styles.toneGreen,
+      animated: true,
     },
     {
       id: 'life',
@@ -353,15 +271,16 @@ export default async function AboutShowcase() {
       summary: t('lifeSummary'),
       Scene: <LifeScene />,
       tone: styles.toneClay,
+      animated: true,
     },
     {
-      id: 'workflow',
-      index: '04 / THE PROCESS',
-      title: t('workflowTitle'),
-      description: t('workflowDescription'),
-      summary: t('workflowSummary'),
-      Scene: <WorkflowScene copy={copy} />,
-      tone: styles.toneTeal,
+      id: 'scenery',
+      index: '04 / LITTLE MOMENTS',
+      title: t('sceneryTitle'),
+      description: t('sceneryDescription'),
+      summary: t('scenerySummary'),
+      Scene: <SceneryScene copy={copy} />,
+      tone: styles.toneClay,
     },
   ];
   return (
@@ -389,20 +308,24 @@ export default async function AboutShowcase() {
               <p>{card.description}</p>
             </header>
             <p className="sr-only">{card.summary}</p>
-            <button
-              className={styles.sceneControl}
-              type="button"
-              data-scene-toggle
-              aria-label={t('pauseDemo', { name: card.title })}
-              aria-pressed="false"
-            >
-              <Pause size={12} className={styles.pauseIcon} aria-hidden="true" />
-              <Play size={12} className={styles.playIcon} aria-hidden="true" />
-            </button>
+            {card.animated && (
+              <button
+                className={styles.sceneControl}
+                type="button"
+                data-scene-toggle
+                aria-label={t('pauseDemo', { name: card.title })}
+                aria-pressed="false"
+              >
+                <Pause size={12} className={styles.pauseIcon} aria-hidden="true" />
+                <Play size={12} className={styles.playIcon} aria-hidden="true" />
+              </button>
+            )}
             {card.Scene}
             <div className={styles.cardFooter}>
-              <span>{['🐷', '🌷', '🧸', '🍀'][index]}</span>
-              <span>0{index + 1} / 04</span>
+              <span>{['🐷', '🌷', '🧸', '🌅'][index]}</span>
+              <span>
+                0{index + 1} / 0{cards.length}
+              </span>
             </div>
           </article>
         ))}
