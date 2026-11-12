@@ -85,7 +85,7 @@ function drawVeins(context: CanvasRenderingContext2D, ginkgo: boolean) {
   }
 }
 
-function createFace(shape: Path2D, palette: LeafPalette, ginkgo: boolean, back: boolean, dark: boolean, seed: number) {
+function createFace(shape: Path2D, palette: LeafPalette, ginkgo: boolean, back: boolean, seed: number) {
   const canvas = document.createElement('canvas');
   canvas.width = 160;
   canvas.height = 160;
@@ -147,8 +147,8 @@ function createFace(shape: Path2D, palette: LeafPalette, ginkgo: boolean, back: 
   fold.addColorStop(1, 'rgba(116, 77, 33, 0)');
   context.fillStyle = fold;
   context.fillRect(-0.14, -1.15, 0.28, 1.8);
-  if (back || dark) {
-    context.fillStyle = `rgba(255, 236, 192, ${back ? 0.15 : 0.08})`;
+  if (back) {
+    context.fillStyle = 'rgba(255, 236, 192, 0.15)';
     context.fillRect(-1.2, -1.2, 2.4, 2.4);
   }
   context.restore();
@@ -167,13 +167,13 @@ function createFace(shape: Path2D, palette: LeafPalette, ginkgo: boolean, back: 
   return canvas;
 }
 
-export function createLeafSprites(dark = false): LeafSprite[] {
+export function createLeafSprites(): LeafSprite[] {
   return [GINKGO_PALETTES, MAPLE_PALETTES].flatMap((palettes, shapeIndex) => {
     const ginkgo = shapeIndex === 0;
     const shape = new Path2D(ginkgo ? GINKGO_OUTLINE : MAPLE_OUTLINE);
     return palettes.map((palette, index) => ({
-      front: createFace(shape, palette, ginkgo, false, dark, index + 41),
-      back: createFace(shape, palette, ginkgo, true, dark, index + 41),
+      front: createFace(shape, palette, ginkgo, false, index + 41),
+      back: createFace(shape, palette, ginkgo, true, index + 41),
     }));
   });
 }

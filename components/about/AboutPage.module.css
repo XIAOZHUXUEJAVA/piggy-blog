@@ -20,20 +20,6 @@
   color: var(--terminal-text);
 }
 
-:global(.dark) .about {
-  --terminal-surface: var(--paper-solid);
-  --terminal-text: var(--paper-ink);
-  --terminal-muted: var(--paper-muted);
-  --terminal-accent: var(--paper-accent);
-  --terminal-green: #a3be8c;
-  --terminal-border: var(--paper-line);
-  --terminal-hover: var(--paper-inset);
-  --panel: var(--paper-solid);
-  --panel-subtle: var(--paper-inset);
-  --line: var(--paper-line);
-  --shadow: rgb(0 0 0 / 27%);
-}
-
 .eyebrow {
   margin: 0;
   color: var(--terminal-accent);
@@ -315,8 +301,7 @@
   background: var(--terminal-green);
 }
 
-.timezone,
-.themeVariant {
+.timezone {
   color: var(--terminal-muted);
   font-size: 0.75rem;
 }
@@ -428,12 +413,6 @@
 .toneTeal {
   --scene-tone: #568980;
 }
-:global(.dark) .toneClay {
-  --scene-tone: #d3a38b;
-}
-:global(.dark) .toneTeal {
-  --scene-tone: #8abdb2;
-}
 .showcaseCard {
   --terminal-muted: color-mix(in srgb, var(--paper-ink) 78%, var(--paper-muted));
   --card-paper: #fcfaf5;
@@ -442,10 +421,6 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-}
-
-:global(.dark) .showcaseCard {
-  --card-paper: #2c2923;
 }
 
 /* Only the backing has torn edges; controls, focus rings and scenes stay unclipped. */

@@ -12,7 +12,6 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import Logo from 'public/static/images/logo.svg';
 
 import MobileNav from './MobileNav';
-import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = memo(() => {
@@ -99,7 +98,6 @@ const Header = memo(() => {
           />
           <div className="flex items-center">
             <LanguageSwitcher />
-            <ThemeSwitch />
             <MobileNav />
           </div>
         </div>

@@ -9,7 +9,7 @@ const BlogMeta = ({ date, readingTime }: BlogMetaProps) => {
   const locale = useLocale();
   const t = useTranslations('Post');
   return (
-    <dd className="flex-column flex gap-1 font-semibold text-gray-500 dark:text-gray-400">
+    <dd className="flex-column flex gap-1 font-semibold text-gray-500">
       <time dateTime={date} className="flex items-center">
         <Twemoji emoji="calendar" />
         <span className="ml-1 md:ml-2">{formatDate(date, locale === 'zh' ? 'zh-CN' : 'en-US')}</span>

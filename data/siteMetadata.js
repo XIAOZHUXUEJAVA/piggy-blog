@@ -7,7 +7,6 @@ const siteMetadata = {
   headerTitle: "Piggy's Blog",
   description: 'I would be grateful for any feedback or insights you have on my writing.',
   language: 'en-us',
-  theme: 'system',
   siteUrl: 'https://piggy-blog.netlify.app/',
   siteRepo: 'https://github.com/XIAOZHUXUEJAVA/piggy-blog',
   siteLogo: '/static/images/avatar.jpg',

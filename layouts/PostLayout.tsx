@@ -98,7 +98,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
               </dd>
             </dl>
             <div className="mx-auto w-full min-w-0 max-w-3xl xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pb-10 pt-12 dark:prose-invert">{children}</div>
+              <div className="prose max-w-none pb-10 pt-12">{children}</div>
               <div className="border-t border-paper-line py-8">
                 <div className="flex flex-col items-center justify-center gap-6">
                   <Link href={editUrl(filePath)} className="paper-button">

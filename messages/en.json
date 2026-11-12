@@ -91,9 +91,6 @@
     "writing": "Tech notes, side projects & everyday thoughts",
     "postsLabel": "Posts",
     "postsCount": "{count, plural, one {# published post} other {# published posts}}",
-    "themeLabel": "Theme",
-    "light": "light",
-    "dark": "dark",
     "signoff": "A little learning, a little building, a little better every day."
   },
   "Career": {

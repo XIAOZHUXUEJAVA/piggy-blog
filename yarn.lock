@@ -9645,7 +9645,6 @@ __metadata:
     next: 14.2.3
     next-contentlayer2: 0.5.1
     next-intl: ^4.14.9
-    next-themes: ^0.3.0
     pliny: 0.4.1
     postcss: ^8.4.24
     prettier: ^3.0.0

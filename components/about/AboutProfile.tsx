@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors } from 'contentlayer/generated';
 import { Link } from '@/i18n/navigation';
-import { LocalTime, TerminalTheme } from './AboutTerminalLive';
+import { LocalTime } from './AboutTerminalLive';
 import styles from './AboutPage.module.css';
 import AboutMotion from './AboutMotion';
 import AboutShowcase from './AboutShowcase';
@@ -44,7 +44,6 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
         </Link>
       ),
     },
-    { label: t('themeLabel'), value: <TerminalTheme /> },
   ];
 
   return (

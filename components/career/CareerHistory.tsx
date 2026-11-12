@@ -101,6 +101,7 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
                     data-career-reveal
                     data-career-delay="100"
                   >
+                    <span className={styles.chapterPaper} aria-hidden="true" />
                     <header className={styles.chapterHeader}>
                       <div className={styles.roleHeading}>
                         <span className={styles.kind}>{t(`kind.${entry.kind}`)}</span>
@@ -126,7 +127,6 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
                     <div className={styles.stack}>
                       <div className={styles.stackHeading}>
                         <p>stack diff</p>
-                        <span>{t('stackHint')}</span>
                       </div>
                       <ul className={styles.tools}>
                         {(diffs.get(entry.id) || []).map((tool) => (

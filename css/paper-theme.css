@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --paper-base-rgb: 243 242 238;
   --paper-base: rgb(var(--paper-base-rgb));
   --paper-solid: #fffefd;
@@ -13,22 +14,6 @@
   --paper-line-hover: rgb(142 125 97 / 42%);
   --paper-shadow: 0 2px 8px rgb(59 46 25 / 3%);
   --paper-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, Georgia, serif;
-}
-
-.dark {
-  --paper-base-rgb: 27 26 24;
-  --paper-base: rgb(var(--paper-base-rgb));
-  --paper-solid: #22211e;
-  --paper-surface: rgb(34 33 30 / 92%);
-  --paper-reading: rgb(34 33 30 / 97%);
-  --paper-inset: #2a2823;
-  --paper-ink: #e5e0d6;
-  --paper-muted: #a49e93;
-  --paper-accent: #c3ab83;
-  --paper-accent-hover: #e2caa2;
-  --paper-line: rgb(190 174 146 / 17%);
-  --paper-line-hover: rgb(190 174 146 / 36%);
-  --paper-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 body {
@@ -136,11 +121,6 @@ body {
 
 .paper-header[data-compact='true'] .paper-header-sheet {
   opacity: 1;
-}
-
-.dark .paper-header {
-  --paper-header-sheet: #2c2923;
-  --paper-header-shadow: rgb(0 0 0 / 30%);
 }
 
 .paper-header .paper-nav-underline {

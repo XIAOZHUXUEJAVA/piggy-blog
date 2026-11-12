@@ -16,12 +16,6 @@
   text-align: center;
 }
 
-:global(.dark) .intro {
-  --intro-accent: #d9ac65;
-  --intro-tint: rgb(217 172 101 / 7%);
-  --intro-border: rgb(217 172 101 / 28%);
-}
-
 .introAvatarLink {
   display: block;
   border: 1px solid var(--intro-border);

@@ -53,19 +53,19 @@ const MobileNav = memo(() => {
         <div className="flex h-6 w-6 flex-col items-center justify-center">
           <span
             className={clsx(
-              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out dark:bg-gray-100',
+              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out',
               navShow ? 'translate-y-1.5 rotate-45' : '-translate-y-1'
             )}
           />
           <span
             className={clsx(
-              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out dark:bg-gray-100',
+              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out',
               navShow ? 'opacity-0' : 'opacity-100'
             )}
           />
           <span
             className={clsx(
-              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out dark:bg-gray-100',
+              'block h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-out',
               navShow ? '-translate-y-1.5 -rotate-45' : 'translate-y-1'
             )}
           />
@@ -112,7 +112,7 @@ const MobileNav = memo(() => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    className="h-6 w-6 text-gray-600 transition-colors duration-200 group-hover:text-gray-900 dark:text-gray-300 dark:group-hover:text-white"
+                    className="h-6 w-6 text-gray-600 transition-colors duration-200 group-hover:text-gray-900"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>

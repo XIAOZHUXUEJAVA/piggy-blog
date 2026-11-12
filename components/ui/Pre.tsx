@@ -41,7 +41,7 @@ export default function Pre({ children, className, ...props }: PreProps) {
       >
         {copied ? (
           <svg
-            className="h-4 w-4 text-emerald-600 dark:text-emerald-400"
+            className="h-4 w-4 text-emerald-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

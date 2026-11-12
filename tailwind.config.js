@@ -12,6 +12,7 @@ module.exports = {
     './layouts/**/*.{js,ts,tsx}',
     './data/**/*.mdx',
   ],
+  // Keep library dark variants inactive instead of following the system color scheme.
   darkMode: 'class',
   theme: {
     extend: {
@@ -32,7 +33,6 @@ module.exports = {
       },
       boxShadow: {
         nextjs: '0 8px 20px rgb(0,0,0,0.12)',
-        'nextjs-dark': '0 8px 20px rgb(255,255,255,0.12)',
       },
       spacing: {
         '9/16': '56.25%',
@@ -67,7 +67,6 @@ module.exports = {
         },
         sky: colors.sky,
         gray: colors.stone,
-        dark: '#1b1a18',
         coral: '#EF596F',
       },
       zIndex: {
@@ -142,70 +141,6 @@ module.exports = {
             blockquote: {
               color: theme('colors.gray.900'),
               borderLeftColor: theme('colors.gray.200'),
-            },
-          },
-        },
-        dark: {
-          css: {
-            color: theme('colors.gray.300'),
-            a: {
-              color: theme('colors.primary'),
-              '&:hover': {
-                color: `${theme('colors.sky.400')} !important`,
-              },
-              code: { color: theme('colors.sky.400') },
-            },
-            h1: {
-              fontWeight: '700',
-              letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.100'),
-            },
-            h2: {
-              fontWeight: '700',
-              letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.100'),
-            },
-            h3: {
-              fontWeight: '600',
-              color: theme('colors.gray.100'),
-            },
-            'h4,h5,h6': {
-              color: theme('colors.gray.100'),
-            },
-            pre: {
-              backgroundColor: '#24283b',
-            },
-            code: {
-              backgroundColor: '#24283b',
-            },
-            details: {
-              backgroundColor: theme('colors.gray.800'),
-            },
-            hr: { borderColor: theme('colors.gray.700') },
-            'ol li::marker': {
-              fontWeight: '600',
-              color: theme('colors.gray.400'),
-            },
-            'ul li::marker': {
-              backgroundColor: theme('colors.gray.400'),
-            },
-            strong: { color: theme('colors.white') },
-            thead: {
-              th: {
-                color: theme('colors.gray.100'),
-              },
-            },
-            tbody: {
-              tr: {
-                borderBottomColor: theme('colors.gray.700'),
-              },
-              td: {
-                color: theme('colors.gray.200'),
-              },
-            },
-            blockquote: {
-              color: theme('colors.gray.100'),
-              borderLeftColor: theme('colors.gray.700'),
             },
           },
         },

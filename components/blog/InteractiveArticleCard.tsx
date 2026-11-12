@@ -45,7 +45,7 @@ const InteractiveArticleCard = ({ post, index }: Props) => {
   return (
     <div
       ref={cardRef}
-      className="group relative h-full overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl dark:bg-gray-900/80"
+      className="group relative h-full overflow-hidden rounded-2xl bg-white/80 backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-2xl"
       style={{
         transform: `perspective(1000px) rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
         transformStyle: 'preserve-3d',
@@ -59,7 +59,7 @@ const InteractiveArticleCard = ({ post, index }: Props) => {
       <Link href={`/blog/${slug}`} className="absolute inset-0 z-0" aria-label={`Read article: ${title}`} />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-blue-900/20 dark:to-purple-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* Shine Effect */}
       <div
@@ -75,7 +75,7 @@ const InteractiveArticleCard = ({ post, index }: Props) => {
         <div className="mb-4 flex items-center justify-between">
           <time
             dateTime={date}
-            className="inline-block rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-3 py-1 text-xs font-medium text-blue-800 dark:from-blue-900/50 dark:to-purple-900/50 dark:text-blue-200"
+            className="inline-block rounded-full bg-gradient-to-r from-blue-100 to-purple-100 px-3 py-1 text-xs font-medium text-blue-800"
           >
             {formatDate(date)}
           </time>
@@ -83,12 +83,12 @@ const InteractiveArticleCard = ({ post, index }: Props) => {
         </div>
 
         {/* Title */}
-        <h2 className="mb-3 line-clamp-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+        <h2 className="mb-3 line-clamp-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600">
           {title}
         </h2>
 
         {/* Summary */}
-        <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{summary}</p>
+        <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-gray-600">{summary}</p>
 
         {/* Tags */}
         {tags && tags.length > 0 && (
@@ -97,13 +97,13 @@ const InteractiveArticleCard = ({ post, index }: Props) => {
               <SimpleTag key={tag} text={tag} />
             ))}
             {tags.length > 3 && (
-              <span className="text-sm text-gray-500 dark:text-gray-400">+{tags.length - 3} more</span>
+              <span className="text-sm text-gray-500">+{tags.length - 3} more</span>
             )}
           </div>
         )}
 
         {/* Read More Arrow */}
-        <div className="mt-4 flex items-center text-sm font-medium text-blue-600 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100 dark:text-blue-400">
+        <div className="mt-4 flex items-center text-sm font-medium text-blue-600 opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100">
           Read more
           <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

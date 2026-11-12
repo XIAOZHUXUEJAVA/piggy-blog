@@ -13,21 +13,9 @@
   border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
-.dark .glass-effect {
-  background-color: rgba(17, 24, 39, 0.75);
-  border: 1px solid rgba(75, 85, 99, 0.3);
-}
-
 /* 渐变文字效果 */
 .gradient-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.dark .gradient-text {
-  background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -40,10 +28,6 @@
 
 .glow-on-hover:hover {
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-}
-
-.dark .glow-on-hover:hover {
-  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
 }
 
 /* 卡片悬停动画 */
@@ -119,28 +103,11 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.dark .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
 /* 加载动画 */
 .loading-shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
-}
-
-.dark .loading-shimmer {
-  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
-  background-size: 200% 100%;
 }
 
 @keyframes shimmer {

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
 import { Clock3 } from 'lucide-react';
 import { lifeClock } from '@/utils/lifeClock';
@@ -93,20 +92,5 @@ export function LifeClock() {
         </span>
       </div>
     </div>
-  );
-}
-
-export function TerminalTheme() {
-  const { resolvedTheme } = useTheme();
-  const t = useTranslations('AboutProfile');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
-  return (
-    <span>
-      Piggy{' '}
-      <span className={styles.themeVariant}>/ {mounted ? t(resolvedTheme === 'dark' ? 'dark' : 'light') : '…'}</span>
-    </span>
   );
 }

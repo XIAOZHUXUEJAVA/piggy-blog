@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useTheme } from 'next-themes';
 
 function seededRandom() {
   let seed = 71423;
@@ -11,7 +10,7 @@ function seededRandom() {
   };
 }
 
-function drawPaper(canvas: HTMLCanvasElement, dark: boolean) {
+function drawPaper(canvas: HTMLCanvasElement) {
   const context = canvas.getContext('2d');
   if (!context) return;
 
@@ -33,7 +32,7 @@ function drawPaper(canvas: HTMLCanvasElement, dark: boolean) {
     const edge = Math.pow(Math.abs((x / canvas.width) * 2 - 1), 1.5);
     for (let y = 0; y < canvas.height; y++) {
       const offset = (y * canvas.width + x) * 4;
-      const variation = random() > 0.72 ? (random() - 0.68) * (dark ? 10 : 17) * (0.4 + edge * 0.6) : 0;
+      const variation = random() > 0.72 ? (random() - 0.68) * 17 * (0.4 + edge * 0.6) : 0;
       grain.data[offset] = base[0] + variation;
       grain.data[offset + 1] = base[1] + variation;
       grain.data[offset + 2] = base[2] + variation;
@@ -50,8 +49,8 @@ function drawPaper(canvas: HTMLCanvasElement, dark: boolean) {
   for (let i = 0; i < (width * height) / 2400; i++) {
     const x = random() * width;
     const y = random() * height;
-    context.fillStyle = dark ? '#c6bcaa' : '#8d806b';
-    context.globalAlpha = (0.045 + random() * 0.13) * strengthAt(x) * (dark ? 0.55 : 1);
+    context.fillStyle = '#8d806b';
+    context.globalAlpha = (0.045 + random() * 0.13) * strengthAt(x);
     context.beginPath();
     context.ellipse(x, y, 0.25 + random() * 0.65, 0.2 + random() * 0.4, random() * Math.PI, 0, Math.PI * 2);
     context.fill();
@@ -90,24 +89,14 @@ function drawPaper(canvas: HTMLCanvasElement, dark: boolean) {
     } else {
       context.bezierCurveTo(length * 0.23, bend, length * 0.66, -bend * 0.55, length, endBend);
     }
-    context.strokeStyle = dark
-      ? pale
-        ? '#e9e1d2'
-        : '#b8ac96'
-      : pale
-        ? '#ffffff'
-        : ['#a99b83', '#aca99e', '#bab2a2'][i % 3];
-    context.globalAlpha = dark
-      ? (0.045 + random() * 0.075) * strength
-      : pale
-        ? (0.55 + random() * 0.4) * strength
-        : (0.045 + random() * 0.055) * strength;
+    context.strokeStyle = pale ? '#ffffff' : ['#a99b83', '#aca99e', '#bab2a2'][i % 3];
+    context.globalAlpha = pale ? (0.55 + random() * 0.4) * strength : (0.045 + random() * 0.055) * strength;
     context.lineWidth = lineWidth;
     context.stroke();
 
     if (random() < 0.2) {
       context.setLineDash([]);
-      context.globalAlpha *= pale && !dark ? 0.7 : 0.45;
+      context.globalAlpha *= pale ? 0.7 : 0.45;
       context.lineWidth *= 0.65;
       context.beginPath();
       context.moveTo(length * 0.12, 1.5);
@@ -121,26 +110,25 @@ function drawPaper(canvas: HTMLCanvasElement, dark: boolean) {
 
 export default function PaperBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !resolvedTheme) return;
-    const draw = () => drawPaper(canvas, resolvedTheme === 'dark');
+    if (!canvas) return;
+    const draw = () => drawPaper(canvas);
     let resizeTimer: ReturnType<typeof setTimeout>;
     const resize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(draw, 120);
     };
 
-    // Static texture: redraw only when the viewport or theme changes.
+    // Static texture: redraw only when the viewport changes.
     draw();
     window.addEventListener('resize', resize);
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
     };
-  }, [resolvedTheme]);
+  }, []);
 
   return (
     <div className="paper-background" aria-hidden="true">

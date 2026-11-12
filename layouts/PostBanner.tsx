@@ -23,7 +23,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
       <ScrollTopAndComment />
       <article className="paper-reading">
         <div>
-          <div className="space-y-1 pb-10 text-center dark:border-gray-700">
+          <div className="space-y-1 pb-10 text-center">
             <div className="w-full">
               <div className="relative aspect-[2/1] w-full">
                 <Image src={displayImage} alt={title} fill className="object-cover" />
@@ -33,9 +33,9 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
               <PageTitle>{title}</PageTitle>
             </div>
           </div>
-          <div className="prose mx-auto max-w-3xl py-4 dark:prose-invert">{children}</div>
+          <div className="prose mx-auto max-w-3xl py-4">{children}</div>
           {siteMetadata.comments && (
-            <div className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300" id="comment">
+            <div className="pb-6 pt-6 text-center text-gray-700" id="comment">
               <Comments slug={slug} />
             </div>
           )}
@@ -45,7 +45,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${prev.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-600"
                     aria-label={t('previousPost', { title: prev.title })}
                   >
                     &larr; {prev.title}
@@ -56,7 +56,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
                 <div className="pt-4 xl:pt-8">
                   <Link
                     href={`/${next.path}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    className="text-primary-500 hover:text-primary-600"
                     aria-label={t('nextPost', { title: next.title })}
                   >
                     {next.title} &rarr;

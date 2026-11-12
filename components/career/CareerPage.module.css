@@ -16,17 +16,6 @@
   color: var(--text);
 }
 
-:global(.dark) .page {
-  --surface: var(--paper-solid);
-  --inset: var(--paper-inset);
-  --text: var(--paper-ink);
-  --muted: var(--paper-muted);
-  --border: var(--paper-line);
-  --accent: var(--paper-accent);
-  --green: #a3be8c;
-  --teal: #8abdb2;
-}
-
 .amber {
   --tone: var(--accent);
 }
@@ -38,9 +27,6 @@
 }
 .teal {
   --tone: var(--teal);
-}
-:global(.dark) .clay {
-  --tone: #d49984;
 }
 
 .pageHeader {
@@ -106,12 +92,6 @@
   --panel-shadow: rgb(83 68 40 / 5%);
   border: 1px solid var(--panel-line);
   background: var(--panel-surface);
-  box-shadow: var(--paper-shadow);
-}
-:global(.dark) .stat {
-  --panel-line: var(--paper-line);
-  --panel-surface: var(--paper-surface);
-  --panel-shadow: rgb(0 0 0 / 30%);
   box-shadow: var(--paper-shadow);
 }
 .stat {
@@ -211,12 +191,6 @@
   box-shadow: 0 2px 5px rgb(65 52 34 / 2%);
   padding: 1.375rem 1.5rem 0;
 }
-:global(.dark) .ruler {
-  --ruler-surface: color-mix(in srgb, var(--paper-solid) 38%, transparent);
-  --ruler-label-surface: color-mix(in srgb, var(--paper-solid) 38%, var(--paper-base));
-  --ruler-sage: #a1b09b;
-  box-shadow: 0 2px 5px rgb(0 0 0 / 5%);
-}
 .rulerCaption {
   display: flex;
   align-items: center;
@@ -305,15 +279,6 @@
 }
 .projectLaneLabel {
   --event-tone: #a17c68;
-}
-:global(.dark) .learningLaneLabel {
-  --event-tone: #c0ab83;
-}
-:global(.dark) .workLaneLabel {
-  --event-tone: #a0b29e;
-}
-:global(.dark) .projectLaneLabel {
-  --event-tone: #c6a28d;
 }
 .rulerPlot {
   min-width: 0;
@@ -670,12 +635,45 @@
 .chapter {
   --panel-line: var(--paper-line);
   --panel-surface: var(--paper-surface);
+  --chapter-paper: #fcfaf5;
+  --chapter-shadow: rgb(76 59 34 / 9%);
+  position: relative;
+  isolation: isolate;
   margin-top: 1rem;
-  border: 1px dashed var(--panel-line);
-  border-radius: 0.75rem;
-  background: var(--panel-surface);
   padding: 1.625rem 1.75rem;
 }
+
+/* Keep the torn backing separate so text, tool chips and focus outlines stay intact. */
+.chapterPaper {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  filter: drop-shadow(0 3px 4px var(--chapter-shadow));
+  pointer-events: none;
+}
+
+.chapterPaper::before {
+  position: absolute;
+  inset: 0;
+  background: var(--chapter-paper) url('/static/images/nav-paper-texture.svg');
+  mask-image: url('/static/images/nav-paper-edge-top.svg'), url('/static/images/nav-paper-edge-bottom.svg'),
+    url('/static/images/paper-edge-left.svg'), url('/static/images/paper-edge-right.svg'), linear-gradient(#fff, #fff);
+  mask-size:
+    160px 6px,
+    160px 6px,
+    6px 160px,
+    6px 160px,
+    calc(100% - 12px) calc(100% - 12px);
+  mask-position:
+    left top,
+    right bottom,
+    left top,
+    right bottom,
+    center;
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+  content: '';
+}
+
 .graphRow:target .chapter {
   outline: 2px solid var(--tone);
   outline-offset: 4px;

@@ -105,13 +105,13 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
   return (
     <div className="archive-page">
       <div className="archive-shell p-4 sm:p-7 lg:p-9">
-        <header className="border-b border-gray-200 pb-6 dark:border-gray-700">
+        <header className="border-b border-gray-200 pb-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {title || t('title')}
               </h1>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{t('archiveDescription')}</p>
+              <p className="mt-2 text-sm text-gray-500">{t('archiveDescription')}</p>
             </div>
 
             <label className="relative block w-full sm:max-w-xs">
@@ -132,21 +132,21 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
           </div>
         </header>
 
-        <section className="border-b border-gray-200 py-5 dark:border-gray-700" aria-labelledby="archive-tags-heading">
+        <section className="border-b border-gray-200 py-5" aria-labelledby="archive-tags-heading">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <h2 id="archive-tags-heading" className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+              <h2 id="archive-tags-heading" className="text-sm font-semibold text-gray-800">
                 {t('filterTags')}
               </h2>
               <span className="text-xs text-gray-400">{tagCounts.length}</span>
             </div>
-            <div className="flex shrink-0 items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+            <div className="flex shrink-0 items-center gap-3 text-sm text-gray-500">
               <span>{t('articleCount', { count: filteredPosts.length })}</span>
               {hasFilters && (
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex items-center gap-1 text-gray-700 underline decoration-gray-300 underline-offset-4 transition hover:text-gray-950 dark:text-gray-200 dark:hover:text-white"
+                  className="inline-flex items-center gap-1 text-gray-700 underline decoration-gray-300 underline-offset-4 transition hover:text-gray-950"
                 >
                   <X className="h-3.5 w-3.5" aria-hidden="true" />
                   {t('clearFilters')}
@@ -191,8 +191,8 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
 
         <main className="pt-7" aria-label={t('archiveLabel')}>
           {yearGroups.length === 0 ? (
-            <div className="border-y border-dashed border-gray-300 py-16 text-center dark:border-gray-700">
-              <p className="text-gray-500 dark:text-gray-400">{t('noPostsFound')}</p>
+            <div className="border-y border-dashed border-gray-300 py-16 text-center">
+              <p className="text-gray-500">{t('noPostsFound')}</p>
               {hasFilters && (
                 <button
                   type="button"
@@ -210,19 +210,19 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                   <div className="grid grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]">
                     <h2
                       id={`year-${group.year}`}
-                      className="text-2xl font-bold leading-10 text-gray-900 dark:text-gray-100 md:text-3xl"
+                      className="text-2xl font-bold leading-10 text-gray-900 md:text-3xl"
                     >
                       {group.year}
                     </h2>
                     <div className="flex items-center justify-center">
                       <span className="h-3 w-3 rounded-full border-2 border-paper-accent bg-paper-solid" />
                     </div>
-                    <p className="flex items-center pl-4 text-sm text-gray-500 dark:text-gray-400 md:pl-5">
+                    <p className="flex items-center pl-4 text-sm text-gray-500 md:pl-5">
                       {t('articleCount', { count: group.posts.length })}
                     </p>
                   </div>
 
-                  <div className="relative before:absolute before:bottom-0 before:left-[4.25rem] before:top-0 before:border-l before:border-dashed before:border-gray-300 dark:before:border-gray-700 md:before:left-[5.25rem]">
+                  <div className="relative before:absolute before:bottom-0 before:left-[4.25rem] before:top-0 before:border-l before:border-dashed before:border-gray-300 md:before:left-[5.25rem]">
                     {group.posts.map((post) => {
                       const date = getDateParts(post.date, locale);
 
@@ -234,7 +234,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                           <time
                             dateTime={post.date}
                             title={date.full}
-                            className={`${styles.date} flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 dark:text-gray-400 md:text-sm`}
+                            className={`${styles.date} flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 md:text-sm`}
                           >
                             {date.day}
                           </time>
@@ -248,7 +248,7 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
                           >
                             <span className={`${styles.title} truncate`}>{post.title}</span>
                           </Link>
-                          <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 dark:text-gray-500 md:flex">
+                          <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 md:flex">
                             {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}
                           </div>
                         </article>

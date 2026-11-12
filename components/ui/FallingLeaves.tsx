@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { useTheme } from 'next-themes';
 import { createLeafSprites } from './leafSprites';
 
 const START_DELAY = 3000;
@@ -28,12 +27,6 @@ const random = (min: number, max: number) => min + Math.random() * (max - min);
 export default function FallingLeaves() {
   const [started, setStarted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { resolvedTheme } = useTheme();
-  const darkRef = useRef(resolvedTheme === 'dark');
-
-  useEffect(() => {
-    darkRef.current = resolvedTheme === 'dark';
-  }, [resolvedTheme]);
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -57,9 +50,8 @@ export default function FallingLeaves() {
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
 
-    const lightSprites = createLeafSprites();
-    const darkSprites = createLeafSprites(true);
-    const variantsPerType = lightSprites.length / 2;
+    const sprites = createLeafSprites();
+    const variantsPerType = sprites.length / 2;
     let leaves: Leaf[] = [];
     let width = 0;
     let height = 0;
@@ -117,8 +109,6 @@ export default function FallingLeaves() {
       previousTime = time;
       elapsed += delta;
       context.clearRect(0, 0, width, height);
-      const dark = darkRef.current;
-      const sprites = dark ? darkSprites : lightSprites;
 
       for (const leaf of leaves) {
         leaf.age += delta;
@@ -138,7 +128,7 @@ export default function FallingLeaves() {
         const centerWeight = Math.min(1, distanceFromCenter / Math.min(width * 0.4, 520));
         const readingOpacity = 0.38 + 0.62 * centerWeight;
         context.save();
-        context.globalAlpha = leaf.opacity * fadeIn * fadeOut * readingOpacity * (dark ? 0.85 : 1);
+        context.globalAlpha = leaf.opacity * fadeIn * fadeOut * readingOpacity;
         context.translate(leaf.x, leaf.y);
         context.rotate(leaf.angle + Math.sin(elapsed * 0.6 + leaf.phase) * 0.35);
         const tilt = Math.cos(elapsed * 0.9 + leaf.phase);
