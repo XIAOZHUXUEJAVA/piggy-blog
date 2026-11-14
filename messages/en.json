@@ -53,6 +53,10 @@
     "next": "Next"
   },
   "Post": {
+    "tableOfContents": "Table of contents",
+    "articleGuide": "Article guide",
+    "introduction": "Introduction",
+    "updatedOn": "Updated",
     "articleNavigation": "Article navigation",
     "readingDuration": "Reading time",
     "publishedOn": "Published on",

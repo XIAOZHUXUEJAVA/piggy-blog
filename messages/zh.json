@@ -53,6 +53,10 @@
     "next": "下一页"
   },
   "Post": {
+    "tableOfContents": "文章目录",
+    "articleGuide": "文章阅读导航",
+    "introduction": "引言",
+    "updatedOn": "更新于",
     "articleNavigation": "文章导航",
     "readingDuration": "阅读时长",
     "publishedOn": "发布于",
