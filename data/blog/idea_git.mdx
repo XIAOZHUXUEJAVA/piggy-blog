@@ -6,9 +6,9 @@ draft: false
 summary: IDEA中使用git
 ---
 
-## 🧩 IDEA 更新代码遇到问题：Update failed / HTTP Basic: Access denied
+## IDEA 更新代码遇到问题：Update failed / HTTP Basic: Access denied
 
-### ❗ 问题描述
+### 问题描述
 
 在 IDEA 中执行 Git 操作（如 Pull、Push）时，遇到如下错误提示：
 
@@ -18,48 +18,40 @@ remote: HTTP Basic: Access denied.
 The provided password or token is incorrect or your account has 2FA enabled and you must use a personal access token instead of a password.
 ```
 
-### 🎯 问题原因
+### 问题原因
 
 你启用了 **GitLab 的双因素认证（2FA）** 或 **密码已被废弃**，此时不能再使用普通账户密码进行操作，需要改用 **Personal Access Token**。
 
----
-
-## ✅ 解决方案：使用 GitLab Access Token
+## 解决方案：使用 GitLab Access Token
 
 ### 第一步：生成 Access Token
 
 1. 登录 GitLab 网站
-2. 点击 `Settings`->`Access Tokens`
+2. 点击 `Settings` → `Access Tokens`
    - **Token Name**：自定义命名（例如：IDEA Git Token）
    - **Expiration date**：可选，设定有效期
    - **Select a scope（权限）**：建议至少勾选 `api` 和 `write_repository`（或根据实际需要）
    - **Role（角色）**：如果可选，选择 `Maintainer`（前提是你本身具备这个权限）
 3. 点击 **Create project access token**
 
-📌 **复制 Token 并妥善保存！** 生成后将 **只显示一次**。
+**复制 Token 并妥善保存！** 生成后将 **只显示一次**。
 
 ![f690255fc74e9c74a9e0bcd1ed75b08](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/f690255fc74e9c74a9e0bcd1ed75b08.png)
 
 ![162673bd2cbcbf56dfa491487555426](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/162673bd2cbcbf56dfa491487555426.png)
-
----
 
 ### 第二步：在 IDEA 中更新 Git 凭证
 
 1. 打开 IDEA：
    - `File` → `Settings`（或 `Ctrl + Alt + S`）
    - 进入 `Version Control` → `GitLab`
-2. 使用刚才复制的Token重新登录一下即可
+2. 使用刚才复制的 Token 重新登录即可。
 
----
-
-### 🔁 再次更新代码
+### 再次更新代码
 
 完成上述操作后，你可以重新尝试 `Git Pull` 或 `Push` 操作。
 
----
-
-## 🔧 补充问题：`master has no tracked branch`
+## 补充问题：`master has no tracked branch`
 
 如果你在 `git pull` 时遇到以下错误：
 

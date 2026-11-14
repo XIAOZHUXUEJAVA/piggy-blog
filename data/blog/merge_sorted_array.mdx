@@ -6,7 +6,7 @@ draft: false
 summary: LeetCode练级
 ---
 
-## ✨ 题目介绍
+## 题目介绍
 
 给你两个 **升序排列** 的整数数组 `nums1` 和 `nums2`，请你将 `nums2` 合并到 `nums1` 中，使得 `nums1` 成为一个升序数组。
 
@@ -17,9 +17,7 @@ summary: LeetCode练级
 
 LeetCode 中的经典题目：[88. Merge Sorted Array](https://leetcode.cn/problems/merge-sorted-array/)
 
----
-
-## 💡 题目思路
+## 题目思路
 
 我们可以使用**双指针归并排序思想**，维护两个指针分别指向 `nums1` 和 `nums2` 的当前比较元素。
 
@@ -32,9 +30,7 @@ LeetCode 中的经典题目：[88. Merge Sorted Array](https://leetcode.cn/probl
 
 - 原地合并（不借助额外数组）的方法会更优，本文在“优化方案”部分介绍。
 
----
-
-## 🧮 思路演示
+## 思路演示
 
 举个例子：
 
@@ -54,9 +50,7 @@ nums2 = [2,4,6], n = 3
 
 最终：`nums1 = [1,2,3,4,5,6]`
 
----
-
-## 💻 题目代码实现（含测试）
+## 题目代码实现（含测试）
 
 ```java
 import java.util.Arrays;
@@ -129,7 +123,7 @@ public class ProblemMergeSortedArray {
     }
 
     public static void main(String[] args) {
-        // ✅ 正常情况测试
+        // 正常情况测试
         testMerge("Both arrays with elements",
                 new int[]{1, 3, 5, 0, 0, 0}, 3,
                 new int[]{2, 4, 6}, 3,
@@ -155,7 +149,7 @@ public class ProblemMergeSortedArray {
                 new int[]{2, 5, 6}, 3,
                 new int[]{1, 2, 2, 3, 5, 6});
 
-        // ❌ 异常情况测试
+        // 异常情况测试
         testMerge("nums1 is null", null, 0, new int[]{1, 2}, 2, null);
         testMerge("nums2 is null", new int[]{1, 2, 0}, 2, null, 1, null);
         testMerge("m is negative", new int[]{1, 2, 0}, -1, new int[]{3}, 1, null);
@@ -167,18 +161,14 @@ public class ProblemMergeSortedArray {
 }
 ```
 
----
-
-## ⏱️ 时间和空间复杂度分析
+## 时间和空间复杂度分析
 
 - **时间复杂度**：O(m + n)
   每个元素都只遍历了一次。
 - **空间复杂度**：O(m + n)
   使用了一个额外数组 `mergedArray` 存储合并结果。
 
----
-
-## 🚀 算法优化方案（更好的写法）
+## 算法优化方案（更好的写法）
 
 题目要求在 `nums1` 原地修改。我们可以 **从后往前遍历**，这样就能直接在 `nums1` 中放置最大元素，无需额外数组：
 
@@ -199,9 +189,7 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
 - 时间复杂度仍为 O(m + n)
 - 空间复杂度为 O(1)，**无需额外数组**
 
----
-
-## ✅ 总结
+## 总结
 
 - 本题本质是归并排序的合并过程。
 - 初始写法逻辑清晰但使用了额外数组，可以作为理解算法的第一步。

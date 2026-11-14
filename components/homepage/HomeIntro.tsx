@@ -37,7 +37,7 @@ export default function HomeIntro({
 
       <h1 id="home-intro-title" className={styles.introGreeting}>
         {t.rich('introGreeting', {
-          name: () => <span className={styles.introName}>{siteMetadata.author}</span>,
+          name: (chunks) => <span className={styles.introName}>{chunks}</span>,
         })}
         <span className={styles.introWave} aria-hidden="true">
           👋

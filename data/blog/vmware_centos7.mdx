@@ -10,8 +10,6 @@ summary: CentOS Install
 
 本教程将详细介绍如何在 VMware 虚拟机上安装 CentOS 7 操作系统，包含 DVD 版本和 Minimal 版本两种安装方式。无论您是 Linux 初学者还是有一定经验的用户，都能通过本教程顺利完成安装。
 
----
-
 ## 准备工作
 
 ### 1. 下载 CentOS 7 ISO 镜像文件
@@ -29,8 +27,6 @@ https://mirrors.aliyun.com/centos/7/isos/x86_64/
 下载完成后，您将获得一个 `.iso` 格式的光盘映像文件：
 
 ![ISO文件示例](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250320221209465.png)
-
----
 
 ## 第一部分：安装 CentOS 7 DVD 版本
 
@@ -85,8 +81,6 @@ https://mirrors.aliyun.com/centos/7/isos/x86_64/
 
 安装过程会自动进行，等待完成即可。
 
----
-
 ## 第二部分：安装 CentOS 7 Minimal 版本
 
 Minimal 版本安装过程与 DVD 版本类似，但有几个关键区别点：
@@ -133,8 +127,6 @@ Minimal 版本默认只安装基本系统，可根据需要添加软件包：
 
 ![安装完成](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250321204358357.png)
 
----
-
 ## 第三部分：测试环境
 
 ### 1. 测试是否联网
@@ -143,39 +135,41 @@ Minimal 版本默认只安装基本系统，可根据需要添加软件包：
 ping www.baidu.com
 ```
 
-**报错：Name or service not known**
+如果出现 `Name or service not known` 错误，可以按下面的步骤检查网络配置。
 
 我们需要确保宿主机VM服务开启，然后设置虚拟机网络适配器为NAT模式，这里我们之前都已经设置过了一部分
 
-**虚拟机网络适配器开启NAT模式**
+#### 虚拟机网络适配器开启 NAT 模式
 
 ![网络设置](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323165857614.png)
 
-**VMware 虚拟网络编辑器**
+#### VMware 虚拟网络编辑器
 
 ![image-20250324212901042](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324212901042.png)
 
 ![image-20250324212731244](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324212731244.png)
 
-**同时点击NAT设置，查看子网IP 子网掩码 网关 IP**
+同时点击 NAT 设置，查看子网 IP、子网掩码、网关 IP。
 
 ![image-20250324213054467](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250324213054467.png)
 
-**在本机中配置VMnet8的IPV4协议，确保该网络的IP地址和和我们刚才在虚拟机中的NAT设置里面的子网IP地址在同一网段**
+#### 配置本机 VMnet8 的 IPv4 协议
+
+确保该网络的 IP 地址和刚才在虚拟机 NAT 设置中的子网 IP 地址在同一网段。
 
 win + r 打开 cmd 输入control 打开控制面板，选择 网络和 Internet
 
 ![image-20250323230400531](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230400531.png)
 
-**查看网络状态和任务**
+选择“查看网络状态和任务”。
 
 ![image-20250323230501379](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230501379.png)
 
-**更改适配器设置**
+点击“更改适配器设置”。
 
 ![image-20250323230516827](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230516827.png)
 
-**选择VMnet8**
+选择 VMnet8。
 
 ![image-20250323230534168](https://xiaozhublog.oss-cn-qingdao.aliyuncs.com/myblogimg/image-20250323230534168.png)
 
@@ -261,7 +255,7 @@ ip addr
    service sshd restart
    ```
 
-### 2.配置yum源
+### 2. 配置 yum 源
 
 ```bash
 vi /etc/yum.repos.d/CentOS-Base.repo
@@ -300,7 +294,7 @@ enabled=0
 gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7
 ```
 
-**测试**
+### 3. 测试网络连通性
 
 ```bash
 ping 192.168.88.131   # 测试与主机的连通性
@@ -309,9 +303,9 @@ ping 8.8.8.8          # 测试外网连通性
 ping www.baidu.com    # 测试DNS解析
 ```
 
-**常见问题解答**
+## 常见问题解答
 
-**Q1：主机VMnet8的IP（192.168.88.131）和虚拟机IP（192.168.88.132）这样配置可以吗？**
+### 主机 VMnet8 的 IP（192.168.88.131）和虚拟机 IP（192.168.88.132）这样配置可以吗？
 
 完全可以，这是标准的NAT模式配置：
 
@@ -329,13 +323,11 @@ CentOS IP：192.168.88.132
 
 这种配置确保了：
 
-主机和虚拟机可以互相通信
+- 主机和虚拟机可以互相通信
+- 虚拟机可以通过 NAT 访问外网
+- 网络隔离，不影响物理网络
 
-虚拟机可以通过NAT访问外网
-
-网络隔离，不影响物理网络
-
-**Q2：VMnet8的IP是真实主机IP吗？**
+### VMnet8 的 IP 是真实主机 IP 吗？
 
 不是。VMnet8的IP（192.168.88.131）是VMware创建的虚拟网络接口IP，不是物理主机的真实IP。要查看真实IP，在Windows中执行：
 
@@ -345,6 +337,6 @@ ipconfig
 
 输出中"以太网适配器 以太网"显示的是真实IP，而"VMware Network Adapter VMnet8"显示的是虚拟IP。
 
-**Q3：依旧联不上网**
+### 依旧连不上网
 
 考虑防火墙的原因
