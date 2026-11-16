@@ -148,9 +148,10 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
                   </div>
                 </div>
 
-                <pre className={styles.asciiArt} aria-hidden="true">
-                  {ASCII_PIG}
-                </pre>
+                <div className={styles.asciiWrap} aria-hidden="true">
+                  <pre className={styles.asciiArt}>{ASCII_PIG}</pre>
+                  <span className={styles.asciiCover} />
+                </div>
               </div>
 
               <TerminalCommand />

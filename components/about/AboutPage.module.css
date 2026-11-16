@@ -199,16 +199,39 @@
   min-width: 0;
 }
 
-.asciiArt {
+.asciiWrap {
+  position: relative;
   align-self: center;
+}
+
+.asciiArt {
   margin: 0;
   color: var(--terminal-accent);
   font-family: inherit;
   font-size: clamp(0.8125rem, 1.1vw, 1rem);
   line-height: 1.15;
   letter-spacing: 0;
-  opacity: 0.6;
+  opacity: 0.8;
   user-select: none;
+}
+
+.asciiCover {
+  position: absolute;
+  inset: 0;
+  background: var(--panel);
+  transform-origin: left top;
+  will-change: transform;
+  animation: ascii-sweep 2400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes ascii-sweep {
+  from {
+    transform: translateX(-4%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(145%) skewX(-18deg);
+  }
 }
 
 .user {
@@ -1751,5 +1774,9 @@
   .readLink,
   .inlineLink {
     transition: none;
+  }
+
+  .asciiCover {
+    display: none;
   }
 }
