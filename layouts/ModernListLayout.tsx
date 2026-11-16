@@ -7,11 +7,13 @@ import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
 import { Link } from '@/i18n/navigation';
+import PageHeader from '@/components/ui/PageHeader';
 import styles from './ArchiveTimeline.module.css';
 
 interface ModernListLayoutProps {
   posts: CoreContent<Blog>[];
   title?: string;
+  path?: string;
 }
 
 interface YearGroup {
@@ -45,7 +47,7 @@ function getTagCounts(posts: CoreContent<Blog>[]) {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
-export default function ModernListLayout({ posts, title }: ModernListLayoutProps) {
+export default function ModernListLayout({ posts, title, path = '~/blog' }: ModernListLayoutProps) {
   const locale = useLocale();
   const t = useTranslations('Blog');
   const [searchValue, setSearchValue] = useState('');
@@ -105,32 +107,27 @@ export default function ModernListLayout({ posts, title }: ModernListLayoutProps
   return (
     <div className="archive-page">
       <div className="archive-shell p-4 sm:p-7 lg:p-9">
-        <header className="border-b border-gray-200 pb-6">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                {title || t('title')}
-              </h1>
-              <p className="mt-2 text-sm text-gray-500">{t('archiveDescription')}</p>
-            </div>
-
-            <label className="relative block w-full sm:max-w-xs">
-              <span className="sr-only">{t('searchLabel')}</span>
-              <Search
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
-                aria-hidden="true"
-              />
-              <input
-                aria-label={t('searchLabel')}
-                type="search"
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-                placeholder={t('searchPlaceholder')}
-                className="h-10 w-full rounded-lg border border-paper-line bg-paper-solid pl-9 pr-3 text-sm text-paper-ink transition placeholder:text-paper-muted focus:border-paper-accent"
-              />
-            </label>
-          </div>
-        </header>
+        <PageHeader
+          className="border-b border-gray-200 pb-6"
+          path={path}
+          title={title || t('title')}
+        >
+          <label className="relative block w-full">
+            <span className="sr-only">{t('searchLabel')}</span>
+            <Search
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+              aria-hidden="true"
+            />
+            <input
+              aria-label={t('searchLabel')}
+              type="search"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+              placeholder={t('searchPlaceholder')}
+              className="h-10 w-full rounded-lg border border-paper-line bg-paper-solid pl-9 pr-3 text-sm text-paper-ink transition placeholder:text-paper-muted focus:border-paper-accent"
+            />
+          </label>
+        </PageHeader>
 
         <section className="border-b border-gray-200 py-5" aria-labelledby="archive-tags-heading">
           <div className="mb-3 flex items-center justify-between gap-3">

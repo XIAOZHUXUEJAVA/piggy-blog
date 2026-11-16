@@ -5,6 +5,7 @@ import Twemoji from './Twemoji';
 import Comments from './Comments';
 import BrandIcon from './BrandIcon';
 import PageTitle from './PageTitle';
+import PageHeader from './PageHeader';
 import TableWrapper from './TableWrapper';
 import components from './MDXComponents';
 import SectionContainer from './SectionContainer';
@@ -19,6 +20,7 @@ export {
   Comments,
   BrandIcon,
   PageTitle,
+  PageHeader,
   components,
   TableWrapper,
   SectionContainer,

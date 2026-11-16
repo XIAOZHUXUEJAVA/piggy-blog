@@ -9,6 +9,18 @@ import styles from './AboutPage.module.css';
 import AboutMotion from './AboutMotion';
 import AboutShowcase from './AboutShowcase';
 
+const ASCII_PIG = String.raw`       ,--.      ,--.
+      /    \____/    \
+     |   ,-.    ,-.   |
+     |  ( o )  ( o )  |
+     |   '-'    '-'   |
+     |     ,----.     |
+     |    ( o  o )    |
+     |     '----'     |
+      \              /
+       '.          .'
+         '--------'`;
+
 interface AboutProfileProps {
   author: CoreContent<Authors>;
   postCount: number;
@@ -110,27 +122,35 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
             <div className={styles.terminal}>
               <Prompt command="fastfetch" />
 
-              <div className={styles.identity}>
-                <h1 id="profile-name" className={styles.name}>
-                  {author.name}
-                  <span className={styles.nameDot}>.</span>
-                </h1>
-                <p className={styles.tagline}>{t('tagline')}</p>
-              </div>
-
-              <dl className={styles.details}>
-                {details.map(({ label, value }) => (
-                  <div className={styles.detail} key={label}>
-                    <dt>{label}</dt>
-                    <dd>{value}</dd>
+              <div className={styles.fetchRow}>
+                <div className={styles.fetchMain}>
+                  <div className={styles.identity}>
+                    <h2 id="profile-name" className={styles.name}>
+                      {author.name}
+                      <span className={styles.nameDot}>.</span>
+                    </h2>
+                    <p className={styles.tagline}>{t('tagline')}</p>
                   </div>
-                ))}
-              </dl>
 
-              <div className={styles.palette} aria-hidden="true">
-                {Array.from({ length: 8 }, (_, index) => (
-                  <span key={index} />
-                ))}
+                  <dl className={styles.details}>
+                    {details.map(({ label, value }) => (
+                      <div className={styles.detail} key={label}>
+                        <dt>{label}</dt>
+                        <dd>{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <div className={styles.palette} aria-hidden="true">
+                    {Array.from({ length: 8 }, (_, index) => (
+                      <span key={index} />
+                    ))}
+                  </div>
+                </div>
+
+                <pre className={styles.asciiArt} aria-hidden="true">
+                  {ASCII_PIG}
+                </pre>
               </div>
 
               <TerminalCommand />

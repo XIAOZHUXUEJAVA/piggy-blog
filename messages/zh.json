@@ -77,6 +77,10 @@
     "copyCode": "复制代码",
     "copied": "已复制！"
   },
+  "About": {
+    "title": "关于",
+    "description": "进一步了解我是谁，以及这个博客的初衷。"
+  },
   "AboutProfile": {
     "avatarAlt": "{name} 的头像",
     "intro": "记录开发、项目，以及一路上的思考。",
@@ -87,7 +91,7 @@
     "readPosts": "阅读我的文章",
     "tagline": "一个普通程序员，保持好奇，持续折腾。",
     "roleLabel": "Role",
-    "role": "开发者 / 终身学习者",
+    "role": "软件工程师",
     "focusLabel": "Focus",
     "stackLabel": "Stack",
     "locationLabel": "Location",

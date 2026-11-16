@@ -77,6 +77,10 @@
     "copyCode": "Copy code",
     "copied": "Copied!"
   },
+  "About": {
+    "title": "About",
+    "description": "Further insights into who I am and the purpose of this blog."
+  },
   "AboutProfile": {
     "avatarAlt": "Avatar of {name}",
     "intro": "Notes on development, projects, and thoughts along the way.",
@@ -87,7 +91,7 @@
     "readPosts": "Read my posts",
     "tagline": "An ordinary developer. Always curious, always tinkering.",
     "roleLabel": "Role",
-    "role": "Developer / Lifelong learner",
+    "role": "Software Engineer",
     "focusLabel": "Focus",
     "stackLabel": "Stack",
     "locationLabel": "Location",

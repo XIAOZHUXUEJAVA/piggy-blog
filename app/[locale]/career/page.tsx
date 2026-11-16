@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { genPageMetadata } from 'app/seo';
+import PageHeader from '@/components/ui/PageHeader';
 import careerData from '@/data/careerData';
 import CareerHistory from '@/components/career/CareerHistory';
 import CareerMotion from '@/components/career/CareerMotion';
@@ -16,9 +17,11 @@ export const revalidate = 86400;
 
 export default async function CareerPage({ params }: { params: { locale: string } }) {
   const locale = params.locale === 'en' ? 'en' : 'zh';
+  const t = await getTranslations({ locale, namespace: 'Career' });
 
   return (
     <CareerMotion className={styles.page}>
+      <PageHeader path="~/career" title={t('title')} />
       <CareerProcess entries={careerData} locale={locale} />
       <CareerHistory entries={careerData} now={new Date()} locale={locale} />
     </CareerMotion>

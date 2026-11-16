@@ -34,7 +34,7 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
           <p className={styles.command}>
             <span>$</span> git log --graph
           </p>
-          <h1 id="career-history-title">{t('history')}</h1>
+          <h2 id="career-history-title">{t('history')}</h2>
         </div>
         <span className={styles.historyHint}>{t('historyHint')}</span>
       </div>
