@@ -19,6 +19,7 @@
     "introEmail": "Send me an email",
     "introRss": "Subscribe via RSS",
     "featuredPosts": "Selected Posts",
+    "collectionNote": "Tucked between pages. Worth returning to.",
     "topicsCount": "{count, plural, one {# Topic} other {# Topics}}",
     "updatedDaily": "Updated Daily",
     "recentPosts": "Recent Posts",

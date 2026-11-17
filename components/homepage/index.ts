@@ -1,3 +1,4 @@
 import FeaturedPosts from './FeaturedPosts';
+import RecentPosts from './RecentPosts';
 
-export { FeaturedPosts };
+export { FeaturedPosts, RecentPosts };

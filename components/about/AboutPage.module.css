@@ -202,13 +202,14 @@
 .asciiWrap {
   position: relative;
   align-self: center;
+  transform: translate(-2rem, 2.5rem);
 }
 
 .asciiArt {
   margin: 0;
   color: var(--terminal-accent);
   font-family: inherit;
-  font-size: clamp(0.8125rem, 1.1vw, 1rem);
+  font-size: clamp(1rem, 1.45vw, 1.35rem);
   line-height: 1.15;
   letter-spacing: 0;
   opacity: 0.8;
