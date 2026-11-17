@@ -13,7 +13,7 @@
   --paper-line: rgb(142 125 97 / 22%);
   --paper-line-hover: rgb(142 125 97 / 42%);
   --paper-shadow: 0 2px 8px rgb(59 46 25 / 3%);
-  --paper-serif: var(--font-zh), 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', SimSun, Georgia, serif;
+  --font-site: var(--font-maple-mono), var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 body {
@@ -353,7 +353,7 @@ body {
 
 .post-title,
 .post-prose :where(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--paper-serif);
+  font-family: var(--font-site);
 }
 
 .post-title {

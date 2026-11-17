@@ -9,7 +9,6 @@
   --shadow: rgb(76 59 34 / 9%);
   --scene-tone: #497c76;
   --card-paper: #fcfaf5;
-  --mono: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   min-width: 0;
   color: var(--terminal-text);
 }
@@ -28,7 +27,7 @@
 .processEyebrow {
   margin: 0 0 1.125rem;
   color: var(--scene-tone);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
 }
@@ -113,7 +112,7 @@
   overflow: hidden;
   min-width: 0;
   margin: 0;
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.75rem;
   line-height: 1.6;
   user-select: none;
@@ -248,7 +247,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-site);
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -373,7 +372,7 @@
 }
 .shipToast strong {
   display: block;
-  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-site);
   font-size: 0.75rem;
   font-weight: 550;
 }

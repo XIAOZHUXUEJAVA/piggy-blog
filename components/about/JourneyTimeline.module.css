@@ -3,8 +3,7 @@
   width: 100%;
   scroll-margin-top: 7rem;
   color: var(--journey-text);
-  font-family: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+  font-family: var(--font-site);
   font-size: 0.75rem;
   line-height: 1.6;
 }

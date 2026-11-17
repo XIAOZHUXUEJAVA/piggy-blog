@@ -39,7 +39,7 @@
   background: transparent;
   padding: 1rem 3.75rem 1rem 1.25rem;
   color: var(--code-text);
-  font-family: 'Cascadia Code', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-family: var(--font-site);
   font-size: 0.875rem;
   line-height: 1.75;
   tab-size: 2;
@@ -103,7 +103,7 @@
   background: var(--code-bg);
   padding: 0.625rem 1.25rem;
   color: var(--code-muted);
-  font-family: monospace;
+  font-family: var(--font-site);
   font-size: 0.75rem;
   overflow-wrap: anywhere;
 }

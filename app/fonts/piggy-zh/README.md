@@ -8,7 +8,7 @@
 - Copyright 2021 The Zen Maru Gothic Authors (https://github.com/googlefonts/zen-marugothic)
 - © 2023 ChillType, with Reserved Font Name 'ChillRoundF' 'ChillRoundM'.
 
-`css/chinese-fonts.css` 通过 `unicode-range` 限制为汉字、中文标点、注音及相关兼容字符，不含拉丁字母、数字和 ASCII 标点。现有 Outfit、衬线英文和代码字体继续负责这些字符。中文标点中的全角标点使用此字体，共用的西文引号、省略号等仍按原字体处理。
+`css/chinese-fonts.css` 通过 `unicode-range` 限制为汉字、中文标点、注音及相关兼容字符，不含拉丁字母、数字和 ASCII 标点。这些字符统一使用 Maple Mono。中文标点中的全角标点使用此字体，共用的西文引号、省略号等由 Maple Mono 处理。正文、标题、界面和代码共用 `--font-site` 字体栈。
 
 23 个分片共覆盖源字体中的 11,378 个中文相关字符，约 2.48 MiB。浏览器只请求页面实际使用的分片；常用站点字符按出现频率集中，以减少首屏下载。源字体之外的生僻字依然回退到系统字体。只包含原字体的 400 字重，粗体由浏览器合成。
 

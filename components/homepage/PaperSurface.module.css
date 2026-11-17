@@ -72,7 +72,7 @@
 
 .introMotto {
   color: var(--paper-muted);
-  font-family: var(--paper-serif);
+  font-family: var(--font-site);
   font-size: 0.75rem;
   font-style: italic;
   line-height: 1.9;
@@ -125,7 +125,7 @@
 /* Shared alignment keeps the loose leaves together as one reading table. */
 .editorial {
   margin: 4.25rem 0 6rem;
-  font-family: var(--paper-serif);
+  font-family: var(--font-site);
 }
 
 .recentPosts,
@@ -144,7 +144,7 @@
 
 .eyebrow {
   color: var(--paper-muted);
-  font-family: var(--font-zh), Georgia, 'Times New Roman', serif;
+  font-family: var(--font-site);
   font-size: 0.625rem;
   line-height: 1.5;
   letter-spacing: 0.17em;
@@ -167,7 +167,7 @@
   gap: 0.5rem 1.5rem;
   padding-bottom: 0.25rem;
   color: var(--paper-muted);
-  font-family: var(--font-zh), Georgia, 'Times New Roman', serif;
+  font-family: var(--font-site);
   font-size: 0.625rem;
   line-height: 1.8;
   letter-spacing: 0.15em;
@@ -252,7 +252,7 @@
 
 .sheetNumber {
   color: var(--paper-muted);
-  font-family: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-family: var(--font-site);
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
@@ -402,7 +402,7 @@
 
 .collectionSignoff {
   color: var(--paper-muted);
-  font-family: var(--font-zh), Georgia, 'Times New Roman', serif;
+  font-family: var(--font-site);
   font-size: 0.75rem;
   font-style: italic;
   line-height: 1.8;
@@ -495,7 +495,7 @@
 
 .featuredNumber {
   color: var(--paper-accent);
-  font-family: var(--font-zh), Georgia, 'Times New Roman', serif;
+  font-family: var(--font-site);
   font-size: 1.5rem;
   font-style: italic;
   font-variant-numeric: tabular-nums;
@@ -504,7 +504,7 @@
 
 .featuredLabel {
   color: var(--paper-muted);
-  font-family: var(--font-zh), Georgia, 'Times New Roman', serif;
+  font-family: var(--font-site);
   font-size: 0.5625rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;

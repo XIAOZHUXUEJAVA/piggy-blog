@@ -13,12 +13,18 @@ import siteMetadata from '@/data/siteMetadata';
 
 import PageEffects from '@/components/ui/PageEffects';
 
-const FONT_OUTFIT = localFont({
-  src: './fonts/Outfit-Variable.ttf',
+const FONT_MAPLE_MONO = localFont({
+  src: [
+    { path: './fonts/maple-mono/maple-mono-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/maple-mono/maple-mono-latin-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/maple-mono/maple-mono-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/maple-mono/maple-mono-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
   display: 'swap',
-  weight: '100 900',
-  style: 'normal',
-  variable: '--font-outfit',
+  preload: false,
+  fallback: [],
+  adjustFontFallback: false,
+  variable: '--font-maple-mono',
 });
 
 export const metadata: Metadata = {
@@ -65,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const basePath = process.env.BASE_PATH || '';
 
   return (
-    <html lang="zh-CN" className={`${FONT_OUTFIT.variable} scroll-smooth`}>
+    <html lang="zh-CN" className={`${FONT_MAPLE_MONO.variable} scroll-smooth`}>
       <link rel="apple-touch-icon" sizes="76x76" href={`${basePath}/static/favicons/apple-touch-icon.png`} />
       <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/tennis-racquet.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/tennis-racquet.png" />

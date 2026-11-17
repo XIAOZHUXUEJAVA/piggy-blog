@@ -7,7 +7,6 @@
   --accent: var(--paper-accent);
   --green: #507644;
   --teal: #497c76;
-  --mono: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   display: grid;
   gap: 2.5rem;
   width: 100%;
@@ -37,7 +36,7 @@
 .sectionEyebrow {
   margin: 0;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.6875rem;
   letter-spacing: 0.05em;
   line-height: 1.8;
@@ -68,7 +67,7 @@
   border-radius: 2rem;
   padding: 0.25rem 0.625rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
 }
 .description {
@@ -116,7 +115,7 @@
 }
 .statEyebrow {
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.5625rem;
   letter-spacing: 0.12em;
   line-height: 1.5;
@@ -140,7 +139,7 @@
   align-items: baseline;
   min-height: 3.375rem;
   margin-top: 1.25rem;
-  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-site);
   font-size: 2.75rem;
   font-weight: 500;
   letter-spacing: -0.055em;
@@ -203,13 +202,13 @@
 }
 .rulerEyebrow {
   color: var(--accent);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.5625rem;
   letter-spacing: 0.16em;
   line-height: 1.5;
 }
 .rulerTitle {
-  font-family: var(--paper-serif);
+  font-family: var(--font-site);
   font-size: 1.1875rem;
   font-weight: 500;
   letter-spacing: 0.025em;
@@ -220,7 +219,7 @@
   align-items: center;
   gap: 0.625rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
   font-variant-numeric: tabular-nums;
 }
@@ -411,7 +410,7 @@
 }
 .barTooltip > span {
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
 }
 .rulerBar:hover .barTooltip,
@@ -438,7 +437,7 @@
   position: absolute;
   padding-top: 0.5rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
   font-variant-numeric: tabular-nums;
 }
@@ -473,7 +472,7 @@
   color: var(--accent);
 }
 .rulerStatus {
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.5625rem;
 }
 .rulerStatus > i {
@@ -511,7 +510,7 @@
 .historyHint {
   padding-bottom: 0.25rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
 }
 .graph {
@@ -607,7 +606,7 @@
   flex-wrap: wrap;
   gap: 0.25rem 0.625rem;
   min-height: 24px;
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.75rem;
   line-height: 1.8;
 }
@@ -627,7 +626,7 @@
 .commitMessage {
   margin: 0;
   color: var(--text);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.75rem;
   line-height: 1.8;
   overflow-wrap: anywhere;
@@ -738,7 +737,7 @@
   gap: 0.25rem 0.375rem;
   padding-top: 0.125rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.6875rem;
   line-height: 1.8;
 }
@@ -783,7 +782,7 @@
 .stackHeading > p {
   margin: 0;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -809,7 +808,7 @@
   border-radius: 0.4375rem;
   background: color-mix(in srgb, var(--panel-surface) 80%, transparent);
   padding: 0.1875rem 0.5625rem 0.1875rem 0.4375rem;
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.75rem;
   line-height: 1.8;
 }
@@ -855,7 +854,7 @@
   gap: 0.625rem;
   margin: 0 0 0 3.5rem;
   color: var(--muted);
-  font-family: var(--mono);
+  font-family: var(--font-site);
   font-size: 0.625rem;
 }
 .logEnd > span {

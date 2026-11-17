@@ -48,7 +48,7 @@ yarn dev
 
 ## 字体
 
-中文使用自托管的寒蝉半圆体（ChillRoundM）WOFF2 分片，英文保留 Outfit，代码保留等宽字体。字体按字符范围加载，新增文章不需要重新生成资源。来源、许可及可选生成步骤见 [中文字体说明](app/fonts/piggy-zh/README.md)。
+中文使用自托管的寒蝉半圆体（ChillRoundM）WOFF2 分片，英文统一使用 Maple Mono，覆盖正文、标题、导航、界面和代码。所有区域共用 `--font-site` 字体栈。字体按需加载，新增文章不需要重新生成资源。来源、许可及可选生成步骤见 [中文字体说明](app/fonts/piggy-zh/README.md) 和 [英文字体说明](app/fonts/maple-mono/README.md)。
 
 ## 内容管理
 
