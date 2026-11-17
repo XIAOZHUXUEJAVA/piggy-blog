@@ -634,7 +634,7 @@
 .chapter {
   --panel-line: var(--paper-line);
   --panel-surface: var(--paper-surface);
-  --chapter-paper: #fcfaf5;
+  --chapter-paper: var(--paper-sheet);
   --chapter-shadow: rgb(76 59 34 / 9%);
   position: relative;
   isolation: isolate;

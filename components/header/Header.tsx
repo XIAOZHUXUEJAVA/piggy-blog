@@ -13,6 +13,7 @@ import Logo from 'public/static/images/logo.svg';
 
 import MobileNav from './MobileNav';
 import LanguageSwitcher from './LanguageSwitcher';
+import ThemeSwitcher from './ThemeSwitcher';
 import { isActivePath } from '@/utils/isActivePath';
 
 const Header = memo(() => {
@@ -98,6 +99,7 @@ const Header = memo(() => {
             className="hidden h-4 w-px shrink-0 bg-paper-line md:block"
           />
           <div className="flex items-center">
+            <ThemeSwitcher />
             <LanguageSwitcher />
             <MobileNav />
           </div>

@@ -9,6 +9,18 @@
     "switchToEnglish": "切换到英文",
     "switchToChinese": "切换到中文"
   },
+  "Theme": {
+    "title": "主题配色",
+    "choose": "切换主题配色，当前：{palette}",
+    "green-soft": "柔绿",
+    "green-vivid": "鲜绿",
+    "rose-soft": "玫瑰",
+    "pink-soft": "柔粉",
+    "purple-soft": "浅紫",
+    "blue-soft": "雾蓝",
+    "orange-soft": "暖橙",
+    "brown-soft": "浅棕"
+  },
   "Homepage": {
     "introGreeting": "Hi，我是 <name>xiaozhu</name>",
     "introDescription": "记录技术、想法，以及屏幕之外的生活。",

@@ -20,7 +20,7 @@ export default function PageHeader({ path, title, className, children }: Props) 
           <RoughNotation
             type="underline"
             show
-            color="#806543"
+            color="var(--paper-accent)"
             strokeWidth={2}
             padding={[0, 0, 4, 0]}
             animationDuration={600}

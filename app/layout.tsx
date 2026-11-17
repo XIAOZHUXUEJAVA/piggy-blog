@@ -3,6 +3,7 @@ import 'css/chinese-fonts.css';
 import 'css/twemoji.css';
 import 'css/homepage-enhancements.css';
 import 'css/paper-theme.css';
+import 'css/navfolio-palettes.css';
 import 'pliny/search/algolia.css';
 import 'remark-github-blockquote-alert/alert.css';
 
@@ -12,6 +13,7 @@ import localFont from 'next/font/local';
 import siteMetadata from '@/data/siteMetadata';
 
 import PageEffects from '@/components/ui/PageEffects';
+import { defaultPalette, paletteInitScript } from '@/utils/palettes';
 
 const FONT_MAPLE_MONO = localFont({
   src: [
@@ -71,15 +73,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const basePath = process.env.BASE_PATH || '';
 
   return (
-    <html lang="zh-CN" className={`${FONT_MAPLE_MONO.variable} scroll-smooth`}>
-      <link rel="apple-touch-icon" sizes="76x76" href={`${basePath}/static/favicons/apple-touch-icon.png`} />
-      <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/tennis-racquet.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/tennis-racquet.png" />
-      <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
-      <link rel="mask-icon" href={`${basePath}/static/favicons/safari-pinned-tab.svg`} color="#5bbad5" />
-      <meta name="msapplication-TileColor" content="#000000" />
-      <meta name="theme-color" content="#f3f2ee" />
-      <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+    <html
+      lang="zh-CN"
+      className={`${FONT_MAPLE_MONO.variable} scroll-smooth`}
+      data-palette={defaultPalette}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="apple-touch-icon" sizes="76x76" href={`${basePath}/static/favicons/apple-touch-icon.png`} />
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/tennis-racquet.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/tennis-racquet.png" />
+        <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
+        <link rel="mask-icon" href={`${basePath}/static/favicons/safari-pinned-tab.svg`} color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="theme-color" content="#fdfdf9" />
+        <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+        <script dangerouslySetInnerHTML={{ __html: paletteInitScript }} />
+      </head>
       <body className="isolate pl-[calc(100vw-100%)] antialiased">
         <PageEffects />
         {children}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { paletteChangeEvent } from '@/utils/palettes';
 
 function seededRandom() {
   let seed = 71423;
@@ -20,11 +21,9 @@ function drawPaper(canvas: HTMLCanvasElement) {
   canvas.width = Math.round(width * ratio);
   canvas.height = Math.round(height * ratio);
   const random = seededRandom();
-  const base = getComputedStyle(document.documentElement)
-    .getPropertyValue('--paper-base-rgb')
-    .trim()
-    .split(/\s+/)
-    .map(Number);
+  const styles = getComputedStyle(document.documentElement);
+  const base = styles.getPropertyValue('--paper-base-rgb').trim().split(/\s+/).map(Number);
+  const accent = styles.getPropertyValue('--paper-accent').trim();
   const grain = context.createImageData(canvas.width, canvas.height);
 
   // Full-viewport grain avoids a visible repeating tile. Keep the reading column quieter.
@@ -42,6 +41,19 @@ function drawPaper(canvas: HTMLCanvasElement) {
   context.putImageData(grain, 0, 0);
   context.scale(ratio, ratio);
 
+  // The same soft fog/dust colors as Navfolio, washed lightly over the paper.
+  for (const [property, x, y, radius, opacity] of [
+    ['--paper-fog', width * 0.08, height * 0.12, width * 0.7, 0.22],
+    ['--paper-dust', width * 0.95, height * 0.65, width * 0.55, 0.14],
+  ] as const) {
+    const wash = context.createRadialGradient(x, y, 0, x, y, radius);
+    wash.addColorStop(0, styles.getPropertyValue(property).trim());
+    wash.addColorStop(1, 'transparent');
+    context.globalAlpha = opacity;
+    context.fillStyle = wash;
+    context.fillRect(0, 0, width, height);
+  }
+
   const strengthAt = (x: number) => 0.72 + Math.pow(Math.abs((x / width) * 2 - 1), 1.5) * 0.28;
   const mobile = width < 640;
 
@@ -49,7 +61,7 @@ function drawPaper(canvas: HTMLCanvasElement) {
   for (let i = 0; i < (width * height) / 2400; i++) {
     const x = random() * width;
     const y = random() * height;
-    context.fillStyle = '#8d806b';
+    context.fillStyle = accent;
     context.globalAlpha = (0.045 + random() * 0.13) * strengthAt(x);
     context.beginPath();
     context.ellipse(x, y, 0.25 + random() * 0.65, 0.2 + random() * 0.4, random() * Math.PI, 0, Math.PI * 2);
@@ -89,7 +101,7 @@ function drawPaper(canvas: HTMLCanvasElement) {
     } else {
       context.bezierCurveTo(length * 0.23, bend, length * 0.66, -bend * 0.55, length, endBend);
     }
-    context.strokeStyle = pale ? '#ffffff' : ['#a99b83', '#aca99e', '#bab2a2'][i % 3];
+    context.strokeStyle = pale ? '#ffffff' : accent;
     context.globalAlpha = pale ? (0.55 + random() * 0.4) * strength : (0.045 + random() * 0.055) * strength;
     context.lineWidth = lineWidth;
     context.stroke();
@@ -121,12 +133,14 @@ export default function PaperBackground() {
       resizeTimer = setTimeout(draw, 120);
     };
 
-    // Static texture: redraw only when the viewport changes.
+    // Static texture: redraw when the viewport or selected palette changes.
     draw();
     window.addEventListener('resize', resize);
+    window.addEventListener(paletteChangeEvent, draw);
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
+      window.removeEventListener(paletteChangeEvent, draw);
     };
   }, []);
 

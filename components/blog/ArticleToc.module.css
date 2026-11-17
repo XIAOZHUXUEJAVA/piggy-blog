@@ -49,7 +49,7 @@
 .link:hover,
 .link[aria-current='location'] {
   color: var(--paper-accent-hover);
-  background: rgb(175 147 95 / 6%);
+  background: var(--paper-accent-soft);
 }
 
 .link[aria-current='location'] {

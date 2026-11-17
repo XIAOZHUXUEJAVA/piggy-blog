@@ -1,10 +1,10 @@
 /* Shared code styles for every article layout. */
 .prose {
-  --code-bg: rgb(142 125 97 / 6%);
-  --code-border: #e2e8e6;
+  --code-bg: var(--paper-accent-soft);
+  --code-border: var(--paper-line);
   --code-text: #334155;
   --code-muted: #64748b;
-  --code-highlight: #e8f3ee;
+  --code-highlight: var(--paper-accent-soft);
 }
 
 .prose :not(pre) > code {

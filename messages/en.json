@@ -9,6 +9,18 @@
     "switchToEnglish": "Switch to English",
     "switchToChinese": "Switch to Chinese"
   },
+  "Theme": {
+    "title": "Theme palette",
+    "choose": "Change theme palette, current: {palette}",
+    "green-soft": "Soft green",
+    "green-vivid": "Vivid green",
+    "rose-soft": "Soft rose",
+    "pink-soft": "Soft pink",
+    "purple-soft": "Soft purple",
+    "blue-soft": "Soft blue",
+    "orange-soft": "Soft orange",
+    "brown-soft": "Soft brown"
+  },
   "Homepage": {
     "introGreeting": "Hi, I'm <name>xiaozhu</name>",
     "introDescription": "An ordinary programmer exploring code, ideas, and life beyond the screen.",

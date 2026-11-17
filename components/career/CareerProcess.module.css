@@ -8,7 +8,7 @@
   --line: var(--paper-line);
   --shadow: rgb(76 59 34 / 9%);
   --scene-tone: #497c76;
-  --card-paper: #fcfaf5;
+  --card-paper: var(--paper-sheet);
   min-width: 0;
   color: var(--terminal-text);
 }
