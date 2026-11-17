@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { allBlogs } from 'contentlayer/generated';
 import siteMetadata from '@/data/siteMetadata';
+import projectsData from '@/data/projectsData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl;
@@ -17,5 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date().toISOString().split('T')[0],
   }));
 
-  return [...routes, ...blogRoutes];
+  const projectRoutes = ['', 'en/'].flatMap((prefix) =>
+    ['projects', ...projectsData.map(({ slug }) => `projects/${slug}`)].map((route) => ({
+      url: `${siteUrl.replace(/\/$/, '')}/${prefix}${route}`,
+    }))
+  );
+
+  return [...routes, ...projectRoutes, ...blogRoutes];
 }

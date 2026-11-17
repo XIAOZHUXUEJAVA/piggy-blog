@@ -2,6 +2,7 @@
   "Navigation": {
     "home": "Home",
     "blog": "Blog",
+    "projects": "Projects",
     "career": "Career",
     "about": "About",
     "portfolio": "Portfolio",
@@ -90,6 +91,34 @@
     "copyCode": "Copy code",
     "copied": "Copied!"
   },
+  "Projects": {
+    "title": "Projects",
+    "description": "A shelf for projects in development, already shipped, or worth documenting.",
+    "intro": "Turning passing ideas into useful little things, and keeping notes along the way. A collection of tools, websites and growing experiments. Open a project to read its story.",
+    "eyebrow": "PROJECT SHELF",
+    "tagline": "Small tools. Little experiments. Ideas taking shape.",
+    "note": "Why it started, what it does, and what comes next.",
+    "count": "{count, plural, one {# project} other {# projects}} · Always tinkering",
+    "sampleNote": "These projects and statuses are fictional examples, to be replaced with real work.",
+    "listLabel": "Project collection",
+    "tagsLabel": "Tech stack",
+    "backToProjects": "Back to projects",
+    "projectNote": "PROJECT NOTES",
+    "goal": "Why it exists",
+    "features": "What it does",
+    "next": "What comes next",
+    "status": {
+      "released": "Released",
+      "wip": "In progress",
+      "experiment": "Experiment"
+    },
+    "visitLink": "Visit",
+    "link": {
+      "github": "GitHub",
+      "demo": "Demo",
+      "docs": "Docs"
+    }
+  },
   "About": {
     "title": "About",
     "description": "Further insights into who I am and the purpose of this blog."
@@ -116,8 +145,8 @@
     "postsCount": "{count, plural, one {# published post} other {# published posts}}",
     "signoff": "A little learning, a little building, a little better every day.",
     "terminalLabel": "Terminal command",
-    "terminalHint": "Type ls and press Enter to explore my tools, ideas, and life.",
-    "terminalUnknown": "zsh: command not found: {command}. Try ls and press Enter."
+    "terminalHint": "Type ls to reveal more, type clear to hide it, type echo to redraw the pig.",
+    "terminalUnknown": "zsh: command not found: {command}. Try ls, clear or echo."
   },
   "Career": {
     "backToCareer": "Back to career",

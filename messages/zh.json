@@ -2,6 +2,7 @@
   "Navigation": {
     "home": "首页",
     "blog": "博客",
+    "projects": "项目",
     "career": "历程",
     "about": "关于",
     "portfolio": "作品集",
@@ -90,6 +91,34 @@
     "copyCode": "复制代码",
     "copied": "已复制！"
   },
+  "Projects": {
+    "title": "项目",
+    "description": "收录正在开发、已经发布，或在设计与实现层面值得记录的项目。",
+    "intro": "把想法做成可以使用的小东西，也记录从灵感到实现的过程。这里收集一些工具、网站和还在生长的实验，点击项目，读读背后的故事。",
+    "eyebrow": "PROJECT SHELF / 项目货架",
+    "tagline": "小工具，小实验，慢慢成形的想法。",
+    "note": "记录为什么开始，做了什么，以及下一步。",
+    "count": "{count} 个项目 · 持续折腾中",
+    "sampleNote": "以下项目与状态为虚构示例，后续替换为真实作品。",
+    "listLabel": "项目列表",
+    "tagsLabel": "技术栈",
+    "backToProjects": "返回项目列表",
+    "projectNote": "PROJECT NOTES / 项目笔记",
+    "goal": "为什么做这个",
+    "features": "能做些什么",
+    "next": "接下来想做的",
+    "status": {
+      "released": "已发布",
+      "wip": "进行中",
+      "experiment": "实验中"
+    },
+    "visitLink": "访问",
+    "link": {
+      "github": "GitHub",
+      "demo": "演示",
+      "docs": "文档"
+    }
+  },
   "About": {
     "title": "关于",
     "description": "进一步了解我是谁，以及这个博客的初衷。"
@@ -116,8 +145,8 @@
     "postsCount": "{count} 篇已发布",
     "signoff": "在这里，一点点积累，一点点变好。",
     "terminalLabel": "终端命令",
-    "terminalHint": "输入 ls，按回车，看看我的工具、想法和生活。",
-    "terminalUnknown": "zsh: command not found: {command}。输入 ls，按回车试试。"
+    "terminalHint": "输入 ls 展开下方内容，输入 clear 清除，输入 echo 重绘小猪。",
+    "terminalUnknown": "zsh: command not found: {command}。试试 ls、clear 或 echo。"
   },
   "Career": {
     "backToCareer": "返回职业历程",

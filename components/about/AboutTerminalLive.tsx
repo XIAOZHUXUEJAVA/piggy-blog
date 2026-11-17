@@ -16,7 +16,7 @@ const clockFormat = new Intl.DateTimeFormat('en-GB', {
 
 export function TerminalCommand() {
   const t = useTranslations('AboutProfile');
-  const revealExplore = useContext(AboutExploreContext);
+  const explore = useContext(AboutExploreContext);
   const hintId = useId();
   const [command, setCommand] = useState('');
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -36,7 +36,19 @@ export function TerminalCommand() {
     if (!value) return;
     if (value === 'ls') {
       setFeedback('');
-      revealExplore?.();
+      explore?.reveal();
+    } else if (value === 'clear') {
+      setFeedback('');
+      setCommand('');
+      explore?.hide();
+    } else if (value === 'echo') {
+      setFeedback('');
+      setCommand('');
+      const cover = document.querySelector(`.${styles.asciiCover}`);
+      if (cover && cover.parentNode) {
+        const clone = cover.cloneNode(true);
+        cover.parentNode.replaceChild(clone, cover);
+      }
     } else {
       setFeedback(t('terminalUnknown', { command: value }));
     }
