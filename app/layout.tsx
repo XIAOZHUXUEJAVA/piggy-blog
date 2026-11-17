@@ -1,4 +1,5 @@
 import 'css/tailwind.css';
+import 'css/chinese-fonts.css';
 import 'css/twemoji.css';
 import 'css/homepage-enhancements.css';
 import 'css/paper-theme.css';

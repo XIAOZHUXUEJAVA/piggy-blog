@@ -7,7 +7,7 @@
   --accent: var(--paper-accent);
   --green: #507644;
   --teal: #497c76;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  --mono: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   display: grid;
   gap: 2.5rem;
   width: 100%;
@@ -140,7 +140,7 @@
   align-items: baseline;
   min-height: 3.375rem;
   margin-top: 1.25rem;
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   font-size: 2.75rem;
   font-weight: 500;
   letter-spacing: -0.055em;

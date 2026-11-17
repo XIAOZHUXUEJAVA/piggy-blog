@@ -44,7 +44,9 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', ...fontFamily.sans],
+        sans: ['var(--font-zh)', 'var(--font-outfit)', ...fontFamily.sans],
+        serif: ['var(--font-zh)', ...fontFamily.serif],
+        mono: ['var(--font-zh)', ...fontFamily.mono],
       },
       colors: {
         primary: {

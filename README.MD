@@ -46,6 +46,10 @@ yarn dev
 
 访问 http://localhost:3000。
 
+## 字体
+
+中文使用自托管的寒蝉半圆体（ChillRoundM）WOFF2 分片，英文保留 Outfit，代码保留等宽字体。字体按字符范围加载，新增文章不需要重新生成资源。来源、许可及可选生成步骤见 [中文字体说明](app/fonts/piggy-zh/README.md)。
+
 ## 内容管理
 
 在 `data/blog/` 目录下创建 `.mdx` 文件，frontmatter 示例：

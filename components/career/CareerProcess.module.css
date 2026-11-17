@@ -9,7 +9,7 @@
   --shadow: rgb(76 59 34 / 9%);
   --scene-tone: #497c76;
   --card-paper: #fcfaf5;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  --mono: var(--font-zh), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   min-width: 0;
   color: var(--terminal-text);
 }
@@ -248,7 +248,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -373,7 +373,7 @@
 }
 .shipToast strong {
   display: block;
-  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-zh), var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
   font-size: 0.75rem;
   font-weight: 550;
 }
