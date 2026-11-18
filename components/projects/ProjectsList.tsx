@@ -17,18 +17,20 @@ export default async function ProjectsList({ projects, locale }: ProjectsListPro
     <section className={styles.projectList} aria-label={t('listLabel')}>
       {projects.map((project) => (
         <article key={project.id} className={styles.projectCard}>
-          <div className={styles.cardHeading}>
-            <ProjectIcon icon={project.icon} />
-            <h2 className={styles.title}>
-              <Link href={`/projects/${project.slug}`}>
-                {project.title[locale]}
-                <ArrowUpRight size={17} strokeWidth={1.6} aria-hidden="true" />
-              </Link>
-            </h2>
+          <div className={styles.cardInner}>
+            <div className={styles.cardHeading}>
+              <ProjectIcon icon={project.icon} />
+              <h2 className={styles.title}>
+                <Link href={`/projects/${project.slug}`}>
+                  {project.title[locale]}
+                  <ArrowUpRight size={17} strokeWidth={1.6} aria-hidden="true" />
+                </Link>
+              </h2>
+            </div>
+            <p className={styles.summary}>{project.summary[locale]}</p>
+            <p className={styles.description}>{project.description[locale]}</p>
+            <ProjectMeta project={project} locale={locale} />
           </div>
-          <p className={styles.summary}>{project.summary[locale]}</p>
-          <p className={styles.description}>{project.description[locale]}</p>
-          <ProjectMeta project={project} locale={locale} />
         </article>
       ))}
     </section>

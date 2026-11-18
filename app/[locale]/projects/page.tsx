@@ -30,7 +30,6 @@ export default async function ProjectsPage({ params }: { params: { locale: strin
           <span>{t('note')}</span>
         </div>
       </header>
-      <p className={styles.intro}>{t('intro')}</p>
       <div className={styles.shelfMeta}>
         <span>{t('count', { count: projectsData.length })}</span>
         <span className={styles.sampleNote}>{t('sampleNote')}</span>
