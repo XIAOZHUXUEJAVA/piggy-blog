@@ -41,7 +41,7 @@ function drawPaper(canvas: HTMLCanvasElement) {
   context.putImageData(grain, 0, 0);
   context.scale(ratio, ratio);
 
-  // The same soft fog/dust colors as Navfolio, washed lightly over the paper.
+  // Soft fog/dust colors washed lightly over the paper.
   for (const [property, x, y, radius, opacity] of [
     ['--paper-fog', width * 0.08, height * 0.12, width * 0.7, 0.22],
     ['--paper-dust', width * 0.95, height * 0.65, width * 0.55, 0.14],

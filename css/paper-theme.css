@@ -2,7 +2,7 @@
   color-scheme: light;
   --paper-base-rgb: 253 253 249;
   --paper-base: rgb(var(--paper-base-rgb));
-  /* Shared light surfaces and ink from Navfolio; color families live in navfolio-palettes.css. */
+  /* Shared light surfaces and ink; color families live in paper-palettes.css. */
   --paper-solid: #fffffc;
   --paper-surface: rgb(255 255 252 / 88%);
   --paper-reading: #fffffc;

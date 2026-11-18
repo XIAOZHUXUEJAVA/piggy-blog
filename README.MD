@@ -116,9 +116,3 @@ yarn lint     # 代码检查
 docker build -t piggy-blog .
 docker run -p 3000:3000 --env-file .env.local piggy-blog
 ```
-
-## 许可证
-
-[MIT License](./LICENSE)
-
-Copyright (c) 2025 xiaozhu <https://github.com/XIAOZHUXUEJAVA>
