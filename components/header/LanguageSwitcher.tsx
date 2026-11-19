@@ -9,8 +9,6 @@ import { routing } from '@/i18n/routing';
 
 type Locale = (typeof routing.locales)[number];
 
-const locales = routing.locales as Locale[];
-
 export default function LanguageSwitcher() {
   const locale = useLocale() as Locale;
   const pathname = usePathname();
@@ -41,7 +39,7 @@ export default function LanguageSwitcher() {
         )}
       </Listbox.Button>
       <Listbox.Options className="paper-popover absolute right-0 z-50 mt-3 w-32 rounded-xl p-2 focus:outline-none">
-        {locales.map((value) => (
+        {routing.locales.map((value) => (
           <Listbox.Option key={value} value={value}>
             {({ active, selected }) => (
               <span
