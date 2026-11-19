@@ -44,12 +44,6 @@
   line-height: 1.8;
 }
 
-.headerNote > span {
-  color: var(--paper-muted);
-  font-size: 0.75rem;
-  line-height: 1.8;
-}
-
 .shelfMeta {
   display: flex;
   flex-wrap: wrap;

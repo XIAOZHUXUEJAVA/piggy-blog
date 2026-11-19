@@ -27,7 +27,6 @@ export default async function ProjectsPage({ params }: { params: { locale: strin
         </div>
         <div className={styles.headerNote}>
           <p>{t('tagline')}</p>
-          <span>{t('note')}</span>
         </div>
       </header>
       <div className={styles.shelfMeta}>

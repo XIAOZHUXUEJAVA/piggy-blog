@@ -7,8 +7,11 @@
     "about": "关于",
     "portfolio": "作品集",
     "language": "语言",
-    "switchToEnglish": "切换到英文",
-    "switchToChinese": "切换到中文"
+    "switchLanguage": "切换语言"
+  },
+  "Languages": {
+    "zh": "中文",
+    "en": "English"
   },
   "Theme": {
     "title": "主题配色",
@@ -96,7 +99,6 @@
     "description": "收录正在开发、已经发布，或在设计与实现层面值得记录的项目。",
     "eyebrow": "PROJECT SHELF / 项目货架",
     "tagline": "小工具，小实验，慢慢成形的想法。",
-    "note": "记录为什么开始，做了什么，以及下一步。",
     "count": "{count} 个项目 · 持续折腾中",
     "sampleNote": "以下项目与状态为虚构示例，后续替换为真实作品。",
     "listLabel": "项目列表",
