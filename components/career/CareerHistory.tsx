@@ -30,13 +30,10 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
   return (
     <section aria-labelledby="career-history-title" className={styles.history}>
       <div className={styles.historyHeader} data-career-reveal>
-        <div>
-          <p className={styles.command}>
-            <span>$</span> git log --graph
-          </p>
-          <h2 id="career-history-title">{t('history')}</h2>
-        </div>
-        <span className={styles.historyHint}>{t('historyHint')}</span>
+        <p className={styles.command}>
+          <span>$</span> git log --graph
+        </p>
+        <h2 id="career-history-title">{t('history')}</h2>
       </div>
 
       <ol className={styles.graph}>
@@ -85,9 +82,6 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
                   <span className={styles.commitMessage}>
                     {merge ? t('mergeMessage', { branch: entry.branch || 'learning' }) : entry.message[locale]}
                   </span>
-                  <time dateTime={`${merge ? entry.end : entry.start}-01`} className={styles.commitDate}>
-                    {formatMonth(merge ? entry.end! : entry.start, locale)}
-                  </time>
                 </div>
 
                 {merge ? (
@@ -109,7 +103,7 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
                         <p>{entry.role[locale]}</p>
                       </div>
                       <div className={styles.tenure}>
-                        <span className={styles.dateRange}>{range}</span>
+                        <span>{range}</span>
                         <span aria-hidden="true">·</span>
                         <span>{formatDuration(elapsedMonths(entry, now), locale)}</span>
                       </div>

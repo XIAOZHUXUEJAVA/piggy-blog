@@ -117,10 +117,7 @@ export default function WorkflowScene({
         <span>
           <Check size={14} />
         </span>
-        <div>
-          <strong>{copy.shipped}</strong>
-          <small>{copy.nextChapter}</small>
-        </div>
+        <strong>{copy.shipped}</strong>
         <GitCommitHorizontal size={16} />
       </div>
     </div>

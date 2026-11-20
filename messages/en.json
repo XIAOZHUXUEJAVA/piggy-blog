@@ -214,7 +214,6 @@
       "project": "Independent projects"
     },
     "history": "The commit history",
-    "historyHint": "A new chapter. A new commit.",
     "mergeMessage": "Merge branch ''{branch}'' into main",
     "completed": "Completed {name}, taking the lessons into the next chapter.",
     "stackHint": "+ First encountered · Used before",
@@ -294,8 +293,7 @@
       "date": "Date",
       "branch": "Branch",
       "iterating": "Still growing",
-      "shipped": "The next chapter is still ahead",
-      "nextChapter": "A new chapter. A new commit."
+      "shipped": "The next chapter is still ahead"
     },
     "mergeEntry": "Completed · {name}",
     "entryCount": "{count, plural, one {# entry} other {# entries}} · main"

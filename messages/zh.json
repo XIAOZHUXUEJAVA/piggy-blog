@@ -214,7 +214,6 @@
       "project": "独立项目"
     },
     "history": "经历记录",
-    "historyHint": "每一段经历，都是一次新的提交。",
     "mergeMessage": "Merge branch ''{branch}'' into main",
     "completed": "完成「{name}」，带着新的积累继续向前。",
     "stackHint": "+ 首次接触 · 持续使用",
@@ -294,8 +293,7 @@
       "date": "时间",
       "branch": "分支",
       "iterating": "持续积累中",
-      "shipped": "下一段经历，继续向前",
-      "nextChapter": "每一段经历，都是一次新的提交。"
+      "shipped": "下一段经历，继续向前"
     },
     "mergeEntry": "完成 · {name}",
     "entryCount": "{count} 条记录 · main"

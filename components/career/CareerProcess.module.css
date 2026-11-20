@@ -376,10 +376,6 @@
   font-size: 0.75rem;
   font-weight: 550;
 }
-.shipToast small {
-  color: var(--terminal-muted);
-  font-size: 0.6875rem;
-}
 .shipToast > svg {
   margin-left: 0.5rem;
   color: var(--terminal-muted);
