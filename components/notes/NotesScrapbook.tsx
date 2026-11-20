@@ -45,6 +45,23 @@ function PigDoodle() {
   );
 }
 
+function SpinningDisc() {
+  return (
+    <div className={styles.disc} aria-hidden="true">
+      <svg viewBox="0 0 160 160" fill="none" stroke="currentColor">
+        <circle cx="80" cy="80" r="77.5" opacity=".37" />
+        <circle cx="80" cy="80" r="15" opacity=".3" />
+        <circle cx="80" cy="80" r="9" opacity=".42" />
+        <path
+          d="M19 70a62 62 0 0 1 20-36m-16 39a58 58 0 0 1 17-34m78 86a59 59 0 0 1-31 13"
+          strokeLinecap="round"
+          opacity=".32"
+        />
+      </svg>
+    </div>
+  );
+}
+
 export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
   const t = useTranslations('Notes');
   const [filter, setFilter] = useState<NoteFilter>('all');
@@ -160,10 +177,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                 {t('signature')}
                 <span> — xiaozhu</span>
               </p>
-              <div className={styles.stamp} aria-hidden="true">
-                <span>{t('stampTop')}</span>
-                <span>{t('stampBottom')}</span>
-              </div>
+              <SpinningDisc />
             </div>
             <PigDoodle />
             <span className={styles.cornerMark} aria-hidden="true">
@@ -182,50 +196,54 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
           </div>
 
           <div className={styles.entries} id="notes-entries">
-            {visibleNotes.map((note) => {
+            {notesData.map((note, index) => {
               const text = note.text[locale];
               const Icon = categoryIcons[note.category];
-              const number = String(notesData.indexOf(note) + 1).padStart(2, '0');
+              const number = String(index + 1).padStart(2, '0');
+              const isVisible = visibleNotes.includes(note);
               return (
-                <article
-                  key={note.id}
-                  id={`note-${note.id}`}
-                  className={styles.entry}
-                  data-category={note.category}
-                  aria-labelledby={`title-${note.id}`}
-                >
-                  <span className={styles.entryTape} aria-hidden="true" />
-                  <div className={styles.entryMeta}>
-                    <time dateTime={note.date}>
-                      {dateFormat.format(new Date(`${note.date}T00:00:00Z`))}
-                      <span> / {note.date.slice(0, 4)}</span>
-                    </time>
-                    <span className={styles.category}>
-                      <Icon size={13} aria-hidden="true" />
-                      {t(note.category)}
-                    </span>
+                <div key={note.id} className={styles.entrySlot} data-visible={isVisible} aria-hidden={!isVisible}>
+                  <div className={styles.entryContent}>
+                    <article
+                      id={`note-${note.id}`}
+                      className={styles.entry}
+                      data-category={note.category}
+                      aria-labelledby={`title-${note.id}`}
+                    >
+                      <span className={styles.entryTape} aria-hidden="true" />
+                      <div className={styles.entryMeta}>
+                        <time dateTime={note.date}>
+                          {dateFormat.format(new Date(`${note.date}T00:00:00Z`))}
+                          <span> / {note.date.slice(0, 4)}</span>
+                        </time>
+                        <span className={styles.category}>
+                          <Icon size={13} aria-hidden="true" />
+                          {t(note.category)}
+                        </span>
+                      </div>
+                      <h3 id={`title-${note.id}`}>{text.title}</h3>
+                      <p className={styles.mood}>
+                        <span aria-hidden="true">○ </span>
+                        {text.mood}
+                      </p>
+                      <div className={styles.entryBody}>
+                        {text.paragraphs.map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
+                      {text.aside ? (
+                        <p className={styles.entryAside}>
+                          <Pencil size={14} aria-hidden="true" />
+                          {text.aside}
+                        </p>
+                      ) : null}
+                      <div className={styles.entryFooter}>
+                        <span aria-label={t('entryNumber', { number })}>— {number} —</span>
+                        <Icon size={21} strokeWidth={1.3} aria-hidden="true" />
+                      </div>
+                    </article>
                   </div>
-                  <h3 id={`title-${note.id}`}>{text.title}</h3>
-                  <p className={styles.mood}>
-                    <span aria-hidden="true">○ </span>
-                    {text.mood}
-                  </p>
-                  <div className={styles.entryBody}>
-                    {text.paragraphs.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                  {text.aside ? (
-                    <p className={styles.entryAside}>
-                      <Pencil size={14} aria-hidden="true" />
-                      {text.aside}
-                    </p>
-                  ) : null}
-                  <div className={styles.entryFooter}>
-                    <span aria-label={t('entryNumber', { number })}>— {number} —</span>
-                    <Icon size={21} strokeWidth={1.3} aria-hidden="true" />
-                  </div>
-                </article>
+                </div>
               );
             })}
           </div>

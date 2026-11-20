@@ -144,23 +144,42 @@
   color: var(--paper-muted);
   font-size: 0.6875rem;
 }
-.stamp {
-  display: grid;
+.disc {
   flex-shrink: 0;
-  place-content: center;
-  width: 61px;
-  height: 61px;
-  border: 2px double currentColor;
-  outline: 1px solid currentColor;
-  outline-offset: -6px;
-  border-radius: 50%;
+  width: 142px;
+  aspect-ratio: 1;
+  margin-block: -1rem -0.5rem;
+  filter: drop-shadow(1px 3px 3px rgb(44 49 39 / 15%));
   color: var(--paper-accent);
-  opacity: 0.65;
-  font-size: 0.6875rem;
-  letter-spacing: 0.15em;
-  line-height: 1.7;
-  text-align: center;
-  transform: rotate(-14deg);
+}
+
+.disc svg {
+  display: block;
+  width: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from -34deg,
+    #f8f8ef,
+    #dae7e0 68deg,
+    #fbf9ee 108deg,
+    #ede2dc 186deg,
+    #faf9ef 238deg,
+    #dae7e0 293deg,
+    #f8f8ef
+  );
+  mask-image: radial-gradient(circle, transparent 5.8%, #000 6.4%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .disc svg {
+    animation: discSpin 22s linear infinite;
+  }
+}
+
+@keyframes discSpin {
+  to {
+    transform: rotate(1turn);
+  }
 }
 .pig {
   position: absolute;
@@ -353,8 +372,58 @@
   font-size: 0.625rem;
 }
 .entries {
+  --entry-gap: 2.25rem;
+  overflow-anchor: none;
+}
+.entrySlot {
   display: grid;
-  gap: 2.25rem;
+  grid-template-rows: 1fr;
+}
+.entrySlot[data-visible='true'] ~ .entrySlot[data-visible='true'] {
+  margin-block-start: var(--entry-gap);
+}
+.entryContent {
+  min-height: 0;
+}
+.entrySlot[data-visible='false'] {
+  grid-template-rows: 0fr;
+  pointer-events: none;
+}
+.entrySlot[data-visible='false'] .entryContent {
+  opacity: 0;
+  transform: translateY(8px);
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .entrySlot {
+    transition:
+      grid-template-rows 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      margin-block-start 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .entrySlot[data-visible='false'] {
+    transition-delay: 40ms;
+  }
+  .entryContent {
+    /* Clip collapsing rows while leaving room for the paper tape and shadow. */
+    overflow: clip;
+    overflow-clip-margin: 16px;
+    transition:
+      opacity 200ms ease-out 35ms,
+      transform 200ms ease-out 35ms;
+  }
+  .entrySlot[data-visible='false'] .entryContent {
+    transition:
+      opacity 120ms ease-in,
+      transform 120ms ease-in,
+      visibility 0ms linear 120ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrySlot[data-visible='false'] {
+    display: none;
+  }
 }
 .entry {
   padding: 1.875rem 2rem 1rem 2.625rem;
@@ -368,10 +437,10 @@
     ),
     url('/static/images/article-paper-texture.svg');
 }
-.entry:nth-child(2n) {
+.entrySlot:nth-child(2n) .entry {
   transform: rotate(0.4deg);
 }
-.entry:nth-child(3n) {
+.entrySlot:nth-child(3n) .entry {
   transform: rotate(-0.4deg);
 }
 .entryTape {
@@ -628,6 +697,10 @@
   .coverBottom > p {
     font-size: 0.6875rem;
   }
+  .disc {
+    width: 104px;
+    margin-block: 0;
+  }
   .sidebar {
     grid-row: 2;
     display: grid;
@@ -713,8 +786,8 @@
     margin: 1.75rem 0;
   }
   .entries {
+    --entry-gap: 2rem;
     grid-row: 5;
-    gap: 2rem;
   }
   .entry {
     padding: 1.75rem 1.25rem 1rem 2rem;
@@ -755,10 +828,8 @@
   .intro {
     font-size: 0.8125rem;
   }
-  .stamp {
-    width: 49px;
-    height: 49px;
-    font-size: 0.5625rem;
+  .disc {
+    width: 96px;
   }
 }
 
