@@ -241,12 +241,6 @@
   font-size: 0.5625rem;
   color: #677f84;
 }
-.memoSpark {
-  position: absolute;
-  right: -8px;
-  top: 18px;
-  color: var(--paper-accent);
-}
 
 .calendar {
   padding: 1rem 0.625rem;

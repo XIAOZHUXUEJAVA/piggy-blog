@@ -263,7 +263,8 @@
   border-bottom: 1px solid var(--paper-line);
   padding-bottom: 0.2rem;
   color: var(--paper-accent);
-  font-size: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
 }
 

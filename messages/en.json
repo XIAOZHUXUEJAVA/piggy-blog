@@ -111,6 +111,7 @@
     "updatedOn": "Updated",
     "articleNavigation": "Article navigation",
     "readingDuration": "Reading time",
+    "readingProgress": "Article reading progress {percent}%",
     "publishedOn": "Published on",
     "authors": "Authors",
     "authorName": "Name",

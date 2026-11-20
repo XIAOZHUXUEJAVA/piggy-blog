@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ArrowUp, Flower2, Heart, Leaf, Pencil, Sparkles } from 'lucide-react';
+import { ArrowUp, Flower2, Heart, Leaf, Pencil } from 'lucide-react';
 import notesData, { type NoteLocale } from '@/data/notesData';
 import styles from './NotesScrapbook.module.css';
 
@@ -38,7 +38,6 @@ function PigDoodle() {
         <path d="M51 57v3m10-3v3m-26-15h1m39-1h1M40 80l-6 8m36-8 7 7" />
         <path d="m8 41 5 2m79-8 6-4m-6 37 6 2" />
       </g>
-      <path d="m13 17 2-7 3 7 7 2-7 3-2 7-3-7-7-2Z" fill="var(--paper-accent)" opacity=".55" />
       <ellipse cx="33" cy="56" rx="5" ry="3" fill="var(--notes-rose)" />
       <ellipse cx="79" cy="55" rx="5" ry="3" fill="var(--notes-rose)" />
     </svg>
@@ -93,7 +92,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
         <aside className={styles.sidebar}>
           <section className={styles.memo} aria-labelledby="notes-memo-title">
             <span className={styles.tape} aria-hidden="true" />
-            <Sparkles size={20} className={styles.memoSpark} aria-hidden="true" />
             <h2 id="notes-memo-title">{t('memoTitle')}</h2>
             <ul>
               {(['memoOne', 'memoTwo', 'memoThree'] as const).map((key) => (

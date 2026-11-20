@@ -12,7 +12,6 @@ import {
   PencilRuler,
   Rocket,
   Repeat2,
-  Sparkles,
 } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import CareerTechIcon from '@/components/career/CareerTechIcon';
@@ -112,7 +111,6 @@ function ProjectsScene({ copy }: { copy: SceneCopy }) {
     <div className={`${styles.scene} ${styles.ideaScene}`} aria-hidden="true">
       <div className={styles.ideaBoardLabel}>
         <span>THE LITTLE IDEA BOARD</span>
-        <Sparkles size={14} strokeWidth={1.4} />
       </div>
       <svg className={styles.ideaThread} viewBox="0 0 600 316" preserveAspectRatio="none" fill="none">
         <defs>

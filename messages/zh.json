@@ -62,7 +62,7 @@
   },
   "Homepage": {
     "introGreeting": "Hi，我是 <name>xiaozhu</name>",
-    "introDescription": "记录技术、想法，以及屏幕之外的生活。",
+    "introDescription": "记录技术、想法，以及屏幕之外的生活。(目前正在持续更新站点样式结构中, 内容大多数为虚构)",
     "introMotto": "「 就连轻轻落在耳畔的音乐里，也有你的存在 」",
     "introAvatarAlt": "{name} 的头像",
     "introSocials": "认识我与保持联系",
@@ -111,6 +111,7 @@
     "updatedOn": "更新于",
     "articleNavigation": "文章导航",
     "readingDuration": "阅读时长",
+    "readingProgress": "正文阅读进度 {percent}%",
     "publishedOn": "发布于",
     "authors": "作者",
     "authorName": "姓名",

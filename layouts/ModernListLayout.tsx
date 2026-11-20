@@ -5,6 +5,7 @@ import { ChevronDown, Search, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
+import { slug as slugify } from 'github-slugger';
 
 import { Link } from '@/i18n/navigation';
 import PageHeader from '@/components/ui/PageHeader';
@@ -41,7 +42,8 @@ function getTagCounts(posts: CoreContent<Blog>[]) {
   const counts = new Map<string, number>();
 
   posts.forEach((post) => {
-    (post.tags ?? []).forEach((tag) => counts.set(tag, (counts.get(tag) ?? 0) + 1));
+    const tags = new Set((post.tags ?? []).map((tag) => slugify(tag)));
+    tags.forEach((tag) => counts.set(tag, (counts.get(tag) ?? 0) + 1));
   });
 
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
@@ -72,7 +74,7 @@ export default function ModernListLayout({ posts, title, path = '~/blog' }: Mode
     return posts.filter((post) => {
       const content = [post.title, post.summary ?? '', ...(post.tags ?? [])].join(' ').toLowerCase();
       const matchesSearch = !query || content.includes(query);
-      const matchesTags = selectedTags.every((tag) => post.tags?.includes(tag));
+      const matchesTags = selectedTags.every((tag) => post.tags?.some((postTag) => slugify(postTag) === tag));
 
       return matchesSearch && matchesTags;
     });

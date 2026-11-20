@@ -10,6 +10,7 @@ import { Comments, Link, Image, Tag, ScrollTopAndComment } from '@/components/ui
 import JourneyBackLink from '@/components/about/JourneyBackLink';
 import ReadingProgress from '@/components/ReadingProgress';
 import ArticleToc, { type ArticleHeading } from '@/components/blog/ArticleToc';
+import { ArticleReadingProvider } from '@/components/blog/ArticleReadingProvider';
 import styles from './PostLayout.module.css';
 
 interface LayoutProps {
@@ -28,7 +29,7 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
   const updated = (lastmod || date).slice(0, 10);
 
   return (
-    <div className={styles.shell} data-post-layout>
+    <ArticleReadingProvider headings={headings} className={styles.shell}>
       <ReadingProgress />
       <ScrollTopAndComment />
       <div className={styles.back}>
@@ -202,6 +203,6 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
           </aside>
         )}
       </div>
-    </div>
+    </ArticleReadingProvider>
   );
 }
