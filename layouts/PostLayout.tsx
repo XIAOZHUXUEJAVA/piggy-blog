@@ -2,11 +2,12 @@ import { ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog, Authors } from 'contentlayer/generated';
-import { ArrowLeft, ArrowRight, ArrowUp, CalendarDays, Clock3, Code2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, Clock3, Code2 } from 'lucide-react';
 import { slug as slugify } from 'github-slugger';
 
 import siteMetadata from '@/data/siteMetadata';
-import { Comments, Link, Image, Tag, ScrollTopAndComment } from '@/components/ui';
+import { Comments, Link, Image, Tag } from '@/components/ui';
+import CommentLink from '@/components/blog/CommentLink';
 import JourneyBackLink from '@/components/about/JourneyBackLink';
 import ReadingProgress from '@/components/ReadingProgress';
 import ArticleToc, { type ArticleHeading } from '@/components/blog/ArticleToc';
@@ -31,7 +32,6 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
   return (
     <ArticleReadingProvider headings={headings} className={styles.shell}>
       <ReadingProgress />
-      <ScrollTopAndComment />
       <div className={styles.back}>
         {slug.startsWith('journey/') ? (
           <JourneyBackLink />
@@ -111,6 +111,7 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
             </dl>
           </header>
 
+          <CommentLink />
           {headings.length > 0 && <ArticleToc headings={headings} variant="mobile" />}
           <div
             id="article-start"
@@ -195,10 +196,7 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
                   </dd>
                 </div>
               </dl>
-              <a href="#article-top" className={styles.backToTop}>
-                <ArrowUp size={12} aria-hidden="true" />
-                {t('backToTop')}
-              </a>
+              <CommentLink />
             </div>
           </aside>
         )}

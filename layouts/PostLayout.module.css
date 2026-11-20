@@ -73,25 +73,10 @@
   text-decoration: underline;
 }
 
-.metaRow a,
-.backToTop {
+.metaRow a {
   display: inline-flex;
   min-height: 1.5rem;
   align-items: center;
-}
-
-.backToTop {
-  gap: 0.5rem;
-  margin-top: 1.375rem;
-  border-top: 1px solid var(--paper-line);
-  padding-top: 1rem;
-  color: var(--paper-muted);
-  font-size: 0.75rem;
-  transition: color 160ms;
-}
-
-.backToTop:hover {
-  color: var(--paper-accent);
 }
 
 .shell :global(.post-prose) {

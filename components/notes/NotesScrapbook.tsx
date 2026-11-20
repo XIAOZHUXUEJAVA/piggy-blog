@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ArrowUp, Flower2, Heart, Leaf, Pencil } from 'lucide-react';
+import { Flower2, Heart, Leaf, Pencil } from 'lucide-react';
 import notesData, { type NoteLocale } from '@/data/notesData';
 import styles from './NotesScrapbook.module.css';
 
@@ -250,9 +250,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             <Flower2 size={30} strokeWidth={1.2} aria-hidden="true" />
             <p>{t('endTitle')}</p>
             <span>{t('endText')}</span>
-            <a href="#notes-top" aria-label={t('backToTop')} title={t('backToTop')}>
-              <ArrowUp size={16} aria-hidden="true" />
-            </a>
           </footer>
         </div>
 

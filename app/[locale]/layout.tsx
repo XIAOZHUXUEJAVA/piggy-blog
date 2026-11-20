@@ -9,6 +9,7 @@ import { SectionContainer } from '@/components/ui';
 import siteMetadata from '@/data/siteMetadata';
 import { routing } from '@/i18n/routing';
 import LocaleDocumentLanguage from '@/components/LocaleDocumentLanguage';
+import BackToTop from '@/components/ui/BackToTop';
 
 const LoadingBar = dynamic(() => import('@/components/ui/LoadingBar'), { ssr: false });
 
@@ -34,10 +35,13 @@ export default async function LocaleLayout({
       <SectionContainer>
         <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
           <Header />
-          <main className="mb-auto mt-20">{children}</main>
+          <main id="main-content" tabIndex={-1} className="mb-auto mt-20 focus:outline-none">
+            {children}
+          </main>
           <Footer />
         </SearchProvider>
       </SectionContainer>
+      <BackToTop />
     </NextIntlClientProvider>
   );
 }

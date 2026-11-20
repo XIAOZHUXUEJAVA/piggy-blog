@@ -4,7 +4,8 @@ import { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 
 import siteMetadata from '@/data/siteMetadata';
-import { Image, Comments, Link, PageTitle, SectionContainer, ScrollTopAndComment } from '@/components/ui';
+import { Image, Comments, Link, PageTitle, SectionContainer } from '@/components/ui';
+import CommentLink from '@/components/blog/CommentLink';
 
 interface LayoutProps {
   content: CoreContent<Blog>;
@@ -20,7 +21,6 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
 
   return (
     <SectionContainer size="article">
-      <ScrollTopAndComment />
       <article className="paper-reading">
         <div>
           <div className="space-y-1 pb-10 text-center">
@@ -31,6 +31,7 @@ export default function PostMinimal({ content, next, prev, children }: LayoutPro
             </div>
             <div className="relative pt-10">
               <PageTitle>{title}</PageTitle>
+              <CommentLink />
             </div>
           </div>
           <div className="prose mx-auto max-w-3xl py-4">{children}</div>

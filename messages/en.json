@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "backToTop": "Back to top"
+  },
   "Navigation": {
     "home": "Home",
     "blog": "Blog",
@@ -41,8 +44,7 @@
     "entryCount": "{count, plural, one {# note} other {# notes}}",
     "entryNumber": "Page {number}",
     "endTitle": "That’s all for now.",
-    "endText": "The next page is for tomorrow’s breeze.",
-    "backToTop": "Back to the top"
+    "endText": "The next page is for tomorrow’s breeze."
   },
   "Languages": {
     "zh": "中文",
@@ -80,8 +82,7 @@
     "freshContent": "Fresh Content",
     "noPostsFound": "No posts found.",
     "latest": "Latest",
-    "readMore": "Read more",
-    "backToTop": "Back to top"
+    "readMore": "Read more"
   },
   "Blog": {
     "title": "Blog",
@@ -126,7 +127,6 @@
     "readingTime": "{minutes, plural, one {# min read} other {# mins read}}",
     "loadComments": "Load Comments",
     "scrollToComments": "Scroll to comments",
-    "backToTop": "Back to top",
     "copyCode": "Copy code",
     "copied": "Copied!"
   },

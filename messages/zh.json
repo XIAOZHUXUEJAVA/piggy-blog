@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "backToTop": "回到顶部"
+  },
   "Navigation": {
     "home": "首页",
     "blog": "博客",
@@ -41,8 +44,7 @@
     "entryCount": "{count} 则手记",
     "entryNumber": "第 {number} 页",
     "endTitle": "先记到这里。",
-    "endText": "下一页，留给明天的风。",
-    "backToTop": "回到本页顶部"
+    "endText": "下一页，留给明天的风。"
   },
   "Languages": {
     "zh": "中文",
@@ -80,8 +82,7 @@
     "freshContent": "持续更新",
     "noPostsFound": "没有找到文章。",
     "latest": "最新",
-    "readMore": "阅读全文",
-    "backToTop": "回到顶部"
+    "readMore": "阅读全文"
   },
   "Blog": {
     "title": "博客",
@@ -126,7 +127,6 @@
     "readingTime": "阅读约需 {minutes} 分钟",
     "loadComments": "加载评论",
     "scrollToComments": "跳转到评论",
-    "backToTop": "回到顶部",
     "copyCode": "复制代码",
     "copied": "已复制！"
   },

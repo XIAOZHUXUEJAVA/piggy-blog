@@ -490,7 +490,10 @@
 }
 
 .history {
+  width: 100%;
+  max-width: 60rem;
   min-width: 0;
+  justify-self: center;
 }
 
 .historyHeader {

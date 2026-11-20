@@ -582,8 +582,7 @@
   font-size: 0.5625rem;
   opacity: 0.65;
 }
-.filter:focus-visible,
-.endNote a:focus-visible {
+.filter:focus-visible {
   outline: 2px solid var(--paper-accent);
   outline-offset: 4px;
 }
@@ -609,19 +608,6 @@
   margin-top: 0.5rem;
   font-size: 0.6875rem;
   color: var(--paper-muted);
-}
-.endNote a {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin-top: 1.25rem;
-  border: 1px dashed var(--paper-line-hover);
-  border-radius: 50%;
-  transition: background-color 180ms;
-}
-.endNote a:hover {
-  background: var(--paper-accent-soft);
 }
 
 @media (max-width: 1100px) {
@@ -828,8 +814,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .filter,
-  .endNote a {
+  .filter {
     transition: none;
   }
 }
