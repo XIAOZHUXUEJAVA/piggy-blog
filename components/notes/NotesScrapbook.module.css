@@ -3,9 +3,8 @@
   --notes-yellow: #f4edcf;
   --notes-rose: #efd9d4;
   --notes-rule: color-mix(in srgb, var(--paper-accent) 18%, transparent);
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 2.75rem 0 1rem;
+  min-width: 0;
+  padding: 3.5rem 0 1rem;
 }
 
 .pageHeader {
@@ -17,16 +16,14 @@
   color: var(--paper-muted);
 }
 
-.path {
-  color: var(--paper-accent);
-  font-size: 1.125rem;
-}
 .edition {
   font-size: 0.625rem;
   letter-spacing: 0.12em;
 }
 
 .desk {
+  max-width: 1060px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 196px minmax(0, 1fr) 80px;
   gap: 0 26px;
@@ -634,10 +631,6 @@
 }
 
 @media (max-width: 767px) {
-  .page {
-    max-width: 580px;
-    padding-top: 2rem;
-  }
   .pageHeader {
     margin-bottom: 3rem;
   }
@@ -646,6 +639,7 @@
     letter-spacing: 0.04em;
   }
   .desk {
+    max-width: 580px;
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
   }
@@ -781,6 +775,12 @@
   }
   .endNote {
     grid-row: 6;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-top: 2.5rem;
   }
 }
 

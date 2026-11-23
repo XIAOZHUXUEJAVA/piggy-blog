@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Flower2, Heart, Leaf, Pencil } from 'lucide-react';
+import PageHeader from '@/components/ui/PageHeader';
 import notesData, { type NoteLocale } from '@/data/notesData';
 import styles from './NotesScrapbook.module.css';
 
@@ -84,7 +85,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
   return (
     <div className={styles.page} id="notes-top">
       <div className={styles.pageHeader}>
-        <span className={styles.path}>~/notes</span>
+        <PageHeader path="~/notes" />
         <span className={styles.edition}>{t('edition')}</span>
       </div>
 
