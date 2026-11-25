@@ -46,7 +46,8 @@
 }
 
 .introName {
-  color: var(--intro-accent);
+  position: relative;
+  color: var(--paper-accent-hover);
   font-weight: 500;
 }
 

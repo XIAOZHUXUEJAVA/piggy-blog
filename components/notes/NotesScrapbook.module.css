@@ -97,7 +97,7 @@
   left: -22px;
   top: -12px;
   transform: rotate(-7deg);
-  background: var(--notes-rose);
+  background: color-mix(in srgb, var(--paper-accent) 40%, var(--paper-accent-soft));
 }
 .eyebrow {
   color: var(--paper-accent);

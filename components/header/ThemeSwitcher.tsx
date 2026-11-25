@@ -41,7 +41,7 @@ export default function ThemeSwitcher() {
   return (
     <Listbox as="div" className="relative" value={selected} onChange={applyPalette}>
       <Listbox.Button
-        className="flex h-9 w-9 items-center justify-center rounded-md text-paper-accent transition-colors hover:bg-paper-inset"
+        className="flex h-9 w-9 items-center justify-center rounded-md bg-paper-inset text-paper-accent-hover transition-colors hover:ring-1 hover:ring-paper-accent"
         aria-label={t('choose', { palette: t(selected) })}
         title={t('title')}
       >

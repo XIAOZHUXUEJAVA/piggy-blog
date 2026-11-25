@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Github, Mail, Rss, UserRound } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { RoughNotation } from 'react-rough-notation';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors } from 'contentlayer/generated';
 import { Link } from '@/i18n/navigation';
@@ -37,7 +38,20 @@ export default function HomeIntro({
 
       <h1 id="home-intro-title" className={styles.introGreeting}>
         {t.rich('introGreeting', {
-          name: (chunks) => <span className={styles.introName}>{chunks}</span>,
+          name: (chunks) => (
+            <span className={styles.introName}>
+              <RoughNotation
+                type="underline"
+                show
+                color="var(--paper-accent)"
+                strokeWidth={2}
+                padding={[0, 0, 4, 0]}
+                animationDuration={600}
+              >
+                {chunks}
+              </RoughNotation>
+            </span>
+          ),
         })}
         <span className={styles.introWave} aria-hidden="true">
           👋

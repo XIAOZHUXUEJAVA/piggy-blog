@@ -7,7 +7,7 @@
   --panel-subtle: var(--paper-inset);
   --line: var(--paper-line);
   --shadow: rgb(76 59 34 / 9%);
-  --scene-tone: #497c76;
+  --scene-tone: var(--paper-accent-hover);
   --card-paper: var(--paper-sheet);
   min-width: 0;
   color: var(--terminal-text);

@@ -98,7 +98,7 @@ const Header = memo(() => {
             data-orientation="vertical"
             className="hidden h-4 w-px shrink-0 bg-paper-line md:block"
           />
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <ThemeSwitcher />
             <LanguageSwitcher />
             <MobileNav />
