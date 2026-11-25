@@ -4,7 +4,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { Fragment, useState, useEffect, useRef, memo, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link, usePathname as useLocalizedPathname, useRouter as useLocalizedRouter } from '@/i18n/navigation';
+import { usePathname as useLocalizedPathname, useRouter as useLocalizedRouter } from '@/i18n/navigation';
+import Link from '@/components/ui/Link';
 import LanguageSwitcher from './LanguageSwitcher';
 import headerNavLinks from '@/data/headerNavLinks';
 import clsx from 'clsx';
@@ -32,7 +33,7 @@ const MobileNav = memo(() => {
   // 预加载页面函数
   const handleMouseEnter = useCallback(
     (href: string) => {
-      if (typeof window !== 'undefined') {
+      if (href.startsWith('/') && typeof window !== 'undefined') {
         router.prefetch(href);
       }
     },

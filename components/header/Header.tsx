@@ -2,7 +2,8 @@
 
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
-import { usePathname, useRouter, Link } from '@/i18n/navigation';
+import { usePathname, useRouter } from '@/i18n/navigation';
+import Link from '@/components/ui/Link';
 
 import siteMetadata from '@/data/siteMetadata';
 import headerNavLinks from '@/data/headerNavLinks';
@@ -48,7 +49,7 @@ const Header = memo(() => {
   // 预加载页面函数
   const handleMouseEnter = useCallback(
     (href: string) => {
-      if (typeof window !== 'undefined') {
+      if (href.startsWith('/') && typeof window !== 'undefined') {
         router.prefetch(href);
       }
     },
