@@ -1,15 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Flower2, Heart, Leaf, Pencil } from 'lucide-react';
+import { Cloud, Flower2, Heart, Leaf, Pencil, Sprout, Sun, Sunset, Wind } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import notesData, { type NoteLocale } from '@/data/notesData';
+import NotesCalendar from './NotesCalendar';
 import styles from './NotesScrapbook.module.css';
 
 const categories = ['all', 'daily', 'thoughts', 'joys'] as const;
 type NoteFilter = (typeof categories)[number];
 const categoryIcons = { daily: Leaf, thoughts: Pencil, joys: Heart };
+const moodIcons = { sun: Sun, cloud: Cloud, heart: Heart, sprout: Sprout, wind: Wind, sunset: Sunset };
 
 function Postcard({ label }: { label: string }) {
   return (
@@ -65,22 +67,56 @@ function SpinningDisc() {
 export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
   const t = useTranslations('Notes');
   const [filter, setFilter] = useState<NoteFilter>('all');
+  const chapterMarker = useRef<HTMLSpanElement>(null);
+  const [isChapterPinned, setIsChapterPinned] = useState(false);
+  const [navigationRequest, setNavigationRequest] = useState<{ id: string } | null>(null);
+  const [highlightedNote, setHighlightedNote] = useState<string | null>(null);
+
+  useEffect(() => {
+    const marker = chapterMarker.current;
+    if (!marker) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsChapterPinned(!entry.isIntersecting && entry.boundingClientRect.top < (entry.rootBounds?.top ?? 88));
+      },
+      { rootMargin: '-88px 0px 0px 0px', threshold: 0 }
+    );
+    observer.observe(marker);
+    return () => observer.disconnect();
+  }, []);
+
+  const selectCalendarNote = (id: string) => {
+    setFilter('all');
+    setHighlightedNote(null);
+    setNavigationRequest({ id });
+  };
+
+  useEffect(() => {
+    if (!navigationRequest) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Let filtered cards finish expanding before measuring the destination's position.
+    const scrollTimer = window.setTimeout(
+      () => {
+        const article = document.getElementById(`note-${navigationRequest.id}`);
+        if (!article) return;
+        article.focus({ preventScroll: true });
+        article.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' });
+        setHighlightedNote(navigationRequest.id);
+      },
+      reducedMotion ? 0 : 320
+    );
+    const highlightTimer = window.setTimeout(() => setHighlightedNote(null), 3500);
+    return () => {
+      window.clearTimeout(scrollTimer);
+      window.clearTimeout(highlightTimer);
+    };
+  }, [navigationRequest]);
   const visibleNotes = notesData.filter((note) => filter === 'all' || note.category === filter);
   const dateFormat = new Intl.DateTimeFormat(locale === 'zh' ? 'zh-CN' : 'en-GB', {
     month: 'short',
     day: 'numeric',
     timeZone: 'UTC',
   });
-
-  // The calendar belongs to the latest entry's month, so it stays consistent with the scrapbook.
-  const [year, month] = notesData[0].date.split('-').map(Number);
-  const monthStart = (new Date(Date.UTC(year, month - 1, 1)).getUTCDay() + 6) % 7;
-  const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
-  const entryDays = new Set(
-    notesData
-      .filter((note) => note.date.startsWith(`${year}-${String(month).padStart(2, '0')}`))
-      .map((note) => Number(note.date.slice(-2)))
-  );
 
   return (
     <div className={styles.page} id="notes-top">
@@ -104,51 +140,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             </span>
           </section>
 
-          <section className={styles.calendar} aria-labelledby="notes-calendar-title">
-            <h2 id="notes-calendar-title">{t('calendarTitle')}</h2>
-            <p className={styles.calendarMonth}>
-              {year}
-              <span> / </span>
-              {String(month).padStart(2, '0')}
-            </p>
-            <table aria-label={t('calendarLabel', { year, month })}>
-              <thead>
-                <tr>
-                  {t('weekdays')
-                    .split(' ')
-                    .map((day, index) => (
-                      <th key={index} scope="col">
-                        {day}
-                      </th>
-                    ))}
-                </tr>
-              </thead>
-              <tbody>
-                {Array.from({ length: Math.ceil((monthStart + daysInMonth) / 7) }, (_, week) => (
-                  <tr key={week}>
-                    {Array.from({ length: 7 }, (_, weekday) => {
-                      const day = week * 7 + weekday - monthStart + 1;
-                      return (
-                        <td key={weekday}>
-                          {day > 0 && day <= daysInMonth ? (
-                            <span
-                              className={entryDays.has(day) ? styles.recordedDay : undefined}
-                              aria-label={
-                                entryDays.has(day) ? t('calendarEntry', { date: `${year}-${month}-${day}` }) : undefined
-                              }
-                            >
-                              {day}
-                            </span>
-                          ) : null}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className={styles.calendarCaption}>{t('calendarCaption')}</p>
-          </section>
+          <NotesCalendar onSelectNote={selectCalendarNote} />
 
           <figure className={styles.postcard}>
             <span className={styles.tape} aria-hidden="true" />
@@ -184,11 +176,23 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             </span>
           </header>
 
-          <div className={styles.chapterHeader}>
-            <h2>
-              <span aria-hidden="true">↳ </span>
-              {filter === 'all' ? t('chapter') : t(filter)}
-            </h2>
+          <div className={styles.chapterHeader} data-pinned={isChapterPinned}>
+            <span ref={chapterMarker} className={styles.chapterMarker} aria-hidden="true" />
+            <nav className={styles.filters} aria-label={t('filterLabel')}>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  type="button"
+                  aria-pressed={filter === category}
+                  aria-controls="notes-entries"
+                  onClick={() => setFilter(category)}
+                  className={styles.filter}
+                  data-selected={filter === category}
+                >
+                  {t(category)}
+                </button>
+              ))}
+            </nav>
             <p role="status" aria-live="polite" aria-atomic="true">
               {t('entryCount', { count: visibleNotes.length })}
             </p>
@@ -198,6 +202,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             {notesData.map((note, index) => {
               const text = note.text[locale];
               const Icon = categoryIcons[note.category];
+              const MoodIcon = moodIcons[note.moodIcon];
               const number = String(index + 1).padStart(2, '0');
               const isVisible = visibleNotes.includes(note);
               return (
@@ -207,7 +212,9 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                       id={`note-${note.id}`}
                       className={styles.entry}
                       data-category={note.category}
+                      data-calendar-selected={highlightedNote === note.id}
                       aria-labelledby={`title-${note.id}`}
+                      tabIndex={-1}
                     >
                       <span className={styles.entryTape} aria-hidden="true" />
                       <div className={styles.entryMeta}>
@@ -222,7 +229,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                       </div>
                       <h3 id={`title-${note.id}`}>{text.title}</h3>
                       <p className={styles.mood}>
-                        <span aria-hidden="true">○ </span>
+                        <MoodIcon size={16} strokeWidth={1.5} aria-hidden="true" />
                         {text.mood}
                       </p>
                       <div className={styles.entryBody}>
@@ -233,7 +240,7 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                       {text.aside ? (
                         <p className={styles.entryAside}>
                           <Pencil size={14} aria-hidden="true" />
-                          {text.aside}
+                          <span>{text.aside}</span>
                         </p>
                       ) : null}
                       <div className={styles.entryFooter}>
@@ -253,30 +260,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             <span>{t('endText')}</span>
           </footer>
         </div>
-
-        <nav className={styles.filterRail} aria-label={t('filterLabel')}>
-          <div className={styles.filters}>
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                type="button"
-                aria-pressed={filter === category}
-                aria-controls="notes-entries"
-                onClick={() => setFilter(category)}
-                className={styles.filter}
-                data-selected={filter === category}
-              >
-                <span className={styles.filterNumber} aria-hidden="true">
-                  0{index + 1}
-                </span>
-                <span>{t(category)}</span>
-              </button>
-            ))}
-            <span className={styles.railFlower} aria-hidden="true">
-              <Flower2 size={32} strokeWidth={1.2} />
-            </span>
-          </div>
-        </nav>
       </div>
     </div>
   );

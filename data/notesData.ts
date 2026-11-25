@@ -12,6 +12,7 @@ export interface NoteEntry {
   id: string;
   date: string;
   category: NoteCategory;
+  moodIcon: 'sun' | 'cloud' | 'heart' | 'sprout' | 'wind' | 'sunset';
   text: Record<NoteLocale, NoteText>;
 }
 
@@ -19,6 +20,7 @@ export interface NoteEntry {
 const notesData: NoteEntry[] = [
   {
     id: 'ordinary-day',
+    moodIcon: 'sun',
     date: '2026-11-19',
     category: 'daily',
     text: {
@@ -44,6 +46,7 @@ const notesData: NoteEntry[] = [
   },
   {
     id: 'close-the-laptop',
+    moodIcon: 'cloud',
     date: '2026-11-16',
     category: 'thoughts',
     text: {
@@ -67,6 +70,7 @@ const notesData: NoteEntry[] = [
   },
   {
     id: 'warm-bread',
+    moodIcon: 'heart',
     date: '2026-11-13',
     category: 'joys',
     text: {
@@ -92,6 +96,7 @@ const notesData: NoteEntry[] = [
   },
   {
     id: 'desk-corner',
+    moodIcon: 'sprout',
     date: '2026-11-09',
     category: 'daily',
     text: {
@@ -115,6 +120,7 @@ const notesData: NoteEntry[] = [
   },
   {
     id: 'unfinished-things',
+    moodIcon: 'wind',
     date: '2026-11-05',
     category: 'thoughts',
     text: {
@@ -140,6 +146,7 @@ const notesData: NoteEntry[] = [
   },
   {
     id: 'evening-sky',
+    moodIcon: 'sunset',
     date: '2026-11-02',
     category: 'joys',
     text: {

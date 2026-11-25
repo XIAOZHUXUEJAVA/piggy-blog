@@ -109,10 +109,3 @@ yarn lint     # 代码检查
 2. 在 Vercel 导入项目
 3. 配置环境变量
 4. 完成部署
-
-### Docker
-
-```bash
-docker build -t piggy-blog .
-docker run -p 3000:3000 --env-file .env.local piggy-blog
-```
