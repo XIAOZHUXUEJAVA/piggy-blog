@@ -24,7 +24,7 @@ export default function LanguageSwitcher() {
   return (
     <Listbox as="div" className="relative" value={locale} onChange={handleChange}>
       <Listbox.Button
-        className="flex h-9 items-center gap-1 rounded-md px-2 text-paper-accent transition-colors hover:bg-paper-inset"
+        className="flex h-9 items-center gap-1 rounded-md px-1 text-paper-accent transition-colors hover:bg-paper-inset sm:px-2"
         aria-label={t('switchLanguage')}
         title={t('switchLanguage')}
       >

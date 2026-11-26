@@ -11,6 +11,7 @@ import siteMetadata from '@/data/siteMetadata';
 
 import PageEffects from '@/components/ui/PageEffects';
 import { defaultPalette, paletteInitScript } from '@/utils/palettes';
+import { backgroundInitScript } from '@/utils/paperBackground';
 
 const FONT_MAPLE_MONO = localFont({
   src: [
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="zh-CN"
       className={`${FONT_MAPLE_MONO.variable} scroll-smooth`}
       data-palette={defaultPalette}
+      data-paper-background="on"
       suppressHydrationWarning
     >
       <head>
@@ -86,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#fdfdf9" />
         <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
         <script dangerouslySetInnerHTML={{ __html: paletteInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: backgroundInitScript }} />
       </head>
       <body className="isolate pl-[calc(100vw-100%)] antialiased">
         <PageEffects />

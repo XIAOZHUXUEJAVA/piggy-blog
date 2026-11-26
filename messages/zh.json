@@ -44,6 +44,11 @@
     "zh": "中文",
     "en": "English"
   },
+  "Background": {
+    "title": "背景线条",
+    "hide": "关闭背景线条",
+    "show": "开启背景线条"
+  },
   "Theme": {
     "title": "主题配色",
     "choose": "切换主题配色，当前：{palette}",

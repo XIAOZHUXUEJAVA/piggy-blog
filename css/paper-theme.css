@@ -30,6 +30,18 @@ body {
   overflow: hidden;
   pointer-events: none;
   background: var(--paper-base);
+  opacity: 1;
+  transition: opacity 750ms ease-in-out;
+}
+
+html[data-paper-background='off'] .paper-background {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-background {
+    transition: none;
+  }
 }
 
 .paper-header {

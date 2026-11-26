@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { paletteChangeEvent } from '@/utils/palettes';
+import { backgroundChangeEvent, isBackgroundEnabled } from '@/utils/paperBackground';
 
 function seededRandom() {
   let seed = 71423;
@@ -11,15 +12,53 @@ function seededRandom() {
   };
 }
 
-function drawPaper(canvas: HTMLCanvasElement) {
+type Point = [number, number];
+type Fiber = {
+  points: Point[];
+  x: number;
+  y: number;
+  rotation: number;
+  color: string;
+  opacity: number;
+  lineWidth: number;
+  dash: number[];
+  delay: number;
+};
+
+// Split a Bézier curve at t so the visible part grows along the actual stroke.
+function traceFiber(context: CanvasRenderingContext2D, points: Point[], t: number) {
+  const partial = [points[0]];
+  let remaining = points;
+  while (remaining.length > 1) {
+    remaining = remaining.slice(0, -1).map(([x, y], index) => {
+      const next = remaining[index + 1];
+      return [x + (next[0] - x) * t, y + (next[1] - y) * t];
+    });
+    partial.push(remaining[0]);
+  }
+  context.beginPath();
+  context.moveTo(...partial[0]);
+  if (partial.length === 4) {
+    context.bezierCurveTo(...partial[1], ...partial[2], ...partial[3]);
+  } else {
+    context.quadraticCurveTo(...partial[1], ...partial[2]);
+  }
+  context.stroke();
+}
+
+function drawPaper(canvas: HTMLCanvasElement, fiberCanvas: HTMLCanvasElement) {
   const context = canvas.getContext('2d');
-  if (!context) return;
+  const fiberContext = fiberCanvas.getContext('2d');
+  if (!context || !fiberContext) return;
 
   const width = window.innerWidth;
   const height = window.innerHeight;
   const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
   canvas.width = Math.round(width * ratio);
   canvas.height = Math.round(height * ratio);
+  fiberCanvas.width = canvas.width;
+  fiberCanvas.height = canvas.height;
+  fiberContext.scale(ratio, ratio);
   const random = seededRandom();
   const styles = getComputedStyle(document.documentElement);
   const base = styles.getPropertyValue('--paper-base-rgb').trim().split(/\s+/).map(Number);
@@ -73,7 +112,7 @@ function drawPaper(canvas: HTMLCanvasElement) {
     x: random() * width,
     y: random() * height,
   }));
-  context.lineCap = 'round';
+  const fibers: Fiber[] = [];
   for (let i = 0; i < fiberCount; i++) {
     const cluster = clusters[Math.floor(random() * clusters.length)];
     const clustered = random() < 0.22;
@@ -90,63 +129,138 @@ function drawPaper(canvas: HTMLCanvasElement) {
     const strength = strengthAt(Math.max(0, Math.min(width, x)));
     const lineWidth = pale ? 0.65 + random() * 0.8 : 0.35 + random() * 0.45;
 
-    context.save();
-    context.translate(x, y);
-    context.rotate(random() * Math.PI * 2);
-    if (random() < 0.14) context.setLineDash([length * 0.4, 5 + random() * 12, length * 0.3]);
-    context.beginPath();
-    context.moveTo(0, 0);
-    if (random() < 0.65) {
-      context.bezierCurveTo(length * 0.15, bend * 0.85, length * 0.65, bend, length, endBend);
-    } else {
-      context.bezierCurveTo(length * 0.23, bend, length * 0.66, -bend * 0.55, length, endBend);
-    }
-    context.strokeStyle = pale ? '#ffffff' : accent;
-    context.globalAlpha = pale ? (0.55 + random() * 0.4) * strength : (0.045 + random() * 0.055) * strength;
-    context.lineWidth = lineWidth;
-    context.stroke();
+    const rotation = random() * Math.PI * 2;
+    const dash = random() < 0.14 ? [length * 0.4, 5 + random() * 12, length * 0.3] : [];
+    const points: Point[] =
+      random() < 0.65
+        ? [
+            [0, 0],
+            [length * 0.15, bend * 0.85],
+            [length * 0.65, bend],
+            [length, endBend],
+          ]
+        : [
+            [0, 0],
+            [length * 0.23, bend],
+            [length * 0.66, -bend * 0.55],
+            [length, endBend],
+          ];
+    const fiber: Fiber = {
+      points,
+      x,
+      y,
+      rotation,
+      color: pale ? '#ffffff' : accent,
+      opacity: pale ? (0.55 + random() * 0.4) * strength : (0.045 + random() * 0.055) * strength,
+      lineWidth,
+      dash,
+      delay: (i / fiberCount) * 0.35,
+    };
+    fibers.push(fiber);
 
     if (random() < 0.2) {
-      context.setLineDash([]);
-      context.globalAlpha *= pale ? 0.7 : 0.45;
-      context.lineWidth *= 0.65;
-      context.beginPath();
-      context.moveTo(length * 0.12, 1.5);
-      context.quadraticCurveTo(length * 0.4, bend * 0.45 + 3, length * 0.7, endBend + 2);
-      context.stroke();
+      fibers.push({
+        ...fiber,
+        points: [
+          [length * 0.12, 1.5],
+          [length * 0.4, bend * 0.45 + 3],
+          [length * 0.7, endBend + 2],
+        ],
+        opacity: fiber.opacity * (pale ? 0.7 : 0.45),
+        lineWidth: lineWidth * 0.65,
+        dash: [],
+      });
     }
-    context.restore();
   }
   context.globalAlpha = 1;
+
+  // Grain and color washes stay cached while only the light fiber layer animates.
+  return (progress: number) => {
+    fiberContext.clearRect(0, 0, width, height);
+    fiberContext.lineCap = 'round';
+    for (const fiber of fibers) {
+      const t = Math.max(0, Math.min(1, (progress - fiber.delay) / (1 - fiber.delay)));
+      if (t === 0) continue;
+      fiberContext.save();
+      fiberContext.translate(fiber.x, fiber.y);
+      fiberContext.rotate(fiber.rotation);
+      fiberContext.setLineDash(fiber.dash);
+      fiberContext.strokeStyle = fiber.color;
+      fiberContext.globalAlpha = fiber.opacity;
+      fiberContext.lineWidth = fiber.lineWidth;
+      traceFiber(fiberContext, fiber.points, t);
+      fiberContext.restore();
+    }
+  };
 }
 
 export default function PaperBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fiberCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    const draw = () => drawPaper(canvas);
+    const fiberCanvas = fiberCanvasRef.current;
+    if (!canvas || !fiberCanvas) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let progress = isBackgroundEnabled() ? 1 : 0;
+    let render: ReturnType<typeof drawPaper>;
+    let animationFrame = 0;
+
+    const redraw = () => {
+      render = undefined;
+      if (isBackgroundEnabled() || progress > 0) {
+        render = drawPaper(canvas, fiberCanvas);
+        render?.(progress);
+      }
+    };
+    const animate = () => {
+      cancelAnimationFrame(animationFrame);
+      const target = isBackgroundEnabled() ? 1 : 0;
+      if (!render && target === 1) redraw();
+      if (reducedMotion.matches) {
+        progress = target;
+        render?.(progress);
+        return;
+      }
+      const from = progress;
+      const started = performance.now();
+      const duration = (target === 1 ? 1600 : 750) * Math.abs(target - from);
+      if (duration === 0) return;
+      const tick = (now: number) => {
+        const elapsed = Math.min(1, (now - started) / duration);
+        progress = from + (target - from) * elapsed;
+        render?.(progress);
+        if (elapsed < 1) animationFrame = requestAnimationFrame(tick);
+      };
+      animationFrame = requestAnimationFrame(tick);
+    };
     let resizeTimer: ReturnType<typeof setTimeout>;
     const resize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(draw, 120);
+      resizeTimer = setTimeout(redraw, 120);
     };
 
-    // Static texture: redraw when the viewport or selected palette changes.
-    draw();
+    // Initial loads stay still; only an explicit toggle draws or erases the fibers.
+    redraw();
     window.addEventListener('resize', resize);
-    window.addEventListener(paletteChangeEvent, draw);
+    window.addEventListener(paletteChangeEvent, redraw);
+    window.addEventListener(backgroundChangeEvent, animate);
+    reducedMotion.addEventListener('change', animate);
     return () => {
       clearTimeout(resizeTimer);
+      cancelAnimationFrame(animationFrame);
       window.removeEventListener('resize', resize);
-      window.removeEventListener(paletteChangeEvent, draw);
+      window.removeEventListener(paletteChangeEvent, redraw);
+      window.removeEventListener(backgroundChangeEvent, animate);
+      reducedMotion.removeEventListener('change', animate);
     };
   }, []);
 
   return (
     <div className="paper-background" aria-hidden="true">
-      <canvas ref={canvasRef} className="h-full w-full" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      <canvas ref={fiberCanvasRef} className="absolute inset-0 h-full w-full" />
     </div>
   );
 }

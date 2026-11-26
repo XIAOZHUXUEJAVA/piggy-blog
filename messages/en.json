@@ -44,6 +44,11 @@
     "zh": "中文",
     "en": "English"
   },
+  "Background": {
+    "title": "Background lines",
+    "hide": "Hide background lines",
+    "show": "Show background lines"
+  },
   "Theme": {
     "title": "Theme palette",
     "choose": "Change theme palette, current: {palette}",

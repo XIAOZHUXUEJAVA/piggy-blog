@@ -15,6 +15,7 @@ import Logo from 'public/static/images/logo.svg';
 import MobileNav from './MobileNav';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeSwitcher from './ThemeSwitcher';
+import BackgroundToggle from './BackgroundToggle';
 import { isActivePath } from '@/utils/isActivePath';
 
 const Header = memo(() => {
@@ -64,7 +65,7 @@ const Header = memo(() => {
           <div className="animate-wave motion-reduce:animate-none">
             <Logo className="paper-header-logo fill-paper-ink" />
           </div>
-          <div className="paper-header-brand group ml-2 text-xl font-bold transition duration-300">
+          <div className="paper-header-brand group ml-2 text-xl font-bold transition duration-300 max-[379px]:hidden">
             PiggyBlog
             <span className="block h-0.5 max-w-0 bg-paper-accent transition-all duration-500 group-hover:max-w-[85%]"></span>
           </div>
@@ -99,8 +100,9 @@ const Header = memo(() => {
             data-orientation="vertical"
             className="hidden h-4 w-px shrink-0 bg-paper-line md:block"
           />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <ThemeSwitcher />
+            <BackgroundToggle />
             <LanguageSwitcher />
             <MobileNav />
           </div>
