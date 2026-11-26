@@ -16,7 +16,6 @@
   "Notes": {
     "title": "Notes",
     "description": "Everyday notes, wandering thoughts, and little things worth keeping.",
-    "edition": "A PERSONAL SCRAPBOOK / VOL. 01",
     "eyebrow": "LITTLE THINGS, KEPT HERE",
     "heading": "Piggy’s little notes",
     "intro": "A little room for ordinary days.",
@@ -128,8 +127,6 @@
   "Projects": {
     "title": "Projects",
     "description": "A shelf for projects in development, already shipped, or worth documenting.",
-    "eyebrow": "PROJECT SHELF",
-    "tagline": "Small tools. Little experiments. Ideas taking shape.",
     "count": "{count, plural, one {# project} other {# projects}} · Always tinkering",
     "sampleNote": "These projects and statuses are fictional examples, to be replaced with real work.",
     "listLabel": "Project collection",

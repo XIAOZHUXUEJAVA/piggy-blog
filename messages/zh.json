@@ -16,7 +16,6 @@
   "Notes": {
     "title": "手记",
     "description": "一些日常、随想，和舍不得忘记的小事。",
-    "edition": "私人剪贴本 / VOL. 01",
     "eyebrow": "LITTLE THINGS, KEPT HERE",
     "heading": "小猪的手记",
     "intro": "给普通的日子，留一个小小的位置。",
@@ -128,8 +127,6 @@
   "Projects": {
     "title": "项目",
     "description": "收录正在开发、已经发布，或在设计与实现层面值得记录的项目。",
-    "eyebrow": "PROJECT SHELF / 项目货架",
-    "tagline": "小工具，小实验，慢慢成形的想法。",
     "count": "{count} 个项目 · 持续折腾中",
     "sampleNote": "以下项目与状态为虚构示例，后续替换为真实作品。",
     "listLabel": "项目列表",

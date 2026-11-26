@@ -17,11 +17,6 @@
   color: var(--paper-muted);
 }
 
-.edition {
-  font-size: 0.625rem;
-  letter-spacing: 0.12em;
-}
-
 .desk {
   max-width: 1060px;
   margin: 0 auto;
@@ -676,10 +671,6 @@
   .pageHeader {
     margin-bottom: 3rem;
   }
-  .edition {
-    font-size: 0.625rem;
-    letter-spacing: 0.04em;
-  }
   .desk {
     max-width: 580px;
     grid-template-columns: minmax(0, 1fr);
@@ -793,10 +784,6 @@
 }
 
 @media (max-width: 359px) {
-  .edition {
-    max-width: 112px;
-    text-align: right;
-  }
   .sidebar {
     gap: 0.75rem;
     padding-right: 0;

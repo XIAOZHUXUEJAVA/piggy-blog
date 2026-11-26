@@ -122,7 +122,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
     <div className={styles.page} id="notes-top">
       <div className={styles.pageHeader}>
         <PageHeader path="~/notes" />
-        <span className={styles.edition}>{t('edition')}</span>
       </div>
 
       <div className={styles.desk}>

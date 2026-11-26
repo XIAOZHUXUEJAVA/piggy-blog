@@ -16,19 +16,7 @@ export default async function ProjectsPage({ params }: { params: { locale: strin
 
   return (
     <div className={styles.page}>
-      <PageHeader path="~/projects" />
-      <header className={styles.pageHeader}>
-        <div>
-          <p className={styles.eyebrow}>{t('eyebrow')}</p>
-          <h1 className={styles.pageTitle}>
-            {t('title')}
-            <span>.</span>
-          </h1>
-        </div>
-        <div className={styles.headerNote}>
-          <p>{t('tagline')}</p>
-        </div>
-      </header>
+      <PageHeader path="~/projects" title={t('title')} />
       <div className={styles.shelfMeta}>
         <span>{t('count', { count: projectsData.length })}</span>
         <span className={styles.sampleNote}>{t('sampleNote')}</span>
