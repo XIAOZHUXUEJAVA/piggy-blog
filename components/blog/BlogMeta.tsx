@@ -1,3 +1,4 @@
+import 'css/twemoji.css';
 import { formatDate } from 'pliny/utils/formatDate';
 import { useLocale, useTranslations } from 'next-intl';
 

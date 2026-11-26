@@ -9,7 +9,6 @@ import PageHeader from './PageHeader';
 import TableWrapper from './TableWrapper';
 import components from './MDXComponents';
 import SectionContainer from './SectionContainer';
-import LoadingBar from './LoadingBar';
 
 export {
   Tag,
@@ -23,5 +22,4 @@ export {
   components,
   TableWrapper,
   SectionContainer,
-  LoadingBar,
 };

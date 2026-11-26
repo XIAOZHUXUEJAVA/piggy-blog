@@ -39,8 +39,7 @@
     "chapter": "翻到这一页",
     "entryCount": "{count} 则手记",
     "entryNumber": "第 {number} 页",
-    "endTitle": "先记到这里。",
-    "endText": "下一页，留给明天的风。"
+    "endTitle": "先记到这里。"
   },
   "Languages": {
     "zh": "中文",

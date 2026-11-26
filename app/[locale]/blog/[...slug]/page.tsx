@@ -10,7 +10,9 @@ import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer
 
 import { components } from '@/components/ui';
 import siteMetadata from '@/data/siteMetadata';
-import { PostSimple, PostLayout, PostBanner } from 'layouts';
+import PostSimple from '@/layouts/PostSimple';
+import PostLayout from '@/layouts/PostLayout';
+import PostBanner from '@/layouts/PostBanner';
 
 const defaultLayout = 'PostLayout';
 const layouts = {

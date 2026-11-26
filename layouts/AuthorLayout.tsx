@@ -1,3 +1,4 @@
+import 'css/twemoji.css';
 import { ReactNode } from 'react';
 import type { Authors } from 'contentlayer/generated';
 import { Icon } from '@iconify/react';

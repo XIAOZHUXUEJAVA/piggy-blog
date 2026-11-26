@@ -1,17 +1,16 @@
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import dynamic from 'next/dynamic';
 import { SearchProvider, SearchConfig } from 'pliny/search';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import { SectionContainer } from '@/components/ui';
+import SectionContainer from '@/components/ui/SectionContainer';
 import siteMetadata from '@/data/siteMetadata';
 import { routing } from '@/i18n/routing';
 import LocaleDocumentLanguage from '@/components/LocaleDocumentLanguage';
 import BackToTop from '@/components/ui/BackToTop';
 
-const LoadingBar = dynamic(() => import('@/components/ui/LoadingBar'), { ssr: false });
+const chineseUiFont = new URL('../fonts/piggy-zh/piggy-zh-ui.woff2', import.meta.url).href;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -31,7 +30,9 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider key={params.locale} locale={params.locale} messages={messages}>
       <LocaleDocumentLanguage />
-      <LoadingBar />
+      {params.locale === 'zh' && (
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href={chineseUiFont} />
+      )}
       <SectionContainer>
         <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
           <Header />

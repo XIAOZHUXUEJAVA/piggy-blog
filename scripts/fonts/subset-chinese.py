@@ -5,6 +5,8 @@ Requires: fonttools[woff]==4.61.1
 """
 
 import argparse
+import json
+import re
 from collections import Counter
 from hashlib import sha256
 from pathlib import Path
@@ -53,6 +55,23 @@ def unicode_ranges(codepoints):
     return ", ".join(ranges)
 
 
+def site_characters():
+    messages = json.loads((ROOT / "messages/zh.json").read_text(encoding="utf-8"))
+    sections = ("Common", "Navigation", "Homepage", "Languages", "Theme")
+    text = [json.dumps(messages[key], ensure_ascii=False) for key in sections]
+    text.append("年月日")
+    articles = Counter(map(ord, json.dumps(messages["Post"], ensure_ascii=False)))
+    for path in sorted((ROOT / "data/blog").rglob("*.mdx")):
+        parts = path.read_text(encoding="utf-8").split("---", 2)
+        if len(parts) != 3:
+            continue
+        frontmatter = parts[1]
+        if not re.search(r"^draft:\s*true\s*$", frontmatter, re.MULTILINE):
+            text.extend(re.findall(r"^(?:title|summary|tags):[^\n]*", frontmatter, re.MULTILINE))
+            articles.update(map(ord, parts[2]))
+    return Counter(map(ord, "".join(text))), articles
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
@@ -70,7 +89,15 @@ def main():
         for path in sorted((ROOT / directory).rglob("*")):
             if path.suffix in {".ts", ".tsx", ".md", ".mdx", ".json"}:
                 frequency.update(map(ord, path.read_text(encoding="utf-8")))
-    ordered = sorted(available, key=lambda codepoint: (-frequency[codepoint], codepoint))
+    homepage, articles = site_characters()
+    ordered = sorted(available, key=lambda cp: (-articles[cp], -frequency[cp], cp))
+    # Keep the navigation, intro and article cards in one small request.
+    ui = set(sorted(available & homepage.keys(), key=lambda cp: (-homepage[cp], cp))[:SHARD_SIZE])
+    shards = [("ui", ui)]
+    for offset in range(0, len(ordered), SHARD_SIZE):
+        remaining = set(ordered[offset : offset + SHARD_SIZE]) - ui
+        if remaining:
+            shards.append((f"{offset // SHARD_SIZE:02d}", remaining))
 
     FONT_DIR.mkdir(parents=True, exist_ok=True)
     css = [
@@ -85,8 +112,7 @@ def main():
     ]
     seen = set()
     generated_files = set()
-    for index, offset in enumerate(range(0, len(ordered), SHARD_SIZE)):
-        codepoints = set(ordered[offset : offset + SHARD_SIZE])
+    for index, codepoints in shards:
         font = TTFont(source, recalcTimestamp=False)
         options = subset.Options()
         options.flavor = "woff2"
@@ -112,7 +138,7 @@ def main():
             if record.nameID in names:
                 record.string = names[record.nameID].encode(record.getEncoding(), errors="replace")
         font.flavor = "woff2"
-        filename = f"piggy-zh-{index:02d}.woff2"
+        filename = f"piggy-zh-{index}.woff2"
         target = FONT_DIR / filename
         font.save(target)
         font.close()

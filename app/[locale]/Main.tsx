@@ -1,5 +1,3 @@
-'use client';
-
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Authors, Blog } from 'contentlayer/generated';
 import { slug as slugify } from 'github-slugger';

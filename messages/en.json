@@ -39,8 +39,7 @@
     "chapter": "On this page",
     "entryCount": "{count, plural, one {# note} other {# notes}}",
     "entryNumber": "Page {number}",
-    "endTitle": "That’s all for now.",
-    "endText": "The next page is for tomorrow’s breeze."
+    "endTitle": "That’s all for now."
   },
   "Languages": {
     "zh": "中文",

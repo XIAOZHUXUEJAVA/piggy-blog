@@ -250,7 +250,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
           <footer className={styles.endNote}>
             <Flower2 size={30} strokeWidth={1.2} aria-hidden="true" />
             <p>{t('endTitle')}</p>
-            <span>{t('endText')}</span>
           </footer>
         </div>
       </div>
