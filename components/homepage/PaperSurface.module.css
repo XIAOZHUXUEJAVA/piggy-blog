@@ -39,8 +39,8 @@
   gap: 0 0.35em;
   margin-top: 1.75rem;
   color: var(--paper-muted);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 400;
+  font-size: clamp(1.75rem, 1.35rem + 1vw, 2.25rem);
+  font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.035em;
 }
@@ -48,7 +48,7 @@
 .introName {
   position: relative;
   color: var(--paper-accent-hover);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .introWave {
@@ -58,17 +58,17 @@
 }
 
 .introStatement {
-  max-width: 100%;
-  margin-top: 0.375rem;
+  max-width: 38em;
+  margin-top: 0.875rem;
   color: var(--paper-muted);
-  font-size: clamp(1.25rem, 2.7vw, 2.125rem);
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem);
   font-weight: 400;
   line-height: 1.65;
   text-wrap: balance;
 }
 
 .introFooter {
-  margin-top: 4.5rem;
+  margin-top: 1.5rem;
 }
 
 .introMotto {
@@ -87,7 +87,7 @@
   gap: 0.75rem;
   margin-top: 0.375rem;
   color: var(--paper-muted);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.8;
 }
@@ -123,9 +123,8 @@
   color: var(--intro-accent);
 }
 
-/* Shared alignment keeps the loose leaves together as one reading table. */
 .editorial {
-  margin: 4.25rem 0 6rem;
+  margin: 2.5rem 0 3rem;
   font-family: var(--font-site);
 }
 
@@ -146,9 +145,9 @@
 .eyebrow {
   color: var(--paper-muted);
   font-family: var(--font-site);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   line-height: 1.5;
-  letter-spacing: 0.17em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -156,29 +155,9 @@
   margin-top: 0.5rem;
   color: var(--paper-ink);
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.08em;
-}
-
-.sectionCount {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.5rem 1.5rem;
-  padding-bottom: 0.25rem;
-  color: var(--paper-muted);
-  font-family: var(--font-site);
-  font-size: 0.625rem;
-  line-height: 1.8;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.sectionCount span:last-child {
-  color: var(--paper-accent);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
 .manuscripts {
@@ -239,41 +218,15 @@
 }
 
 .leadSheet .manuscriptLink {
-  min-height: 22rem;
+  min-height: 18rem;
   padding: 1.75rem;
 }
 
-.sheetTopline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--paper-muted);
-}
-
-.sheetNumber {
-  color: var(--paper-muted);
-  font-family: var(--font-site);
-  font-size: 0.6875rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
-  opacity: 0.85;
-}
-
-.latestMark {
-  border-bottom: 1px solid var(--paper-line);
-  padding-bottom: 0.2rem;
-  color: var(--paper-accent);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-}
-
 .manuscriptTitle {
-  margin-top: 1.25rem;
+  margin: 0;
   color: var(--paper-ink);
   font-size: 1.1875rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.75;
   overflow-wrap: anywhere;
   text-wrap: pretty;
@@ -281,10 +234,10 @@
 }
 
 .leadSheet .manuscriptTitle {
-  margin-top: 2.25rem;
-  font-size: clamp(1.75rem, 2.6vw, 2.5rem);
-  line-height: 1.6;
-  letter-spacing: 0.025em;
+  margin-top: 0;
+  font-size: clamp(1.75rem, 1.25rem + 1.4vw, 2.5rem);
+  line-height: 1.5;
+  letter-spacing: -0.025em;
 }
 
 .sheetSummary {
@@ -296,7 +249,7 @@
 }
 
 .leadSheet .sheetSummary {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   font-size: 0.875rem;
 }
 
@@ -304,9 +257,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1rem;
-  margin-top: 1.75rem;
+  margin-top: 1.25rem;
   color: var(--paper-muted);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.9;
   overflow-wrap: anywhere;
@@ -334,58 +287,46 @@
   font-size: 1.125rem;
 }
 
-.indexNote .manuscriptLink {
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  column-gap: 0.75rem;
-  border-block: 1px solid var(--paper-line);
-  padding: 1.125rem 0;
-}
-
-.indexNote .sheetTopline {
-  grid-row: 1 / 3;
-  align-self: start;
-  padding-top: 0.375rem;
-}
-
-.indexNote .manuscriptTitle {
-  margin-top: 0;
-  font-size: 1.0625rem;
-}
-
-.indexNote .sheetMeta {
-  grid-column: 2;
-  margin-top: 0.625rem;
-}
-
-.excerptNote .manuscriptLink {
-  display: grid;
-  grid-template-columns: 2.75rem minmax(0, 1fr);
-  gap: 0.625rem 1rem;
-  padding: 0.5rem 0;
-}
-
-.excerptNote .sheetTopline {
-  grid-row: 1 / span 3;
-  align-items: flex-start;
-  border-right: 1px solid var(--paper-line-hover);
-  padding-top: 0.375rem;
-}
-
-.excerptNote .manuscriptTitle {
-  margin-top: 0;
+.paperNote .manuscriptTitle {
   font-size: 1.125rem;
 }
 
-.excerptNote .sheetSummary {
-  grid-column: 2;
-  max-width: 34em;
-  margin-top: 0;
+.paperNote .sheetMeta {
+  margin-top: 1rem;
 }
 
-.excerptNote .sheetMeta {
-  grid-column: 2;
-  margin-top: 0.25rem;
+.indexNote .manuscriptTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--paper-line-hover);
+  padding-bottom: 0.75rem;
+}
+
+.indexNote .manuscriptTitle span {
+  color: var(--paper-muted);
+  font-weight: 400;
+}
+
+.indexNote .sheetMeta {
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
+.marginNote .manuscriptTitle {
+  position: relative;
+  font-size: 1.25rem;
+}
+
+.marginNote .manuscriptTitle::before {
+  position: absolute;
+  inset-block-start: 0.38em;
+  inset-inline-start: -0.75rem;
+  width: 3px;
+  height: 1em;
+  background: currentColor;
+  content: '';
 }
 
 .manuscript:nth-child(5) {
@@ -396,18 +337,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 0.75rem 1.5rem;
   border-top: 1px solid var(--paper-line);
   padding-top: 1rem;
-}
-
-.collectionSignoff {
-  color: var(--paper-muted);
-  font-family: var(--font-site);
-  font-size: 0.75rem;
-  font-style: italic;
-  line-height: 1.8;
 }
 
 .archiveLink {
@@ -442,7 +375,7 @@
   max-width: 15rem;
   margin-top: 1rem;
   color: var(--paper-muted);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.9;
   text-wrap: pretty;
 }
@@ -498,25 +431,17 @@
 .featuredNumber {
   color: var(--paper-accent);
   font-family: var(--font-site);
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-style: italic;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
-.featuredLabel {
-  color: var(--paper-muted);
-  font-family: var(--font-site);
-  font-size: 0.5625rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
 .featuredTitle {
   margin-bottom: 1.5rem;
   color: var(--paper-ink);
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.0625rem;
+  font-weight: 600;
   line-height: 1.85;
   overflow-wrap: anywhere;
   text-wrap: pretty;
@@ -526,7 +451,7 @@
 .featuredDate {
   margin-top: auto;
   color: var(--paper-muted);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.8;
   transition: color 350ms ease;
@@ -545,6 +470,15 @@
   font-size: 0.875rem;
 }
 
+.homeFooter {
+  border-top: 1px solid var(--paper-line);
+  padding-block: 1.25rem;
+  color: var(--paper-muted);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
 .paper :is(a, button):focus-visible {
   outline: 2px solid var(--paper-accent);
   outline-offset: 4px;
@@ -552,7 +486,6 @@
 
 @media (min-width: 640px) {
   .intro {
-    min-height: 35rem;
     padding-top: 3.5rem;
   }
 
@@ -562,48 +495,35 @@
   }
 
   .introFooter {
-    margin-top: 6.5rem;
+    margin-top: 2rem;
   }
 
   .manuscripts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
+    align-items: stretch;
     gap: 2rem;
-    margin: 3rem 1rem;
+    margin: 2rem 0;
   }
 
   .manuscript {
-    align-self: start;
+    align-self: stretch;
+  }
+
+  .manuscript article,
+  .manuscriptLink {
+    height: 100%;
   }
 
   .leadSheet {
     grid-column: 1 / -1;
-    width: 90%;
-    justify-self: center;
-  }
-
-  .manuscript:nth-child(2) {
-    --sheet-angle: -0.35deg;
-  }
-
-  .manuscript:nth-child(3) {
-    margin-top: 1rem;
-  }
-
-  .manuscript:nth-child(4) {
-    margin-top: 0.5rem;
-  }
-
-  .manuscript:nth-child(5) {
-    margin-top: 0.5rem;
   }
 
   .featuredList {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
     gap: 1.25rem;
-    margin: 2.5rem 0.5rem 0;
+    margin: 2rem 0 0;
   }
 
   .featuredItem:nth-child(3n + 1) {
@@ -624,7 +544,7 @@
   .manuscripts {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 1.5rem 2rem;
-    margin: 3rem 0.75rem 2.5rem;
+    margin: 2.5rem 0;
   }
 
   .leadSheet {
@@ -634,55 +554,39 @@
   }
 
   .leadSheet .manuscriptLink {
-    min-height: 26rem;
-    padding: clamp(2rem, 3.5vw, 3.5rem);
+    min-height: 20rem;
+    padding: clamp(2rem, 1rem + 2vw, 3rem);
   }
 
   .manuscript:nth-child(2) {
-    grid-column: 9 / 13;
+    grid-column: 8 / 13;
     grid-row: 1;
-    margin-top: 1rem;
-  }
-
-  .manuscript:nth-child(2) .manuscriptLink {
-    padding: 1.5rem 1.75rem;
   }
 
   .manuscript:nth-child(3) {
-    grid-column: 9 / 13;
+    grid-column: 8 / 13;
     grid-row: 2;
-    margin-top: 0;
-    margin-inline: 1.75rem;
   }
 
   .manuscript:nth-child(4) {
     grid-column: 1 / 7;
     grid-row: 3;
-    margin: 1rem 0 0;
   }
 
   .manuscript:nth-child(5) {
-    grid-column: 8 / 13;
+    grid-column: 7 / 13;
     grid-row: 3;
-    margin-top: 1rem;
   }
+}
 
-  .manuscript:nth-child(5) .manuscriptTitle {
-    margin-top: 0.75rem;
-    font-size: 1.0625rem;
-  }
-
-  .manuscript:nth-child(5) .sheetMeta {
-    margin-top: 1.25rem;
-  }
-
+@media (min-width: 1280px) {
   .selectedCollection {
     display: grid;
     grid-template-columns: minmax(10rem, 0.85fr) minmax(0, 3fr);
     align-items: start;
     gap: 3rem;
     margin-top: 4.5rem;
-    padding: 0 0.75rem 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .selectedHeading {

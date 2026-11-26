@@ -147,13 +147,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             <Postcard label={t('postcardAlt')} />
             <figcaption>{t('postcardCaption')}</figcaption>
           </figure>
-
-          <section className={styles.pocket}>
-            <Flower2 size={29} strokeWidth={1.3} aria-hidden="true" />
-            <h2>{t('pocketTitle')}</h2>
-            <p>{t('pocketText')}</p>
-            <span aria-hidden="true">✳</span>
-          </section>
         </aside>
 
         <div className={styles.main}>

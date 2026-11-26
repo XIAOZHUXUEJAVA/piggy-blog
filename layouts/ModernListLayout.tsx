@@ -245,7 +245,7 @@ export default function ModernListLayout({ posts, title, path = '~/blog' }: Mode
                             aria-label={t('readArticle', { title: post.title })}
                             className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent focus-visible:z-20 focus-visible:rounded md:pl-5 md:text-base"
                           >
-                            <span className={`${styles.title} truncate`}>{post.title}</span>
+                            <span className={`${styles.title} [overflow-wrap:anywhere] md:truncate`}>{post.title}</span>
                           </Link>
                           <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 md:flex">
                             {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}

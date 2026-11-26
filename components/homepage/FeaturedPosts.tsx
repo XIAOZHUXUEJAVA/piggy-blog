@@ -35,9 +35,6 @@ const FeaturedPosts = ({ posts }: { posts: CoreContent<Blog>[] }) => {
             <Link href={`/blog/${slug}`} className={styles.featuredLink}>
               <div className={styles.featuredTopline} aria-hidden="true">
                 <span className={styles.featuredNumber}>{String(index + 1).padStart(2, '0')}</span>
-                <span className={styles.featuredLabel} lang="en">
-                  Collected
-                </span>
               </div>
               <h3 className={styles.featuredTitle}>{title}</h3>
               <time dateTime={date} className={styles.featuredDate}>

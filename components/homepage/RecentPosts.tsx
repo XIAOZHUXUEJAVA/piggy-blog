@@ -26,12 +26,6 @@ export default function RecentPosts({ posts }: { posts: CoreContent<Blog>[] }) {
             {t('recentPosts')}
           </h2>
         </div>
-        {posts.length > 0 && (
-          <p className={styles.sectionCount} lang="en" aria-hidden="true">
-            <span>Loose leaves</span>
-            <span>01 — {String(posts.length).padStart(2, '0')}</span>
-          </p>
-        )}
       </header>
 
       {!posts.length ? (
@@ -43,21 +37,19 @@ export default function RecentPosts({ posts }: { posts: CoreContent<Blog>[] }) {
               key={slug}
               className={cn(styles.manuscript, {
                 [styles.leadSheet]: index === 0,
+                [styles.paperNote]: index === 1 || index === 4,
                 [styles.indexNote]: index === 2,
-                [styles.excerptNote]: index === 3,
+                [styles.marginNote]: index === 3,
               })}
             >
               {(index < 2 || index === 4) && <span className={styles.sheetPaper} aria-hidden="true" />}
               <article>
                 <Link href={`/blog/${slug}`} className={styles.manuscriptLink}>
-                  <div className={styles.sheetTopline}>
-                    <span className={styles.sheetNumber} aria-hidden="true">
-                      [{String(index + 1).padStart(2, '0')}]
-                    </span>
-                    {index === 0 && <span className={styles.latestMark}>{t('latest')}</span>}
-                  </div>
-                  <h3 className={styles.manuscriptTitle}>{title}</h3>
-                  {summary && (index < 2 || index === 3) && <p className={styles.sheetSummary}>{summary}</p>}
+                  <h3 className={styles.manuscriptTitle}>
+                    {title}
+                    {index === 2 && <span aria-hidden="true">→</span>}
+                  </h3>
+                  {summary && <p className={styles.sheetSummary}>{summary}</p>}
                   <div className={styles.sheetMeta}>
                     <time dateTime={date}>{dateFormatter.format(new Date(date))}</time>
                     <span>{tags.length ? tags.slice(0, 2).join(' · ') : t('articleLabel')}</span>
@@ -75,9 +67,6 @@ export default function RecentPosts({ posts }: { posts: CoreContent<Blog>[] }) {
       )}
 
       <div className={styles.collectionFooter}>
-        <span className={styles.collectionSignoff} lang="en" aria-hidden="true">
-          Notes, gently gathered.
-        </span>
         <Link href="/blog" className={styles.archiveLink}>
           <span>{t('discoverAllPosts')}</span>
           <span aria-hidden="true" className={styles.archiveArrow}>

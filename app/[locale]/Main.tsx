@@ -6,6 +6,7 @@ import { slug as slugify } from 'github-slugger';
 import { FeaturedPosts, RecentPosts } from '@/components/homepage';
 import featuredPostSlugs from '@/data/featuredPosts';
 import HomeIntro from '@/components/homepage/HomeIntro';
+import siteMetadata from '@/data/siteMetadata';
 import styles from '@/components/homepage/PaperSurface.module.css';
 // import { IconCloud } from '@/components/ui/icon-cloud';
 
@@ -64,6 +65,9 @@ export default function Home({ posts, author }: { posts: CoreContent<Blog>[]; au
         <RecentPosts posts={posts.slice(0, MAX_DISPLAY)} />
         <FeaturedPosts posts={featuredPosts} />
       </div>
+      <footer className={styles.homeFooter}>
+        <p>© {siteMetadata.author} · PiggyBlog</p>
+      </footer>
     </div>
   );
 }

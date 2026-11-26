@@ -244,10 +244,6 @@
   padding: 1rem 0.625rem;
   color: var(--paper-muted);
 }
-.calendar h2 {
-  font-size: 0.6875rem;
-  text-align: center;
-}
 .calendarMonth {
   margin: 0.75rem 0;
   color: var(--paper-accent);
@@ -310,38 +306,6 @@
   background: var(--paper-accent-soft);
   transform: rotate(-8deg);
 }
-.calendarCaption {
-  margin-top: 0.875rem;
-  text-align: center;
-  font-size: 0.625rem;
-  line-height: 1.9;
-}
-.calendarLegend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 0.875rem;
-  margin-top: 0.875rem;
-  font-size: 0.5625rem;
-}
-.calendarLegend > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.legendRecord {
-  width: 12px;
-  height: 12px;
-  border: 1px solid currentColor;
-  border-radius: 48% 43% 49% 42%;
-  transform: rotate(-8deg);
-}
-.legendToday {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-}
 
 .postcard {
   position: relative;
@@ -369,29 +333,6 @@
   font-size: 0.5625rem;
   text-align: center;
   line-height: 1.9;
-}
-.pocket {
-  position: relative;
-  padding: 1rem 0.75rem 1.5rem;
-  color: var(--paper-accent);
-  transform: rotate(-2deg);
-}
-.pocket h2 {
-  margin-top: 0.75rem;
-  font-size: 0.6875rem;
-}
-.pocket p {
-  margin-top: 0.75rem;
-  color: var(--paper-muted);
-  font-size: 0.8125rem;
-  line-height: 2.1;
-}
-.pocket > span {
-  display: block;
-  margin-top: 1rem;
-  font-size: 1.25rem;
-  opacity: 0.55;
-  text-align: right;
 }
 
 .chapterHeader {
@@ -741,7 +682,7 @@
     margin-bottom: 3rem;
   }
   .edition {
-    font-size: 0.5rem;
+    font-size: 0.625rem;
     letter-spacing: 0.04em;
   }
   .desk {
@@ -754,7 +695,7 @@
   }
   .cover {
     grid-row: 1;
-    padding: 2.5rem 1.5rem 1.25rem 2rem;
+    padding: 2rem 1.5rem 1rem 2rem;
   }
   .pig {
     width: 78px;
@@ -766,28 +707,32 @@
     width: 115px;
   }
   .eyebrow {
-    font-size: 0.5625rem;
+    font-size: 0.625rem;
   }
   .cover h1 {
     font-size: 1.875rem;
   }
   .welcome {
+    margin-top: 1rem;
     font-size: 0.8125rem;
   }
   .coverBottom > p {
     font-size: 0.6875rem;
   }
+  .coverBottom {
+    margin-top: 1.25rem;
+  }
   .disc {
-    width: 104px;
+    width: 92px;
     margin-block: 0;
   }
   .sidebar {
     grid-row: 2;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 1rem;
     align-items: center;
-    padding: 2.5rem 0.5rem 0;
+    padding: 2rem 0 0;
   }
   .memo {
     padding: 1.25rem 0.875rem 1rem;
@@ -805,17 +750,14 @@
     width: 70px;
   }
   .memoSign {
-    font-size: 0.5rem;
+    font-size: 0.5625rem;
   }
   .calendar {
     padding: 0;
   }
-  .calendar h2 {
-    font-size: 0.625rem;
-  }
   .calendar .calendarDay {
     width: 100%;
-    max-width: 22px;
+    max-width: 24px;
     height: auto;
     aspect-ratio: 1;
   }
@@ -823,11 +765,7 @@
     margin: 0.5rem 0;
     font-size: 1rem;
   }
-  .calendarCaption {
-    font-size: 0.5625rem;
-  }
-  .postcard,
-  .pocket {
+  .postcard {
     display: none;
   }
   .chapterHeader {
@@ -873,10 +811,6 @@
     padding-right: 0.625rem;
     padding-left: 0.625rem;
   }
-  .calendar .calendarDay {
-    width: 19px;
-    height: 22px;
-  }
   .cover h1 {
     font-size: 1.65rem;
   }
@@ -884,7 +818,7 @@
     font-size: 0.8125rem;
   }
   .disc {
-    width: 96px;
+    width: 84px;
   }
 }
 

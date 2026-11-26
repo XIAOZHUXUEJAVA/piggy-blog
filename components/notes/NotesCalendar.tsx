@@ -47,14 +47,13 @@ export default function NotesCalendar({ onSelectNote }: { onSelectNote: (id: str
   );
 
   return (
-    <section className={styles.calendar} aria-labelledby="notes-calendar-title">
-      <h2 id="notes-calendar-title">{t('calendarTitle')}</h2>
+    <section className={styles.calendar} aria-label={currentMonth ? t('calendarLabel', { year, month }) : undefined}>
       <p className={styles.calendarMonth}>
         {year || '----'}
         <span> / </span>
         {month ? String(month).padStart(2, '0') : '--'}
       </p>
-      <table aria-label={currentMonth ? t('calendarLabel', { year, month }) : t('calendarTitle')}>
+      <table aria-label={currentMonth ? t('calendarLabel', { year, month }) : undefined}>
         <thead>
           <tr>
             {t('weekdays')
@@ -74,9 +73,6 @@ export default function NotesCalendar({ onSelectNote }: { onSelectNote: (id: str
                 const note = entryDays.get(day);
                 const isToday = day === currentMonth?.day;
                 const date = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const label = [note ? t('calendarEntry', { date }) : date, isToday ? t('calendarToday') : '']
-                  .filter(Boolean)
-                  .join(' · ');
                 return (
                   <td key={weekday}>
                     {day > 0 && day <= daysInMonth ? (
@@ -86,20 +82,15 @@ export default function NotesCalendar({ onSelectNote }: { onSelectNote: (id: str
                           className={`${styles.calendarDay} ${styles.recordedDay}`}
                           data-today={isToday}
                           aria-current={isToday ? 'date' : undefined}
-                          aria-label={label}
+                          aria-label={date}
                           aria-controls={`note-${note.id}`}
-                          title={`${label} · ${t('calendarJump')}`}
+                          title={`${date} · ${t('calendarJump')}`}
                           onClick={() => onSelectNote(note.id)}
                         >
                           {day}
                         </button>
                       ) : (
-                        <span
-                          className={styles.calendarDay}
-                          data-today={isToday}
-                          aria-current={isToday ? 'date' : undefined}
-                          aria-label={label}
-                        >
+                        <span className={styles.calendarDay} data-today={isToday} aria-current={isToday ? 'date' : undefined}>
                           {day}
                         </span>
                       )
@@ -111,17 +102,6 @@ export default function NotesCalendar({ onSelectNote }: { onSelectNote: (id: str
           ))}
         </tbody>
       </table>
-      <div className={styles.calendarLegend}>
-        <span>
-          <i className={styles.legendRecord} aria-hidden="true" />
-          {t('calendarRecorded')}
-        </span>
-        <span>
-          <i className={styles.legendToday} aria-hidden="true" />
-          {t('calendarToday')}
-        </span>
-      </div>
-      <p className={styles.calendarCaption}>{t('calendarCaption')}</p>
     </section>
   );
 }
