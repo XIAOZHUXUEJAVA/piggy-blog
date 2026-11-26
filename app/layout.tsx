@@ -1,9 +1,7 @@
 import 'css/tailwind.css';
 import 'css/chinese-fonts.css';
-import 'css/homepage-enhancements.css';
 import 'css/paper-theme.css';
 import 'css/paper-palettes.css';
-import 'pliny/search/algolia.css';
 import 'remark-github-blockquote-alert/alert.css';
 
 import { Metadata } from 'next';
