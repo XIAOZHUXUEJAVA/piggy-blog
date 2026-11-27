@@ -75,7 +75,6 @@
   color: var(--paper-muted);
   font-family: var(--font-site);
   font-size: 0.75rem;
-  font-style: italic;
   line-height: 1.9;
   text-wrap: balance;
 }
@@ -432,7 +431,6 @@
   color: var(--paper-accent);
   font-family: var(--font-site);
   font-size: 1rem;
-  font-style: italic;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }

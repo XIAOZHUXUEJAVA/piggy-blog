@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Cloud, Flower2, Heart, Leaf, Pencil, Sprout, Sun, Sunset, Wind } from 'lucide-react';
+import { Flower2, Heart, Leaf, Pencil } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import notesData, { type NoteLocale } from '@/data/notesData';
 import NotesCalendar from './NotesCalendar';
@@ -11,7 +11,6 @@ import styles from './NotesScrapbook.module.css';
 const categories = ['all', 'daily', 'thoughts', 'joys'] as const;
 type NoteFilter = (typeof categories)[number];
 const categoryIcons = { daily: Leaf, thoughts: Pencil, joys: Heart };
-const moodIcons = { sun: Sun, cloud: Cloud, heart: Heart, sprout: Sprout, wind: Wind, sunset: Sunset };
 
 function Postcard({ label }: { label: string }) {
   return (
@@ -194,7 +193,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
             {notesData.map((note, index) => {
               const text = note.text[locale];
               const Icon = categoryIcons[note.category];
-              const MoodIcon = moodIcons[note.moodIcon];
               const number = String(index + 1).padStart(2, '0');
               const isVisible = visibleNotes.includes(note);
               return (
@@ -220,10 +218,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                         </span>
                       </div>
                       <h3 id={`title-${note.id}`}>{text.title}</h3>
-                      <p className={styles.mood}>
-                        <MoodIcon size={16} strokeWidth={1.5} aria-hidden="true" />
-                        {text.mood}
-                      </p>
                       <div className={styles.entryBody}>
                         {text.paragraphs.map((paragraph) => (
                           <p key={paragraph}>{paragraph}</p>
@@ -237,7 +231,6 @@ export default function NotesScrapbook({ locale }: { locale: NoteLocale }) {
                       ) : null}
                       <div className={styles.entryFooter}>
                         <span aria-label={t('entryNumber', { number })}>— {number} —</span>
-                        <Icon size={21} strokeWidth={1.3} aria-hidden="true" />
                       </div>
                     </article>
                   </div>

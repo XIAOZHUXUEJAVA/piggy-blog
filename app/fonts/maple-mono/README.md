@@ -2,6 +2,8 @@
 
 使用与参考站点相同的 `@fontsource/maple-mono@5.3.0`，直接保留其 Latin WOFF2 文件，包含 400、500、600、700 四个常规字重。字体由 `next/font/local` 自托管，无需请求第三方字体服务，也不新增运行时依赖。
 
+500 和 600 文件的命名已按字体内部的 OS/2 字重校正，分别对应 Medium 和 SemiBold。升级资源时应核对内部字重与文件名一致。
+
 - 原字体项目：https://github.com/subframe7536/maple-font
 - 文件来源：https://registry.npmjs.org/@fontsource/maple-mono/-/maple-mono-5.3.0.tgz
 - 许可：SIL Open Font License 1.1，见本目录 `OFL.txt`。
