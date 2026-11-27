@@ -4,41 +4,13 @@
   },
   "Navigation": {
     "home": "首页",
-    "blog": "博客",
-    "notes": "手记",
+    "archive": "归档",
     "projects": "项目",
     "career": "历程",
     "about": "关于",
     "portfolio": "作品集",
     "language": "语言",
     "switchLanguage": "切换语言"
-  },
-  "Notes": {
-    "title": "手记",
-    "description": "一些日常、随想，和舍不得忘记的小事。",
-    "eyebrow": "LITTLE THINGS, KEPT HERE",
-    "heading": "小猪的手记",
-    "intro": "给普通的日子，留一个小小的位置。",
-    "welcome": "这里收留一些没头没尾的念头、散步时的发现，还有生活里轻轻闪了一下的瞬间。想到什么，就贴在这一页。",
-    "signature": "慢慢生活，慢慢记录。",
-    "memoTitle": "最近碎碎念",
-    "memoOne": "天气凉了，热水杯又成了桌面常驻嘉宾。",
-    "memoTwo": "想把散步变成一件不需要理由的事。",
-    "memoThree": "今天也有好好吃饭。",
-    "calendarJump": "跳转到手记",
-    "calendarLabel": "{year} 年 {month} 月手记日历",
-    "weekdays": "一 二 三 四 五 六 日",
-    "postcardAlt": "手绘明信片：山坡、树木和落日",
-    "postcardCaption": "想去走走的地方 / somewhere quiet",
-    "filterLabel": "按手记分类筛选",
-    "all": "全部",
-    "daily": "日常",
-    "thoughts": "随想",
-    "joys": "小确幸",
-    "chapter": "翻到这一页",
-    "entryCount": "{count} 则手记",
-    "entryNumber": "第 {number} 页",
-    "endTitle": "先记到这里。"
   },
   "Languages": {
     "zh": "中文",
@@ -84,9 +56,9 @@
     "readMore": "阅读全文"
   },
   "Blog": {
-    "title": "博客",
+    "title": "归档",
     "description": "分享技术与开发领域的见解、教程与思考。",
-    "archiveLabel": "文章归档",
+    "archiveLabel": "归档",
     "archiveDescription": "按时间浏览所有文章，寻找过去留下的记录。",
     "searchLabel": "搜索文章",
     "searchPlaceholder": "搜索文章...",
@@ -103,6 +75,23 @@
     "previous": "上一页",
     "previousShort": "上一页",
     "next": "下一页"
+  },
+  "WritingArchive": {
+    "title": "写作档案",
+    "since": "始于 {year} 年",
+    "activity": "月度发文",
+    "year": "年份",
+    "sum": "篇",
+    "monthCount": "{month} · {count} 篇文章",
+    "articles": "文章",
+    "words": "总字数",
+    "average": "字 / 篇",
+    "peak": "最活跃月份",
+    "perMonth": "每月 {count} 篇",
+    "longest": "最长文章",
+    "approxWords": "约 {count, number} 字",
+    "random": "随机翻一篇",
+    "shuffle": "再抽"
   },
   "Post": {
     "tableOfContents": "文章目录",
@@ -121,7 +110,7 @@
     "nextArticle": "下一篇",
     "previousPost": "上一篇：{title}",
     "nextPost": "下一篇：{title}",
-    "backToBlog": "返回博客",
+    "backToArchive": "返回归档",
     "viewOnGithub": "在 GitHub 上查看",
     "readingTime": "阅读约需 {minutes} 分钟",
     "loadComments": "加载评论",
@@ -221,7 +210,8 @@
     "contactTitle": "下一段故事，保持联系。",
     "contactDescription": "看看我正在做的东西，或来聊聊你的想法。",
     "email": "邮件联系",
-    "about": "关于我"
+    "about": "关于我",
+    "backToTrace": "回到提交轨迹中的「{name}」"
   },
   "AboutJourney": {
     "title": "我的历程",
@@ -280,18 +270,11 @@
     }
   },
   "CareerProcess": {
-    "title": "小步迭代，认真交付。",
-    "description": "从学习基础、走进团队，到探索前端和独立项目。把每一段经历，写成一次向前的提交。",
-    "summary": "提交轨迹与下方经历记录一致，按时间倒序展示：{entries}。随后展示最新经历的提交详情。",
-    "pauseDemo": "暂停或继续「{name}」的演示",
+    "search": "搜索提交轨迹",
+    "empty": "没有匹配的提交",
     "scene": {
       "trace": "提交轨迹",
-      "commitDetails": "最新提交",
-      "commit": "提交",
-      "date": "时间",
-      "branch": "分支",
-      "iterating": "持续积累中",
-      "shipped": "下一段经历，继续向前"
+      "iterating": "持续积累中"
     },
     "mergeEntry": "完成 · {name}",
     "entryCount": "{count} 条记录 · main"

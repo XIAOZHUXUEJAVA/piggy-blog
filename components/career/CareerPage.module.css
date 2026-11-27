@@ -603,7 +603,14 @@
   line-height: 1.8;
 }
 .commitHash {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   color: var(--accent);
+}
+.commitHash:hover,
+.commitHash:focus-visible {
+  text-decoration: underline;
 }
 .branchRef {
   color: var(--green);
@@ -659,6 +666,11 @@
 .graphRow:target .chapter {
   outline: 2px solid var(--tone);
   outline-offset: 4px;
+}
+.mergeRow:target .mergeDescription,
+.mergeRow:focus-visible .mergeDescription {
+  color: var(--tone);
+  font-weight: 600;
 }
 
 .page[data-motion-ready] [data-career-reveal]:not([data-revealed]) {

@@ -80,11 +80,11 @@ export default function ListLayoutWithTags({ posts, title, initialDisplayPosts =
         <div className="flex sm:space-x-24">
           <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md sm:flex">
             <div className="px-6 py-4">
-              {pathname.startsWith('/blog') ? (
+              {pathname.startsWith('/archive') ? (
                 <h3 className="font-bold uppercase text-primary-500">All Posts</h3>
               ) : (
                 <Link
-                  href={`/blog`}
+                  href="/archive"
                   className="font-bold uppercase text-gray-700 hover:text-primary-500"
                 >
                   All Posts

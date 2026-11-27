@@ -97,6 +97,7 @@ export function careerRuler(entries: CareerEntry[], now: Date) {
 }
 
 export interface GraphRow {
+  id: string;
   entry: CareerEntry;
   type: 'commit' | 'merge';
   month: number;
@@ -112,7 +113,7 @@ export function careerHash(id: string): string {
 }
 
 export function careerGraph(entries: CareerEntry[]): GraphRow[] {
-  const events: Omit<GraphRow, 'lanes'>[] = [];
+  const events: Omit<GraphRow, 'id' | 'lanes'>[] = [];
   for (const entry of entries) {
     events.push({ entry, type: 'commit', month: monthIndex(entry.start), lane: entry.kind === 'education' ? 1 : 0 });
     if (entry.kind === 'education' && entry.end) {
@@ -137,6 +138,7 @@ export function careerGraph(entries: CareerEntry[]): GraphRow[] {
   return events.map((event, index) => {
     return {
       ...event,
+      id: event.type === 'merge' ? `${event.entry.id}-completed` : event.entry.id,
       lanes: [
         { up: index > firstMain && index <= lastMain, down: index >= firstMain && index < lastMain },
         {

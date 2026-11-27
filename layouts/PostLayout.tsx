@@ -36,13 +36,13 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
         {slug.startsWith('journey/') ? (
           <JourneyBackLink />
         ) : (
-          <nav aria-label={t('backToBlog')} className="mb-6 pt-4">
+          <nav aria-label={t('backToArchive')} className="mb-6 pt-4">
             <Link
-              href="/blog"
+              href="/archive"
               className="inline-flex items-center gap-2 text-sm text-paper-muted transition-colors hover:text-paper-accent"
             >
               <ArrowLeft size={14} aria-hidden="true" />
-              {t('backToBlog')}
+              {t('backToArchive')}
             </Link>
           </nav>
         )}
@@ -153,9 +153,9 @@ export default function PostLayout({ content, authorDetails = [], next, prev, ch
               </nav>
             )}
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-paper-line py-5 text-xs text-paper-muted">
-              <Link href="/blog" className="inline-flex items-center gap-2 hover:text-paper-accent">
+              <Link href="/archive" className="inline-flex items-center gap-2 hover:text-paper-accent">
                 <ArrowLeft size={14} aria-hidden="true" />
-                {t('backToBlog')}
+                {t('backToArchive')}
               </Link>
               <Link
                 href={`${siteMetadata.siteRepo}/blob/main/data/${filePath}`}

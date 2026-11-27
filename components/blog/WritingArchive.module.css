@@ -1,0 +1,169 @@
+.panel {
+  width: 100%;
+  min-width: 0;
+  max-width: 27rem;
+  padding: clamp(0.85rem, 2vw, 1.1rem);
+  border: 1px solid var(--paper-line-hover);
+  border-radius: 10px;
+  background: var(--paper-surface);
+  color: var(--paper-ink);
+  font-family: var(--font-site);
+  font-variant-numeric: tabular-nums;
+}
+
+.heading,
+.pickHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.heading h2 {
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.heading span,
+.records dt,
+.records small,
+.pick time {
+  color: var(--paper-muted);
+  font-size: 0.72rem;
+}
+
+.heatmap {
+  width: 100%;
+  margin-block: 1rem;
+  border-collapse: separate;
+  border-spacing: 2px 3px;
+  table-layout: fixed;
+  text-align: center;
+}
+
+.command {
+  display: block;
+  color: var(--paper-muted);
+  font: 400 0.72rem/1.55 var(--font-site);
+  overflow-wrap: anywhere;
+}
+
+.command > span {
+  color: var(--paper-accent-hover);
+  font-weight: 600;
+}
+
+.heatmap caption {
+  text-align: start;
+  margin-bottom: 0.35rem;
+}
+.heatmap th,
+.yearTotal {
+  color: var(--paper-muted);
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+.heatmap th:first-child {
+  width: 2.1rem;
+  text-align: start;
+}
+.heatmap th:last-child {
+  width: 1.3rem;
+}
+
+.cell {
+  display: grid;
+  width: 100%;
+  height: 1rem;
+  place-items: center;
+  border-radius: 3px;
+  background: var(--paper-line);
+  color: var(--paper-ink);
+  font-size: 0.64rem;
+  line-height: 1;
+}
+.cell[data-level='1'] {
+  background: color-mix(in srgb, var(--paper-accent) 30%, var(--paper-solid));
+}
+.cell[data-level='2'] {
+  background: color-mix(in srgb, var(--paper-accent) 55%, var(--paper-solid));
+}
+.cell[data-level='3'] {
+  background: var(--paper-accent-hover);
+  color: var(--paper-solid);
+}
+
+.totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  border-bottom: 1px solid var(--paper-line-hover);
+  padding-block: 0.8rem;
+}
+.totals dt {
+  font-size: 0.7rem;
+  color: var(--paper-muted);
+}
+.totals dd {
+  margin-top: 0.22rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.records {
+  margin-block: 0.9rem;
+}
+.records > div {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  gap: 0.5rem;
+}
+.records > div + div {
+  margin-top: 0.65rem;
+}
+.records dd {
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+.records small,
+.pick time {
+  display: block;
+  margin-top: 0.2rem;
+}
+.records a {
+  text-decoration: underline;
+  text-decoration-color: var(--paper-line-hover);
+  text-underline-offset: 0.18em;
+}
+
+.pick {
+  padding: 0.7rem 0.85rem;
+  border-radius: 6px;
+  background: var(--paper-inset);
+}
+.pickHeading {
+  align-items: center;
+}
+.pickHeading button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 1.75rem;
+  padding-inline: 0.4rem;
+  color: var(--paper-accent-hover);
+  font-size: 0.73rem;
+}
+.pickedTitle {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.87rem;
+  overflow-wrap: anywhere;
+}
+.panel a:hover,
+.panel button:hover {
+  color: var(--paper-accent-hover);
+  text-decoration: underline;
+}
+.panel :is(a, button):focus-visible {
+  outline: 2px solid var(--paper-accent);
+  outline-offset: 2px;
+}

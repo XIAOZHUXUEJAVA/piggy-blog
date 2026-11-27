@@ -3,6 +3,15 @@ export function attachCareerMotion(root) {
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const rows = Array.from(root.querySelectorAll('[data-career-row]'));
   const bars = Array.from(root.querySelectorAll('[data-career-bar]'));
+  const traceLinks = Array.from(root.querySelectorAll('[data-career-trace]'));
+  const search = root.querySelector('[data-career-search]');
+  const searchControl = root.querySelector('[data-career-search-control]');
+  const empty = root.querySelector('[data-career-empty]');
+  const filterTrace = () => {
+    const query = search.value.trim().toLowerCase();
+    for (const link of traceLinks) link.hidden = !link.textContent.toLowerCase().includes(query);
+    empty.hidden = traceLinks.some((link) => !link.hidden);
+  };
   const animations = new Set();
   const counterFrames = new Set();
   let observer;
@@ -71,7 +80,8 @@ export function attachCareerMotion(root) {
     // Read all geometry before writing styles, once per animation frame.
     const readingLine = window.innerHeight * 0.72;
     const geometry = rows.map((row) => ({ row, rect: row.getBoundingClientRect() }));
-    let active;
+    let active = traceLinks.find((link) => `#${link.id}` === window.location.hash)?.hash.slice(1) || rows[0]?.id;
+    const anchorLine = rows.length ? parseFloat(getComputedStyle(rows[0]).scrollMarginTop) + 2 : 0;
     for (const { row, rect } of geometry) {
       const progress = Math.max(0, Math.min(1, (readingLine - rect.top - 12) / Math.max(1, rect.height - 12)));
       row.style.setProperty('--draw-progress', preference.matches ? '1' : String(progress));
@@ -80,11 +90,16 @@ export function attachCareerMotion(root) {
         preference.matches ? '99999px' : `${Math.max(0, readingLine - rect.top)}px`
       );
       row.toggleAttribute('data-node-reached', rect.top + 12 <= readingLine);
-      if (row.dataset.careerEntry && rect.top <= window.innerHeight * 0.45) active = row.dataset.careerEntry;
+      if (rect.top <= anchorLine) active = row.id;
     }
-    if (!active) active = rows.find((row) => row.dataset.careerEntry)?.dataset.careerEntry;
-    for (const row of rows) row.toggleAttribute('data-career-active', row.dataset.careerEntry === active);
-    for (const bar of bars) {
+    if (Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight) {
+      const destination = geometry.find(
+        ({ row, rect }) => `#${row.id}` === window.location.hash && rect.top >= 0 && rect.top < window.innerHeight
+      );
+      active = destination?.row.id || rows.at(-1)?.id;
+    }
+    for (const row of rows) row.toggleAttribute('data-career-active', row.id === active);
+    for (const bar of [...bars, ...traceLinks]) {
       const selected = bar.hash === `#${active}`;
       bar.toggleAttribute('data-career-active', selected);
       if (selected) bar.setAttribute('aria-current', 'step');
@@ -143,19 +158,22 @@ export function attachCareerMotion(root) {
       event.altKey
     )
       return;
-    const link = event.target instanceof Element ? event.target.closest('[data-career-bar]') : null;
+    if (!(event.target instanceof Element)) return;
+    const backLink = event.target.closest('[data-career-return]');
+    if (backLink && traceLinks.find((link) => `#${link.id}` === backLink.hash)?.hidden) {
+      search.value = '';
+      filterTrace();
+    }
+    const link = event.target.closest('[data-career-bar], [data-career-trace]');
     const target = link && rows.find((row) => `#${row.id}` === link.hash);
     if (!target) return;
-    event.preventDefault();
     // Reveal before jumping, so even a long jump never lands on an invisible chapter.
     target.querySelectorAll('[data-career-reveal]').forEach(reveal);
-    window.history.pushState(null, '', link.hash);
-    target.scrollIntoView({ behavior: preference.matches ? 'instant' : 'smooth', block: 'start' });
-    target.focus({ preventScroll: true });
-    schedule();
   };
 
   configure();
+  if (searchControl) searchControl.hidden = false;
+  search?.addEventListener('input', filterTrace);
   // Start narrow timelines at the recent chapters instead of mostly empty early tracks.
   const rulerScroll = root.querySelector('[data-career-ruler-scroll]');
   if (rulerScroll) rulerScroll.scrollLeft = rulerScroll.scrollWidth - rulerScroll.clientWidth;
@@ -168,6 +186,7 @@ export function attachCareerMotion(root) {
   resizeObserver?.observe(root);
 
   return () => {
+    search?.removeEventListener('input', filterTrace);
     observer?.disconnect();
     resizeObserver?.disconnect();
     cancelAnimationFrame(frame);

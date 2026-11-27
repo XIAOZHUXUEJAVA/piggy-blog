@@ -51,7 +51,7 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
     {
       label: t('postsLabel'),
       value: (
-        <Link href="/blog" className={styles.inlineLink}>
+        <Link href="/archive" className={styles.inlineLink}>
           {t('postsCount', { count: postCount })}
         </Link>
       ),
@@ -113,7 +113,7 @@ export default async function AboutProfile({ author, postCount }: AboutProfilePr
                 )}
               </div>
 
-              <Link href="/blog" className={styles.readLink}>
+              <Link href="/archive" className={styles.readLink}>
                 {t('readPosts')}
                 <ArrowUpRight size={15} strokeWidth={1.6} aria-hidden="true" />
               </Link>

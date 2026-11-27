@@ -1,4 +1,4 @@
-import { GitMerge } from 'lucide-react';
+import { CornerLeftUp, GitMerge } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import type { CareerEntry, CareerLocale } from '@/data/careerData';
 import {
@@ -44,10 +44,9 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
           return (
             <li
               className={`${styles.graphRow} ${styles[entry.tone]} ${merge ? styles.mergeRow : ''}`}
-              key={`${entry.id}-${type}`}
-              id={merge ? `${entry.id}-completed` : entry.id}
+              key={row.id}
+              id={row.id}
               data-career-row
-              data-career-entry={merge ? undefined : entry.id}
               tabIndex={-1}
             >
               <div className={styles.graphGutter} aria-hidden="true">
@@ -69,9 +68,16 @@ export default async function CareerHistory({ entries, now, locale }: Props) {
 
               <div className={styles.graphBody}>
                 <div className={styles.commitMeta} data-career-reveal>
-                  <span className={styles.commitHash} aria-hidden="true">
+                  <a
+                    className={styles.commitHash}
+                    href={`#trace-${row.id}`}
+                    data-career-return
+                    aria-label={t('backToTrace', { name: entry.organization[locale] })}
+                    title={t('backToTrace', { name: entry.organization[locale] })}
+                  >
+                    <CornerLeftUp size={12} aria-hidden="true" />
                     {careerHash(`${entry.id}-${type}`)}
-                  </span>
+                  </a>
                   {!merge && entry.id === latest?.id && <span className={styles.branchRef}>(HEAD → main)</span>}
                   {!merge && entry.branch && <span className={styles.branchRef}>({entry.branch})</span>}
                   {merge && (

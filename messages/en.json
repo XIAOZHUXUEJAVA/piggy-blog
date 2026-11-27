@@ -4,41 +4,13 @@
   },
   "Navigation": {
     "home": "Home",
-    "blog": "Blog",
-    "notes": "Notes",
+    "archive": "Archive",
     "projects": "Projects",
     "career": "Career",
     "about": "About",
     "portfolio": "Portfolio",
     "language": "Language",
     "switchLanguage": "Switch language"
-  },
-  "Notes": {
-    "title": "Notes",
-    "description": "Everyday notes, wandering thoughts, and little things worth keeping.",
-    "eyebrow": "LITTLE THINGS, KEPT HERE",
-    "heading": "Piggy’s little notes",
-    "intro": "A little room for ordinary days.",
-    "welcome": "A home for unfinished thoughts, things found on a walk, and moments that quietly sparkle. Whenever something comes to mind, I leave it on this page.",
-    "signature": "Live slowly. Keep a few memories.",
-    "memoTitle": "Lately, in the margins",
-    "memoOne": "Cold weather means a warm mug has moved back onto my desk.",
-    "memoTwo": "Trying to make walks something that needs no reason.",
-    "memoThree": "Remembered to have a proper meal today.",
-    "calendarJump": "Jump to note",
-    "calendarLabel": "Notes calendar for {year}-{month}",
-    "weekdays": "M T W T F S S",
-    "postcardAlt": "An illustrated postcard of hills, trees, and the setting sun",
-    "postcardCaption": "A place for a walk / somewhere quiet",
-    "filterLabel": "Filter notes by category",
-    "all": "All",
-    "daily": "Daily",
-    "thoughts": "Thoughts",
-    "joys": "Little joys",
-    "chapter": "On this page",
-    "entryCount": "{count, plural, one {# note} other {# notes}}",
-    "entryNumber": "Page {number}",
-    "endTitle": "That’s all for now."
   },
   "Languages": {
     "zh": "中文",
@@ -84,7 +56,7 @@
     "readMore": "Read more"
   },
   "Blog": {
-    "title": "Blog",
+    "title": "Archive",
     "description": "Discover insights, tutorials, and thoughts on technology and development.",
     "archiveLabel": "Archive",
     "archiveDescription": "Browse every article by date and revisit what you have learned.",
@@ -104,6 +76,23 @@
     "previousShort": "Prev",
     "next": "Next"
   },
+  "WritingArchive": {
+    "title": "Writing archive",
+    "since": "Since {year}",
+    "activity": "Posts by month",
+    "year": "Year",
+    "sum": "Σ",
+    "monthCount": "{month} · {count, plural, one {# post} other {# posts}}",
+    "articles": "Articles",
+    "words": "Total words",
+    "average": "Words / post",
+    "peak": "Peak months",
+    "perMonth": "{count, plural, one {# post} other {# posts}} per month",
+    "longest": "Longest post",
+    "approxWords": "≈{count, number} words",
+    "random": "Random read",
+    "shuffle": "Shuffle"
+  },
   "Post": {
     "tableOfContents": "Table of contents",
     "articleGuide": "Article guide",
@@ -121,7 +110,7 @@
     "nextArticle": "Next Article",
     "previousPost": "Previous post: {title}",
     "nextPost": "Next post: {title}",
-    "backToBlog": "Back to the blog",
+    "backToArchive": "Back to archive",
     "viewOnGithub": "View on GitHub",
     "readingTime": "{minutes, plural, one {# min read} other {# mins read}}",
     "loadComments": "Load Comments",
@@ -221,7 +210,8 @@
     "contactTitle": "Here’s to the next chapter.",
     "contactDescription": "See what I’m working on, or drop a note about your ideas.",
     "email": "Email",
-    "about": "About me"
+    "about": "About me",
+    "backToTrace": "Return to {name} in the commit history"
   },
   "AboutJourney": {
     "title": "Journey",
@@ -280,18 +270,11 @@
     }
   },
   "CareerProcess": {
-    "title": "Small steps. Thoughtful work.",
-    "description": "From learning the foundations to working with teams, exploring the web and building independent projects. Each chapter becomes another commit forward.",
-    "summary": "The animated log matches the history below, newest first: {entries}. It then shows details of the latest chapter.",
-    "pauseDemo": "Pause or resume the {name} demo",
+    "search": "Search commits",
+    "empty": "No matching commits",
     "scene": {
       "trace": "Commit history",
-      "commitDetails": "Latest commit",
-      "commit": "Commit",
-      "date": "Date",
-      "branch": "Branch",
-      "iterating": "Still growing",
-      "shipped": "The next chapter is still ahead"
+      "iterating": "Still growing"
     },
     "mergeEntry": "Completed · {name}",
     "entryCount": "{count, plural, one {# entry} other {# entries}} · main"

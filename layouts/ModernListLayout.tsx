@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { type ReactNode, useMemo, useState } from 'react';
 import { ChevronDown, Search, X } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CoreContent } from 'pliny/utils/contentlayer';
@@ -9,12 +9,15 @@ import { slug as slugify } from 'github-slugger';
 
 import { Link } from '@/i18n/navigation';
 import PageHeader from '@/components/ui/PageHeader';
+import ArchiveFileTree from './ArchiveFileTree';
 import styles from './ArchiveTimeline.module.css';
 
 interface ModernListLayoutProps {
   posts: CoreContent<Blog>[];
   title?: string;
   path?: string;
+  fileTree?: boolean;
+  sidebar?: ReactNode;
 }
 
 interface YearGroup {
@@ -49,7 +52,13 @@ function getTagCounts(posts: CoreContent<Blog>[]) {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
-export default function ModernListLayout({ posts, title, path = '~/blog' }: ModernListLayoutProps) {
+export default function ModernListLayout({
+  posts,
+  title,
+  path = '~/archive',
+  fileTree = false,
+  sidebar,
+}: ModernListLayoutProps) {
   const locale = useLocale();
   const t = useTranslations('Blog');
   const [searchValue, setSearchValue] = useState('');
@@ -109,11 +118,7 @@ export default function ModernListLayout({ posts, title, path = '~/blog' }: Mode
   return (
     <div className="archive-page">
       <div className="archive-shell p-4 sm:p-7 lg:p-9">
-        <PageHeader
-          className="border-b border-gray-200 pb-6"
-          path={path}
-          title={title || t('title')}
-        >
+        <PageHeader className="border-b border-gray-200 pb-6" path={path} title={title || t('title')}>
           <label className="relative block w-full">
             <span className="sr-only">{t('searchLabel')}</span>
             <Search
@@ -188,77 +193,81 @@ export default function ModernListLayout({ posts, title, path = '~/blog' }: Mode
           </div>
         </section>
 
-        <main className="pt-7" aria-label={t('archiveLabel')}>
-          {yearGroups.length === 0 ? (
-            <div className="border-y border-dashed border-gray-300 py-16 text-center">
-              <p className="text-gray-500">{t('noPostsFound')}</p>
-              {hasFilters && (
-                <button
-                  type="button"
-                  onClick={clearFilters}
-                  className="mt-3 text-sm font-medium text-paper-accent underline underline-offset-4 hover:text-paper-accent-hover"
-                >
-                  {t('clearFilters')}
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="space-y-10">
-              {yearGroups.map((group) => (
-                <section key={group.year} aria-labelledby={`year-${group.year}`}>
-                  <div className="grid grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]">
-                    <h2
-                      id={`year-${group.year}`}
-                      className="text-2xl font-bold leading-10 text-gray-900 md:text-3xl"
-                    >
-                      {group.year}
-                    </h2>
-                    <div className="flex items-center justify-center">
-                      <span className="h-3 w-3 rounded-full border-2 border-paper-accent bg-paper-solid" />
+        <div className={sidebar ? 'grid items-start gap-8 pt-7 lg:grid-cols-[minmax(0,1fr)_20rem]' : 'pt-7'}>
+          <section className="min-w-0" aria-label={t('archiveLabel')}>
+            {yearGroups.length === 0 ? (
+              <div className="border-y border-dashed border-gray-300 py-16 text-center">
+                <p className="text-gray-500">{t('noPostsFound')}</p>
+                {hasFilters && (
+                  <button
+                    type="button"
+                    onClick={clearFilters}
+                    className="mt-3 text-sm font-medium text-paper-accent underline underline-offset-4 hover:text-paper-accent-hover"
+                  >
+                    {t('clearFilters')}
+                  </button>
+                )}
+              </div>
+            ) : fileTree ? (
+              <ArchiveFileTree key={JSON.stringify([searchValue, selectedTags])} path="~/blog" groups={yearGroups} />
+            ) : (
+              <div className="space-y-10">
+                {yearGroups.map((group) => (
+                  <section key={group.year} aria-labelledby={`year-${group.year}`}>
+                    <div className="grid grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]">
+                      <h2 id={`year-${group.year}`} className="text-2xl font-bold leading-10 text-gray-900 md:text-3xl">
+                        {group.year}
+                      </h2>
+                      <div className="flex items-center justify-center">
+                        <span className="h-3 w-3 rounded-full border-2 border-paper-accent bg-paper-solid" />
+                      </div>
+                      <p className="flex items-center pl-4 text-sm text-gray-500 md:pl-5">
+                        {t('articleCount', { count: group.posts.length })}
+                      </p>
                     </div>
-                    <p className="flex items-center pl-4 text-sm text-gray-500 md:pl-5">
-                      {t('articleCount', { count: group.posts.length })}
-                    </p>
-                  </div>
 
-                  <div className="relative before:absolute before:bottom-0 before:left-[4.25rem] before:top-0 before:border-l before:border-dashed before:border-gray-300 md:before:left-[5.25rem]">
-                    {group.posts.map((post) => {
-                      const date = getDateParts(post.date, locale);
+                    <div className="relative before:absolute before:bottom-0 before:left-[4.25rem] before:top-0 before:border-l before:border-dashed before:border-gray-300 md:before:left-[5.25rem]">
+                      {group.posts.map((post) => {
+                        const date = getDateParts(post.date, locale);
 
-                      return (
-                        <article
-                          key={post.slug}
-                          className={`${styles.row} relative grid min-h-11 grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]`}
-                        >
-                          <time
-                            dateTime={post.date}
-                            title={date.full}
-                            className={`${styles.date} flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 md:text-sm`}
+                        return (
+                          <article
+                            key={post.slug}
+                            className={`${styles.row} relative grid min-h-11 grid-cols-[3.5rem_1.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_1.5rem_minmax(0,1fr)_8rem]`}
                           >
-                            {date.day}
-                          </time>
-                          <div className="relative z-10 flex items-center justify-center" aria-hidden="true">
-                            <span className={styles.node} />
-                          </div>
-                          <Link
-                            href={`/blog/${post.slug}`}
-                            aria-label={t('readArticle', { title: post.title })}
-                            className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent focus-visible:z-20 focus-visible:rounded md:pl-5 md:text-base"
-                          >
-                            <span className={`${styles.title} [overflow-wrap:anywhere] md:truncate`}>{post.title}</span>
-                          </Link>
-                          <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 md:flex">
-                            {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}
-                          </div>
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
-              ))}
-            </div>
-          )}
-        </main>
+                            <time
+                              dateTime={post.date}
+                              title={date.full}
+                              className={`${styles.date} flex items-center justify-end pr-3 text-xs tabular-nums text-gray-500 md:text-sm`}
+                            >
+                              {date.day}
+                            </time>
+                            <div className="relative z-10 flex items-center justify-center" aria-hidden="true">
+                              <span className={styles.node} />
+                            </div>
+                            <Link
+                              href={`/blog/${post.slug}`}
+                              aria-label={t('readArticle', { title: post.title })}
+                              className="flex min-w-0 items-center py-2 pl-4 pr-2 text-sm font-semibold text-paper-ink transition-colors hover:text-paper-accent focus-visible:z-20 focus-visible:rounded md:pl-5 md:text-base"
+                            >
+                              <span className={`${styles.title} [overflow-wrap:anywhere] md:truncate`}>
+                                {post.title}
+                              </span>
+                            </Link>
+                            <div className="hidden min-w-0 items-center justify-end truncate pl-2 text-right text-xs text-gray-400 md:flex">
+                              {post.tags?.length ? post.tags.map((tag) => `#${tag}`).join(' ') : null}
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            )}
+          </section>
+          {sidebar}
+        </div>
       </div>
     </div>
   );

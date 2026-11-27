@@ -25,43 +25,6 @@ export interface Project {
 // Fictional examples. Replace these records and add real links when publishing your own work.
 const projectsData: Project[] = [
   {
-    id: 'piggy-notes',
-    slug: 'piggy-notes',
-    date: '2026-10-12',
-    status: 'released',
-    icon: 'notebook',
-    title: { zh: 'Piggy Notes', en: 'Piggy Notes' },
-    summary: { zh: '给零散的灵感，一个安静的归处。', en: 'A quiet home for scattered ideas.' },
-    description: {
-      zh: '一个轻量的个人知识库，把开发笔记、阅读摘录和一闪而过的想法放在一起。用 Markdown 写作，通过标签与双向链接，慢慢织起自己的知识网络。',
-      en: 'A small personal knowledge base for development notes, reading highlights and passing thoughts. Markdown, tags and backlinks turn loose pages into a connected collection.',
-    },
-    tags: ['Next.js', 'TypeScript', 'MDX'],
-    links: [],
-    goal: {
-      zh: '笔记往往散落在不同的应用里，记录容易，重新找到却很难。这个项目从一个简单的想法出发：让写下的东西，在需要时还能被轻松找到。',
-      en: 'Notes tend to end up in different apps. Writing them is easy; finding them again is harder. This project starts with one idea: make what you write easy to rediscover.',
-    },
-    features: [
-      {
-        zh: '使用本地 Markdown 文件管理内容，支持代码块与阅读目录。',
-        en: 'Local Markdown files with code blocks and a reading outline.',
-      },
-      {
-        zh: '通过标签、全文搜索和双向链接连接相关笔记。',
-        en: 'Tags, full-text search and backlinks connect related notes.',
-      },
-      {
-        zh: '提供中英文界面，让写作与阅读保持简单。',
-        en: 'A bilingual interface that keeps writing and reading simple.',
-      },
-    ],
-    next: {
-      zh: '接下来想试试阅读回顾：定期捞起很久没打开的笔记，看看旧想法能不能碰撞出新东西。',
-      en: 'Next up: a reading review that resurfaces older notes and invites a fresh look at forgotten ideas.',
-    },
-  },
-  {
     id: 'spring-boot-starter',
     slug: 'spring-boot-starter',
     date: '2026-08-24',

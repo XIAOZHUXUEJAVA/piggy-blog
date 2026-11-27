@@ -89,6 +89,15 @@ module.exports = () => {
       formats: ['image/webp', 'image/avif'],
       minimumCacheTTL: 60,
     },
+    async redirects() {
+      return ['', '/:locale(zh|en)'].flatMap((prefix) =>
+        ['/blog', '/blog/page/:page(\\d+)'].map((oldPath) => ({
+          source: prefix + oldPath,
+          destination: prefix ? '/:locale/archive' : '/archive',
+          permanent: true,
+        }))
+      );
+    },
     async headers() {
       return [
         {
