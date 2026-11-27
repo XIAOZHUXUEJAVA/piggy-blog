@@ -624,8 +624,8 @@
 .chapter {
   --panel-line: var(--paper-line);
   --panel-surface: var(--paper-surface);
-  --chapter-paper: var(--paper-sheet);
-  --chapter-shadow: rgb(76 59 34 / 9%);
+  --chapter-paper: color-mix(in srgb, var(--paper-accent-soft) 60%, var(--paper-sheet));
+  --chapter-shadow: color-mix(in srgb, var(--accent-dark) 15%, transparent);
   position: relative;
   isolation: isolate;
   margin-top: 1rem;

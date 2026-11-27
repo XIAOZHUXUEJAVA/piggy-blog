@@ -1,7 +1,11 @@
+'use client';
+
+import { Fragment } from 'react';
 import { useFormatter, useTranslations } from 'next-intl';
 import type { CoreContent } from 'pliny/utils/contentlayer';
 import type { Blog } from 'contentlayer/generated';
 import { Link } from '@/i18n/navigation';
+import { useArchiveFilter } from './ArchiveFilterContext';
 import RandomArchivePost from './RandomArchivePost';
 import styles from './WritingArchive.module.css';
 
@@ -10,6 +14,7 @@ const months = Array.from({ length: 12 }, (_, index) => index);
 export default function WritingArchive({ posts }: { posts: CoreContent<Blog>[] }) {
   const t = useTranslations('WritingArchive');
   const format = useFormatter();
+  const { activeMonth, toggleMonth } = useArchiveFilter();
   if (!posts.length) return null;
 
   // The archive supplies all published posts in descending publication order.
@@ -34,7 +39,12 @@ export default function WritingArchive({ posts }: { posts: CoreContent<Blog>[] }
     if (post.readingTime.words > longest.readingTime.words) longest = post;
   }
   const peakMonths = years.flatMap(({ year, counts }) =>
-    counts.flatMap((count, month) => (count === peak ? [`${year}.${String(month + 1).padStart(2, '0')}`] : []))
+    counts.flatMap((count, month) => {
+      if (count !== peak) return [];
+
+      const padded = String(month + 1).padStart(2, '0');
+      return [{ key: `${year}-${padded}`, year, month, display: `${year}.${padded}` }];
+    })
   );
 
   return (
@@ -69,16 +79,33 @@ export default function WritingArchive({ posts }: { posts: CoreContent<Blog>[] }
             <tr key={year}>
               <th scope="row">{year}</th>
               {counts.map((count, month) => {
+                const key = `${year}-${String(month + 1).padStart(2, '0')}`;
                 const monthLabel = format.dateTime(new Date(Date.UTC(year, month, 1)), {
                   year: 'numeric',
                   month: 'long',
                   timeZone: 'UTC',
                 });
+                const active = activeMonth === key;
+
                 return (
                   <td key={month} title={t('monthCount', { month: monthLabel, count })}>
-                    <span className={styles.cell} data-level={Math.min(count, 3)}>
-                      {count || <span className="sr-only">0</span>}
-                    </span>
+                    {count ? (
+                      <button
+                        type="button"
+                        className={styles.cellButton}
+                        aria-pressed={active}
+                        aria-label={t('filterByMonth', { month: monthLabel, count })}
+                        onClick={() => toggleMonth(key)}
+                      >
+                        <span className={styles.cell} data-level={Math.min(count, 3)} data-active={active}>
+                          {count}
+                        </span>
+                      </button>
+                    ) : (
+                      <span className={styles.cell} data-level={0}>
+                        <span className="sr-only">0</span>
+                      </span>
+                    )}
                   </td>
                 );
               })}
@@ -108,7 +135,29 @@ export default function WritingArchive({ posts }: { posts: CoreContent<Blog>[] }
         <div>
           <dt>{t('peak')}</dt>
           <dd>
-            {peakMonths.join(' · ')}
+            {peakMonths.map(({ key, year, month, display }, index) => {
+              const active = activeMonth === key;
+              const monthLabel = format.dateTime(new Date(Date.UTC(year, month, 1)), {
+                year: 'numeric',
+                month: 'long',
+                timeZone: 'UTC',
+              });
+
+              return (
+                <Fragment key={key}>
+                  {index > 0 && ' · '}
+                  <button
+                    type="button"
+                    className={styles.monthLink}
+                    aria-pressed={active}
+                    aria-label={t('filterByMonth', { month: monthLabel, count: peak })}
+                    onClick={() => toggleMonth(key)}
+                  >
+                    {display}
+                  </button>
+                </Fragment>
+              );
+            })}
             <small>{t('perMonth', { count: peak })}</small>
           </dd>
         </div>
@@ -120,10 +169,7 @@ export default function WritingArchive({ posts }: { posts: CoreContent<Blog>[] }
           </dd>
         </div>
       </dl>
-      <RandomArchivePost
-        posts={posts.map(({ slug, title, date }) => ({ slug, title, date }))}
-        initialIndex={Math.floor(Math.random() * posts.length)}
-      />
+      <RandomArchivePost posts={posts.map(({ slug, title, date }) => ({ slug, title, date }))} />
     </aside>
   );
 }

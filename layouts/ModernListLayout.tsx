@@ -9,6 +9,7 @@ import { slug as slugify } from 'github-slugger';
 
 import { Link } from '@/i18n/navigation';
 import PageHeader from '@/components/ui/PageHeader';
+import { ArchiveFilterContext, type ArchiveFilterValue } from '@/components/blog/ArchiveFilterContext';
 import ArchiveFileTree from './ArchiveFileTree';
 import styles from './ArchiveTimeline.module.css';
 
@@ -52,6 +53,11 @@ function getTagCounts(posts: CoreContent<Blog>[]) {
   return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
+function getMonthKey(date: string) {
+  const value = new Date(date);
+  return `${value.getUTCFullYear()}-${String(value.getUTCMonth() + 1).padStart(2, '0')}`;
+}
+
 export default function ModernListLayout({
   posts,
   title,
@@ -63,6 +69,7 @@ export default function ModernListLayout({
   const t = useTranslations('Blog');
   const [searchValue, setSearchValue] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [showAllTags, setShowAllTags] = useState(false);
 
   const tagCounts = useMemo(() => getTagCounts(posts), [posts]);
@@ -84,10 +91,11 @@ export default function ModernListLayout({
       const content = [post.title, post.summary ?? '', ...(post.tags ?? [])].join(' ').toLowerCase();
       const matchesSearch = !query || content.includes(query);
       const matchesTags = selectedTags.every((tag) => post.tags?.some((postTag) => slugify(postTag) === tag));
+      const matchesMonth = !selectedMonth || getMonthKey(post.date) === selectedMonth;
 
-      return matchesSearch && matchesTags;
+      return matchesSearch && matchesTags && matchesMonth;
     });
-  }, [posts, searchValue, selectedTags]);
+  }, [posts, searchValue, selectedTags, selectedMonth]);
 
   const yearGroups = useMemo(() => {
     const groups = new Map<number, CoreContent<Blog>[]>();
@@ -111,9 +119,28 @@ export default function ModernListLayout({
   const clearFilters = () => {
     setSearchValue('');
     setSelectedTags([]);
+    setSelectedMonth(null);
   };
 
-  const hasFilters = searchValue.trim().length > 0 || selectedTags.length > 0;
+  const hasFilters = searchValue.trim().length > 0 || selectedTags.length > 0 || selectedMonth !== null;
+
+  const archiveFilter = useMemo<ArchiveFilterValue>(() => {
+    const toggleMonth = (month: string) => {
+      const next = selectedMonth === month ? null : month;
+      setSelectedMonth(next);
+
+      if (next && window.matchMedia('(max-width: 1023px)').matches) {
+        requestAnimationFrame(() => {
+          document.getElementById('archive-list')?.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            block: 'start',
+          });
+        });
+      }
+    };
+
+    return { activeMonth: selectedMonth, toggleMonth };
+  }, [selectedMonth]);
 
   return (
     <div className="archive-page">
@@ -145,6 +172,18 @@ export default function ModernListLayout({
               <span className="text-xs text-gray-400">{tagCounts.length}</span>
             </div>
             <div className="flex shrink-0 items-center gap-3 text-sm text-gray-500">
+              {selectedMonth && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedMonth(null)}
+                  title={t('clearMonth')}
+                  className="inline-flex items-center gap-1 text-gray-700 underline decoration-gray-300 underline-offset-4 transition hover:text-gray-950"
+                >
+                  {selectedMonth.replace('-', '.')}
+                  <X className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span className="sr-only">{t('clearMonth')}</span>
+                </button>
+              )}
               <span>{t('articleCount', { count: filteredPosts.length })}</span>
               {hasFilters && (
                 <button
@@ -194,7 +233,7 @@ export default function ModernListLayout({
         </section>
 
         <div className={sidebar ? 'grid items-start gap-8 pt-7 lg:grid-cols-[minmax(0,1fr)_20rem]' : 'pt-7'}>
-          <section className="min-w-0" aria-label={t('archiveLabel')}>
+          <section id="archive-list" className="min-w-0 scroll-mt-4" aria-label={t('archiveLabel')}>
             {yearGroups.length === 0 ? (
               <div className="border-y border-dashed border-gray-300 py-16 text-center">
                 <p className="text-gray-500">{t('noPostsFound')}</p>
@@ -209,7 +248,11 @@ export default function ModernListLayout({
                 )}
               </div>
             ) : fileTree ? (
-              <ArchiveFileTree key={JSON.stringify([searchValue, selectedTags])} path="~/blog" groups={yearGroups} />
+              <ArchiveFileTree
+                key={JSON.stringify([searchValue, selectedTags, selectedMonth])}
+                path="~/blog"
+                groups={yearGroups}
+              />
             ) : (
               <div className="space-y-10">
                 {yearGroups.map((group) => (
@@ -266,7 +309,7 @@ export default function ModernListLayout({
               </div>
             )}
           </section>
-          {sidebar}
+          <ArchiveFilterContext.Provider value={archiveFilter}>{sidebar}</ArchiveFilterContext.Provider>
         </div>
       </div>
     </div>

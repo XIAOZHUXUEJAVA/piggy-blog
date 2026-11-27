@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { Shuffle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
@@ -8,14 +8,17 @@ import styles from './WritingArchive.module.css';
 
 interface Props {
   posts: { slug: string; title: string; date: string }[];
-  initialIndex: number;
 }
 
-export default function RandomArchivePost({ posts, initialIndex }: Props) {
+export default function RandomArchivePost({ posts }: Props) {
   const t = useTranslations('WritingArchive');
   const format = useFormatter();
-  const [index, setIndex] = useState(initialIndex);
+  const [index, setIndex] = useState(0);
   const post = posts[index];
+
+  useEffect(() => {
+    setIndex(Math.floor(Math.random() * posts.length));
+  }, [posts.length]);
 
   function draw() {
     const offset = 1 + Math.floor(Math.random() * (posts.length - 1));
